@@ -633,292 +633,227 @@
 
 
   /* ══════════════════════════════════════════════════
-     PORTFOLIO — stack apilado estilo editorial
+     PORTFOLIO — carrusel circular coverflow
   ══════════════════════════════════════════════════ */
   :root { --terracotta: #4f3029; --cream: #fefce3; }
 
   .portfolio { background: var(--bg); border-top: 1px solid var(--rule); }
-  .portfolio-intro { margin-bottom: 56px; }
+  .portfolio-intro { margin-bottom: 40px; }
   .portfolio-title {
     font-family: var(--font-serif); font-size: clamp(34px, 4.5vw, 68px);
     font-weight: 300; font-style: italic; line-height: 1.05;
   }
 
-  /* Stack de proyectos */
-  .pf-stack {
-    display: flex; flex-direction: column;
-    gap: 2px;
+  /* Stage del carrusel */
+  .pf-stage {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    perspective: 1200px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    cursor: grab;
+  }
+  .pf-stage:active { cursor: grabbing; }
+
+  /* Track rotativo */
+  .pf-track {
+    position: absolute;
+    width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
-  /* Cada fila del stack */
-  .pf-row {
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    min-height: 320px;
+  /* Cada tarjeta */
+  .pf-card {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 300px; height: 360px;
+    margin-left: -150px; margin-top: -180px;
+    border-radius: 20px;
+    overflow: hidden;
     cursor: pointer;
-    overflow: hidden;
-    position: relative;
-    border-top: 1px solid var(--rule);
-  }
-  .pf-row:last-child { border-bottom: 1px solid var(--rule); }
-
-  /* Imagen — ocupa toda la columna izquierda */
-  .pf-row-img {
-    position: relative;
-    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: box-shadow 0.4s, filter 0.4s;
     background: #f0ece6;
+    box-shadow: 0 8px 40px rgba(22,21,21,0.12);
   }
-  .pf-row:nth-child(2) .pf-row-img { background: #dcefff; }
-  .pf-row:nth-child(3) .pf-row-img { background: #fefce3; }
-  .pf-row:nth-child(4) .pf-row-img { background: #ede0d8; }
-  .pf-row:nth-child(5) .pf-row-img { background: #dde8e4; }
-  .pf-row:nth-child(6) .pf-row-img { background: #e8dde8; }
-
-  .pf-row-img img {
+  .pf-card img {
     width: 100%; height: 100%;
     object-fit: cover; display: block;
-    transform: scale(1.04);
-    transition: transform 0.8s var(--ease);
+    border-radius: 20px;
   }
-  .pf-row:hover .pf-row-img img { transform: scale(1); }
-
-  .pf-row-ph {
-    position: absolute; inset: 0;
+  .pf-card .pf-card-ph {
+    width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
+    border-radius: 20px;
   }
-  .pf-row-ph span {
+  .pf-card .pf-card-ph span {
     font-family: var(--font-serif); font-style: italic;
-    font-size: 15px; font-weight: 300;
-    color: rgba(22,21,21,0.28);
-  }
-
-  /* Panel de info — columna derecha */
-  .pf-row-info {
-    display: flex; flex-direction: column;
-    justify-content: space-between;
-    padding: 36px 48px;
-    background: var(--bg);
-    border-left: 1px solid var(--rule);
-    transition: background 0.5s var(--ease);
-  }
-  .pf-row:hover .pf-row-info { background: var(--terracotta); }
-
-  .pf-row-top {}
-  .pf-row-num {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 13px; font-weight: 300;
-    color: var(--muted); margin-bottom: 16px; display: block;
-    transition: color 0.4s;
-  }
-  .pf-row:hover .pf-row-num { color: rgba(255,255,255,0.45); }
-
-  .pf-row-name {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: clamp(22px, 2.5vw, 34px); font-weight: 300;
-    color: var(--ink); line-height: 1.15; margin-bottom: 12px;
-    transition: color 0.4s;
-  }
-  .pf-row:hover .pf-row-name { color: #fff; }
-
-  .pf-row-cat {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 8.5px; font-weight: 200;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--muted); transition: color 0.4s;
-  }
-  .pf-row:hover .pf-row-cat { color: rgba(255,255,255,0.5); }
-
-  .pf-row-desc {
-    font-family: var(--font-serif);
-    font-size: 14px; font-weight: 300; line-height: 1.75;
-    color: var(--muted); margin-top: 20px;
-    max-height: 0; overflow: hidden;
-    transition: max-height 0.5s var(--ease), color 0.4s;
-  }
-  .pf-row:hover .pf-row-desc {
-    max-height: 120px;
-    color: rgba(255,255,255,0.65);
-  }
-
-  .pf-row-bottom {
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .pf-row-cta {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 8.5px; font-weight: 200;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--muted); transition: color 0.4s;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .pf-row:hover .pf-row-cta { color: #fff; }
-
-  .pf-row-arrow {
-    font-size: 20px; color: var(--muted);
-    transition: transform 0.4s var(--ease), color 0.4s;
-  }
-  .pf-row:hover .pf-row-arrow { transform: translate(4px, -4px); color: #fff; }
-
-  @media (max-width: 900px) {
-    .pf-row { grid-template-columns: 1fr; min-height: auto; }
-    .pf-row-img { aspect-ratio: 16/9; }
-    .pf-row-info { border-left: none; border-top: 1px solid var(--rule); }
-    .pf-row-desc { max-height: none !important; }
-  }
-
-  /* ══════════════════════════════════════════════════
-     PANEL LATERAL — visor de proyecto
-  ══════════════════════════════════════════════════ */
-  .pv-overlay {
-    position: fixed; inset: 0; z-index: 200;
-    background: rgba(22,21,21,0);
-    pointer-events: none;
-    transition: background 0.5s var(--ease);
-  }
-  .pv-overlay.open {
-    background: rgba(22,21,21,0.45);
-    pointer-events: all;
-  }
-
-  .pv-panel {
-    position: fixed;
-    top: 0; right: 0; bottom: 0;
-    width: min(680px, 100vw);
-    background: #fafaf8;
-    transform: translateX(100%);
-    transition: transform 0.55s var(--ease);
-    display: flex; flex-direction: column;
-    overflow: hidden;
-    z-index: 201;
-  }
-  .pv-overlay.open .pv-panel { transform: translateX(0); }
-
-  /* Header del panel */
-  .pv-header {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    padding: 32px 40px 24px;
-    border-bottom: 1px solid var(--rule);
-    flex-shrink: 0;
-    background: #fafaf8;
-  }
-  .pv-header-text { flex: 1; }
-  .pv-cat {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 8.5px; font-weight: 200;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 6px; display: block;
-  }
-  .pv-title {
-    font-family: var(--font-serif);
-    font-size: clamp(26px, 3.5vw, 40px);
-    font-weight: 300; font-style: italic;
-    color: var(--ink); line-height: 1.1;
-  }
-  .pv-close {
-    background: none; border: none; cursor: pointer;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 8.5px; font-weight: 200;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--muted); padding: 4px;
-    margin-left: 24px; flex-shrink: 0;
-    transition: color 0.25s;
-  }
-  .pv-close:hover { color: var(--ink); }
-
-  /* Cuerpo scrolleable */
-  .pv-body {
-    flex: 1; overflow-y: auto;
-    padding: 32px 40px 48px;
-    scroll-behavior: smooth;
-  }
-
-  /* Portada grande */
-  .pv-cover {
-    width: 100%;
-    aspect-ratio: 4/3;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 24px;
-    flex-shrink: 0;
-    background: #fff;
-    border: 1px solid var(--ink);
-  }
-  .pv-cover-label {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 18px; font-weight: 300;
+    font-size: 14px; font-weight: 300;
     color: rgba(22,21,21,0.3);
   }
-
-  /* Descripción */
-  .pv-desc {
-    font-family: var(--font-serif);
-    font-size: 16px; font-weight: 300; line-height: 1.85;
-    color: #5a5550; margin-bottom: 36px;
+  /* Info hover overlay */
+  .pf-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(79,48,41,0.92) 0%, rgba(79,48,41,0.2) 55%, transparent 100%);
+    border-radius: 20px;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px 22px;
+    opacity: 0;
+    transition: opacity 0.35s;
   }
-
-  /* Banda de color terracotta con dato */
-  .pv-accent {
-    background: var(--terracotta);
-    color: #fff;
-    padding: 20px 24px;
-    margin-bottom: 32px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .pv-accent-text {
+  .pf-card.active .pf-card-overlay { opacity: 1; }
+  .pf-card-overlay h3 {
     font-family: var(--font-serif); font-style: italic;
-    font-size: 15px; font-weight: 300;
+    font-size: 18px; font-weight: 300;
+    color: #fff; margin-bottom: 4px; line-height: 1.2;
   }
-  .pv-accent-cat {
+  .pf-card-overlay p {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 8px; font-weight: 200;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+  .pf-card-overlay .pf-open-btn {
+    margin-top: 12px;
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 8px; font-weight: 200;
     letter-spacing: 0.2em; text-transform: uppercase;
-    opacity: 0.7;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 7px 14px; border-radius: 100px;
+    display: inline-block; width: fit-content;
+    transition: background 0.3s;
   }
+  .pf-card-overlay .pf-open-btn:hover { background: rgba(255,255,255,0.15); }
 
-  /* Subimágenes (placeholders) */
-  .pv-label-row {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 8.5px; font-weight: 200;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 16px;
-    padding-bottom: 12px; border-bottom: 1px solid var(--rule);
-  }
-  .pv-slides {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
-  }
-  .pv-slide-ph {
-    aspect-ratio: 4/3;
+  /* Navegación */
+  .pf-nav {
     display: flex; align-items: center; justify-content: center;
-    background: #fff;
-    border: 1px solid var(--ink);
+    gap: 32px; padding-bottom: 48px;
   }
-  .pv-slide-ph span {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 11px; font-weight: 300; color: rgba(22,21,21,0.3);
+  .pf-nav-btn {
+    background: none; border: 1px solid var(--rule);
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 18px; color: var(--muted);
+    transition: border-color 0.3s, color 0.3s, background 0.3s;
   }
-  .pv-slide-ph:nth-child(1) { background: #fff; border: 1px solid var(--ink); }
-  .pv-slide-ph:nth-child(2) { background: #fff; border: 1px solid var(--ink); }
-  .pv-slide-ph:nth-child(3) { background: #fff; border: 1px solid var(--ink); }
-  .pv-slide-ph:nth-child(4) { background: #fff; border: 1px solid var(--ink); }
+  .pf-nav-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .pf-nav-dots {
+    display: flex; gap: 8px; align-items: center;
+  }
+  .pf-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--muted); cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .pf-dot.active { background: var(--ink); transform: scale(1.5); }
 
-  /* Nav entre proyectos */
-  .pv-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 0 0;
-    border-top: 1px solid var(--rule);
-    margin-top: 32px;
+  /* Modal de proyecto */
+  .pf-modal-overlay {
+    position: fixed; inset: 0; z-index: 400;
+    background: rgba(22,21,21,0);
+    pointer-events: none;
+    transition: background 0.45s var(--ease);
+    display: flex; align-items: center; justify-content: center;
   }
-  .pv-nav-btn {
-    background: none; border: none; cursor: pointer;
+  .pf-modal-overlay.open {
+    background: rgba(22,21,21,0.75);
+    pointer-events: all;
+  }
+  .pf-modal {
+    background: #fffff3;
+    width: min(860px, 92vw);
+    max-height: 90vh;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transform: scale(0.88) translateY(24px);
+    opacity: 0;
+    transition: transform 0.45s var(--ease), opacity 0.45s var(--ease);
+  }
+  .pf-modal-overlay.open .pf-modal {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  .pf-modal-hero {
+    width: 100%; aspect-ratio: 16/9;
+    overflow: hidden; flex-shrink: 0;
+    background: #e8e4de;
+    position: relative;
+  }
+  .pf-modal-hero img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .pf-modal-hero .pf-modal-ph {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pf-modal-hero .pf-modal-ph span {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 18px; font-weight: 300; color: rgba(22,21,21,0.25);
+  }
+  .pf-modal-body {
+    padding: 36px 48px 48px;
+    overflow-y: auto;
+  }
+  .pf-modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: rgba(22,21,21,0.5); border: none; cursor: pointer;
+    color: #fff; border-radius: 50%; width: 36px; height: 36px;
+    font-size: 18px; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; z-index: 2;
+  }
+  .pf-modal-close:hover { background: rgba(22,21,21,0.8); }
+  .pf-modal-cat {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 9px; font-weight: 200;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px; display: block;
+  }
+  .pf-modal-title {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(28px, 4vw, 44px); font-weight: 300;
+    color: var(--ink); line-height: 1.1; margin-bottom: 20px;
+  }
+  .pf-modal-desc {
+    font-family: var(--font-serif);
+    font-size: 16px; font-weight: 300; line-height: 1.85;
+    color: var(--mid); margin-bottom: 32px;
+  }
+  .pf-modal-accent {
+    background: var(--terracotta); color: #fff;
+    padding: 16px 24px; border-radius: 6px;
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 9px; font-weight: 200;
     letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--muted); transition: color 0.25s;
-    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 28px; display: inline-block;
   }
-  .pv-nav-btn:hover { color: var(--ink); }
-  .pv-nav-counter {
+  .pf-modal-thumbs {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  }
+  .pf-modal-thumb {
+    aspect-ratio: 4/3; border-radius: 6px; overflow: hidden;
+    background: #e8e4de;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pf-modal-thumb span {
     font-family: var(--font-serif); font-style: italic;
-    font-size: 13px; color: var(--muted);
+    font-size: 11px; font-weight: 300; color: rgba(22,21,21,0.25);
   }
+  .pf-modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  @media (max-width: 700px) {
+    .pf-stage { height: 360px; }
+    .pf-card { width: 240px; height: 290px; margin-left: -120px; margin-top: -145px; }
+    .pf-modal-body { padding: 24px; }
+    .pf-modal-thumbs { grid-template-columns: repeat(2, 1fr); }
+  }
+
+
 
   </style>
 </head>
@@ -1129,120 +1064,92 @@
       </div>
     </div>
 
-    <!-- Stack apilado de proyectos -->
-    <div class="pf-stack">
+    <!-- Carrusel circular -->
+    <div class="pf-stage" id="pf-stage">
+      <div class="pf-track" id="pf-track">
 
-      <div class="pf-row reveal" data-project="0" tabindex="0" role="button" aria-label="Ver proyecto: Social media post — UNP">
-        <div class="pf-row-img">
+        <div class="pf-card" data-project="0">
           <img src="https://mir-s3-cdn-cf.behance.net/projects/404/71832c242252871.Y3JvcCwzMDU2LDIzOTAsNzQxLDM2Mw.jpg" alt="Social media UNP">
-        </div>
-        <div class="pf-row-info">
-          <div class="pf-row-top">
-            <span class="pf-row-num">01</span>
-            <h3 class="pf-row-name">Social media post — UNP</h3>
-            <span class="pf-row-cat">social media · comunicación</span>
-            <p class="pf-row-desc">Piezas de comunicación visual para la Universidad Nacional de Pilar. Diseño de posts para redes con lenguaje institucional claro.</p>
-          </div>
-          <div class="pf-row-bottom">
-            <span class="pf-row-cta">ver proyecto</span>
-            <span class="pf-row-arrow">↗</span>
+          <div class="pf-card-overlay">
+            <h3>Social media post — UNP</h3>
+            <p>social media · comunicación</p>
+            <span class="pf-open-btn">ver proyecto</span>
           </div>
         </div>
-      </div>
 
-      <div class="pf-row reveal d1" data-project="1" tabindex="0" role="button" aria-label="Ver proyecto: Instagram Stories">
-        <div class="pf-row-img">
+        <div class="pf-card" data-project="1">
           <img src="https://mir-s3-cdn-cf.behance.net/projects/404/b63799242251125.Y3JvcCwyODc2LDIyNTAsNTYyLDA.png" alt="Instagram Stories">
-        </div>
-        <div class="pf-row-info">
-          <div class="pf-row-top">
-            <span class="pf-row-num">02</span>
-            <h3 class="pf-row-name">Instagram Stories</h3>
-            <span class="pf-row-cat">social media · diseño editorial</span>
-            <p class="pf-row-desc">Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica y paleta de color para redes sociales.</p>
-          </div>
-          <div class="pf-row-bottom">
-            <span class="pf-row-cta">ver proyecto</span>
-            <span class="pf-row-arrow">↗</span>
+          <div class="pf-card-overlay">
+            <h3>Instagram Stories</h3>
+            <p>social media · editorial</p>
+            <span class="pf-open-btn">ver proyecto</span>
           </div>
         </div>
-      </div>
 
-      <div class="pf-row reveal d1" data-project="2" tabindex="0" role="button" aria-label="Ver proyecto: Comunicación institucional">
-        <div class="pf-row-img">
-          <div class="pf-row-ph"><span>próximamente</span></div>
-        </div>
-        <div class="pf-row-info">
-          <div class="pf-row-top">
-            <span class="pf-row-num">03</span>
-            <h3 class="pf-row-name">Comunicación institucional</h3>
-            <span class="pf-row-cat">identidad · comunicación</span>
-            <p class="pf-row-desc">Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme.</p>
-          </div>
-          <div class="pf-row-bottom">
-            <span class="pf-row-cta">ver proyecto</span>
-            <span class="pf-row-arrow">↗</span>
+        <div class="pf-card" data-project="2">
+          <div class="pf-card-ph" style="background:#fefce3;"><span>Comunicación institucional</span></div>
+          <div class="pf-card-overlay">
+            <h3>Comunicación institucional</h3>
+            <p>identidad · comunicación</p>
+            <span class="pf-open-btn">ver proyecto</span>
           </div>
         </div>
-      </div>
 
-      <div class="pf-row reveal d2" data-project="3" tabindex="0" role="button" aria-label="Ver proyecto: Branding de marca">
-        <div class="pf-row-img">
-          <div class="pf-row-ph"><span>próximamente</span></div>
-        </div>
-        <div class="pf-row-info">
-          <div class="pf-row-top">
-            <span class="pf-row-num">04</span>
-            <h3 class="pf-row-name">Branding de marca</h3>
-            <span class="pf-row-cat">branding · papelería</span>
-            <p class="pf-row-desc">Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.</p>
-          </div>
-          <div class="pf-row-bottom">
-            <span class="pf-row-cta">ver proyecto</span>
-            <span class="pf-row-arrow">↗</span>
+        <div class="pf-card" data-project="3">
+          <div class="pf-card-ph" style="background:#ede0d8;"><span>Branding de marca</span></div>
+          <div class="pf-card-overlay">
+            <h3>Branding de marca</h3>
+            <p>branding · papelería</p>
+            <span class="pf-open-btn">ver proyecto</span>
           </div>
         </div>
-      </div>
 
-      <div class="pf-row reveal d2" data-project="4" tabindex="0" role="button" aria-label="Ver proyecto: Diseño de logotipo">
-        <div class="pf-row-img">
-          <div class="pf-row-ph"><span>próximamente</span></div>
-        </div>
-        <div class="pf-row-info">
-          <div class="pf-row-top">
-            <span class="pf-row-num">05</span>
-            <h3 class="pf-row-name">Diseño de logotipo</h3>
-            <span class="pf-row-cat">logo · identidad visual</span>
-            <p class="pf-row-desc">Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.</p>
-          </div>
-          <div class="pf-row-bottom">
-            <span class="pf-row-cta">ver proyecto</span>
-            <span class="pf-row-arrow">↗</span>
+        <div class="pf-card" data-project="4">
+          <div class="pf-card-ph" style="background:#dde8e4;"><span>Diseño de logotipo</span></div>
+          <div class="pf-card-overlay">
+            <h3>Diseño de logotipo</h3>
+            <p>logo · identidad visual</p>
+            <span class="pf-open-btn">ver proyecto</span>
           </div>
         </div>
-      </div>
 
-      <div class="pf-row reveal d3" data-project="5" tabindex="0" role="button" aria-label="Ver proyecto: Social media & papelería">
-        <div class="pf-row-img">
-          <div class="pf-row-ph"><span>próximamente</span></div>
-        </div>
-        <div class="pf-row-info">
-          <div class="pf-row-top">
-            <span class="pf-row-num">06</span>
-            <h3 class="pf-row-name">Social media & papelería</h3>
-            <span class="pf-row-cat">social media · papelería</span>
-            <p class="pf-row-desc">Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.</p>
-          </div>
-          <div class="pf-row-bottom">
-            <span class="pf-row-cta">ver proyecto</span>
-            <span class="pf-row-arrow">↗</span>
+        <div class="pf-card" data-project="5">
+          <div class="pf-card-ph" style="background:#dcefff;"><span>Social media & papelería</span></div>
+          <div class="pf-card-overlay">
+            <h3>Social media & papelería</h3>
+            <p>social media · papelería</p>
+            <span class="pf-open-btn">ver proyecto</span>
           </div>
         </div>
-      </div>
 
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="pf-nav">
+      <button class="pf-nav-btn" id="pf-prev" aria-label="Anterior">←</button>
+      <div class="pf-nav-dots" id="pf-dots"></div>
+      <button class="pf-nav-btn" id="pf-next" aria-label="Siguiente">→</button>
     </div>
 
   </section>
+
+  <!-- Modal de proyecto -->
+  <div class="pf-modal-overlay" id="pf-modal-overlay">
+    <div class="pf-modal" id="pf-modal">
+      <div class="pf-modal-hero" id="pf-modal-hero">
+        <button class="pf-modal-close" id="pf-modal-close">✕</button>
+        <div class="pf-modal-ph" id="pf-modal-ph"><span id="pf-modal-ph-label"></span></div>
+      </div>
+      <div class="pf-modal-body">
+        <span class="pf-modal-cat" id="pf-modal-cat"></span>
+        <h2 class="pf-modal-title" id="pf-modal-title"></h2>
+        <p class="pf-modal-desc" id="pf-modal-desc"></p>
+        <span class="pf-modal-accent" id="pf-modal-accent"></span>
+        <div class="pf-modal-thumbs" id="pf-modal-thumbs"></div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -1304,53 +1211,8 @@
 
 
 
-  <!-- PANEL VISOR DE PROYECTO -->
-  <div class="pv-overlay" id="pv-overlay" aria-hidden="true">
-    <div class="pv-panel" role="dialog" aria-modal="true" id="pv-panel">
 
-      <div class="pv-header">
-        <div class="pv-header-text">
-          <span class="pv-cat" id="pv-cat"></span>
-          <h2 class="pv-title" id="pv-title"></h2>
-        </div>
-        <button class="pv-close" id="pv-close" aria-label="Cerrar">cerrar ✕</button>
-      </div>
-
-      <div class="pv-body" id="pv-body">
-        <!-- Portada placeholder -->
-        <div class="pv-cover" id="pv-cover" style="background:#fff; border:1px solid var(--ink);">
-          <span class="pv-cover-label" id="pv-cover-label"></span>
-        </div>
-
-        <!-- Descripción -->
-        <p class="pv-desc" id="pv-desc"></p>
-
-        <!-- Banda terracotta -->
-        <div class="pv-accent">
-          <span class="pv-accent-text" id="pv-accent-text"></span>
-          <span class="pv-accent-cat" id="pv-accent-cat"></span>
-        </div>
-
-        <!-- Sub-imágenes -->
-        <p class="pv-label-row">imágenes del proyecto</p>
-        <div class="pv-slides">
-          <div class="pv-slide-ph"><span>detalle 01</span></div>
-          <div class="pv-slide-ph"><span>detalle 02</span></div>
-          <div class="pv-slide-ph"><span>detalle 03</span></div>
-          <div class="pv-slide-ph"><span>detalle 04</span></div>
-        </div>
-
-        <!-- Nav entre proyectos -->
-        <div class="pv-nav">
-          <button class="pv-nav-btn" id="pv-prev">← anterior</button>
-          <span class="pv-nav-counter" id="pv-counter"></span>
-          <button class="pv-nav-btn" id="pv-next">siguiente →</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
+  
   <!-- JAVASCRIPT -->
   <script>
   'use strict';
@@ -1452,12 +1314,17 @@
 
 
   /* ── Panel visor de proyectos ── */
+
+  /* ══════════════════════════════════════════════════
+     PORTFOLIO — carrusel coverflow + modal
+  ══════════════════════════════════════════════════ */
   const PF_DATA = [
     {
       cat: 'social media · comunicación institucional',
       name: 'Social media post — UNP',
       desc: 'Piezas de comunicación visual para la Universidad Nacional de Pilar. Diseño de posts para redes sociales con lenguaje institucional claro y coherente.',
       accent: 'Universidad Nacional de Pilar · 2025',
+      img: 'https://mir-s3-cdn-cf.behance.net/projects/404/71832c242252871.Y3JvcCwzMDU2LDIzOTAsNzQxLDM2Mw.jpg',
       color: '#dcefff'
     },
     {
@@ -1465,103 +1332,145 @@
       name: 'Instagram Stories',
       desc: 'Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica, paleta de color y animación para contenido de redes sociales.',
       accent: 'Diseño para Instagram · 2025',
+      img: 'https://mir-s3-cdn-cf.behance.net/projects/404/b63799242251125.Y3JvcCwyODc2LDIyNTAsNTYyLDA.png',
       color: '#fefce3'
     },
-    {
-      cat: 'identidad · comunicación institucional',
-      name: 'Comunicación institucional',
-      desc: 'Sistema visual para institución pública. Campañas estacionales, papelería corporativa y contenido digital con lenguaje uniforme en todas las plataformas.',
-      accent: 'Municipalidad de Pilar · 2025',
-      color: '#fefce3'
-    },
-    {
-      cat: 'branding · papelería',
-      name: 'Branding de marca',
-      desc: 'Identidad refinada para marca con estética de lujo. Logomark, paleta, tipografía y aplicaciones en papelería corporativa, señalética y piezas de comunicación.',
-      accent: 'Identidad de lujo',
-      color: '#ede0d8'
-    },
-    {
-      cat: 'logo · identidad visual',
-      name: 'Diseño de logotipo',
-      desc: 'Construcción de logotipo moderno con sistema tipográfico completo. Versiones monocromo, color y negativo. Guía de uso para aplicaciones digitales y físicas.',
-      accent: 'Sistema tipográfico completo',
-      color: '#dde8e4'
-    },
-    {
-      cat: 'social media · papelería',
-      name: 'Social media & papelería',
-      desc: 'Diseño de piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo. Feed curado, stories, highlights y plantillas editables.',
-      accent: 'Laburito Studio · 2026',
-      color: '#e8dde8'
-    }
+    { cat: 'identidad · comunicación', name: 'Comunicación institucional', desc: 'Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme en todas las plataformas.', accent: 'Municipalidad de Pilar · 2025', img: null, color: '#fefce3' },
+    { cat: 'branding · papelería', name: 'Branding de marca', desc: 'Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.', accent: 'Identidad de lujo', img: null, color: '#ede0d8' },
+    { cat: 'logo · identidad visual', name: 'Diseño de logotipo', desc: 'Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.', accent: 'Sistema tipográfico completo', img: null, color: '#dde8e4' },
+    { cat: 'social media · papelería', name: 'Social media & papelería', desc: 'Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.', accent: 'Laburito Studio · 2026', img: null, color: '#dcefff' },
   ];
 
+  /* ── COVERFLOW CAROUSEL ── */
   (function () {
-    const overlay  = document.getElementById('pv-overlay');
-    const body     = document.getElementById('pv-body');
-    const closBtn  = document.getElementById('pv-close');
-    const pvCat    = document.getElementById('pv-cat');
-    const pvTitle  = document.getElementById('pv-title');
-    const pvCover  = document.getElementById('pv-cover');
-    const pvCoverL = document.getElementById('pv-cover-label');
-    const pvDesc   = document.getElementById('pv-desc');
-    const pvAccent = document.getElementById('pv-accent-text');
-    const pvAccCat = document.getElementById('pv-accent-cat');
-    const pvCounter= document.getElementById('pv-counter');
-    const pvPrev   = document.getElementById('pv-prev');
-    const pvNext   = document.getElementById('pv-next');
+    const track   = document.getElementById('pf-track');
+    const cards   = Array.from(track.querySelectorAll('.pf-card'));
+    const dotsEl  = document.getElementById('pf-dots');
+    const prevBtn = document.getElementById('pf-prev');
+    const nextBtn = document.getElementById('pf-next');
+    const N       = cards.length;
+    let current   = 0;
 
-    let current = 0;
+    // Build dots
+    cards.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'pf-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    });
 
-    function populate(idx) {
-      const p = PF_DATA[idx];
-      pvCat.textContent    = p.cat;
-      pvTitle.textContent  = p.name;
-      pvCover.style.background = p.color;
-      pvCoverL.textContent = p.name;
-      pvDesc.textContent   = p.desc;
-      pvAccent.textContent = p.accent;
-      pvAccCat.textContent = p.cat;
-      pvCounter.textContent = (idx + 1) + ' / ' + PF_DATA.length;
-      body.scrollTop = 0;
+    function goTo(idx) {
+      current = ((idx % N) + N) % N;
+      arrange();
     }
 
-    function open(idx) {
-      current = idx;
-      populate(idx);
-      overlay.classList.add('open');
-      overlay.setAttribute('aria-hidden', 'false');
+    function arrange() {
+      const angleStep = 360 / N;
+      const radius    = 340;
+
+      cards.forEach((card, i) => {
+        const offset  = ((i - current + N) % N);
+        const angle   = offset * angleStep;
+        const rad     = (angle * Math.PI) / 180;
+        const x       = Math.sin(rad) * radius;
+        const z       = Math.cos(rad) * radius - radius;
+        const rotY    = -angle;
+        const scale   = offset === 0 ? 1 : (Math.abs(offset) === 1 || offset === N-1) ? 0.78 : 0.62;
+        const opacity = offset === 0 ? 1 : (Math.abs(offset) <= 1 || offset >= N-1) ? 0.65 : 0.3;
+        const isAct   = offset === 0;
+
+        card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
+        card.style.opacity   = opacity;
+        card.style.zIndex    = offset === 0 ? 10 : offset === 1 || offset === N-1 ? 5 : 1;
+        card.classList.toggle('active', isAct);
+      });
+
+      // update dots
+      dotsEl.querySelectorAll('.pf-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    // Drag / swipe
+    let startX = 0, dragging = false;
+    const stage = document.getElementById('pf-stage');
+    stage.addEventListener('mousedown',  (e) => { startX = e.clientX; dragging = true; });
+    stage.addEventListener('mousemove',  (e) => { if (!dragging) return; if (e.clientX - startX > 60) { dragging = false; goTo(current - 1); } else if (startX - e.clientX > 60) { dragging = false; goTo(current + 1); } });
+    stage.addEventListener('mouseup',    () => dragging = false);
+    stage.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend',   (e) => { const dx = e.changedTouches[0].clientX - startX; if (dx > 40) goTo(current - 1); else if (dx < -40) goTo(current + 1); }, { passive: true });
+
+    // Click on non-active → rotate to it; click on active → open modal
+    cards.forEach((card, i) => {
+      card.addEventListener('click', (e) => {
+        if (!card.classList.contains('active')) { goTo(i); return; }
+        const btn = e.target.closest('.pf-open-btn');
+        if (btn || card.classList.contains('active')) openModal(current);
+      });
+    });
+
+    arrange();
+
+    /* ── MODAL ── */
+    const modalOverlay = document.getElementById('pf-modal-overlay');
+    const modalClose   = document.getElementById('pf-modal-close');
+    const modalHero    = document.getElementById('pf-modal-hero');
+    const modalPh      = document.getElementById('pf-modal-ph');
+    const modalPhLbl   = document.getElementById('pf-modal-ph-label');
+    const modalCat     = document.getElementById('pf-modal-cat');
+    const modalTitle   = document.getElementById('pf-modal-title');
+    const modalDesc    = document.getElementById('pf-modal-desc');
+    const modalAccent  = document.getElementById('pf-modal-accent');
+    const modalThumbs  = document.getElementById('pf-modal-thumbs');
+
+    function openModal(idx) {
+      const p = PF_DATA[idx];
+      modalCat.textContent   = p.cat;
+      modalTitle.textContent = p.name;
+      modalDesc.textContent  = p.desc;
+      modalAccent.textContent = p.accent;
+
+      // Hero image or placeholder
+      const existingImg = modalHero.querySelector('img');
+      if (existingImg) existingImg.remove();
+      if (p.img) {
+        modalPh.style.display = 'none';
+        const img = document.createElement('img');
+        img.src = p.img; img.alt = p.name;
+        modalHero.insertBefore(img, modalClose);
+      } else {
+        modalPh.style.display = 'flex';
+        modalHero.style.background = p.color;
+        modalPhLbl.textContent = p.name;
+      }
+
+      // Thumbs
+      modalThumbs.innerHTML = [0,1,2].map(i =>
+        p.img && i === 0
+          ? `<div class="pf-modal-thumb"><img src="${p.img}" alt="${p.name}"></div>`
+          : `<div class="pf-modal-thumb" style="background:${p.color}"><span>${p.name}</span></div>`
+      ).join('');
+
+      modalOverlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
-    function close() {
-      overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden', 'true');
+    function closeModal() {
+      modalOverlay.classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    // Cards
-    document.querySelectorAll('.pf-row, .pf-card').forEach((card) => {
-      const idx = parseInt(card.dataset.project);
-      card.addEventListener('click', () => open(idx));
-      card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') open(idx); });
-    });
-
-    closBtn.addEventListener('click', close);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
     document.addEventListener('keydown', (e) => {
-      if (!overlay.classList.contains('open')) return;
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowRight') { current = (current + 1) % PF_DATA.length; populate(current); }
-      if (e.key === 'ArrowLeft')  { current = (current - 1 + PF_DATA.length) % PF_DATA.length; populate(current); }
+      if (e.key === 'Escape') closeModal();
+      if (!modalOverlay.classList.contains('open')) {
+        if (e.key === 'ArrowLeft')  goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+      }
     });
-
-    pvNext.addEventListener('click', () => { current = (current + 1) % PF_DATA.length; populate(current); });
-    pvPrev.addEventListener('click', () => { current = (current - 1 + PF_DATA.length) % PF_DATA.length; populate(current); });
   })();
-
-
 
   </script>
 

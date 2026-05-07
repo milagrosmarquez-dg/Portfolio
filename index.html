@@ -368,50 +368,26 @@
 
 
   /* ══════════════════════════════════════════════════
-     SKILLS — rediseño con personal + technical
+     SKILLS
   ══════════════════════════════════════════════════ */
   .skills {
     background: #4f3029;
     border-top: 1px solid var(--rule);
-    padding: 0;
-  }
-  .skills .section-inner { padding-bottom: 0; }
-
-  /* Encabezado */
-  .sk-header {
-    display: flex; align-items: baseline;
-    justify-content: space-between;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
-    margin-bottom: 72px;
-  }
-  .sk-title {
-    font-family: var(--font-serif);
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 300; font-style: italic;
-    color: #fff; line-height: 1;
-  }
-  .sk-title-sans {
-    display: block;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: clamp(10px, 1.1vw, 13px);
-    font-weight: 200; font-style: normal;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(255,255,255,0.4); margin-bottom: 6px;
   }
 
-  /* ── PERSONAL SKILLS — pills ── */
-  .sk-personal { margin-bottom: 72px; }
   .sk-group-label {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 9px; font-weight: 200;
     letter-spacing: 0.26em; text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.4);
     margin-bottom: 28px; display: block;
   }
-  .sk-pills {
-    display: flex; flex-wrap: wrap; gap: 12px;
-  }
+
+  /* Personal skills — pills */
+  .sk-personal { margin-bottom: 72px; }
+
+  .sk-pills { display: flex; flex-wrap: wrap; gap: 12px; }
+
   .sk-pill {
     font-family: var(--font-serif);
     font-size: clamp(15px, 1.5vw, 19px);
@@ -423,60 +399,52 @@
     transition: background 0.35s var(--ease), border-color 0.35s, color 0.35s;
     cursor: default;
   }
-  .sk-pill:hover {
-    background: #fefce3;
-    border-color: #fefce3;
-    color: #4f3029;
-  }
+  .sk-pill:hover { background: #fefce3; border-color: #fefce3; color: #4f3029; }
 
-  /* ── TECHNICAL SKILLS — logos grid ── */
-  .sk-technical {
-    background: #3d2420;
-    margin: 0 -80px;
-    padding: 52px 80px 64px;
-  }
-  .sk-tools-grid {
+  /* Technical skills — carpetitas */
+  .sk-technical-wrap { }
+
+  .sk-folders {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    margin-top: 32px;
+    gap: 32px 24px;
   }
-  .sk-tool {
+
+  .sk-folder {
     display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 14px;
-    padding: 36px 20px;
-    border: 1px solid rgba(255,255,255,0.06);
-    transition: background 0.35s var(--ease);
+    align-items: center; gap: 12px;
     cursor: default;
+    transition: transform 0.35s var(--ease);
   }
-  .sk-tool:hover { background: rgba(254,252,227,0.07); }
-  .sk-tool-icon {
-    width: 40px; height: 40px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+  .sk-folder:hover { transform: translateY(-4px); }
+
+  .sk-folder svg {
+    width: 100%; max-width: 110px;
+    height: auto;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.18));
+    transition: filter 0.35s;
   }
-  .sk-tool-icon svg { width: 40px; height: 40px; }
-  .sk-tool-name {
+  .sk-folder:hover svg { filter: drop-shadow(0 8px 20px rgba(0,0,0,0.28)); }
+
+  .sk-folder span {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 9px; font-weight: 200;
     letter-spacing: 0.18em; text-transform: uppercase;
     color: rgba(255,255,255,0.55); text-align: center;
     transition: color 0.3s;
   }
-  .sk-tool:hover .sk-tool-name { color: #fefce3; }
+  .sk-folder:hover span { color: #fefce3; }
 
   @media (max-width: 768px) {
-    .sk-tools-grid { grid-template-columns: repeat(2, 1fr); }
-    .sk-technical { margin: 0 -48px; padding: 40px 48px 52px; }
+    .sk-folders { grid-template-columns: repeat(3, 1fr); gap: 24px 16px; }
   }
-  @media (max-width: 500px) {
-    .sk-tools-grid { grid-template-columns: repeat(2, 1fr); }
-    .sk-technical { margin: 0 -24px; padding: 32px 24px 44px; }
+  @media (max-width: 480px) {
+    .sk-folders { grid-template-columns: repeat(2, 1fr); }
   }
-
 
   /* ══════════════════════════════════════════════════
+     EXPERIENCIA
+  ══════════════════════════════════════════════════
      EXPERIENCIA
   ══════════════════════════════════════════════════ */
   .experiencia { background: var(--bg); border-top: 1px solid var(--rule); }
@@ -1040,14 +1008,6 @@
   <section class="skills" id="skills">
     <div class="section-inner">
 
-      <!-- Encabezado -->
-      <div class="sk-header reveal">
-        <h2 class="sk-title">
-          <span class="sk-title-sans">lo que sé hacer</span>
-          Skills
-        </h2>
-      </div>
-
       <!-- Personal Skills -->
       <div class="sk-personal reveal">
         <span class="sk-group-label">Personal skills</span>
@@ -1060,49 +1020,81 @@
         </div>
       </div>
 
-      <!-- Technical Skills -->
-      <div class="sk-technical reveal">
+      <!-- Technical Skills — carpetitas SVG -->
+      <div class="sk-technical-wrap reveal d1">
         <span class="sk-group-label">Technical skills</span>
-        <div class="sk-tools-grid">
+        <div class="sk-folders">
 
-          <div class="sk-tool">
-            <div class="sk-tool-icon"><svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#FF9A00"/><text x="8" y="28" font-family="serif" font-size="18" font-weight="bold" fill="#2C1A00">Ai</text></svg></div>
-            <span class="sk-tool-name">Adobe Illustrator</span>
+          <div class="sk-folder">
+            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
+              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ai</text>
+            </svg>
+            <span>Adobe Illustrator</span>
           </div>
 
-          <div class="sk-tool">
-            <div class="sk-tool-icon"><svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#31A8FF"/><text x="5" y="28" font-family="serif" font-size="18" font-weight="bold" fill="#001C32">Ps</text></svg></div>
-            <span class="sk-tool-name">Adobe Photoshop</span>
+          <div class="sk-folder">
+            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
+              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ps</text>
+            </svg>
+            <span>Adobe Photoshop</span>
           </div>
 
-          <div class="sk-tool">
-            <div class="sk-tool-icon"><svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#9999FF"/><text x="6" y="28" font-family="serif" font-size="18" font-weight="bold" fill="#15002E">Ae</text></svg></div>
-            <span class="sk-tool-name">After Effects</span>
+          <div class="sk-folder">
+            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
+              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ae</text>
+            </svg>
+            <span>After Effects</span>
           </div>
 
-          <div class="sk-tool">
-            <div class="sk-tool-icon"><svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#FF3366"/><text x="6" y="28" font-family="serif" font-size="18" font-weight="bold" fill="#1D001B">Id</text></svg></div>
-            <span class="sk-tool-name">Adobe InDesign</span>
+          <div class="sk-folder">
+            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
+              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Id</text>
+            </svg>
+            <span>Adobe InDesign</span>
           </div>
 
-          <div class="sk-tool">
-            <div class="sk-tool-icon"><svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#1E1E1E"/><circle cx="26" cy="14" r="6" fill="#1ABCFE"/><circle cx="14" cy="14" r="6" fill="#FF7262"/><circle cx="14" cy="26" r="6" fill="#0ACF83"/><path d="M14 8h12a6 6 0 0 1 0 12H14z" fill="#F24E1E"/><circle cx="20" cy="26" r="6" fill="#A259FF"/></svg></div>
-            <span class="sk-tool-name">Figma</span>
+          <div class="sk-folder">
+            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
+              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Fg</text>
+            </svg>
+            <span>Figma</span>
           </div>
 
-          <div class="sk-tool">
-            <div class="sk-tool-icon"><svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="20" fill="#00C4CC"/><text x="6" y="28" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff">C</text></svg></div>
-            <span class="sk-tool-name">Canva</span>
+          <div class="sk-folder">
+            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
+              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Cv</text>
+            </svg>
+            <span>Canva</span>
           </div>
 
-          <div class="sk-tool">
-            <div class="sk-tool-icon"><svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#E44D26"/><text x="4" y="28" font-family="sans-serif" font-size="13" font-weight="bold" fill="#fff">HTML</text></svg></div>
-            <span class="sk-tool-name">HTML</span>
+          <div class="sk-folder">
+            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
+              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">HTML</text>
+            </svg>
+            <span>HTML</span>
           </div>
 
-          <div class="sk-tool">
-            <div class="sk-tool-icon"><svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#fefce3"/><circle cx="20" cy="16" r="5" fill="#4f3029"/><path d="M10 32c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="#4f3029" stroke-width="2" fill="none"/></svg></div>
-            <span class="sk-tool-name">Herramientas de IA</span>
+          <div class="sk-folder">
+            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
+              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">IA</text>
+            </svg>
+            <span>Herramientas IA</span>
           </div>
 
         </div>

@@ -138,12 +138,12 @@
   .logo-sub {
     display: block;
     font-family: var(--font-serif);
-    font-size: 13.5px;
+    font-size: 16px;
     font-weight: 300;
     font-style: italic;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     color: var(--ink);
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
   .logo-main {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
@@ -203,13 +203,14 @@
   /* Layout de dos columnas: texto | foto */
   .hero-body {
     display: grid;
-    grid-template-columns: 1fr 520px;
-    gap: 20px;
+    grid-template-columns: auto auto;
+    gap: 0;
     align-items: center;
+    justify-content: center; /* centra el grupo horizontalmente */
     width: 100%;
   }
 
-  .hero-content { position: relative; z-index: 1; }
+  .hero-content { position: relative; z-index: 1; max-width: 480px; padding-right: 0; }
 
   .hero-headline {
     margin-bottom: 20px;
@@ -270,11 +271,10 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-left: -40px; /* acerca la imagen al texto */
+    margin-left: -80px; /* solapa ligeramente sobre el texto */
   }
   .hero-photo-img {
-    width: 100%;
-    max-width: 560px;
+    width: 520px;
     height: auto;
     display: block;
     mix-blend-mode: multiply;
@@ -873,6 +873,7 @@
     <div class="header-inner">
 
       <nav class="nav-left" aria-label="Navegación principal">
+        <a href="#hero"      class="nav-link">Sobre mí</a>
         <a href="#skills"   class="nav-link">Skills</a>
       </nav>
 
@@ -892,6 +893,7 @@
     </div>
 
     <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="#hero"      class="mobile-link">Sobre mí</a>
       <a href="#skills"    class="mobile-link">Skills</a>
       <a href="#portfolio" class="mobile-link">Portfolio</a>
       <a href="#contacto"  class="mobile-link">Contacto</a>
@@ -900,7 +902,7 @@
 
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="hero">
     <div class="hero-body">
       <!-- Columna izquierda: texto -->
       <div class="hero-content">

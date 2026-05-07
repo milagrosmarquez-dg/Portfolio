@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -202,8 +203,8 @@
   /* Layout de dos columnas: texto | foto */
   .hero-body {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 60px;
+    grid-template-columns: 1fr 520px;
+    gap: 20px;
     align-items: center;
     width: 100%;
   }
@@ -266,25 +267,17 @@
 
   /* Placeholder foto */
   .hero-photo {
-    height: 480px;
-    display: flex;
-    align-items: stretch;
-  }
-  .hero-photo-inner {
-    flex: 1;
-    background: #fff;
-    border: 1px solid var(--ink);
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
+    justify-content: flex-start;
+    margin-left: -40px; /* acerca la imagen al texto */
   }
-
-  .hero-photo-label {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 9px; font-weight: 200;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--muted);
+  .hero-photo-img {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    display: block;
+    mix-blend-mode: multiply;
   }
 
   @media (max-width: 900px) {

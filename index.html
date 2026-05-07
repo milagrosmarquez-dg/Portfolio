@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -634,121 +633,136 @@
 
 
   /* ══════════════════════════════════════════════════
-     PORTFOLIO — pantalla completa, hover reveal
+     PORTFOLIO — stack apilado estilo editorial
   ══════════════════════════════════════════════════ */
   :root { --terracotta: #4f3029; --cream: #fefce3; }
 
   .portfolio { background: var(--bg); border-top: 1px solid var(--rule); }
-  .portfolio-intro { margin-bottom: 0; }
+  .portfolio-intro { margin-bottom: 56px; }
   .portfolio-title {
     font-family: var(--font-serif); font-size: clamp(34px, 4.5vw, 68px);
     font-weight: 300; font-style: italic; line-height: 1.05;
   }
 
-  /* Lista vertical de proyectos */
-  .pf-list {
+  /* Stack de proyectos */
+  .pf-stack {
     display: flex; flex-direction: column;
-    border-top: 1px solid var(--rule);
-    margin-top: 48px;
+    gap: 2px;
   }
 
-  .pf-item {
+  /* Cada fila del stack */
+  .pf-row {
     display: grid;
-    grid-template-columns: 80px 1fr 1fr auto;
-    align-items: center;
-    gap: 32px;
-    padding: 28px 80px;
-    border-bottom: 1px solid var(--rule);
+    grid-template-columns: 1fr 380px;
+    min-height: 320px;
     cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid var(--rule);
+  }
+  .pf-row:last-child { border-bottom: 1px solid var(--rule); }
+
+  /* Imagen — ocupa toda la columna izquierda */
+  .pf-row-img {
     position: relative;
     overflow: hidden;
-    transition: background 0.4s var(--ease);
+    background: #f0ece6;
   }
-  .pf-item::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: var(--terracotta);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s var(--ease);
-    z-index: 0;
-  }
-  .pf-item:hover::before { transform: scaleX(1); }
-  .pf-item > * { position: relative; z-index: 1; }
+  .pf-row:nth-child(2) .pf-row-img { background: #dcefff; }
+  .pf-row:nth-child(3) .pf-row-img { background: #fefce3; }
+  .pf-row:nth-child(4) .pf-row-img { background: #ede0d8; }
+  .pf-row:nth-child(5) .pf-row-img { background: #dde8e4; }
+  .pf-row:nth-child(6) .pf-row-img { background: #e8dde8; }
 
-  .pf-item-num {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: clamp(28px, 3vw, 42px); font-weight: 300;
-    color: var(--muted);
-    transition: color 0.4s;
-    line-height: 1;
-  }
-  .pf-item:hover .pf-item-num { color: rgba(255,255,255,0.4); }
-
-  .pf-item-name {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: clamp(22px, 2.8vw, 40px); font-weight: 300;
-    color: var(--ink); line-height: 1.1;
-    transition: color 0.4s;
-  }
-  .pf-item:hover .pf-item-name { color: #fff; }
-
-  .pf-item-cat {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 9px; font-weight: 200;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--muted);
-    transition: color 0.4s;
-  }
-  .pf-item:hover .pf-item-cat { color: rgba(255,255,255,0.55); }
-
-  .pf-item-arrow {
-    font-size: 22px; color: var(--muted);
-    transition: transform 0.4s var(--ease), color 0.4s;
-  }
-  .pf-item:hover .pf-item-arrow { transform: translateX(6px); color: #fff; }
-
-  /* Imagen flotante que sigue el mouse */
-  .pf-cursor-img {
-    position: fixed;
-    width: 320px; height: 220px;
-    pointer-events: none;
-    z-index: 300;
-    opacity: 0;
-    transform: translate(-50%, -60%) scale(0.88) rotate(-2deg);
-    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
-    overflow: hidden;
-    border: none;
-  }
-  .pf-cursor-img.visible {
-    opacity: 1;
-    transform: translate(-50%, -60%) scale(1) rotate(-1deg);
-  }
-  .pf-cursor-img img {
+  .pf-row-img img {
     width: 100%; height: 100%;
     object-fit: cover; display: block;
+    transform: scale(1.04);
+    transition: transform 0.8s var(--ease);
   }
-  .pf-cursor-img .pf-cursor-ph {
-    width: 100%; height: 100%;
+  .pf-row:hover .pf-row-img img { transform: scale(1); }
+
+  .pf-row-ph {
+    position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
   }
-  .pf-cursor-img .pf-cursor-ph span {
+  .pf-row-ph span {
     font-family: var(--font-serif); font-style: italic;
-    font-size: 14px; font-weight: 300; color: rgba(22,21,21,0.3);
+    font-size: 15px; font-weight: 300;
+    color: rgba(22,21,21,0.28);
   }
 
-  @media (max-width: 900px) {
-    .pf-item {
-      grid-template-columns: 48px 1fr auto;
-      gap: 20px; padding: 22px 48px;
-    }
-    .pf-item-cat { display: none; }
-    .pf-cursor-img { display: none; }
+  /* Panel de info — columna derecha */
+  .pf-row-info {
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    padding: 36px 48px;
+    background: var(--bg);
+    border-left: 1px solid var(--rule);
+    transition: background 0.5s var(--ease);
   }
-  @media (max-width: 600px) {
-    .pf-item { padding: 18px 24px; gap: 16px; }
-    .pf-item-num { font-size: 20px; }
-    .pf-item-name { font-size: clamp(18px, 5vw, 26px); }
+  .pf-row:hover .pf-row-info { background: var(--terracotta); }
+
+  .pf-row-top {}
+  .pf-row-num {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 13px; font-weight: 300;
+    color: var(--muted); margin-bottom: 16px; display: block;
+    transition: color 0.4s;
+  }
+  .pf-row:hover .pf-row-num { color: rgba(255,255,255,0.45); }
+
+  .pf-row-name {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(22px, 2.5vw, 34px); font-weight: 300;
+    color: var(--ink); line-height: 1.15; margin-bottom: 12px;
+    transition: color 0.4s;
+  }
+  .pf-row:hover .pf-row-name { color: #fff; }
+
+  .pf-row-cat {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 8.5px; font-weight: 200;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); transition: color 0.4s;
+  }
+  .pf-row:hover .pf-row-cat { color: rgba(255,255,255,0.5); }
+
+  .pf-row-desc {
+    font-family: var(--font-serif);
+    font-size: 14px; font-weight: 300; line-height: 1.75;
+    color: var(--muted); margin-top: 20px;
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s var(--ease), color 0.4s;
+  }
+  .pf-row:hover .pf-row-desc {
+    max-height: 120px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .pf-row-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .pf-row-cta {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 8.5px; font-weight: 200;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); transition: color 0.4s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pf-row:hover .pf-row-cta { color: #fff; }
+
+  .pf-row-arrow {
+    font-size: 20px; color: var(--muted);
+    transition: transform 0.4s var(--ease), color 0.4s;
+  }
+  .pf-row:hover .pf-row-arrow { transform: translate(4px, -4px); color: #fff; }
+
+  @media (max-width: 900px) {
+    .pf-row { grid-template-columns: 1fr; min-height: auto; }
+    .pf-row-img { aspect-ratio: 16/9; }
+    .pf-row-info { border-left: none; border-top: 1px solid var(--rule); }
+    .pf-row-desc { max-height: none !important; }
   }
 
   /* ══════════════════════════════════════════════════
@@ -1115,58 +1129,117 @@
       </div>
     </div>
 
-    <!-- Lista de proyectos -->
-    <div class="pf-list">
+    <!-- Stack apilado de proyectos -->
+    <div class="pf-stack">
 
-      <div class="pf-item reveal" data-project="0" tabindex="0" role="button">
-        <span class="pf-item-num">01</span>
-        <span class="pf-item-name">Social media post — UNP</span>
-        <span class="pf-item-cat">social media · comunicación institucional</span>
-        <span class="pf-item-arrow">→</span>
+      <div class="pf-row reveal" data-project="0" tabindex="0" role="button" aria-label="Ver proyecto: Social media post — UNP">
+        <div class="pf-row-img">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/404/71832c242252871.Y3JvcCwzMDU2LDIzOTAsNzQxLDM2Mw.jpg" alt="Social media UNP">
+        </div>
+        <div class="pf-row-info">
+          <div class="pf-row-top">
+            <span class="pf-row-num">01</span>
+            <h3 class="pf-row-name">Social media post — UNP</h3>
+            <span class="pf-row-cat">social media · comunicación</span>
+            <p class="pf-row-desc">Piezas de comunicación visual para la Universidad Nacional de Pilar. Diseño de posts para redes con lenguaje institucional claro.</p>
+          </div>
+          <div class="pf-row-bottom">
+            <span class="pf-row-cta">ver proyecto</span>
+            <span class="pf-row-arrow">↗</span>
+          </div>
+        </div>
       </div>
 
-      <div class="pf-item reveal d1" data-project="1" tabindex="0" role="button">
-        <span class="pf-item-num">02</span>
-        <span class="pf-item-name">Instagram Stories</span>
-        <span class="pf-item-cat">social media · diseño editorial</span>
-        <span class="pf-item-arrow">→</span>
+      <div class="pf-row reveal d1" data-project="1" tabindex="0" role="button" aria-label="Ver proyecto: Instagram Stories">
+        <div class="pf-row-img">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/404/b63799242251125.Y3JvcCwyODc2LDIyNTAsNTYyLDA.png" alt="Instagram Stories">
+        </div>
+        <div class="pf-row-info">
+          <div class="pf-row-top">
+            <span class="pf-row-num">02</span>
+            <h3 class="pf-row-name">Instagram Stories</h3>
+            <span class="pf-row-cat">social media · diseño editorial</span>
+            <p class="pf-row-desc">Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica y paleta de color para redes sociales.</p>
+          </div>
+          <div class="pf-row-bottom">
+            <span class="pf-row-cta">ver proyecto</span>
+            <span class="pf-row-arrow">↗</span>
+          </div>
+        </div>
       </div>
 
-      <div class="pf-item reveal d1" data-project="2" tabindex="0" role="button">
-        <span class="pf-item-num">03</span>
-        <span class="pf-item-name">Comunicación institucional</span>
-        <span class="pf-item-cat">identidad · comunicación</span>
-        <span class="pf-item-arrow">→</span>
+      <div class="pf-row reveal d1" data-project="2" tabindex="0" role="button" aria-label="Ver proyecto: Comunicación institucional">
+        <div class="pf-row-img">
+          <div class="pf-row-ph"><span>próximamente</span></div>
+        </div>
+        <div class="pf-row-info">
+          <div class="pf-row-top">
+            <span class="pf-row-num">03</span>
+            <h3 class="pf-row-name">Comunicación institucional</h3>
+            <span class="pf-row-cat">identidad · comunicación</span>
+            <p class="pf-row-desc">Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme.</p>
+          </div>
+          <div class="pf-row-bottom">
+            <span class="pf-row-cta">ver proyecto</span>
+            <span class="pf-row-arrow">↗</span>
+          </div>
+        </div>
       </div>
 
-      <div class="pf-item reveal d2" data-project="3" tabindex="0" role="button">
-        <span class="pf-item-num">04</span>
-        <span class="pf-item-name">Branding de marca</span>
-        <span class="pf-item-cat">branding · papelería</span>
-        <span class="pf-item-arrow">→</span>
+      <div class="pf-row reveal d2" data-project="3" tabindex="0" role="button" aria-label="Ver proyecto: Branding de marca">
+        <div class="pf-row-img">
+          <div class="pf-row-ph"><span>próximamente</span></div>
+        </div>
+        <div class="pf-row-info">
+          <div class="pf-row-top">
+            <span class="pf-row-num">04</span>
+            <h3 class="pf-row-name">Branding de marca</h3>
+            <span class="pf-row-cat">branding · papelería</span>
+            <p class="pf-row-desc">Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.</p>
+          </div>
+          <div class="pf-row-bottom">
+            <span class="pf-row-cta">ver proyecto</span>
+            <span class="pf-row-arrow">↗</span>
+          </div>
+        </div>
       </div>
 
-      <div class="pf-item reveal d2" data-project="4" tabindex="0" role="button">
-        <span class="pf-item-num">05</span>
-        <span class="pf-item-name">Diseño de logotipo</span>
-        <span class="pf-item-cat">logo · identidad visual</span>
-        <span class="pf-item-arrow">→</span>
+      <div class="pf-row reveal d2" data-project="4" tabindex="0" role="button" aria-label="Ver proyecto: Diseño de logotipo">
+        <div class="pf-row-img">
+          <div class="pf-row-ph"><span>próximamente</span></div>
+        </div>
+        <div class="pf-row-info">
+          <div class="pf-row-top">
+            <span class="pf-row-num">05</span>
+            <h3 class="pf-row-name">Diseño de logotipo</h3>
+            <span class="pf-row-cat">logo · identidad visual</span>
+            <p class="pf-row-desc">Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.</p>
+          </div>
+          <div class="pf-row-bottom">
+            <span class="pf-row-cta">ver proyecto</span>
+            <span class="pf-row-arrow">↗</span>
+          </div>
+        </div>
       </div>
 
-      <div class="pf-item reveal d3" data-project="5" tabindex="0" role="button">
-        <span class="pf-item-num">06</span>
-        <span class="pf-item-name">Social media & papelería</span>
-        <span class="pf-item-cat">social media · papelería</span>
-        <span class="pf-item-arrow">→</span>
+      <div class="pf-row reveal d3" data-project="5" tabindex="0" role="button" aria-label="Ver proyecto: Social media & papelería">
+        <div class="pf-row-img">
+          <div class="pf-row-ph"><span>próximamente</span></div>
+        </div>
+        <div class="pf-row-info">
+          <div class="pf-row-top">
+            <span class="pf-row-num">06</span>
+            <h3 class="pf-row-name">Social media & papelería</h3>
+            <span class="pf-row-cat">social media · papelería</span>
+            <p class="pf-row-desc">Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.</p>
+          </div>
+          <div class="pf-row-bottom">
+            <span class="pf-row-cta">ver proyecto</span>
+            <span class="pf-row-arrow">↗</span>
+          </div>
+        </div>
       </div>
 
-    </div>
-
-    <!-- Imagen flotante que sigue el cursor -->
-    <div class="pf-cursor-img" id="pf-cursor-img">
-      <div class="pf-cursor-ph" id="pf-cursor-ph">
-        <span id="pf-cursor-label">proyecto</span>
-      </div>
     </div>
 
   </section>
@@ -1469,7 +1542,7 @@
     }
 
     // Cards
-    document.querySelectorAll('.pf-card').forEach((card) => {
+    document.querySelectorAll('.pf-row, .pf-card').forEach((card) => {
       const idx = parseInt(card.dataset.project);
       card.addEventListener('click', () => open(idx));
       card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') open(idx); });
@@ -1489,73 +1562,6 @@
   })();
 
 
-  /* ── Portfolio cursor image follow ── */
-  (function () {
-    const cursorEl  = document.getElementById('pf-cursor-img');
-    const cursorPh  = document.getElementById('pf-cursor-ph');
-    const cursorLbl = document.getElementById('pf-cursor-label');
-    if (!cursorEl) return;
-
-    const IMGS = [
-      'https://mir-s3-cdn-cf.behance.net/projects/404/71832c242252871.Y3JvcCwzMDU2LDIzOTAsNzQxLDM2Mw.jpg',
-      'https://mir-s3-cdn-cf.behance.net/projects/404/b63799242251125.Y3JvcCwyODc2LDIyNTAsNTYyLDA.png',
-      null, null, null, null
-    ];
-    const LABELS = [
-      'Social media · UNP',
-      'Instagram Stories',
-      'Comunicación institucional',
-      'Branding de marca',
-      'Diseño de logotipo',
-      'Social media & papelería'
-    ];
-    const BG = ['#dcefff','#fefce3','#fefce3','#ede0d8','#dde8e4','#e8dde8'];
-
-    let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
-    let raf;
-
-    // Smooth follow
-    function lerp(a, b, t) { return a + (b - a) * t; }
-    function tick() {
-      curX = lerp(curX, mouseX, 0.1);
-      curY = lerp(curY, mouseY, 0.1);
-      cursorEl.style.left = curX + 'px';
-      cursorEl.style.top  = curY + 'px';
-      raf = requestAnimationFrame(tick);
-    }
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    document.querySelectorAll('.pf-item').forEach((item) => {
-      const idx = parseInt(item.dataset.project);
-
-      item.addEventListener('mouseenter', () => {
-        // Set image or placeholder
-        cursorPh.innerHTML = '';
-        if (IMGS[idx]) {
-          cursorPh.innerHTML = `<img src="${IMGS[idx]}" alt="${LABELS[idx]}" style="width:100%;height:100%;object-fit:cover;">`;
-        } else {
-          cursorPh.style.background = BG[idx];
-          cursorLbl = cursorEl.querySelector('#pf-cursor-label');
-          cursorPh.innerHTML = `<span style="font-family:var(--font-serif);font-style:italic;font-size:13px;font-weight:300;color:rgba(22,21,21,0.35);">${LABELS[idx]}</span>`;
-        }
-        cursorEl.classList.add('visible');
-        if (!raf) tick();
-      });
-
-      item.addEventListener('mouseleave', () => {
-        cursorEl.classList.remove('visible');
-      });
-
-      // keyboard
-      item.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') item.click();
-      });
-    });
-  })();
 
   </script>
 

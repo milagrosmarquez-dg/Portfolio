@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,1607 +10,374 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Serif+Display:ital@0;1&family=Jost:wght@100;200;300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.typekit.net/mot2twm.css" />
-
   <style>
-  /* ══════════════════════════════════════════════════
-     MILAGROS MÁRQUEZ — Portfolio
-     Editorial minimalista · archivo único
-  ══════════════════════════════════════════════════ */
-
   :root {
-    --bg:       #ffffff;
-    --ink:      #161515;
-    --soft:     #dcefff;
-    --warm:     #4f3029;
-    --mid:      #6b6460;
-    --muted:    #8c857f;
-    --rule:     rgba(22, 21, 21, 0.10);
-
+    --bg: #ffffff; --ink: #161515; --soft: #dcefff; --warm: #4f3029;
+    --mid: #6b6460; --muted: #8c857f; --rule: rgba(22,21,21,0.10);
     --font-display: 'DM Serif Display', Georgia, serif;
-    --font-body:    'Jost', sans-serif;
-    --font-serif:   'Cormorant Garamond', Georgia, serif;
-
+    --font-body: 'Jost', sans-serif;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
     --header-h: 68px;
-    --ease:     cubic-bezier(0.25, 0.1, 0.25, 1);
-    --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
-  }
-
-  /* ─── RESET ─── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html  { scroll-behavior: smooth; }
-  body  {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-weight: 200;
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
-  img   { display: block; max-width: 100%; }
-  a     { color: inherit; text-decoration: none; }
-  ul    { list-style: none; }
-
-  ::selection { background: var(--soft); color: var(--ink); }
-  ::-webkit-scrollbar       { width: 3px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 2px; }
-
-  /* ─── SCROLL REVEAL ─── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
-  }
-  .reveal.d1 { transition-delay: 0.08s; }
-  .reveal.d2 { transition-delay: 0.18s; }
-  .reveal.d3 { transition-delay: 0.30s; }
-  .reveal.visible { opacity: 1; transform: none; }
-
-
-  /* ══════════════════════════════════════════════════
-     HEADER — fiel a la referencia visual
-     NAV-IZQ centrado | LOGO CENTRAL | NAV-DER centrado
-  ══════════════════════════════════════════════════ */
-  .site-header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: #fffff3;
-    border-bottom: 1px solid var(--rule);
-    transition: box-shadow 0.5s var(--ease);
-  }
-  .site-header.scrolled { box-shadow: 0 1px 20px rgba(22,21,21,0.05); }
-
-  .header-inner {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    height: var(--header-h);
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 48px;
-  }
-
-  .nav-left {
-    display: flex;
-    align-items: center;
-    gap: 48px;
-    justify-content: flex-start;
-  }
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 48px;
-    justify-content: flex-end;
-  }
-
-  .nav-link {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 10.5px;
-    font-weight: 300;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink);
-    position: relative;
-    padding-bottom: 2px;
-    white-space: nowrap;
-    transition: color 0.35s var(--ease);
-  }
-  .nav-link::after {
-    content: '·';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%) scale(0);
-    font-size: 18px;
-    line-height: 1;
-    color: var(--warm);
-    transition: transform 0.35s var(--ease), opacity 0.35s;
-    opacity: 0;
-  }
-  .nav-link:hover { color: var(--warm); }
-  .nav-link:hover::after { transform: translateX(-50%) scale(1); opacity: 1; }
-
-  .logo-block {
-    text-align: center;
-    line-height: 1;
-    padding: 0 56px;
-  }
-  .logo-sub {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: 16px;
-    font-weight: 300;
-    font-style: italic;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-    margin-bottom: 5px;
-  }
-  .logo-main {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 15px;
-    font-weight: 300;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    color: var(--ink);
-    line-height: 1.15;
-  }
-
-  /* Hamburguesa */
-  .menu-toggle {
-    display: none;
-    flex-direction: column; gap: 7px;
-    background: none; border: none; cursor: pointer; padding: 4px;
-  }
-  .menu-toggle span {
-    display: block; width: 22px; height: 1px;
-    background: var(--ink);
-    transition: transform 0.35s var(--ease), opacity 0.35s;
-  }
-  .menu-toggle.open span:first-child { transform: translateY(8px) rotate(45deg); }
-  .menu-toggle.open span:last-child  { transform: translateY(-8px) rotate(-45deg); }
-
-  .mobile-menu {
-    display: none; flex-direction: column;
-    overflow: hidden; max-height: 0;
-    transition: max-height 0.5s var(--ease);
-    border-top: 1px solid var(--rule);
-    background: #fffff3;
-  }
-  .mobile-menu.open { max-height: 280px; }
-  .mobile-link {
-    font-family: var(--font-body); font-size: 11px; font-weight: 200;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    padding: 18px; text-align: center;
-    border-bottom: 1px solid var(--rule);
-    transition: background 0.3s;
-  }
-  .mobile-link:hover { background: rgba(220,239,255,0.3); }
-
-
-  /* ══════════════════════════════════════════════════
-     HERO — tipográfico editorial, fondo claro
-  ══════════════════════════════════════════════════ */
-  .hero {
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    padding: calc(var(--header-h) + 60px) 72px 80px;
-    position: relative;
-    overflow: visible;
-    background: var(--bg);
-  }
-
-  /* Layout de dos columnas: texto | foto */
-  .hero-body {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 48px;
-    align-items: center;
-    justify-content: center; /* centra el grupo horizontalmente */
-    width: 100%;
-  }
-
-  .hero-content { position: relative; z-index: 1; max-width: 480px; padding-right: 0; }
-
-  .hero-headline {
-    margin-bottom: 20px;
-    line-height: 1;
-  }
-
-  .hero-line-sans {
-    display: block;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: clamp(22px, 3vw, 44px);
-    font-weight: 100;
-    letter-spacing: 0;
-    color: var(--ink);
-    line-height: 1.2;
-  }
-  .hero-name-inline {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 1.9em;
-    line-height: 0.85;
-    vertical-align: middle;
-  }
-
-  /* "Márquez." en cursiva grande */
-  .hero-line-script {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: clamp(52px, 7.5vw, 112px);
-    font-weight: 300;
-    font-style: italic;
-    line-height: 0.88;
-    color: var(--ink);
-    margin-left: 0.03em;
-  }
-
-  /* Descripción */
-  .hero-desc {
-    font-family: var(--font-serif);
-    font-size: clamp(15px, 1.4vw, 17px);
-    font-weight: 300;
-    line-height: 1.85;
-    color: var(--mid);
-    max-width: 440px;
-  }
-  .hero-desc em { font-style: italic; color: var(--ink); }
-
-  .hero-tags {
-    display: flex; gap: 14px; margin-top: 20px;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 11.5px; font-weight: 300;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
-  }
-
-
-  /* Placeholder foto */
-  .hero-photo {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-left: -20px;
-  }
-  .hero-photo-img {
-    width: 100%;
-    max-width: 520px;
-    height: auto;
-    display: block;
-    mix-blend-mode: multiply;
-  }
-
-  @media (max-width: 900px) {
-    .hero-body { grid-template-columns: 1fr; }
-    .hero-photo { height: 300px; }
-  }
-  @media (max-width: 700px) {
-    .hero { padding: calc(var(--header-h) + 40px) 24px 64px; }
-    .hero-line-script { font-size: clamp(44px, 13vw, 72px); }
-    .hero-line-sans   { font-size: clamp(22px, 7vw, 36px); }
-  }
-
-
-  /* ══════════════════════════════════════════════════
-     MARQUEE
-  ══════════════════════════════════════════════════ */
-  .marquee-wrapper {
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
-    overflow: hidden; padding: 13px 0;
-    background: #dcefff;
-  }
-  .marquee-track {
-    display: flex; width: max-content;
-    animation: marquee 34s linear infinite;
-  }
-  .marquee-track:hover { animation-play-state: paused; }
-
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .marquee-content {
-    display: flex; align-items: center;
-    gap: 30px; padding: 0 30px; white-space: nowrap;
-  }
-  .marquee-content span {
-    font-family: var(--font-serif); font-size: 13.5px;
-    font-weight: 300; font-style: italic; color: var(--ink); letter-spacing: 0.04em;
-  }
-  .marquee-content .dot { color: var(--warm); font-style: normal; }
-
-
-  /* ══════════════════════════════════════════════════
-     LAYOUT SECCIONES
-  ══════════════════════════════════════════════════ */
-  .section-inner { max-width: 1400px; margin: 0 auto; padding: 120px 80px; }
-
-  .section-label {
-    display: flex; align-items: center; gap: 20px;
-    font-family: var(--font-body); font-size: 9px; font-weight: 200;
-    letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted);
-    margin-bottom: 80px; padding-bottom: 20px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .section-label span:first-child {
-    font-family: var(--font-display); font-size: 11px; color: var(--warm); font-style: italic;
-  }
-
-
-  /* ══════════════════════════════════════════════════
-     SOBRE MÍ
-  ══════════════════════════════════════════════════ */
-  .sobre-mi { background: var(--bg); }
-
-  .sobre-mi-grid { display: grid; grid-template-columns: 180px 1fr; gap: 80px; align-items: start; }
-
-  .sobre-mi-deco { display: flex; flex-direction: column; align-items: center; gap: 24px; padding-top: 8px; }
-  .deco-number { font-family: var(--font-serif); font-size: 72px; font-style: italic; font-weight: 300; color: var(--muted); opacity: 0.35; line-height: 1; }
-  .deco-line { width: 1px; height: 100px; background: var(--rule); }
-
-  .sobre-mi-title {
-    font-family: var(--font-serif); font-size: clamp(34px, 4.5vw, 60px);
-    font-weight: 300; font-style: italic; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 32px;
-  }
-  .sobre-mi-title em { font-style: normal; font-family: acumin-pro-wide, var(--font-body), sans-serif; font-size: 0.55em; font-weight: 100; letter-spacing: 0.02em; color: var(--muted); display: block; margin-bottom: 8px; }
-
-  .sobre-mi-body {
-    font-family: var(--font-serif); font-size: clamp(16px, 1.8vw, 20px);
-    font-weight: 300; line-height: 1.8; color: #5a5550; max-width: 600px; margin-bottom: 40px;
-  }
-  .sobre-mi-tags {
-    display: flex; gap: 14px;
-    font-family: var(--font-body); font-size: 9.5px; font-weight: 200;
-    letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
-  }
-
-
-  /* ══════════════════════════════════════════════════
-     SKILLS
-  ══════════════════════════════════════════════════ */
-  .skills {
-    background: #4f3029;
-    border-top: 1px solid var(--rule);
-  }
-
-  .sk-group-label {
-    font-family: var(--font-serif);
-    font-size: clamp(22px, 3vw, 36px);
-    font-weight: 300; font-style: italic;
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 28px; display: block;
-    letter-spacing: 0;
-  }
-
-  /* Personal skills — pills */
-  .sk-personal { margin-bottom: 72px; }
-
-  .sk-pills { display: flex; flex-wrap: wrap; gap: 12px; }
-
-  .sk-pill {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: clamp(13px, 1.3vw, 15px);
-    font-weight: 300;
-    letter-spacing: 0.06em;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.25);
-    padding: 11px 24px;
-    border-radius: 100px;
-    transition: background 0.35s var(--ease), border-color 0.35s, color 0.35s;
-    cursor: default;
-  }
-  .sk-pill:hover { background: #fefce3; border-color: #fefce3; color: #4f3029; }
-
-  /* Technical skills — carpetitas */
-  .sk-technical-wrap { }
-
-  .sk-folders {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px 24px;
-  }
-
-  .sk-folder {
-    display: flex; flex-direction: column;
-    align-items: center; gap: 12px;
-    cursor: default;
-    transition: transform 0.35s var(--ease);
-  }
-  .sk-folder:hover { transform: translateY(-4px); }
-
-  .sk-folder svg {
-    width: 100%; max-width: 110px;
-    height: auto;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.18));
-    transition: filter 0.35s;
-  }
-  .sk-folder:hover svg { filter: drop-shadow(0 8px 20px rgba(0,0,0,0.28)); }
-
-  .sk-folder span {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 9px; font-weight: 200;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.55); text-align: center;
-    transition: color 0.3s;
-  }
-  .sk-folder:hover span { color: #fefce3; }
-
-  @media (max-width: 768px) {
-    .sk-folders { grid-template-columns: repeat(3, 1fr); gap: 24px 16px; }
-  }
-  @media (max-width: 480px) {
-    .sk-folders { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  /* ══════════════════════════════════════════════════
-     EXPERIENCIA
-  ══════════════════════════════════════════════════
-     EXPERIENCIA
-  ══════════════════════════════════════════════════ */
-  .experiencia { background: var(--bg); border-top: 1px solid var(--rule); }
-
-  .timeline { display: flex; flex-direction: column; max-width: 860px; margin-left: auto; }
-
-  .timeline-item {
-    display: grid; grid-template-columns: 140px 1fr;
-    gap: 48px; padding: 52px 0;
-    border-bottom: 1px solid var(--rule); align-items: start;
-  }
-  .timeline-item:first-child { border-top: 1px solid var(--rule); }
-
-  .timeline-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; padding-top: 4px; }
-  .timeline-year { font-family: var(--font-body); font-size: 9.5px; font-weight: 200; letter-spacing: 0.12em; color: var(--muted); text-align: right; }
-  .timeline-dot  { width: 5px; height: 5px; border-radius: 50%; background: var(--warm); flex-shrink: 0; }
-
-  .timeline-role    { font-family: var(--font-display); font-size: clamp(20px, 2.6vw, 32px); font-weight: 400; margin-bottom: 6px; line-height: 1.1; }
-  .timeline-company { font-family: var(--font-body); font-size: 10px; font-weight: 200; letter-spacing: 0.16em; text-transform: uppercase; color: var(--warm); margin-bottom: 18px; }
-  .timeline-desc    { font-family: var(--font-serif); font-size: clamp(14px, 1.5vw, 17px); font-weight: 300; line-height: 1.8; color: #5a5550; max-width: 500px; }
-
-
-  /* ══════════════════════════════════════════════════
-     PORTFOLIO — Bento grid
-  ══════════════════════════════════════════════════ */
-  :root { --terracotta: #4f3029; --cream: #fefce3; }
-
-  .portfolio { background: var(--bg); border-top: 1px solid var(--rule); }
-
-  /* Bento grid — asimétrico 3 cols */
-  .bento {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 360px 280px;
-    gap: 6px;
-    padding: 0 0 6px;
-  }
-
-  .bento-item {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    background: #f0ece6;
-  }
-
-  /* Tamaños especiales */
-  .bento-item.b-wide   { grid-column: span 2; }   /* ocupa 2 cols */
-  .bento-item.b-tall   { grid-row: span 2; }       /* ocupa 2 filas */
-
-  /* Colores de fondo por ítem */
-  .bento-item:nth-child(1) { background: #dcefff; }
-  .bento-item:nth-child(2) { background: #fefce3; }
-  .bento-item:nth-child(3) { background: #f0e8e3; }
-  .bento-item:nth-child(4) { background: #e4ede9; }
-  .bento-item:nth-child(5) { background: #ede0d8; }
-  .bento-item:nth-child(6) { background: #e8e2f0; }
-
-  /* Placeholder centrado */
-  .bento-ph {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
-  }
-  .bento-item:hover .bento-ph { transform: scale(1.03); }
-  .bento-ph span {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 15px; font-weight: 300;
-    color: rgba(22,21,21,0.28); text-align: center; padding: 16px;
-  }
-
-  /* Imagen real */
-  .bento-img {
-    width: 100%; height: 100%;
-    object-fit: cover; display: block;
-    transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
-  }
-  .bento-item:hover .bento-img { transform: scale(1.03); }
-
-  /* Overlay hover con info */
-  .bento-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(79,48,41,0.88) 0%, rgba(79,48,41,0.15) 55%, transparent 100%);
-    display: flex; flex-direction: column;
-    justify-content: flex-end;
-    padding: 24px 28px;
-    opacity: 0;
-    transition: opacity 0.4s cubic-bezier(0.25,0.1,0.25,1);
-  }
-  .bento-item:hover .bento-overlay { opacity: 1; }
-
-  .bento-cat {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 8px; font-weight: 200;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(255,255,255,0.6); margin-bottom: 6px;
-    transform: translateY(6px);
-    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0.05s;
-  }
-  .bento-item:hover .bento-cat { transform: translateY(0); }
-
-  .bento-name {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: clamp(16px, 1.8vw, 22px); font-weight: 300;
-    color: #fff; line-height: 1.2; margin-bottom: 12px;
-    transform: translateY(8px);
-    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0.02s;
-  }
-  .bento-item:hover .bento-name { transform: translateY(0); }
-
-  .bento-btn {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 8px; font-weight: 200;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: #fff; border: 1px solid rgba(255,255,255,0.45);
-    padding: 7px 16px; border-radius: 100px;
-    display: inline-block; width: fit-content;
-    transform: translateY(10px); opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0s, opacity 0.4s 0s, background 0.25s;
-  }
-  .bento-item:hover .bento-btn { transform: translateY(0); opacity: 1; transition-delay: 0.08s; }
-  .bento-btn:hover { background: rgba(255,255,255,0.15); }
-
-  /* Número decorativo (siempre visible, esquina) */
-  .bento-num {
-    position: absolute; top: 18px; left: 22px;
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 12px; font-weight: 300;
-    color: rgba(22,21,21,0.3); z-index: 1;
-    transition: color 0.3s;
-  }
-  .bento-item:hover .bento-num { color: rgba(255,255,255,0.5); }
-
-  @media (max-width: 900px) {
-    .bento {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: auto;
-    }
-    .bento-item.b-wide { grid-column: span 2; }
-    .bento-item.b-tall { grid-row: span 1; }
-    .bento-item       { height: 260px; }
-  }
-  @media (max-width: 560px) {
-    .bento { grid-template-columns: 1fr; }
-    .bento-item.b-wide { grid-column: span 1; }
-    .bento-item { height: 240px; }
-  }
-
-  /* Modal proyecto (igual que antes) */
-  .pf-modal-overlay {
-    position: fixed; inset: 0; z-index: 400;
-    background: rgba(22,21,21,0);
-    pointer-events: none;
-    transition: background 0.45s cubic-bezier(0.25,0.1,0.25,1);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .pf-modal-overlay.open { background: rgba(22,21,21,0.75); pointer-events: all; }
-  .pf-modal {
-    background: #fffff3; width: min(860px, 92vw); max-height: 90vh;
-    border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
-    transform: scale(0.88) translateY(24px); opacity: 0;
-    transition: transform 0.45s cubic-bezier(0.25,0.1,0.25,1), opacity 0.45s cubic-bezier(0.25,0.1,0.25,1);
-  }
-  .pf-modal-overlay.open .pf-modal { transform: scale(1) translateY(0); opacity: 1; }
-  .pf-modal-hero {
-    width: 100%; aspect-ratio: 16/9; overflow: hidden; flex-shrink: 0;
-    background: #e8e4de; position: relative;
-  }
-  .pf-modal-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .pf-modal-hero .pf-modal-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .pf-modal-hero .pf-modal-ph span { font-family: var(--font-serif); font-style: italic; font-size: 18px; font-weight: 300; color: rgba(22,21,21,0.25); }
-  .pf-modal-body { padding: 36px 48px 48px; overflow-y: auto; }
-  .pf-modal-close {
-    position: absolute; top: 16px; right: 20px;
-    background: rgba(22,21,21,0.5); border: none; cursor: pointer;
-    color: #fff; border-radius: 50%; width: 36px; height: 36px;
-    font-size: 18px; display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s; z-index: 2;
-  }
-  .pf-modal-close:hover { background: rgba(22,21,21,0.8); }
-  .pf-modal-cat { font-family: acumin-pro-wide, var(--font-body), sans-serif; font-size: 9px; font-weight: 200; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: block; }
-  .pf-modal-title { font-family: var(--font-serif); font-style: italic; font-size: clamp(28px, 4vw, 44px); font-weight: 300; color: var(--ink); line-height: 1.1; margin-bottom: 20px; }
-  .pf-modal-desc { font-family: var(--font-serif); font-size: 16px; font-weight: 300; line-height: 1.85; color: var(--mid); margin-bottom: 32px; }
-  .pf-modal-accent { background: var(--terracotta); color: #fff; padding: 16px 24px; border-radius: 6px; font-family: acumin-pro-wide, var(--font-body), sans-serif; font-size: 9px; font-weight: 200; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 28px; display: inline-block; }
-  .pf-modal-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .pf-modal-thumb { aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; background: #e8e4de; display: flex; align-items: center; justify-content: center; }
-  .pf-modal-thumb span { font-family: var(--font-serif); font-style: italic; font-size: 11px; font-weight: 300; color: rgba(22,21,21,0.25); }
-  .pf-modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
-  @media (max-width: 700px) { .pf-modal-body { padding: 24px; } .pf-modal-thumbs { grid-template-columns: repeat(2, 1fr); } }
-
-  /* Flechas de navegación del modal */
-  .pf-modal-arrow {
-    position: fixed; top: 50%; transform: translateY(-50%);
-    background: rgba(250,250,250,0.92); border: 1px solid rgba(22,21,21,0.1);
-    width: 52px; height: 52px; border-radius: 50%;
-    font-size: 20px; cursor: pointer; color: var(--ink);
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.25s, transform 0.25s, opacity 0.3s;
-    opacity: 0; pointer-events: none; z-index: 401;
-    font-family: var(--font-body);
-  }
-  .pf-modal-overlay.open .pf-modal-arrow { opacity: 1; pointer-events: all; }
-  .pf-modal-prev { left: clamp(12px, 3vw, 40px); }
-  .pf-modal-next { right: clamp(12px, 3vw, 40px); }
-  .pf-modal-arrow:hover {
-    background: var(--terracotta); color: #fff; border-color: var(--terracotta);
-    transform: translateY(-50%) scale(1.08);
-  }
-  /* Contador */
-  .pf-modal-counter {
-    position: absolute; bottom: 16px; right: 20px;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 9px; font-weight: 200; letter-spacing: 0.18em;
-    color: rgba(255,255,255,0.7); text-transform: uppercase;
-    background: rgba(22,21,21,0.35); padding: 4px 10px; border-radius: 100px;
-  }
-
-  /* ══════════════════════════════════════════════════
-     CONTACTO
-  ══════════════════════════════════════════════════ */
-  .contacto { background: var(--bg); border-top: 1px solid var(--rule); }
-
-  .contacto-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-
-  .contacto-title {
-    font-family: var(--font-serif);
-    font-size: clamp(44px, 6.5vw, 88px);
-    font-weight: 300;
-    font-style: italic;
-    line-height: 0.95;
-    letter-spacing: -0.015em;
-    margin-bottom: 28px;
-    color: var(--ink);
-  }
-  .contacto-title .ct-sans {
-    display: block;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: clamp(18px, 2.2vw, 32px);
-    font-weight: 100;
-    font-style: normal;
-    letter-spacing: 0;
-    color: var(--ink);
-    margin-bottom: 4px;
-  }
-  .contacto-sub { font-family: var(--font-serif); font-size: 17px; font-weight: 300; line-height: 1.75; color: var(--mid); }
-
-  .contacto-links { display: flex; flex-direction: column; padding-top: 8px; }
-  .contact-link {
-    display: grid; grid-template-columns: 76px 1fr 22px;
-    align-items: center; gap: 20px;
-    padding: 20px 0; border-bottom: 1px solid var(--rule);
-    transition: padding-right 0.4s var(--ease);
-  }
-  .contact-link:first-child { border-top: 1px solid var(--rule); }
-  .contact-link:hover { padding-right: 6px; }
-  .contact-label { font-family: var(--font-body); font-size: 9px; font-weight: 200; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
-  .contact-value { font-family: var(--font-serif); font-size: clamp(14px, 1.6vw, 18px); font-weight: 300; color: var(--ink); transition: color 0.3s; }
-  .contact-link:hover .contact-value { color: var(--warm); }
-  .contact-arrow { font-size: 17px; color: var(--muted); text-align: right; transition: transform 0.4s var(--ease), color 0.3s; }
-  .contact-link:hover .contact-arrow { transform: translate(2px, -2px); color: var(--warm); }
-
-
-
-
-  /* ══════════════════════════════════════════════════
-     FOOTER — mismo estilo que header
-  ══════════════════════════════════════════════════ */
-  .site-footer {
-    border-top: 1px solid var(--rule);
-    background: #fffff3;
-  }
-  .footer-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: var(--header-h);
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 48px;
-  }
-  .footer-left {
-    display: flex; flex-direction: column; gap: 3px;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 11px; font-weight: 300;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--muted);
-    justify-self: flex-start;
-  }
-  .footer-right {
-    display: flex; flex-direction: column; gap: 3px;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 11px; font-weight: 300;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--muted); text-align: right;
-    justify-self: flex-end;
-  }
-  .footer-right a { color: var(--muted); transition: color 0.3s; }
-  .footer-right a:hover { color: var(--ink); }
-
-  .footer-back {
-    font-size: 16px; color: var(--muted);
-    transition: color 0.3s, transform 0.3s; display: inline-block;
-  }
-  .footer-back:hover { color: var(--ink); transform: translateY(-3px); }
-
-  @media (max-width: 700px) {
-    .footer-inner {
-      grid-template-columns: 1fr 1fr;
-      height: auto; padding: 24px;
-      gap: 20px;
-    }
-    .footer-inner .logo-block { display: none; }
-    .footer-right { justify-self: end; }
-
-  }
-
-
-
-  /* ══════════════════════════════════════════════════
-     RESPONSIVE — TABLET
-  ══════════════════════════════════════════════════ */
-  @media (max-width: 1024px) {
-    .section-inner { padding: 80px 48px; }
-    .header-inner  { padding: 0 28px; }
-    .logo-block    { padding: 0 32px; }
-
-    .sobre-mi-grid   { grid-template-columns: 1fr; gap: 40px; }
-    .sobre-mi-deco   { flex-direction: row; align-items: center; }
-    .deco-line       { width: 60px; height: 1px; }
-    .skills-layout   { grid-template-columns: 1fr; gap: 48px; }
-    .contacto-layout { grid-template-columns: 1fr; gap: 52px; }
-
-    .portfolio-grid { grid-template-columns: repeat(6, 1fr); gap: 10px; }
-    .project-large               { grid-column: 1 / 7; }
-    .project-small:nth-of-type(2){ grid-column: 1 / 4; }
-    .project-small:nth-of-type(3){ grid-column: 4 / 7; }
-    .project-medium:nth-of-type(4){ grid-column: 1 / 4; }
-    .project-medium:nth-of-type(5){ grid-column: 4 / 7; }
-  }
-
-  /* ══════════════════════════════════════════════════
-     RESPONSIVE — MOBILE
-  ══════════════════════════════════════════════════ */
-  @media (max-width: 700px) {
-    :root { --header-h: 58px; }
-
-    .header-inner { grid-template-columns: 1fr auto; padding: 0 20px; }
-    .nav-left, .nav-right { display: none; }
-    .logo-block   { padding: 0; justify-self: center; grid-column: 1; }
-    .menu-toggle  { display: flex; grid-column: 2; }
-    .mobile-menu  { display: flex; }
-
-    .hero { padding: calc(var(--header-h) + 52px) 24px 64px; min-height: 100svh; }
-    .hero-desc br { display: none; }
-
-    .section-inner { padding: 64px 24px; }
-    .section-label { margin-bottom: 48px; }
-
-    .skills-grid { grid-template-columns: 1fr; gap: 40px; }
-
-    .timeline-item { grid-template-columns: 1fr; gap: 14px; padding: 36px 0; }
-    .timeline-meta { flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; }
-    .timeline-year { text-align: left; }
-
-
-
-    .contacto-title { font-size: clamp(44px, 13vw, 68px); }
-    .footer-inner { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
-  }
-
-
-  /* ══════════════════════════════════════════════════
-     PORTFOLIO — carrusel circular coverflow
-  ══════════════════════════════════════════════════ */
-  :root { --terracotta: #4f3029; --cream: #fefce3; }
-
-  .portfolio { background: var(--bg); border-top: 1px solid var(--rule); padding-top: 0; }
-  .portfolio-intro { margin-bottom: 40px; }
-  .portfolio-title {
-    font-family: var(--font-serif); font-size: clamp(34px, 4.5vw, 68px);
-    font-weight: 300; font-style: italic; line-height: 1.05;
-  }
-
-  /* Stage del carrusel */
-  .pf-stage {
-    position: relative;
-    width: 100%;
-    height: 620px;
-    perspective: 1400px;
-    overflow: hidden;
-    margin-bottom: 0;
-    cursor: grab;
-  }
-  .pf-stage:active { cursor: grabbing; }
-
-  /* Track rotativo */
-  .pf-track {
-    position: absolute;
-    width: 100%; height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
-
-  /* Cada tarjeta */
-  .pf-card {
-    position: absolute;
-    left: 50%; top: 50%;
-    width: 400px; height: 480px;
-    margin-left: -200px; margin-top: -240px;
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    transition: box-shadow 0.4s, filter 0.4s;
-    background: #f0ece6;
-    box-shadow: 0 8px 40px rgba(22,21,21,0.12);
-  }
-  .pf-card img {
-    width: 100%; height: 100%;
-    object-fit: cover; display: block;
-    border-radius: 20px;
-  }
-  .pf-card .pf-card-ph {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 20px;
-  }
-  .pf-card .pf-card-ph span {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 14px; font-weight: 300;
-    color: rgba(22,21,21,0.3);
-  }
-  /* Info hover overlay */
-  .pf-card-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(79,48,41,0.92) 0%, rgba(79,48,41,0.2) 55%, transparent 100%);
-    border-radius: 20px;
-    display: flex; flex-direction: column;
-    justify-content: flex-end;
-    padding: 24px 22px;
-    opacity: 0;
-    transition: opacity 0.35s;
-  }
-  .pf-card.active .pf-card-overlay { opacity: 1; }
-  .pf-card-overlay h3 {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 18px; font-weight: 300;
-    color: #fff; margin-bottom: 4px; line-height: 1.2;
-  }
-  .pf-card-overlay p {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 8px; font-weight: 200;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-  }
-  .pf-card-overlay .pf-open-btn {
-    margin-top: 12px;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 8px; font-weight: 200;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.5);
-    padding: 7px 14px; border-radius: 100px;
-    display: inline-block; width: fit-content;
-    transition: background 0.3s;
-  }
-  .pf-card-overlay .pf-open-btn:hover { background: rgba(255,255,255,0.15); }
-
-  /* Navegación */
-  .pf-nav {
-    display: flex; align-items: center; justify-content: center;
-    gap: 32px; padding-bottom: 48px;
-  }
-  .pf-nav-btn {
-    background: none; border: 1px solid var(--rule);
-    width: 44px; height: 44px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 18px; color: var(--muted);
-    transition: border-color 0.3s, color 0.3s, background 0.3s;
-  }
-  .pf-nav-btn:hover { border-color: var(--ink); color: var(--ink); }
-  .pf-nav-dots {
-    display: flex; gap: 8px; align-items: center;
-  }
-  .pf-dot {
-    width: 5px; height: 5px; border-radius: 50%;
-    background: var(--muted); cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-  }
-  .pf-dot.active { background: var(--ink); transform: scale(1.5); }
-
-  /* Modal de proyecto */
-  .pf-modal-overlay {
-    position: fixed; inset: 0; z-index: 400;
-    background: rgba(22,21,21,0);
-    pointer-events: none;
-    transition: background 0.45s var(--ease);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .pf-modal-overlay.open {
-    background: rgba(22,21,21,0.75);
-    pointer-events: all;
-  }
-  .pf-modal {
-    background: #fffff3;
-    width: min(860px, 92vw);
-    max-height: 90vh;
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex; flex-direction: column;
-    transform: scale(0.88) translateY(24px);
-    opacity: 0;
-    transition: transform 0.45s var(--ease), opacity 0.45s var(--ease);
-  }
-  .pf-modal-overlay.open .pf-modal {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
-  .pf-modal-hero {
-    width: 100%; aspect-ratio: 16/9;
-    overflow: hidden; flex-shrink: 0;
-    background: #e8e4de;
-    position: relative;
-  }
-  .pf-modal-hero img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-  }
-  .pf-modal-hero .pf-modal-ph {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .pf-modal-hero .pf-modal-ph span {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 18px; font-weight: 300; color: rgba(22,21,21,0.25);
-  }
-  .pf-modal-body {
-    padding: 36px 48px 48px;
-    overflow-y: auto;
-  }
-  .pf-modal-close {
-    position: absolute; top: 16px; right: 20px;
-    background: rgba(22,21,21,0.5); border: none; cursor: pointer;
-    color: #fff; border-radius: 50%; width: 36px; height: 36px;
-    font-size: 18px; display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s; z-index: 2;
-  }
-  .pf-modal-close:hover { background: rgba(22,21,21,0.8); }
-  .pf-modal-cat {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 9px; font-weight: 200;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 10px; display: block;
-  }
-  .pf-modal-title {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: clamp(28px, 4vw, 44px); font-weight: 300;
-    color: var(--ink); line-height: 1.1; margin-bottom: 20px;
-  }
-  .pf-modal-desc {
-    font-family: var(--font-serif);
-    font-size: 16px; font-weight: 300; line-height: 1.85;
-    color: var(--mid); margin-bottom: 32px;
-  }
-  .pf-modal-accent {
-    background: var(--terracotta); color: #fff;
-    padding: 16px 24px; border-radius: 6px;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 9px; font-weight: 200;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    margin-bottom: 28px; display: inline-block;
-  }
-  .pf-modal-thumbs {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-  }
-  .pf-modal-thumb {
-    aspect-ratio: 4/3; border-radius: 6px; overflow: hidden;
-    background: #e8e4de;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .pf-modal-thumb span {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 11px; font-weight: 300; color: rgba(22,21,21,0.25);
-  }
-  .pf-modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-  @media (max-width: 700px) {
-    .pf-stage { height: 440px; }
-    .pf-card { width: 280px; height: 340px; margin-left: -140px; margin-top: -170px; }
-    .pf-modal-body { padding: 24px; }
-    .pf-modal-thumbs { grid-template-columns: repeat(2, 1fr); }
-  }
-
-
-
+    --ease: cubic-bezier(0.25,0.1,0.25,1);
+    --ease-out: cubic-bezier(0.0,0.0,0.2,1);
+    --terracotta: #4f3029; --cream: #fefce3;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-weight:200;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  ::selection{background:var(--soft);color:var(--ink)}
+  ::-webkit-scrollbar{width:3px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--muted);border-radius:2px}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.9s var(--ease-out),transform 0.9s var(--ease-out)}
+  .reveal.d1{transition-delay:0.08s}.reveal.d2{transition-delay:0.18s}.reveal.d3{transition-delay:0.30s}
+  .reveal.visible{opacity:1;transform:none}
+  /* HEADER */
+  .site-header{position:fixed;top:0;left:0;right:0;z-index:100;background:#fffff3;border-bottom:1px solid var(--rule);transition:box-shadow 0.5s var(--ease)}
+  .site-header.scrolled{box-shadow:0 1px 20px rgba(22,21,21,0.05)}
+  .header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:var(--header-h);max-width:1600px;margin:0 auto;padding:0 48px}
+  .nav-left{display:flex;align-items:center;gap:48px;justify-content:flex-start}
+  .nav-right{display:flex;align-items:center;gap:48px;justify-content:flex-end}
+  .nav-link{font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:10.5px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink);position:relative;padding-bottom:2px;white-space:nowrap;transition:color 0.35s var(--ease)}
+  .nav-link::after{content:'·';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%) scale(0);font-size:18px;line-height:1;color:var(--warm);transition:transform 0.35s var(--ease),opacity 0.35s;opacity:0}
+  .nav-link:hover{color:var(--warm)}
+  .nav-link:hover::after{transform:translateX(-50%) scale(1);opacity:1}
+  .logo-block{text-align:center;line-height:1;padding:0 56px}
+  .logo-sub{display:block;font-family:var(--font-serif);font-size:16px;font-weight:300;font-style:italic;letter-spacing:0.04em;color:var(--ink);margin-bottom:5px}
+  .logo-main{font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:15px;font-weight:300;letter-spacing:0;text-transform:uppercase;color:var(--ink);line-height:1.15}
+  .menu-toggle{display:none;flex-direction:column;gap:7px;background:none;border:none;cursor:pointer;padding:4px}
+  .menu-toggle span{display:block;width:22px;height:1px;background:var(--ink);transition:transform 0.35s var(--ease),opacity 0.35s}
+  .menu-toggle.open span:first-child{transform:translateY(8px) rotate(45deg)}
+  .menu-toggle.open span:last-child{transform:translateY(-8px) rotate(-45deg)}
+  .mobile-menu{display:none;flex-direction:column;overflow:hidden;max-height:0;transition:max-height 0.5s var(--ease);border-top:1px solid var(--rule);background:#fffff3}
+  .mobile-menu.open{max-height:280px}
+  .mobile-link{font-family:var(--font-body);font-size:11px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;padding:18px;text-align:center;border-bottom:1px solid var(--rule);transition:background 0.3s}
+  .mobile-link:hover{background:rgba(220,239,255,0.3)}
+  /* HERO */
+  .hero{min-height:100svh;display:flex;align-items:center;padding:calc(var(--header-h) + 60px) 72px 80px;position:relative;overflow:visible;background:var(--bg)}
+  .hero-body{display:grid;grid-template-columns:auto auto;gap:48px;align-items:center;justify-content:center;width:100%}
+  .hero-content{position:relative;z-index:1;max-width:480px;padding-right:0}
+  .hero-headline{margin-bottom:20px;line-height:1}
+  .hero-line-sans{display:block;font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:clamp(22px,3vw,44px);font-weight:100;letter-spacing:0;color:var(--ink);line-height:1.2}
+  .hero-name-inline{font-family:var(--font-serif);font-style:italic;font-weight:300;font-size:1.9em;line-height:0.85;vertical-align:middle}
+  .hero-line-script{display:block;font-family:var(--font-serif);font-size:clamp(52px,7.5vw,112px);font-weight:300;font-style:italic;line-height:0.88;color:var(--ink);margin-left:0.03em}
+  .hero-desc{font-family:var(--font-serif);font-size:clamp(15px,1.4vw,17px);font-weight:300;line-height:1.85;color:var(--mid);max-width:440px}
+  .hero-desc em{font-style:italic;color:var(--ink)}
+  .hero-tags{display:flex;gap:14px;margin-top:20px;font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:11.5px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+  .hero-photo{display:flex;align-items:center;justify-content:flex-start;margin-left:-20px}
+  .hero-photo-img{width:100%;max-width:520px;height:auto;display:block;mix-blend-mode:multiply}
+  @media(max-width:900px){.hero-body{grid-template-columns:1fr}.hero-photo{height:300px}}
+  @media(max-width:700px){.hero{padding:calc(var(--header-h) + 40px) 24px 64px}.hero-line-script{font-size:clamp(44px,13vw,72px)}.hero-line-sans{font-size:clamp(22px,7vw,36px)}}
+  /* MARQUEE */
+  .marquee-wrapper{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);overflow:hidden;padding:13px 0;background:#dcefff}
+  .marquee-track{display:flex;width:max-content;animation:marquee 34s linear infinite}
+  .marquee-track:hover{animation-play-state:paused}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .marquee-content{display:flex;align-items:center;gap:30px;padding:0 30px;white-space:nowrap}
+  .marquee-content span{font-family:var(--font-serif);font-size:13.5px;font-weight:300;font-style:italic;color:var(--ink);letter-spacing:0.04em}
+  .marquee-content .dot{color:var(--warm);font-style:normal}
+  /* SECCIONES */
+  .section-inner{max-width:1400px;margin:0 auto;padding:120px 80px}
+  .section-label{display:flex;align-items:center;gap:20px;font-family:var(--font-body);font-size:9px;font-weight:200;letter-spacing:0.24em;text-transform:uppercase;color:var(--muted);margin-bottom:80px;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+  .section-label span:first-child{font-family:var(--font-display);font-size:11px;color:var(--warm);font-style:italic}
+  /* SOBRE MÍ */
+  .sobre-mi{background:var(--bg)}
+  .sobre-mi-grid{display:grid;grid-template-columns:180px 1fr;gap:80px;align-items:start}
+  .sobre-mi-deco{display:flex;flex-direction:column;align-items:center;gap:24px;padding-top:8px}
+  .deco-number{font-family:var(--font-serif);font-size:72px;font-style:italic;font-weight:300;color:var(--muted);opacity:0.35;line-height:1}
+  .deco-line{width:1px;height:100px;background:var(--rule)}
+  .sobre-mi-title{font-family:var(--font-serif);font-size:clamp(34px,4.5vw,60px);font-weight:300;font-style:italic;line-height:1.08;letter-spacing:-0.01em;margin-bottom:32px}
+  .sobre-mi-title em{font-style:normal;font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:0.55em;font-weight:100;letter-spacing:0.02em;color:var(--muted);display:block;margin-bottom:8px}
+  .sobre-mi-body{font-family:var(--font-serif);font-size:clamp(16px,1.8vw,20px);font-weight:300;line-height:1.8;color:#5a5550;max-width:600px;margin-bottom:40px}
+  .sobre-mi-tags{display:flex;gap:14px;font-family:var(--font-body);font-size:9.5px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+  /* SKILLS */
+  .skills{background:#4f3029;border-top:1px solid var(--rule)}
+  .sk-group-label{font-family:var(--font-serif);font-size:clamp(22px,3vw,36px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.75);margin-bottom:28px;display:block;letter-spacing:0}
+  .sk-personal{margin-bottom:72px}
+  .sk-pills{display:flex;flex-wrap:wrap;gap:12px}
+  .sk-pill{font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:clamp(13px,1.3vw,15px);font-weight:300;letter-spacing:0.06em;color:#fff;border:1px solid rgba(255,255,255,0.25);padding:11px 24px;border-radius:100px;transition:background 0.35s var(--ease),border-color 0.35s,color 0.35s;cursor:default}
+  .sk-pill:hover{background:#fefce3;border-color:#fefce3;color:#4f3029}
+  .sk-folders{display:grid;grid-template-columns:repeat(4,1fr);gap:32px 24px}
+  .sk-folder{display:flex;flex-direction:column;align-items:center;gap:12px;cursor:default;transition:transform 0.35s var(--ease)}
+  .sk-folder:hover{transform:translateY(-4px)}
+  .sk-folder svg{width:100%;max-width:110px;height:auto;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.18));transition:filter 0.35s}
+  .sk-folder:hover svg{filter:drop-shadow(0 8px 20px rgba(0,0,0,0.28))}
+  .sk-folder span{font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:9px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-align:center;transition:color 0.3s}
+  .sk-folder:hover span{color:#fefce3}
+  @media(max-width:768px){.sk-folders{grid-template-columns:repeat(3,1fr);gap:24px 16px}}
+  @media(max-width:480px){.sk-folders{grid-template-columns:repeat(2,1fr)}}
+  /* PORTFOLIO */
+  .portfolio{background:var(--bg);border-top:1px solid var(--rule)}
+  .portfolio-header-space{height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg);position:relative}
+  .portfolio-header-space img{width:100%;height:100%;object-fit:cover}
+  .portfolio-header-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;height:100%;border:1.5px dashed rgba(22,21,21,0.15)}
+  .portfolio-header-placeholder span{font-family:var(--font-serif);font-style:italic;font-size:15px;font-weight:300;color:rgba(22,21,21,0.3)}
+  .portfolio-header-placeholder label{font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:9px;font-weight:200;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);padding:6px 14px;border-radius:100px;cursor:pointer;transition:border-color 0.3s,color 0.3s}
+  .portfolio-header-placeholder label:hover{border-color:var(--ink);color:var(--ink)}
+  #portfolio-header-input{display:none}
+  .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:360px 280px;gap:6px;padding:0 0 6px}
+  .bento-item{position:relative;overflow:hidden;cursor:pointer;background:#f0ece6}
+  .bento-item.b-wide{grid-column:span 2}
+  .bento-item.b-tall{grid-row:span 2}
+  .bento-item:nth-child(1){background:#dcefff}
+  .bento-item:nth-child(2){background:#fefce3}
+  .bento-item:nth-child(3){background:#f0e8e3}
+  .bento-item:nth-child(4){background:#e4ede9}
+  .bento-item:nth-child(5){background:#ede0d8}
+  .bento-item:nth-child(6){background:#e8e2f0}
+  .bento-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform 0.7s cubic-bezier(0.25,0.1,0.25,1)}
+  .bento-item:hover .bento-ph{transform:scale(1.03)}
+  .bento-ph span{font-family:var(--font-serif);font-style:italic;font-size:15px;font-weight:300;color:rgba(22,21,21,0.28);text-align:center;padding:16px}
+  .bento-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s cubic-bezier(0.25,0.1,0.25,1)}
+  .bento-item:hover .bento-img{transform:scale(1.03)}
+  .bento-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(79,48,41,0.88) 0%,rgba(79,48,41,0.15) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px 28px;opacity:0;transition:opacity 0.4s cubic-bezier(0.25,0.1,0.25,1)}
+  .bento-item:hover .bento-overlay{opacity:1}
+  .bento-cat{font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:8px;font-weight:200;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:6px;transform:translateY(6px);transition:transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0.05s}
+  .bento-item:hover .bento-cat{transform:translateY(0)}
+  .bento-name{font-family:var(--font-serif);font-style:italic;font-size:clamp(16px,1.8vw,22px);font-weight:300;color:#fff;line-height:1.2;margin-bottom:12px;transform:translateY(8px);transition:transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0.02s}
+  .bento-item:hover .bento-name{transform:translateY(0)}
+  .bento-btn{font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:8px;font-weight:200;letter-spacing:0.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,0.45);padding:7px 16px;border-radius:100px;display:inline-block;width:fit-content;transform:translateY(10px);opacity:0;transition:transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0s,opacity 0.4s 0s,background 0.25s}
+  .bento-item:hover .bento-btn{transform:translateY(0);opacity:1;transition-delay:0.08s}
+  .bento-btn:hover{background:rgba(255,255,255,0.15)}
+  .bento-num{position:absolute;top:18px;left:22px;font-family:var(--font-serif);font-style:italic;font-size:12px;font-weight:300;color:rgba(22,21,21,0.3);z-index:1;transition:color 0.3s}
+  .bento-item:hover .bento-num{color:rgba(255,255,255,0.5)}
+  @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}.bento-item.b-wide{grid-column:span 2}.bento-item.b-tall{grid-row:span 1}.bento-item{height:260px}}
+  @media(max-width:560px){.bento{grid-template-columns:1fr}.bento-item.b-wide{grid-column:span 1}.bento-item{height:240px}}
+  /* MODAL */
+  .pf-modal-overlay{position:fixed;inset:0;z-index:400;background:rgba(22,21,21,0);pointer-events:none;transition:background 0.45s var(--ease);display:flex;align-items:center;justify-content:center}
+  .pf-modal-overlay.open{background:rgba(22,21,21,0.75);pointer-events:all}
+  .pf-modal{background:#fffff3;width:min(860px,92vw);max-height:90vh;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transform:scale(0.88) translateY(24px);opacity:0;transition:transform 0.45s var(--ease),opacity 0.45s var(--ease)}
+  .pf-modal-overlay.open .pf-modal{transform:scale(1) translateY(0);opacity:1}
+  .pf-modal-hero{width:100%;aspect-ratio:16/9;overflow:hidden;flex-shrink:0;background:#e8e4de;position:relative}
+  .pf-modal-hero-slides{display:flex;width:100%;height:100%;transition:transform 0.5s var(--ease)}
+  .pf-modal-slide{min-width:100%;height:100%;position:relative;flex-shrink:0}
+  .pf-modal-slide img{width:100%;height:100%;object-fit:cover;display:block}
+  .pf-modal-slide-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  .pf-modal-slide-ph span{font-family:var(--font-serif);font-style:italic;font-size:18px;font-weight:300;color:rgba(22,21,21,0.25)}
+  .pf-slide-prev,.pf-slide-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.88);border:1px solid rgba(22,21,21,0.12);width:40px;height:40px;border-radius:50%;font-size:16px;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:background 0.25s,transform 0.25s;z-index:5}
+  .pf-slide-prev{left:14px}.pf-slide-next{right:14px}
+  .pf-slide-prev:hover,.pf-slide-next:hover{background:var(--terracotta);color:#fff}
+  .pf-slide-prev:hover{transform:translateY(-50%) scale(1.05)}.pf-slide-next:hover{transform:translateY(-50%) scale(1.05)}
+  .pf-modal-hero.single-slide .pf-slide-prev,.pf-modal-hero.single-slide .pf-slide-next{display:none}
+  .pf-modal-close{position:absolute;top:16px;right:20px;background:rgba(22,21,21,0.5);border:none;cursor:pointer;color:#fff;border-radius:50%;width:36px;height:36px;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;z-index:6}
+  .pf-modal-close:hover{background:rgba(22,21,21,0.8)}
+  .pf-modal-counter{position:absolute;bottom:12px;right:16px;font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:9px;font-weight:200;letter-spacing:0.18em;color:rgba(255,255,255,0.8);text-transform:uppercase;background:rgba(22,21,21,0.35);padding:4px 10px;border-radius:100px;z-index:5}
+  .pf-slide-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5}
+  .pf-slide-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;transition:background 0.3s,transform 0.3s;border:none;padding:0}
+  .pf-slide-dot.active{background:#fff;transform:scale(1.4)}
+  .pf-modal-body{padding:36px 48px 48px;overflow-y:auto}
+  .pf-modal-cat{font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:9px;font-weight:200;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block}
+  .pf-modal-title{font-family:var(--font-serif);font-style:italic;font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:20px}
+  .pf-modal-desc{font-family:var(--font-serif);font-size:16px;font-weight:300;line-height:1.85;color:var(--mid);margin-bottom:32px}
+  .pf-modal-accent{background:var(--terracotta);color:#fff;padding:16px 24px;border-radius:6px;font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:9px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:28px;display:inline-block}
+  .pf-modal-arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(250,250,250,0.92);border:1px solid rgba(22,21,21,0.1);width:52px;height:52px;border-radius:50%;font-size:20px;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:background 0.25s,transform 0.25s,opacity 0.3s;opacity:0;pointer-events:none;z-index:401}
+  .pf-modal-overlay.open .pf-modal-arrow{opacity:1;pointer-events:all}
+  .pf-modal-prev{left:clamp(12px,3vw,40px)}.pf-modal-next{right:clamp(12px,3vw,40px)}
+  .pf-modal-arrow:hover{background:var(--terracotta);color:#fff;border-color:var(--terracotta);transform:translateY(-50%) scale(1.08)}
+  @media(max-width:700px){.pf-modal-body{padding:24px}}
+  /* CONTACTO */
+  .contacto{background:var(--bg);border-top:1px solid var(--rule)}
+  .contacto-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+  .contacto-title{font-family:var(--font-serif);font-size:clamp(44px,6.5vw,88px);font-weight:300;font-style:italic;line-height:0.95;letter-spacing:-0.015em;margin-bottom:28px;color:var(--ink)}
+  .contacto-title .ct-sans{display:block;font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:clamp(18px,2.2vw,32px);font-weight:100;font-style:normal;letter-spacing:0;color:var(--ink);margin-bottom:4px}
+  .contacto-sub{font-family:var(--font-serif);font-size:17px;font-weight:300;line-height:1.75;color:var(--mid)}
+  .contacto-links{display:flex;flex-direction:column;padding-top:8px}
+  .contact-link{display:grid;grid-template-columns:76px 1fr 22px;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--rule);transition:padding-right 0.4s var(--ease)}
+  .contact-link:first-child{border-top:1px solid var(--rule)}
+  .contact-link:hover{padding-right:6px}
+  .contact-label{font-family:var(--font-body);font-size:9px;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+  .contact-value{font-family:var(--font-serif);font-size:clamp(14px,1.6vw,18px);font-weight:300;color:var(--ink);transition:color 0.3s}
+  .contact-link:hover .contact-value{color:var(--warm)}
+  .contact-arrow{font-size:17px;color:var(--muted);text-align:right;transition:transform 0.4s var(--ease),color 0.3s}
+  .contact-link:hover .contact-arrow{transform:translate(2px,-2px);color:var(--warm)}
+  /* FOOTER */
+  .site-footer{border-top:1px solid rgba(255,255,255,0.12);background:var(--warm)}
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;height:var(--header-h);max-width:1600px;margin:0 auto;padding:0 48px}
+  .footer-left{display:flex;flex-direction:column;gap:3px;font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:11px;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+  .footer-right{display:flex;flex-direction:column;gap:3px;font-family:acumin-pro-wide,var(--font-body),sans-serif;font-size:11px;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-align:right}
+  .footer-right a{color:rgba(255,255,255,0.6);transition:color 0.3s}
+  .footer-right a:hover{color:#fff}
+  @media(max-width:700px){.footer-inner{padding:24px;flex-direction:column;gap:8px;text-align:center;height:auto}}
+  /* RESPONSIVE */
+  @media(max-width:1024px){.section-inner{padding:80px 48px}.header-inner{padding:0 28px}.logo-block{padding:0 32px}.sobre-mi-grid{grid-template-columns:1fr;gap:40px}.sobre-mi-deco{flex-direction:row;align-items:center}.deco-line{width:60px;height:1px}.contacto-layout{grid-template-columns:1fr;gap:52px}}
+  @media(max-width:700px){:root{--header-h:58px}.header-inner{grid-template-columns:1fr auto;padding:0 20px}.nav-left,.nav-right{display:none}.logo-block{padding:0;justify-self:center;grid-column:1}.menu-toggle{display:flex;grid-column:2}.mobile-menu{display:flex}.hero{padding:calc(var(--header-h) + 52px) 24px 64px;min-height:100svh}.section-inner{padding:64px 24px}.section-label{margin-bottom:48px}.timeline-item{grid-template-columns:1fr;gap:14px;padding:36px 0}.timeline-meta{flex-direction:row;align-items:center;justify-content:flex-start;gap:12px}.timeline-year{text-align:left}.contacto-title{font-size:clamp(44px,13vw,68px)}}
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="site-header" id="site-header">
     <div class="header-inner">
-
-      <nav class="nav-left" aria-label="Navegación principal">
-        <a href="#hero"      class="nav-link">Sobre mí</a>
-        <a href="#skills"   class="nav-link">Skills</a>
+      <nav class="nav-left">
+        <a href="#hero" class="nav-link">Sobre mí</a>
+        <a href="#skills" class="nav-link">Skills</a>
       </nav>
-
       <div class="logo-block">
         <span class="logo-sub">Diseñadora Gráfica</span>
         <p class="logo-main">MILAGROS MÁRQUEZ</p>
       </div>
-
-      <nav class="nav-right" aria-label="Navegación secundaria">
+      <nav class="nav-right">
         <a href="#portfolio" class="nav-link">Portfolio</a>
-        <a href="#contacto"  class="nav-link">Contacto</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
       </nav>
-
       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span>
       </button>
     </div>
-
     <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-      <a href="#hero"      class="mobile-link">Sobre mí</a>
-      <a href="#skills"    class="mobile-link">Skills</a>
+      <a href="#hero" class="mobile-link">Sobre mí</a>
+      <a href="#skills" class="mobile-link">Skills</a>
       <a href="#portfolio" class="mobile-link">Portfolio</a>
-      <a href="#contacto"  class="mobile-link">Contacto</a>
+      <a href="#contacto" class="mobile-link">Contacto</a>
     </div>
   </header>
 
-
-  <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-body">
-      <!-- Columna izquierda: texto -->
       <div class="hero-content">
         <h1 class="hero-headline">
-          <span class="hero-line-sans reveal">Hola, soy <em class="hero-name-inline">Mili.</em></span>
-        </h1>
-        <p class="hero-desc reveal d2">
-          Diseñadora Gráfica con experiencia en entornos institucionales y proyectos de identidad visual. Traduzco necesidades comunicacionales en piezas coherentes y bien ejecutadas. Me adapto rápido a los lenguajes visuales de cada organización y disfruto de equipos donde el diseño tiene un rol activo.
-        </p>
-        <div class="hero-tags reveal d3">
-          <span>Pilar, Buenos Aires</span>
-        </div>
-      </div>
-      <!-- Columna derecha: foto -->
+          <span class="hero-line-sans reveal">Hola, soy <em class="hero-name-inline">Mili.<\/em><\/span>
+        <\/h1>
+        <p class="hero-desc reveal d2">Diseñadora Gráfica con experiencia en entornos institucionales y proyectos de identidad visual. Traduzco necesidades comunicacionales en piezas coherentes y bien ejecutadas. Me adapto rápido a los lenguajes visuales de cada organización y disfruto de equipos donde el diseño tiene un rol activo.<\/p>
+        <div class="hero-tags reveal d3"><span>Pilar, Buenos Aires<\/span><\/div>
+      <\/div>
       <div class="hero-photo reveal d2">
         <img src="foto-mili.png" alt="Mili Márquez" class="hero-photo-img">
-      </div>
-    </div>
-  </section>
+      <\/div>
+    <\/div>
+  <\/section>
 
-
-  <!-- MARQUEE -->
   <div class="marquee-wrapper" aria-hidden="true">
     <div class="marquee-track">
       <div class="marquee-content">
-        <span>branding</span><span class="dot">·</span>
-        <span>identidad visual</span><span class="dot">·</span>
-        <span>social media</span><span class="dot">·</span>
-        <span>papelería</span><span class="dot">·</span>
-        <span>packaging</span><span class="dot">·</span>
-        <span>editorial</span><span class="dot">·</span>
-        <span>branding</span><span class="dot">·</span>
-        <span>identidad visual</span><span class="dot">·</span>
-        <span>social media</span><span class="dot">·</span>
-        <span>papelería</span><span class="dot">·</span>
-        <span>packaging</span><span class="dot">·</span>
-        <span>editorial</span><span class="dot">·</span>
-      </div>
+        <span>branding<\/span><span class="dot">·<\/span><span>identidad visual<\/span><span class="dot">·<\/span><span>social media<\/span><span class="dot">·<\/span><span>papelería<\/span><span class="dot">·<\/span><span>packaging<\/span><span class="dot">·<\/span><span>editorial<\/span><span class="dot">·<\/span>
+        <span>branding<\/span><span class="dot">·<\/span><span>identidad visual<\/span><span class="dot">·<\/span><span>social media<\/span><span class="dot">·<\/span><span>papelería<\/span><span class="dot">·<\/span><span>packaging<\/span><span class="dot">·<\/span><span>editorial<\/span><span class="dot">·<\/span>
+      <\/div>
       <div class="marquee-content" aria-hidden="true">
-        <span>branding</span><span class="dot">·</span>
-        <span>identidad visual</span><span class="dot">·</span>
-        <span>social media</span><span class="dot">·</span>
-        <span>papelería</span><span class="dot">·</span>
-        <span>packaging</span><span class="dot">·</span>
-        <span>editorial</span><span class="dot">·</span>
-        <span>branding</span><span class="dot">·</span>
-        <span>identidad visual</span><span class="dot">·</span>
-        <span>social media</span><span class="dot">·</span>
-        <span>papelería</span><span class="dot">·</span>
-        <span>packaging</span><span class="dot">·</span>
-        <span>editorial</span><span class="dot">·</span>
-      </div>
-    </div>
-  </div>
+        <span>branding<\/span><span class="dot">·<\/span><span>identidad visual<\/span><span class="dot">·<\/span><span>social media<\/span><span class="dot">·<\/span><span>papelería<\/span><span class="dot">·<\/span><span>packaging<\/span><span class="dot">·<\/span><span>editorial<\/span><span class="dot">·<\/span>
+        <span>branding<\/span><span class="dot">·<\/span><span>identidad visual<\/span><span class="dot">·<\/span><span>social media<\/span><span class="dot">·<\/span><span>papelería<\/span><span class="dot">·<\/span><span>packaging<\/span><span class="dot">·<\/span><span>editorial<\/span><span class="dot">·<\/span>
+      <\/div>
+    <\/div>
+  <\/div>
 
-
-
-
-  <!-- SKILLS -->
   <section class="skills" id="skills">
     <div class="section-inner">
-
-      <!-- Personal Skills -->
       <div class="sk-personal reveal">
-        <span class="sk-group-label">Personal skills</span>
+        <span class="sk-group-label">Personal skills<\/span>
         <div class="sk-pills">
-          <span class="sk-pill">Comunicación asertiva</span>
-          <span class="sk-pill">Adaptabilidad</span>
-          <span class="sk-pill">Atención al detalle</span>
-          <span class="sk-pill">Gestión del tiempo</span>
-          <span class="sk-pill">Pensamiento creativo</span>
-        </div>
-      </div>
-
-      <!-- Technical Skills — carpetitas SVG -->
+          <span class="sk-pill">Comunicación asertiva<\/span>
+          <span class="sk-pill">Adaptabilidad<\/span>
+          <span class="sk-pill">Atención al detalle<\/span>
+          <span class="sk-pill">Gestión del tiempo<\/span>
+          <span class="sk-pill">Pensamiento creativo<\/span>
+        <\/div>
+      <\/div>
       <div class="sk-technical-wrap reveal d1">
-        <span class="sk-group-label">Technical skills</span>
+        <span class="sk-group-label">Technical skills<\/span>
         <div class="sk-folders">
+          <div class="sk-folder"><svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/><path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/><text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ai<\/text><\/svg><span>Adobe Illustrator<\/span><\/div>
+          <div class="sk-folder"><svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/><path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/><text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ps<\/text><\/svg><span>Adobe Photoshop<\/span><\/div>
+          <div class="sk-folder"><svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/><path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/><text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ae<\/text><\/svg><span>After Effects<\/span><\/div>
+          <div class="sk-folder"><svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/><path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/><text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Id<\/text><\/svg><span>Adobe InDesign<\/span><\/div>
+          <div class="sk-folder"><svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/><path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/><text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Fg<\/text><\/svg><span>Figma<\/span><\/div>
+          <div class="sk-folder"><svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/><path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/><text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Cv<\/text><\/svg><span>Canva<\/span><\/div>
+          <div class="sk-folder"><svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/><path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/><text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">HTML<\/text><\/svg><span>HTML<\/span><\/div>
+          <div class="sk-folder"><svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/><path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/><text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">IA<\/text><\/svg><span>Herramientas IA<\/span><\/div>
+        <\/div>
+      <\/div>
+    <\/div>
+  <\/section>
 
-          <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ai</text>
-            </svg>
-            <span>Adobe Illustrator</span>
-          </div>
-
-          <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ps</text>
-            </svg>
-            <span>Adobe Photoshop</span>
-          </div>
-
-          <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ae</text>
-            </svg>
-            <span>After Effects</span>
-          </div>
-
-          <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Id</text>
-            </svg>
-            <span>Adobe InDesign</span>
-          </div>
-
-          <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Fg</text>
-            </svg>
-            <span>Figma</span>
-          </div>
-
-          <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Cv</text>
-            </svg>
-            <span>Canva</span>
-          </div>
-
-          <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">HTML</text>
-            </svg>
-            <span>HTML</span>
-          </div>
-
-          <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">IA</text>
-            </svg>
-            <span>Herramientas IA</span>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-
-
-
-    <!-- PORTFOLIO -->
   <section class="portfolio" id="portfolio">
-
-    <!-- Bento grid -->
+    <div class="portfolio-header-space" id="portfolio-header-space">
+      <div class="portfolio-header-placeholder" id="portfolio-header-placeholder">
+        <span>Cargá tu imagen de Portfolio aquí<\/span>
+        <label for="portfolio-header-input">Subir imagen<\/label>
+        <input type="file" id="portfolio-header-input" accept="image/*">
+      <\/div>
+    <\/div>
     <div class="bento">
+      <div class="bento-item b-wide" data-project="0" tabindex="0" role="button"><span class="bento-num">01<\/span><div class="bento-ph"><span>Social media post — UNP<\/span><\/div><div class="bento-overlay"><span class="bento-cat">social media · comunicación<\/span><h3 class="bento-name">Social media post — UNP<\/h3><span class="bento-btn">ver proyecto<\/span><\/div><\/div>
+      <div class="bento-item b-tall" data-project="1" tabindex="0" role="button"><span class="bento-num">02<\/span><div class="bento-ph"><span>Instagram Stories<\/span><\/div><div class="bento-overlay"><span class="bento-cat">social media · editorial<\/span><h3 class="bento-name">Instagram Stories<\/h3><span class="bento-btn">ver proyecto<\/span><\/div><\/div>
+      <div class="bento-item" data-project="2" tabindex="0" role="button"><span class="bento-num">03<\/span><div class="bento-ph"><span>Comunicación institucional<\/span><\/div><div class="bento-overlay"><span class="bento-cat">identidad · comunicación<\/span><h3 class="bento-name">Comunicación institucional<\/h3><span class="bento-btn">ver proyecto<\/span><\/div><\/div>
+      <div class="bento-item" data-project="3" tabindex="0" role="button"><span class="bento-num">04<\/span><div class="bento-ph"><span>Branding de marca<\/span><\/div><div class="bento-overlay"><span class="bento-cat">branding · papelería<\/span><h3 class="bento-name">Branding de marca<\/h3><span class="bento-btn">ver proyecto<\/span><\/div><\/div>
+      <div class="bento-item" data-project="4" tabindex="0" role="button"><span class="bento-num">05<\/span><div class="bento-ph"><span>Diseño de logotipo<\/span><\/div><div class="bento-overlay"><span class="bento-cat">logo · identidad visual<\/span><h3 class="bento-name">Diseño de logotipo<\/h3><span class="bento-btn">ver proyecto<\/span><\/div><\/div>
+      <div class="bento-item b-wide" data-project="5" tabindex="0" role="button"><span class="bento-num">06<\/span><div class="bento-ph"><span>Social media &amp; papelería<\/span><\/div><div class="bento-overlay"><span class="bento-cat">social media · papelería<\/span><h3 class="bento-name">Social media &amp; papelería<\/h3><span class="bento-btn">ver proyecto<\/span><\/div><\/div>
+    <\/div>
+  <\/section>
 
-      <!-- Item 1: wide — ocupa 2 cols, fila 1 -->
-      <div class="bento-item b-wide" data-project="0" tabindex="0" role="button">
-        <span class="bento-num">01</span>
-        <div class="bento-ph"><span>Social media post — UNP</span></div>
-        <div class="bento-overlay">
-          <span class="bento-cat">social media · comunicación</span>
-          <h3 class="bento-name">Social media post — UNP</h3>
-          <span class="bento-btn">ver proyecto</span>
-        </div>
-      </div>
-
-      <!-- Item 2: tall — 1 col, ocupa 2 filas -->
-      <div class="bento-item b-tall" data-project="1" tabindex="0" role="button">
-        <span class="bento-num">02</span>
-        <div class="bento-ph"><span>Instagram Stories</span></div>
-        <div class="bento-overlay">
-          <span class="bento-cat">social media · editorial</span>
-          <h3 class="bento-name">Instagram Stories</h3>
-          <span class="bento-btn">ver proyecto</span>
-        </div>
-      </div>
-
-      <!-- Item 3: normal -->
-      <div class="bento-item" data-project="2" tabindex="0" role="button">
-        <span class="bento-num">03</span>
-        <div class="bento-ph"><span>Comunicación institucional</span></div>
-        <div class="bento-overlay">
-          <span class="bento-cat">identidad · comunicación</span>
-          <h3 class="bento-name">Comunicación institucional</h3>
-          <span class="bento-btn">ver proyecto</span>
-        </div>
-      </div>
-
-      <!-- Item 4: normal -->
-      <div class="bento-item" data-project="3" tabindex="0" role="button">
-        <span class="bento-num">04</span>
-        <div class="bento-ph"><span>Branding de marca</span></div>
-        <div class="bento-overlay">
-          <span class="bento-cat">branding · papelería</span>
-          <h3 class="bento-name">Branding de marca</h3>
-          <span class="bento-btn">ver proyecto</span>
-        </div>
-      </div>
-
-      <!-- Item 5: normal -->
-      <div class="bento-item" data-project="4" tabindex="0" role="button">
-        <span class="bento-num">05</span>
-        <div class="bento-ph"><span>Diseño de logotipo</span></div>
-        <div class="bento-overlay">
-          <span class="bento-cat">logo · identidad visual</span>
-          <h3 class="bento-name">Diseño de logotipo</h3>
-          <span class="bento-btn">ver proyecto</span>
-        </div>
-      </div>
-
-      <!-- Item 6: wide — fila 2 -->
-      <div class="bento-item b-wide" data-project="5" tabindex="0" role="button">
-        <span class="bento-num">06</span>
-        <div class="bento-ph"><span>Social media & papelería</span></div>
-        <div class="bento-overlay">
-          <span class="bento-cat">social media · papelería</span>
-          <h3 class="bento-name">Social media & papelería</h3>
-          <span class="bento-btn">ver proyecto</span>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-<!-- Modal de proyecto -->
   <div class="pf-modal-overlay" id="pf-modal-overlay">
-    <!-- Flecha anterior -->
-    <button class="pf-modal-arrow pf-modal-prev" id="pf-modal-prev" aria-label="Proyecto anterior">←</button>
-
+    <button class="pf-modal-arrow pf-modal-prev" id="pf-modal-prev">←<\/button>
     <div class="pf-modal" id="pf-modal">
       <div class="pf-modal-hero" id="pf-modal-hero">
-        <button class="pf-modal-close" id="pf-modal-close">✕</button>
-        <div class="pf-modal-ph" id="pf-modal-ph"><span id="pf-modal-ph-label"></span></div>
-        <!-- Contador -->
-        <span class="pf-modal-counter" id="pf-modal-counter"></span>
-      </div>
+        <button class="pf-modal-close" id="pf-modal-close">✕<\/button>
+        <div class="pf-modal-hero-slides" id="pf-modal-slides"><\/div>
+        <button class="pf-slide-prev" id="pf-slide-prev">←<\/button>
+        <button class="pf-slide-next" id="pf-slide-next">→<\/button>
+        <div class="pf-slide-dots" id="pf-slide-dots"><\/div>
+        <span class="pf-modal-counter" id="pf-modal-counter"><\/span>
+      <\/div>
       <div class="pf-modal-body">
-        <span class="pf-modal-cat" id="pf-modal-cat"></span>
-        <h2 class="pf-modal-title" id="pf-modal-title"></h2>
-        <p class="pf-modal-desc" id="pf-modal-desc"></p>
-        <span class="pf-modal-accent" id="pf-modal-accent"></span>
-        <div class="pf-modal-thumbs" id="pf-modal-thumbs"></div>
-      </div>
-    </div>
+        <span class="pf-modal-cat" id="pf-modal-cat"><\/span>
+        <h2 class="pf-modal-title" id="pf-modal-title"><\/h2>
+        <p class="pf-modal-desc" id="pf-modal-desc"><\/p>
+        <span class="pf-modal-accent" id="pf-modal-accent"><\/span>
+      <\/div>
+    <\/div>
+    <button class="pf-modal-arrow pf-modal-next" id="pf-modal-next">→<\/button>
+  <\/div>
 
-    <!-- Flecha siguiente -->
-    <button class="pf-modal-arrow pf-modal-next" id="pf-modal-next" aria-label="Proyecto siguiente">→</button>
-  </div>
-
-
-
-
-  <!-- CONTACTO -->
   <section class="contacto" id="contacto">
     <div class="section-inner">
-      <div class="section-label reveal"><span>03</span><span>Contacto</span></div>
+      <div class="section-label reveal"><span>03<\/span><span>Contacto<\/span><\/div>
       <div class="contacto-layout">
         <div>
-          <h2 class="contacto-title reveal">
-            <span class="ct-sans">¿trabajamos</span>
-            juntos?
-          </h2>
-          <p class="contacto-sub reveal d1">Siempre disponible para proyectos<br>interesantes y colaboraciones.</p>
-        </div>
+          <h2 class="contacto-title reveal"><span class="ct-sans">¿trabajamos<\/span>juntos?<\/h2>
+          <p class="contacto-sub reveal d1">Siempre disponible para proyectos<br>interesantes y colaboraciones.<\/p>
+        <\/div>
         <div class="contacto-links reveal d2">
-          <a href="mailto:milimarquez.dg@gmail.com" class="contact-link">
-            <span class="contact-label">Email</span>
-            <span class="contact-value">milimarquez.dg@gmail.com</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-          <a href="https://linkedin.com/in/milagros-marquez" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-label">LinkedIn</span>
-            <span class="contact-value">milagros-marquez</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-          <a href="https://behance.net/milimarquez" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-label">Behance</span>
-            <span class="contact-value">milimarquez</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-          <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-label">Instagram</span>
-            <span class="contact-value">@laburitostudio</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+          <a href="mailto:milimarquez.dg@gmail.com" class="contact-link"><span class="contact-label">Email<\/span><span class="contact-value">milimarquez.dg@gmail.com<\/span><span class="contact-arrow">↗<\/span><\/a>
+          <a href="https://linkedin.com/in/milagros-marquez" target="_blank" rel="noopener" class="contact-link"><span class="contact-label">LinkedIn<\/span><span class="contact-value">milagros-marquez<\/span><span class="contact-arrow">↗<\/span><\/a>
+          <a href="https://behance.net/milimarquez" target="_blank" rel="noopener" class="contact-link"><span class="contact-label">Behance<\/span><span class="contact-value">milimarquez<\/span><span class="contact-arrow">↗<\/span><\/a>
+          <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="contact-link"><span class="contact-label">Instagram<\/span><span class="contact-value">@laburitostudio<\/span><span class="contact-arrow">↗<\/span><\/a>
+        <\/div>
+      <\/div>
+    <\/div>
+  <\/section>
 
-
-  <!-- FOOTER — mismo estilo que el header -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-left">
-        <span>milimarquez.dg@gmail.com</span>
-        <span>Pilar, Buenos Aires</span>
-      </div>
+      <div class="footer-left"><span>milimarquez.dg@gmail.com<\/span><span>Pilar, Buenos Aires<\/span><\/div>
       <div class="footer-right">
-        <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://behance.net/milimarquez" target="_blank" rel="noopener">Behance</a>
-        <a href="https://linkedin.com/in/milagros-marquez" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-    </div>
-  </footer>
+        <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener">Instagram<\/a>
+        <a href="https://behance.net/milimarquez" target="_blank" rel="noopener">Behance<\/a>
+        <a href="https://linkedin.com/in/milagros-marquez" target="_blank" rel="noopener">LinkedIn<\/a>
+      <\/div>
+    <\/div>
+  <\/footer>
 
-
-
-
-
-  
-  <!-- JAVASCRIPT -->
   <script>
   'use strict';
-
-  /* Scroll reveal */
-  (function () {
-    const els = document.querySelectorAll('.reveal');
-    if (!els.length) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
-    els.forEach((el) => io.observe(el));
-  })();
-
-  /* Header sombra al scroll */
-  (function () {
-    const h = document.getElementById('site-header');
-    if (!h) return;
-    window.addEventListener('scroll', () => h.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
-  })();
-
-  /* Menú mobile */
-  (function () {
-    const btn  = document.getElementById('menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    if (!btn || !menu) return;
-    btn.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open);
-      menu.setAttribute('aria-hidden', !open);
-    });
-    menu.querySelectorAll('.mobile-link').forEach((l) =>
-      l.addEventListener('click', () => {
-        menu.classList.remove('open'); btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', false); menu.setAttribute('aria-hidden', true);
-      })
-    );
-  })();
-
-  /* Smooth scroll */
-  (function () {
-    const hh = () => { const h = document.getElementById('site-header'); return h ? h.offsetHeight : 0; };
-    document.querySelectorAll('a[href^="#"]').forEach((a) =>
-      a.addEventListener('click', (e) => {
-        const id = a.getAttribute('href');
-        if (!id || id === '#') return;
-        const el = document.querySelector(id);
-        if (!el) return;
-        e.preventDefault();
-        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - hh(), behavior: 'smooth' });
-      })
-    );
-  })();
-
-  /* Nav active state */
-  (function () {
-    const sects = document.querySelectorAll('section[id]');
-    const links = document.querySelectorAll('.nav-link, .mobile-link');
-    if (!sects.length) return;
-    const hh = () => { const h = document.getElementById('site-header'); return h ? h.offsetHeight + 20 : 0; };
-    const set = () => {
-      const y = window.scrollY + hh(); let cur = '';
-      sects.forEach((s) => { if (s.offsetTop <= y) cur = s.id; });
-      links.forEach((l) => {
-        const on = l.getAttribute('href') === `#${cur}`;
-        l.style.opacity = on ? '1' : '';
-        l.style.fontWeight = on ? '300' : '';
-      });
-    };
-    window.addEventListener('scroll', set, { passive: true }); set();
-  })();
-
-  /* Marquee touch */
-  (function () {
-    const t = document.querySelector('.marquee-track');
-    if (!t) return;
-    t.addEventListener('touchstart', () => t.style.animationPlayState = 'paused', { passive: true });
-    t.addEventListener('touchend', () => setTimeout(() => t.style.animationPlayState = 'running', 800), { passive: true });
-  })();
-
-  /* Hero entrada */
-  (function () {
-    document.querySelectorAll('.hero .reveal').forEach((el, i) =>
-      setTimeout(() => el.classList.add('visible'), 180 + i * 150)
-    );
-  })();
-
-  /* Reduced motion */
-  (function () {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const apply = (r) => { if (r) document.querySelectorAll('.reveal').forEach((el) => { el.style.transition = 'none'; el.classList.add('visible'); }); };
-    apply(mq.matches);
-    mq.addEventListener('change', (e) => apply(e.matches));
-  })();
-
-
-
-  /* ── Panel visor de proyectos ── */
-
-
-  /* ══════════════════════════════════════════════════
-     PORTFOLIO — Bento grid + modal
-  ══════════════════════════════════════════════════ */
-  const PF_DATA = [
-    { cat: 'social media · comunicación institucional', name: 'Social media post — UNP',    desc: 'Piezas de comunicación visual para la Universidad Nacional de Pilar. Diseño de posts para redes sociales con lenguaje institucional claro y coherente.', accent: 'Universidad Nacional de Pilar · 2025', img: null, color: '#dcefff' },
-    { cat: 'social media · diseño editorial',           name: 'Instagram Stories',           desc: 'Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica, paleta de color y animación para contenido de redes sociales.',       accent: 'Diseño para Instagram · 2025',       img: null, color: '#fefce3' },
-    { cat: 'identidad · comunicación',                  name: 'Comunicación institucional',  desc: 'Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme en todas las plataformas.',                        accent: 'Municipalidad de Pilar · 2025',      img: null, color: '#fefce3' },
-    { cat: 'branding · papelería',                      name: 'Branding de marca',           desc: 'Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.',                                                        accent: 'Identidad de lujo',                 img: null, color: '#ede0d8' },
-    { cat: 'logo · identidad visual',                   name: 'Diseño de logotipo',          desc: 'Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.',                                                     accent: 'Sistema tipográfico completo',      img: null, color: '#dde8e4' },
-    { cat: 'social media · papelería',                  name: 'Social media & papelería',    desc: 'Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.',                                                               accent: 'Laburito Studio · 2026',            img: null, color: '#dcefff' },
+  (function(){const els=document.querySelectorAll('.reveal');if(!els.length)return;const io=new IntersectionObserver((e)=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -36px 0px'});els.forEach(el=>io.observe(el))})();
+  (function(){const h=document.getElementById('site-header');if(!h)return;window.addEventListener('scroll',()=>h.classList.toggle('scrolled',window.scrollY>20),{passive:true})})();
+  (function(){const btn=document.getElementById('menu-toggle'),menu=document.getElementById('mobile-menu');if(!btn||!menu)return;btn.addEventListener('click',()=>{const open=menu.classList.toggle('open');btn.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);menu.setAttribute('aria-hidden',!open)});menu.querySelectorAll('.mobile-link').forEach(l=>l.addEventListener('click',()=>{menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded',false);menu.setAttribute('aria-hidden',true)}))})();
+  (function(){const hh=()=>{const h=document.getElementById('site-header');return h?h.offsetHeight:0};document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');if(!id||id==='#')return;const el=document.querySelector(id);if(!el)return;e.preventDefault();window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-hh(),behavior:'smooth'})}))})();
+  document.querySelectorAll('.hero .reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('visible'),180+i*150));
+  (function(){const t=document.querySelector('.marquee-track');if(!t)return;t.addEventListener('touchstart',()=>t.style.animationPlayState='paused',{passive:true});t.addEventListener('touchend',()=>setTimeout(()=>t.style.animationPlayState='running',800),{passive:true})})();
+  (function(){const input=document.getElementById('portfolio-header-input'),space=document.getElementById('portfolio-header-space'),placeholder=document.getElementById('portfolio-header-placeholder');if(!input)return;input.addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const url=URL.createObjectURL(file);placeholder.style.display='none';const img=document.createElement('img');img.src=url;img.alt='Portfolio header';img.style.cssText='width:100%;height:100%;object-fit:cover;display:block;';space.appendChild(img)})})();
+  const PF_DATA=[
+    {cat:'social media · comunicación institucional',name:'Social media post — UNP',desc:'Piezas de comunicación visual para la Universidad Nacional de Pilar. Diseño de posts para redes sociales con lenguaje institucional claro y coherente.',accent:'Universidad Nacional de Pilar · 2025',color:'#dcefff',images:[
+      // Ejemplo: { src: 'proyecto1-img1.jpg', alt: 'Vista 1' },
+    ]},
+    {cat:'social media · diseño editorial',name:'Instagram Stories',desc:'Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica, paleta de color y animación para contenido de redes sociales.',accent:'Diseño para Instagram · 2025',color:'#fefce3',images:[]},
+    {cat:'identidad · comunicación',name:'Comunicación institucional',desc:'Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme en todas las plataformas.',accent:'Municipalidad de Pilar · 2025',color:'#f0e8e3',images:[]},
+    {cat:'branding · papelería',name:'Branding de marca',desc:'Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.',accent:'Identidad de lujo',color:'#e4ede9',images:[]},
+    {cat:'logo · identidad visual',name:'Diseño de logotipo',desc:'Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.',accent:'Sistema tipográfico completo',color:'#ede0d8',images:[]},
+    {cat:'social media · papelería',name:'Social media & papelería',desc:'Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.',accent:'Laburito Studio · 2026',color:'#e8e2f0',images:[]}
   ];
-
-  /* Modal con navegación */
-  (function () {
-    const overlay    = document.getElementById('pf-modal-overlay');
-    const closeBtn   = document.getElementById('pf-modal-close');
-    const prevBtn    = document.getElementById('pf-modal-prev');
-    const nextBtn    = document.getElementById('pf-modal-next');
-    const modalHero  = document.getElementById('pf-modal-hero');
-    const modalPh    = document.getElementById('pf-modal-ph');
-    const modalPhLbl = document.getElementById('pf-modal-ph-label');
-    const modalCat   = document.getElementById('pf-modal-cat');
-    const modalTitle = document.getElementById('pf-modal-title');
-    const modalDesc  = document.getElementById('pf-modal-desc');
-    const modalAcc   = document.getElementById('pf-modal-accent');
-    const modalThumbs= document.getElementById('pf-modal-thumbs');
-    const modalCount = document.getElementById('pf-modal-counter');
-    if (!overlay) return;
-
-    let currentIdx = 0;
-    const N = PF_DATA.length;
-
-    function populate(idx) {
-      const p = PF_DATA[idx];
-      modalCat.textContent    = p.cat;
-      modalTitle.textContent  = p.name;
-      modalDesc.textContent   = p.desc;
-      modalAcc.textContent    = p.accent;
-      modalHero.style.background = p.color;
-      modalPh.style.display   = 'flex';
-      modalPhLbl.textContent  = p.name;
-      modalCount.textContent  = (idx + 1) + ' / ' + N;
-      const existImg = modalHero.querySelector('img');
-      if (existImg) existImg.remove();
-      if (p.img) {
-        modalPh.style.display = 'none';
-        const img = document.createElement('img');
-        img.src = p.img; img.alt = p.name;
-        modalHero.insertBefore(img, closeBtn);
-      }
-      modalThumbs.innerHTML = [0,1,2].map(() =>
-        `<div class="pf-modal-thumb" style="background:${p.color}"><span>${p.name}</span></div>`
-      ).join('');
-      // Animate content swap
-      const body = document.querySelector('.pf-modal-body');
-      body.style.opacity = '0'; body.style.transform = 'translateY(8px)';
-      requestAnimationFrame(() => {
-        body.style.transition = 'opacity 0.3s, transform 0.3s';
-        body.style.opacity = '1'; body.style.transform = 'translateY(0)';
-      });
-    }
-
-    function openModal(idx) {
-      currentIdx = idx;
-      populate(idx);
-      overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      overlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function goNext() { currentIdx = (currentIdx + 1) % N; populate(currentIdx); }
-    function goPrev() { currentIdx = (currentIdx - 1 + N) % N; populate(currentIdx); }
-
-    document.querySelectorAll('.bento-item').forEach((item) => {
-      const idx = parseInt(item.dataset.project);
-      item.addEventListener('click', () => openModal(idx));
-      item.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openModal(idx); });
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    prevBtn.addEventListener('click', goPrev);
-    nextBtn.addEventListener('click', goNext);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
-    document.addEventListener('keydown', (e) => {
-      if (!overlay.classList.contains('open')) return;
-      if (e.key === 'Escape')      closeModal();
-      if (e.key === 'ArrowRight')  goNext();
-      if (e.key === 'ArrowLeft')   goPrev();
-    });
-
-    // Swipe on modal
-    let tx = 0;
-    overlay.addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true });
-    overlay.addEventListener('touchend',   (e) => {
-      const dx = e.changedTouches[0].clientX - tx;
-      if (dx < -40) goNext();
-      if (dx >  40) goPrev();
-    }, { passive: true });
-  })();
-
-  </script>
-
-</body>
-</html>
+  (function(){const overlay=document.getElementById('pf-modal-overlay'),closeBtn=document.getElementById('pf-modal-close'),prevProj=document.getElementById('pf-modal-prev'),nextProj=document.getElementById('pf-modal-next'),slidesEl=document.getElementById('pf-modal-slides'),dotsEl=document.getElementById('pf-slide-dots'),countEl=document.getElementById('pf-modal-counter'),heroEl=document.getElementById('pf-modal-hero'),slidePrev=document.getElementById('pf-slide-prev'),slideNext=document.getElementById('pf-slide-next');if(!overlay)return;let projIdx=0,slideIdx=0;const N=PF_DATA.length;function buildSlides(p){slidesEl.innerHTML='';dotsEl.innerHTML='';const imgs=p.images&&p.images.length?p.images:[];const count=imgs.length||1;if(!imgs.length){const slide=document.createElement('div');slide.className='pf-modal-slide';slide.style.background=p.color;slide.innerHTML='<div class="pf-modal-slide-ph"><span>'+p.name+'<\/span><\/div>';slidesEl.appendChild(slide)}else{imgs.forEach(img=>{const slide=document.createElement('div');slide.className='pf-modal-slide';slide.style.background=p.color;if(img.src){const i=document.createElement('img');i.src=img.src;i.alt=img.alt||p.name;slide.appendChild(i)}slidesEl.appendChild(slide)});imgs.forEach((_,i)=>{const dot=document.createElement('button');dot.className='pf-slide-dot'+(i===0?' active':'');dot.addEventListener('click',()=>goSlide(i));dotsEl.appendChild(dot)})}heroEl.classList.toggle('single-slide',count<=1);slideIdx=0;updateSlideUI(p,count)}function updateSlideUI(p,total){const t=total||(p.images&&p.images.length)||1;slidesEl.style.transform='translateX(-'+(slideIdx*100)+'%)';countEl.textContent=t>1?(slideIdx+1)+' / '+t:'';dotsEl.querySelectorAll('.pf-slide-dot').forEach((d,i)=>d.classList.toggle('active',i===slideIdx))}function goSlide(i){const p=PF_DATA[projIdx];const total=p.images&&p.images.length?p.images.length:1;slideIdx=(i+total)%total;updateSlideUI(p,total)}function populate(idx){const p=PF_DATA[idx];document.getElementById('pf-modal-cat').textContent=p.cat;document.getElementById('pf-modal-title').textContent=p.name;document.getElementById('pf-modal-desc').textContent=p.desc;document.getElementById('pf-modal-accent').textContent=p.accent;buildSlides(p);const body=document.querySelector('.pf-modal-body');body.style.opacity='0';body.style.transform='translateY(8px)';requestAnimationFrame(()=>{body.style.transition='opacity 0.3s,transform 0.3s';body.style.opacity='1';body.style.transform='translateY(0)'})}function openModal(idx){projIdx=idx;populate(idx);overlay.classList.add('open');document.body.style.overflow='hidden'}function closeModal(){overlay.classList.remove('open');document.body.style.overflow=''}function goNextProj(){projIdx=(projIdx+1)%N;populate(projIdx)}function goPrevProj(){projIdx=(projIdx-1+N)%N;populate(projIdx)}document.querySelectorAll('.bento-item').forEach(item=>{const idx=parseInt(item.dataset.project);item.addEventListener('click',()=>openModal(idx));item.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')openModal(idx)})});closeBtn.addEventListener('click',closeModal);prevProj.addEventListener('click',goPrevProj);nextProj.addEventListener('click',goNextProj);slidePrev.addEventListener('click',e=>{e.stopPropagation();goSlide(slideIdx-1)});slideNext.addEventListener('click',e=>{e.stopPropagation();goSlide(slideIdx+1)});overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal()});document.addEventListener('keydown',e=>{if(!overlay.classList.contains('open'))return;if(e.key==='Escape')closeModal();if(e.key==='ArrowRight')goSlide(slideIdx+1);if(e.key==='ArrowLeft')goSlide(slideIdx-1)});let tx=0;overlay.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});overlay.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(dx<-40)goSlide(slideIdx+1);if(dx>40)goSlide(slideIdx-1)},{passive:true})})();
+  <\/script>
+<\/body>
+<\/html>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -469,15 +468,199 @@
   .timeline-desc    { font-family: var(--font-serif); font-size: clamp(14px, 1.5vw, 17px); font-weight: 300; line-height: 1.8; color: #5a5550; max-width: 500px; }
 
 
-  /* PORTFOLIO */
-  .portfolio { background: var(--bg); border-top: 1px solid var(--rule); padding-top: 0; }
-  .portfolio-intro { margin-bottom: 40px; }
-  .portfolio-title { font-family: var(--font-serif); font-size: clamp(34px, 4.5vw, 68px); font-weight: 300; font-style: italic; line-height: 1.05; }
-  .portfolio-title em { font-style: normal; }
-  .portfolio-note { font-family: var(--font-serif); font-size: 15px; font-weight: 300; font-style: italic; color: var(--muted); text-align: center; padding-top: 32px; }
-  .portfolio-note a { color: var(--warm); border-bottom: 1px solid currentColor; transition: opacity 0.3s; }
-  .portfolio-note a:hover { opacity: 0.7; }
+  /* ══════════════════════════════════════════════════
+     PORTFOLIO — Bento grid
+  ══════════════════════════════════════════════════ */
+  :root { --terracotta: #4f3029; --cream: #fefce3; }
 
+  .portfolio { background: var(--bg); border-top: 1px solid var(--rule); }
+
+  /* Bento grid — asimétrico 3 cols */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 360px 280px;
+    gap: 6px;
+    padding: 0 0 6px;
+  }
+
+  .bento-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: #f0ece6;
+  }
+
+  /* Tamaños especiales */
+  .bento-item.b-wide   { grid-column: span 2; }   /* ocupa 2 cols */
+  .bento-item.b-tall   { grid-row: span 2; }       /* ocupa 2 filas */
+
+  /* Colores de fondo por ítem */
+  .bento-item:nth-child(1) { background: #dcefff; }
+  .bento-item:nth-child(2) { background: #fefce3; }
+  .bento-item:nth-child(3) { background: #f0e8e3; }
+  .bento-item:nth-child(4) { background: #e4ede9; }
+  .bento-item:nth-child(5) { background: #ede0d8; }
+  .bento-item:nth-child(6) { background: #e8e2f0; }
+
+  /* Placeholder centrado */
+  .bento-ph {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
+  }
+  .bento-item:hover .bento-ph { transform: scale(1.03); }
+  .bento-ph span {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 15px; font-weight: 300;
+    color: rgba(22,21,21,0.28); text-align: center; padding: 16px;
+  }
+
+  /* Imagen real */
+  .bento-img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
+  }
+  .bento-item:hover .bento-img { transform: scale(1.03); }
+
+  /* Overlay hover con info */
+  .bento-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(79,48,41,0.88) 0%, rgba(79,48,41,0.15) 55%, transparent 100%);
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px 28px;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.25,0.1,0.25,1);
+  }
+  .bento-item:hover .bento-overlay { opacity: 1; }
+
+  .bento-cat {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 8px; font-weight: 200;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); margin-bottom: 6px;
+    transform: translateY(6px);
+    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0.05s;
+  }
+  .bento-item:hover .bento-cat { transform: translateY(0); }
+
+  .bento-name {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(16px, 1.8vw, 22px); font-weight: 300;
+    color: #fff; line-height: 1.2; margin-bottom: 12px;
+    transform: translateY(8px);
+    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0.02s;
+  }
+  .bento-item:hover .bento-name { transform: translateY(0); }
+
+  .bento-btn {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 8px; font-weight: 200;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #fff; border: 1px solid rgba(255,255,255,0.45);
+    padding: 7px 16px; border-radius: 100px;
+    display: inline-block; width: fit-content;
+    transform: translateY(10px); opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0s, opacity 0.4s 0s, background 0.25s;
+  }
+  .bento-item:hover .bento-btn { transform: translateY(0); opacity: 1; transition-delay: 0.08s; }
+  .bento-btn:hover { background: rgba(255,255,255,0.15); }
+
+  /* Número decorativo (siempre visible, esquina) */
+  .bento-num {
+    position: absolute; top: 18px; left: 22px;
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 12px; font-weight: 300;
+    color: rgba(22,21,21,0.3); z-index: 1;
+    transition: color 0.3s;
+  }
+  .bento-item:hover .bento-num { color: rgba(255,255,255,0.5); }
+
+  @media (max-width: 900px) {
+    .bento {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+    }
+    .bento-item.b-wide { grid-column: span 2; }
+    .bento-item.b-tall { grid-row: span 1; }
+    .bento-item       { height: 260px; }
+  }
+  @media (max-width: 560px) {
+    .bento { grid-template-columns: 1fr; }
+    .bento-item.b-wide { grid-column: span 1; }
+    .bento-item { height: 240px; }
+  }
+
+  /* Modal proyecto (igual que antes) */
+  .pf-modal-overlay {
+    position: fixed; inset: 0; z-index: 400;
+    background: rgba(22,21,21,0);
+    pointer-events: none;
+    transition: background 0.45s cubic-bezier(0.25,0.1,0.25,1);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pf-modal-overlay.open { background: rgba(22,21,21,0.75); pointer-events: all; }
+  .pf-modal {
+    background: #fffff3; width: min(860px, 92vw); max-height: 90vh;
+    border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
+    transform: scale(0.88) translateY(24px); opacity: 0;
+    transition: transform 0.45s cubic-bezier(0.25,0.1,0.25,1), opacity 0.45s cubic-bezier(0.25,0.1,0.25,1);
+  }
+  .pf-modal-overlay.open .pf-modal { transform: scale(1) translateY(0); opacity: 1; }
+  .pf-modal-hero {
+    width: 100%; aspect-ratio: 16/9; overflow: hidden; flex-shrink: 0;
+    background: #e8e4de; position: relative;
+  }
+  .pf-modal-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pf-modal-hero .pf-modal-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .pf-modal-hero .pf-modal-ph span { font-family: var(--font-serif); font-style: italic; font-size: 18px; font-weight: 300; color: rgba(22,21,21,0.25); }
+  .pf-modal-body { padding: 36px 48px 48px; overflow-y: auto; }
+  .pf-modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: rgba(22,21,21,0.5); border: none; cursor: pointer;
+    color: #fff; border-radius: 50%; width: 36px; height: 36px;
+    font-size: 18px; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; z-index: 2;
+  }
+  .pf-modal-close:hover { background: rgba(22,21,21,0.8); }
+  .pf-modal-cat { font-family: acumin-pro-wide, var(--font-body), sans-serif; font-size: 9px; font-weight: 200; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: block; }
+  .pf-modal-title { font-family: var(--font-serif); font-style: italic; font-size: clamp(28px, 4vw, 44px); font-weight: 300; color: var(--ink); line-height: 1.1; margin-bottom: 20px; }
+  .pf-modal-desc { font-family: var(--font-serif); font-size: 16px; font-weight: 300; line-height: 1.85; color: var(--mid); margin-bottom: 32px; }
+  .pf-modal-accent { background: var(--terracotta); color: #fff; padding: 16px 24px; border-radius: 6px; font-family: acumin-pro-wide, var(--font-body), sans-serif; font-size: 9px; font-weight: 200; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 28px; display: inline-block; }
+  .pf-modal-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .pf-modal-thumb { aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; background: #e8e4de; display: flex; align-items: center; justify-content: center; }
+  .pf-modal-thumb span { font-family: var(--font-serif); font-style: italic; font-size: 11px; font-weight: 300; color: rgba(22,21,21,0.25); }
+  .pf-modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 700px) { .pf-modal-body { padding: 24px; } .pf-modal-thumbs { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Flechas de navegación del modal */
+  .pf-modal-arrow {
+    position: fixed; top: 50%; transform: translateY(-50%);
+    background: rgba(250,250,250,0.92); border: 1px solid rgba(22,21,21,0.1);
+    width: 52px; height: 52px; border-radius: 50%;
+    font-size: 20px; cursor: pointer; color: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.25s, transform 0.25s, opacity 0.3s;
+    opacity: 0; pointer-events: none; z-index: 401;
+    font-family: var(--font-body);
+  }
+  .pf-modal-overlay.open .pf-modal-arrow { opacity: 1; pointer-events: all; }
+  .pf-modal-prev { left: clamp(12px, 3vw, 40px); }
+  .pf-modal-next { right: clamp(12px, 3vw, 40px); }
+  .pf-modal-arrow:hover {
+    background: var(--terracotta); color: #fff; border-color: var(--terracotta);
+    transform: translateY(-50%) scale(1.08);
+  }
+  /* Contador */
+  .pf-modal-counter {
+    position: absolute; bottom: 16px; right: 20px;
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 9px; font-weight: 200; letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.7); text-transform: uppercase;
+    background: rgba(22,21,21,0.35); padding: 4px 10px; border-radius: 100px;
+  }
 
   /* ══════════════════════════════════════════════════
      CONTACTO
@@ -1059,83 +1242,90 @@
     <!-- PORTFOLIO -->
   <section class="portfolio" id="portfolio">
 
+    <!-- Bento grid -->
+    <div class="bento">
 
-    <!-- Carrusel circular -->
-    <div class="pf-stage" id="pf-stage">
-      <div class="pf-track" id="pf-track">
-
-        <div class="pf-card" data-project="0">
-          <div class="pf-card-ph" style="background:#dcefff;"><span>Social media post — UNP</span></div>
-          <div class="pf-card-overlay">
-            <h3>Social media post — UNP</h3>
-            <p>social media · comunicación</p>
-            <span class="pf-open-btn">ver proyecto</span>
-          </div>
+      <!-- Item 1: wide — ocupa 2 cols, fila 1 -->
+      <div class="bento-item b-wide" data-project="0" tabindex="0" role="button">
+        <span class="bento-num">01</span>
+        <div class="bento-ph"><span>Social media post — UNP</span></div>
+        <div class="bento-overlay">
+          <span class="bento-cat">social media · comunicación</span>
+          <h3 class="bento-name">Social media post — UNP</h3>
+          <span class="bento-btn">ver proyecto</span>
         </div>
-
-        <div class="pf-card" data-project="1">
-          <div class="pf-card-ph" style="background:#fefce3;"><span>Instagram Stories</span></div>
-          <div class="pf-card-overlay">
-            <h3>Instagram Stories</h3>
-            <p>social media · editorial</p>
-            <span class="pf-open-btn">ver proyecto</span>
-          </div>
-        </div>
-
-        <div class="pf-card" data-project="2">
-          <div class="pf-card-ph" style="background:#fefce3;"><span>Comunicación institucional</span></div>
-          <div class="pf-card-overlay">
-            <h3>Comunicación institucional</h3>
-            <p>identidad · comunicación</p>
-            <span class="pf-open-btn">ver proyecto</span>
-          </div>
-        </div>
-
-        <div class="pf-card" data-project="3">
-          <div class="pf-card-ph" style="background:#ede0d8;"><span>Branding de marca</span></div>
-          <div class="pf-card-overlay">
-            <h3>Branding de marca</h3>
-            <p>branding · papelería</p>
-            <span class="pf-open-btn">ver proyecto</span>
-          </div>
-        </div>
-
-        <div class="pf-card" data-project="4">
-          <div class="pf-card-ph" style="background:#dde8e4;"><span>Diseño de logotipo</span></div>
-          <div class="pf-card-overlay">
-            <h3>Diseño de logotipo</h3>
-            <p>logo · identidad visual</p>
-            <span class="pf-open-btn">ver proyecto</span>
-          </div>
-        </div>
-
-        <div class="pf-card" data-project="5">
-          <div class="pf-card-ph" style="background:#dcefff;"><span>Social media & papelería</span></div>
-          <div class="pf-card-overlay">
-            <h3>Social media & papelería</h3>
-            <p>social media · papelería</p>
-            <span class="pf-open-btn">ver proyecto</span>
-          </div>
-        </div>
-
       </div>
-    </div>
 
-    <!-- Nav -->
-    <div class="pf-nav">
-      <button class="pf-nav-btn" id="pf-prev" aria-label="Anterior">←</button>
-      <div class="pf-nav-dots" id="pf-dots"></div>
-      <button class="pf-nav-btn" id="pf-next" aria-label="Siguiente">→</button>
+      <!-- Item 2: tall — 1 col, ocupa 2 filas -->
+      <div class="bento-item b-tall" data-project="1" tabindex="0" role="button">
+        <span class="bento-num">02</span>
+        <div class="bento-ph"><span>Instagram Stories</span></div>
+        <div class="bento-overlay">
+          <span class="bento-cat">social media · editorial</span>
+          <h3 class="bento-name">Instagram Stories</h3>
+          <span class="bento-btn">ver proyecto</span>
+        </div>
+      </div>
+
+      <!-- Item 3: normal -->
+      <div class="bento-item" data-project="2" tabindex="0" role="button">
+        <span class="bento-num">03</span>
+        <div class="bento-ph"><span>Comunicación institucional</span></div>
+        <div class="bento-overlay">
+          <span class="bento-cat">identidad · comunicación</span>
+          <h3 class="bento-name">Comunicación institucional</h3>
+          <span class="bento-btn">ver proyecto</span>
+        </div>
+      </div>
+
+      <!-- Item 4: normal -->
+      <div class="bento-item" data-project="3" tabindex="0" role="button">
+        <span class="bento-num">04</span>
+        <div class="bento-ph"><span>Branding de marca</span></div>
+        <div class="bento-overlay">
+          <span class="bento-cat">branding · papelería</span>
+          <h3 class="bento-name">Branding de marca</h3>
+          <span class="bento-btn">ver proyecto</span>
+        </div>
+      </div>
+
+      <!-- Item 5: normal -->
+      <div class="bento-item" data-project="4" tabindex="0" role="button">
+        <span class="bento-num">05</span>
+        <div class="bento-ph"><span>Diseño de logotipo</span></div>
+        <div class="bento-overlay">
+          <span class="bento-cat">logo · identidad visual</span>
+          <h3 class="bento-name">Diseño de logotipo</h3>
+          <span class="bento-btn">ver proyecto</span>
+        </div>
+      </div>
+
+      <!-- Item 6: wide — fila 2 -->
+      <div class="bento-item b-wide" data-project="5" tabindex="0" role="button">
+        <span class="bento-num">06</span>
+        <div class="bento-ph"><span>Social media & papelería</span></div>
+        <div class="bento-overlay">
+          <span class="bento-cat">social media · papelería</span>
+          <h3 class="bento-name">Social media & papelería</h3>
+          <span class="bento-btn">ver proyecto</span>
+        </div>
+      </div>
+
     </div>
 
   </section>
 
-  <!-- Modal de proyecto -->
+<!-- Modal de proyecto -->
   <div class="pf-modal-overlay" id="pf-modal-overlay">
+    <!-- Flecha anterior -->
+    <button class="pf-modal-arrow pf-modal-prev" id="pf-modal-prev" aria-label="Proyecto anterior">←</button>
+
     <div class="pf-modal" id="pf-modal">
       <div class="pf-modal-hero" id="pf-modal-hero">
         <button class="pf-modal-close" id="pf-modal-close">✕</button>
         <div class="pf-modal-ph" id="pf-modal-ph"><span id="pf-modal-ph-label"></span></div>
+        <!-- Contador -->
+        <span class="pf-modal-counter" id="pf-modal-counter"></span>
       </div>
       <div class="pf-modal-body">
         <span class="pf-modal-cat" id="pf-modal-cat"></span>
@@ -1145,6 +1335,9 @@
         <div class="pf-modal-thumbs" id="pf-modal-thumbs"></div>
       </div>
     </div>
+
+    <!-- Flecha siguiente -->
+    <button class="pf-modal-arrow pf-modal-next" id="pf-modal-next" aria-label="Proyecto siguiente">→</button>
   </div>
 
 
@@ -1311,170 +1504,109 @@
 
   /* ── Panel visor de proyectos ── */
 
+
   /* ══════════════════════════════════════════════════
-     PORTFOLIO — carrusel coverflow + modal
+     PORTFOLIO — Bento grid + modal
   ══════════════════════════════════════════════════ */
   const PF_DATA = [
-    {
-      cat: 'social media · comunicación institucional',
-      name: 'Social media post — UNP',
-      desc: 'Piezas de comunicación visual para la Universidad Nacional de Pilar. Diseño de posts para redes sociales con lenguaje institucional claro y coherente.',
-      accent: 'Universidad Nacional de Pilar · 2025',
-      img: null,
-      color: '#dcefff'
-    },
-    {
-      cat: 'social media · diseño editorial',
-      name: 'Instagram Stories',
-      desc: 'Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica, paleta de color y animación para contenido de redes sociales.',
-      accent: 'Diseño para Instagram · 2025',
-      img: null,
-      color: '#fefce3'
-    },
-    { cat: 'identidad · comunicación', name: 'Comunicación institucional', desc: 'Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme en todas las plataformas.', accent: 'Municipalidad de Pilar · 2025', img: null, color: '#fefce3' },
-    { cat: 'branding · papelería', name: 'Branding de marca', desc: 'Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.', accent: 'Identidad de lujo', img: null, color: '#ede0d8' },
-    { cat: 'logo · identidad visual', name: 'Diseño de logotipo', desc: 'Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.', accent: 'Sistema tipográfico completo', img: null, color: '#dde8e4' },
-    { cat: 'social media · papelería', name: 'Social media & papelería', desc: 'Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.', accent: 'Laburito Studio · 2026', img: null, color: '#dcefff' },
+    { cat: 'social media · comunicación institucional', name: 'Social media post — UNP',    desc: 'Piezas de comunicación visual para la Universidad Nacional de Pilar. Diseño de posts para redes sociales con lenguaje institucional claro y coherente.', accent: 'Universidad Nacional de Pilar · 2025', img: null, color: '#dcefff' },
+    { cat: 'social media · diseño editorial',           name: 'Instagram Stories',           desc: 'Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica, paleta de color y animación para contenido de redes sociales.',       accent: 'Diseño para Instagram · 2025',       img: null, color: '#fefce3' },
+    { cat: 'identidad · comunicación',                  name: 'Comunicación institucional',  desc: 'Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme en todas las plataformas.',                        accent: 'Municipalidad de Pilar · 2025',      img: null, color: '#fefce3' },
+    { cat: 'branding · papelería',                      name: 'Branding de marca',           desc: 'Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.',                                                        accent: 'Identidad de lujo',                 img: null, color: '#ede0d8' },
+    { cat: 'logo · identidad visual',                   name: 'Diseño de logotipo',          desc: 'Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.',                                                     accent: 'Sistema tipográfico completo',      img: null, color: '#dde8e4' },
+    { cat: 'social media · papelería',                  name: 'Social media & papelería',    desc: 'Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.',                                                               accent: 'Laburito Studio · 2026',            img: null, color: '#dcefff' },
   ];
 
-  /* ── COVERFLOW CAROUSEL ── */
+  /* Modal con navegación */
   (function () {
-    const track   = document.getElementById('pf-track');
-    const cards   = Array.from(track.querySelectorAll('.pf-card'));
-    const dotsEl  = document.getElementById('pf-dots');
-    const prevBtn = document.getElementById('pf-prev');
-    const nextBtn = document.getElementById('pf-next');
-    const N       = cards.length;
-    let current   = 0;
+    const overlay    = document.getElementById('pf-modal-overlay');
+    const closeBtn   = document.getElementById('pf-modal-close');
+    const prevBtn    = document.getElementById('pf-modal-prev');
+    const nextBtn    = document.getElementById('pf-modal-next');
+    const modalHero  = document.getElementById('pf-modal-hero');
+    const modalPh    = document.getElementById('pf-modal-ph');
+    const modalPhLbl = document.getElementById('pf-modal-ph-label');
+    const modalCat   = document.getElementById('pf-modal-cat');
+    const modalTitle = document.getElementById('pf-modal-title');
+    const modalDesc  = document.getElementById('pf-modal-desc');
+    const modalAcc   = document.getElementById('pf-modal-accent');
+    const modalThumbs= document.getElementById('pf-modal-thumbs');
+    const modalCount = document.getElementById('pf-modal-counter');
+    if (!overlay) return;
 
-    // Build dots
-    cards.forEach((_, i) => {
-      const d = document.createElement('div');
-      d.className = 'pf-dot' + (i === 0 ? ' active' : '');
-      d.addEventListener('click', () => goTo(i));
-      dotsEl.appendChild(d);
-    });
+    let currentIdx = 0;
+    const N = PF_DATA.length;
 
-    function goTo(idx) {
-      current = ((idx % N) + N) % N;
-      arrange();
-    }
-
-    function arrange() {
-      const angleStep = 360 / N;
-      const radius    = 340;
-
-      cards.forEach((card, i) => {
-        const offset  = ((i - current + N) % N);
-        const angle   = offset * angleStep;
-        const rad     = (angle * Math.PI) / 180;
-        const x       = Math.sin(rad) * radius;
-        const z       = Math.cos(rad) * radius - radius;
-        const rotY    = -angle;
-        const scale   = offset === 0 ? 1 : (Math.abs(offset) === 1 || offset === N-1) ? 0.78 : 0.62;
-        const opacity = offset === 0 ? 1 : (Math.abs(offset) <= 1 || offset >= N-1) ? 0.65 : 0.3;
-        const isAct   = offset === 0;
-
-        card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
-        card.style.opacity   = opacity;
-        card.style.zIndex    = offset === 0 ? 10 : offset === 1 || offset === N-1 ? 5 : 1;
-        card.classList.toggle('active', isAct);
-      });
-
-      // update dots
-      dotsEl.querySelectorAll('.pf-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-    }
-
-    prevBtn.addEventListener('click', () => goTo(current - 1));
-    nextBtn.addEventListener('click', () => goTo(current + 1));
-
-    // Drag / swipe
-    let startX = 0, dragging = false;
-    const stageEl = document.getElementById('pf-stage');
-    stageEl.addEventListener('mousedown',  (e) => { startX = e.clientX; dragging = true; });
-    stageEl.addEventListener('mousemove',  (e) => { if (!dragging) return; if (e.clientX - startX > 60) { dragging = false; goTo(current - 1); } else if (startX - e.clientX > 60) { dragging = false; goTo(current + 1); } });
-    stageEl.addEventListener('mouseup',    () => dragging = false);
-    stageEl.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
-    stageEl.addEventListener('touchend',   (e) => { const dx = e.changedTouches[0].clientX - startX; if (dx > 40) goTo(current - 1); else if (dx < -40) goTo(current + 1); }, { passive: true });
-
-    // Click on non-active → rotate to it; click on active → open modal
-    cards.forEach((card, i) => {
-      card.addEventListener('click', (e) => {
-        if (!card.classList.contains('active')) { goTo(i); return; }
-        const btn = e.target.closest('.pf-open-btn');
-        if (btn || card.classList.contains('active')) openModal(current);
-      });
-    });
-
-    arrange();
-
-    // Autoplay — avanza sola cada 3s, pausa al hover
-    let autoTimer = setInterval(() => goTo(current + 1), 3000);
-    const stage = document.getElementById('pf-stage');
-    stage.addEventListener('mouseenter', () => clearInterval(autoTimer));
-    stage.addEventListener('mouseleave', () => {
-      clearInterval(autoTimer);
-      autoTimer = setInterval(() => goTo(current + 1), 3000);
-    });
-
-    /* ── MODAL ── */
-    const modalOverlay = document.getElementById('pf-modal-overlay');
-    const modalClose   = document.getElementById('pf-modal-close');
-    const modalHero    = document.getElementById('pf-modal-hero');
-    const modalPh      = document.getElementById('pf-modal-ph');
-    const modalPhLbl   = document.getElementById('pf-modal-ph-label');
-    const modalCat     = document.getElementById('pf-modal-cat');
-    const modalTitle   = document.getElementById('pf-modal-title');
-    const modalDesc    = document.getElementById('pf-modal-desc');
-    const modalAccent  = document.getElementById('pf-modal-accent');
-    const modalThumbs  = document.getElementById('pf-modal-thumbs');
-
-    function openModal(idx) {
+    function populate(idx) {
       const p = PF_DATA[idx];
-      modalCat.textContent   = p.cat;
-      modalTitle.textContent = p.name;
-      modalDesc.textContent  = p.desc;
-      modalAccent.textContent = p.accent;
-
-      // Hero image or placeholder
-      const existingImg = modalHero.querySelector('img');
-      if (existingImg) existingImg.remove();
+      modalCat.textContent    = p.cat;
+      modalTitle.textContent  = p.name;
+      modalDesc.textContent   = p.desc;
+      modalAcc.textContent    = p.accent;
+      modalHero.style.background = p.color;
+      modalPh.style.display   = 'flex';
+      modalPhLbl.textContent  = p.name;
+      modalCount.textContent  = (idx + 1) + ' / ' + N;
+      const existImg = modalHero.querySelector('img');
+      if (existImg) existImg.remove();
       if (p.img) {
         modalPh.style.display = 'none';
         const img = document.createElement('img');
         img.src = p.img; img.alt = p.name;
-        modalHero.insertBefore(img, modalClose);
-      } else {
-        modalPh.style.display = 'flex';
-        modalHero.style.background = p.color;
-        modalPhLbl.textContent = p.name;
+        modalHero.insertBefore(img, closeBtn);
       }
-
-      // Thumbs
-      modalThumbs.innerHTML = [0,1,2].map(i =>
-        p.img && i === 0
-          ? `<div class="pf-modal-thumb"><img src="${p.img}" alt="${p.name}"></div>`
-          : `<div class="pf-modal-thumb" style="background:${p.color}"><span>${p.name}</span></div>`
+      modalThumbs.innerHTML = [0,1,2].map(() =>
+        `<div class="pf-modal-thumb" style="background:${p.color}"><span>${p.name}</span></div>`
       ).join('');
+      // Animate content swap
+      const body = document.querySelector('.pf-modal-body');
+      body.style.opacity = '0'; body.style.transform = 'translateY(8px)';
+      requestAnimationFrame(() => {
+        body.style.transition = 'opacity 0.3s, transform 0.3s';
+        body.style.opacity = '1'; body.style.transform = 'translateY(0)';
+      });
+    }
 
-      modalOverlay.classList.add('open');
+    function openModal(idx) {
+      currentIdx = idx;
+      populate(idx);
+      overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
-      modalOverlay.classList.remove('open');
+      overlay.classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    modalClose.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-      if (!modalOverlay.classList.contains('open')) {
-        if (e.key === 'ArrowLeft')  goTo(current - 1);
-        if (e.key === 'ArrowRight') goTo(current + 1);
-      }
+    function goNext() { currentIdx = (currentIdx + 1) % N; populate(currentIdx); }
+    function goPrev() { currentIdx = (currentIdx - 1 + N) % N; populate(currentIdx); }
+
+    document.querySelectorAll('.bento-item').forEach((item) => {
+      const idx = parseInt(item.dataset.project);
+      item.addEventListener('click', () => openModal(idx));
+      item.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openModal(idx); });
     });
+
+    closeBtn.addEventListener('click', closeModal);
+    prevBtn.addEventListener('click', goPrev);
+    nextBtn.addEventListener('click', goNext);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (!overlay.classList.contains('open')) return;
+      if (e.key === 'Escape')      closeModal();
+      if (e.key === 'ArrowRight')  goNext();
+      if (e.key === 'ArrowLeft')   goPrev();
+    });
+
+    // Swipe on modal
+    let tx = 0;
+    overlay.addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true });
+    overlay.addEventListener('touchend',   (e) => {
+      const dx = e.changedTouches[0].clientX - tx;
+      if (dx < -40) goNext();
+      if (dx >  40) goPrev();
+    }, { passive: true });
   })();
 
   </script>

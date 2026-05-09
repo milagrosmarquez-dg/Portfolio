@@ -194,7 +194,7 @@
     min-height: 100svh;
     display: flex;
     align-items: center;
-    padding: calc(var(--header-h) + 60px) 72px 80px;
+    padding: calc(var(--header-h) + 28px) 72px 60px;
     position: relative;
     overflow: visible;
     background: var(--bg);
@@ -663,6 +663,22 @@
     background: rgba(22,21,21,0.35); padding: 4px 10px; border-radius: 100px;
   }
 
+
+  /* Banner espacio para imagen de portfolio */
+  .portfolio-banner {
+    width: 100%;
+    padding: 32px 0 16px;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .portfolio-banner img {
+    width: auto;
+    height: 220px;
+    max-width: 80%;
+    display: block;
+    mix-blend-mode: multiply;
+  }
+
   /* ══════════════════════════════════════════════════
      CONTACTO
   ══════════════════════════════════════════════════ */
@@ -715,7 +731,7 @@
   ══════════════════════════════════════════════════ */
   .site-footer {
     border-top: 1px solid var(--rule);
-    background: #fffff3;
+    background: #4f3029;
   }
   .footer-inner {
     display: flex;
@@ -731,7 +747,7 @@
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 11px; font-weight: 300;
     letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--muted);
+    color: rgba(255,255,255,0.6);
     justify-self: flex-start;
   }
   .footer-right {
@@ -739,11 +755,11 @@
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 11px; font-weight: 300;
     letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--muted); text-align: right;
+    color: rgba(255,255,255,0.6); text-align: right;
     justify-self: flex-end;
   }
-  .footer-right a { color: var(--muted); transition: color 0.3s; }
-  .footer-right a:hover { color: var(--ink); }
+  .footer-right a { color: rgba(255,255,255,0.6); transition: color 0.3s; }
+  .footer-right a:hover { color: #fefce3; }
 
   .footer-back {
     font-size: 16px; color: var(--muted);
@@ -1169,7 +1185,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#f4f1e2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ps</text>
             </svg>
@@ -1187,7 +1203,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#f4f1e2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Id</text>
             </svg>
@@ -1205,7 +1221,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#f4f1e2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Cv</text>
             </svg>
@@ -1223,7 +1239,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#f4f1e2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">IA</text>
             </svg>
@@ -1242,6 +1258,11 @@
 
     <!-- PORTFOLIO -->
   <section class="portfolio" id="portfolio">
+
+    <!-- Banner espacio para imagen de portfolio -->
+    <div class="portfolio-banner" id="portfolio-banner">
+      <img src="portfolio.png" alt="My Portfolio">
+    </div>
 
     <!-- Bento grid -->
     <div class="bento">
@@ -1510,15 +1531,15 @@
      PORTFOLIO — Bento grid + modal
   ══════════════════════════════════════════════════ */
   const PF_DATA = [
-    { cat: 'social media · comunicación institucional', name: 'Social media post — UNP',    desc: 'Piezas de comunicación visual para la Universidad Nacional de Pilar. Diseño de posts para redes sociales con lenguaje institucional claro y coherente.', accent: 'Universidad Nacional de Pilar · 2025', img: null, color: '#dcefff' },
-    { cat: 'social media · diseño editorial',           name: 'Instagram Stories',           desc: 'Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica, paleta de color y animación para contenido de redes sociales.',       accent: 'Diseño para Instagram · 2025',       img: null, color: '#fefce3' },
-    { cat: 'identidad · comunicación',                  name: 'Comunicación institucional',  desc: 'Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme en todas las plataformas.',                        accent: 'Municipalidad de Pilar · 2025',      img: null, color: '#fefce3' },
-    { cat: 'branding · papelería',                      name: 'Branding de marca',           desc: 'Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.',                                                        accent: 'Identidad de lujo',                 img: null, color: '#ede0d8' },
-    { cat: 'logo · identidad visual',                   name: 'Diseño de logotipo',          desc: 'Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.',                                                     accent: 'Sistema tipográfico completo',      img: null, color: '#dde8e4' },
-    { cat: 'social media · papelería',                  name: 'Social media & papelería',    desc: 'Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.',                                                               accent: 'Laburito Studio · 2026',            img: null, color: '#dcefff' },
+    { cat: 'social media · comunicación institucional', name: 'Social media post — UNP',   desc: 'Piezas de comunicación visual para la Universidad Nacional de Pilar. Diseño de posts para redes sociales con lenguaje institucional claro y coherente.', accent: 'Universidad Nacional de Pilar · 2025', color: '#dcefff', images: [null, null, null] },
+    { cat: 'social media · diseño editorial',           name: 'Instagram Stories',          desc: 'Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica, paleta de color y animación para contenido de redes sociales.',      accent: 'Diseño para Instagram · 2025',       color: '#fefce3', images: [null, null, null] },
+    { cat: 'identidad · comunicación',                  name: 'Comunicación institucional', desc: 'Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme en todas las plataformas.',                       accent: 'Municipalidad de Pilar · 2025',      color: '#fefce3', images: [null, null, null] },
+    { cat: 'branding · papelería',                      name: 'Branding de marca',          desc: 'Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.',                                                       accent: 'Identidad de lujo',                 color: '#ede0d8', images: [null, null, null] },
+    { cat: 'logo · identidad visual',                   name: 'Diseño de logotipo',         desc: 'Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.',                                                    accent: 'Sistema tipográfico completo',      color: '#dde8e4', images: [null, null, null] },
+    { cat: 'social media · papelería',                  name: 'Social media & papelería',   desc: 'Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.',                                                              accent: 'Laburito Studio · 2026',            color: '#dcefff', images: [null, null, null] },
   ];
 
-  /* Modal con navegación */
+  /* Modal — flechas navegan IMÁGENES del proyecto */
   (function () {
     const overlay    = document.getElementById('pf-modal-overlay');
     const closeBtn   = document.getElementById('pf-modal-close');
@@ -1535,31 +1556,65 @@
     const modalCount = document.getElementById('pf-modal-counter');
     if (!overlay) return;
 
-    let currentIdx = 0;
-    const N = PF_DATA.length;
+    let projectIdx = 0;  // proyecto actual
+    let imageIdx   = 0;  // imagen actual dentro del proyecto
 
-    function populate(idx) {
-      const p = PF_DATA[idx];
-      modalCat.textContent    = p.cat;
-      modalTitle.textContent  = p.name;
-      modalDesc.textContent   = p.desc;
-      modalAcc.textContent    = p.accent;
-      modalHero.style.background = p.color;
-      modalPh.style.display   = 'flex';
-      modalPhLbl.textContent  = p.name;
-      modalCount.textContent  = (idx + 1) + ' / ' + N;
-      const existImg = modalHero.querySelector('img');
-      if (existImg) existImg.remove();
-      if (p.img) {
+    function showImage(p, imgIdx) {
+      const imgs = p.images;
+      const total = imgs.length;
+      imageIdx = ((imgIdx % total) + total) % total;
+      const src = imgs[imageIdx];
+
+      // Update counter: "imagen 1 / 3"
+      modalCount.textContent = (imageIdx + 1) + ' / ' + total;
+
+      // Remove old img
+      const old = modalHero.querySelector('img');
+      if (old) old.remove();
+
+      if (src) {
         modalPh.style.display = 'none';
         const img = document.createElement('img');
-        img.src = p.img; img.alt = p.name;
+        img.src = src; img.alt = p.name;
+        modalHero.style.background = 'transparent';
         modalHero.insertBefore(img, closeBtn);
+      } else {
+        modalPh.style.display = 'flex';
+        modalHero.style.background = p.color;
+        modalPhLbl.textContent = p.name + (total > 1 ? ' — imagen ' + (imageIdx + 1) : '');
       }
-      modalThumbs.innerHTML = [0,1,2].map(() =>
-        `<div class="pf-modal-thumb" style="background:${p.color}"><span>${p.name}</span></div>`
+
+      // Highlight active thumb
+      modalThumbs.querySelectorAll('.pf-modal-thumb').forEach((th, i) => {
+        th.style.outline = i === imageIdx ? '2px solid #4f3029' : 'none';
+        th.style.opacity  = i === imageIdx ? '1' : '0.55';
+      });
+    }
+
+    function populate(idx) {
+      projectIdx = idx;
+      imageIdx   = 0;
+      const p = PF_DATA[idx];
+      modalCat.textContent   = p.cat;
+      modalTitle.textContent = p.name;
+      modalDesc.textContent  = p.desc;
+      modalAcc.textContent   = p.accent;
+
+      // Build thumbs (one per image)
+      modalThumbs.innerHTML = p.images.map((src, i) =>
+        src
+          ? `<div class="pf-modal-thumb" data-img="${i}" style="cursor:pointer;"><img src="${src}" alt="${p.name} ${i+1}"></div>`
+          : `<div class="pf-modal-thumb" data-img="${i}" style="background:${p.color};cursor:pointer;"><span>imagen ${i+1}</span></div>`
       ).join('');
-      // Animate content swap
+
+      // Click on thumb → show that image
+      modalThumbs.querySelectorAll('.pf-modal-thumb').forEach((th) => {
+        th.addEventListener('click', () => showImage(p, parseInt(th.dataset.img)));
+      });
+
+      showImage(p, 0);
+
+      // Animate body
       const body = document.querySelector('.pf-modal-body');
       body.style.opacity = '0'; body.style.transform = 'translateY(8px)';
       requestAnimationFrame(() => {
@@ -1569,19 +1624,18 @@
     }
 
     function openModal(idx) {
-      currentIdx = idx;
       populate(idx);
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-
     function closeModal() {
       overlay.classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    function goNext() { currentIdx = (currentIdx + 1) % N; populate(currentIdx); }
-    function goPrev() { currentIdx = (currentIdx - 1 + N) % N; populate(currentIdx); }
+    // Flechas: navegan imágenes del proyecto
+    function imgNext() { showImage(PF_DATA[projectIdx], imageIdx + 1); }
+    function imgPrev() { showImage(PF_DATA[projectIdx], imageIdx - 1); }
 
     document.querySelectorAll('.bento-item').forEach((item) => {
       const idx = parseInt(item.dataset.project);
@@ -1590,23 +1644,21 @@
     });
 
     closeBtn.addEventListener('click', closeModal);
-    prevBtn.addEventListener('click', goPrev);
-    nextBtn.addEventListener('click', goNext);
+    prevBtn.addEventListener('click', imgPrev);
+    nextBtn.addEventListener('click', imgNext);
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
     document.addEventListener('keydown', (e) => {
       if (!overlay.classList.contains('open')) return;
       if (e.key === 'Escape')      closeModal();
-      if (e.key === 'ArrowRight')  goNext();
-      if (e.key === 'ArrowLeft')   goPrev();
+      if (e.key === 'ArrowRight')  imgNext();
+      if (e.key === 'ArrowLeft')   imgPrev();
     });
-
-    // Swipe on modal
+    // Swipe
     let tx = 0;
     overlay.addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true });
     overlay.addEventListener('touchend',   (e) => {
       const dx = e.changedTouches[0].clientX - tx;
-      if (dx < -40) goNext();
-      if (dx >  40) goPrev();
+      if (dx < -40) imgNext(); if (dx > 40) imgPrev();
     }, { passive: true });
   })();
 

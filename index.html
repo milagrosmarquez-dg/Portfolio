@@ -400,7 +400,7 @@
     transition: background 0.35s var(--ease), border-color 0.35s, color 0.35s;
     cursor: default;
   }
-  .sk-pill:hover { background: #fefce3; border-color: #fefce3; color: #43302e; }
+  .sk-pill:hover { background: #dcefff; border-color: #dcefff; color: #43302e; }
 
   /* Technical skills — carpetitas */
   .sk-technical-wrap { }
@@ -654,34 +654,140 @@
   .pf-modal-thumb { aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; background: #e8e4de; display: flex; align-items: center; justify-content: center; }
   .pf-modal-thumb span { font-family: var(--font-serif); font-style: italic; font-size: 11px; font-weight: 300; color: rgba(22,21,21,0.25); }
   .pf-modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
-  @media (max-width: 700px) { .pf-modal-body { padding: 24px; } .pf-modal-thumbs { grid-template-columns: repeat(2, 1fr); } }
-
-  /* Flechas de navegación del modal */
-  .pf-modal-arrow {
-    position: fixed; top: 50%; transform: translateY(-50%);
-    background: rgba(250,250,250,0.92); border: 1px solid rgba(22,21,21,0.1);
-    width: 52px; height: 52px; border-radius: 50%;
-    font-size: 20px; cursor: pointer; color: var(--ink);
+  /* ─── MODAL REDISEÑADO ─── */
+  .pf-modal-overlay {
+    position: fixed; inset: 0; z-index: 400;
+    background: rgba(22,21,21,0);
+    pointer-events: none;
+    transition: background 0.45s cubic-bezier(0.25,0.1,0.25,1);
     display: flex; align-items: center; justify-content: center;
-    transition: background 0.25s, transform 0.25s, opacity 0.3s;
-    opacity: 0; pointer-events: none; z-index: 401;
-    font-family: var(--font-body);
   }
-  .pf-modal-overlay.open .pf-modal-arrow { opacity: 1; pointer-events: all; }
-  .pf-modal-prev { left: clamp(12px, 3vw, 40px); }
-  .pf-modal-next { right: clamp(12px, 3vw, 40px); }
-  .pf-modal-arrow:hover {
-    background: var(--terracotta); color: #fff; border-color: var(--terracotta);
-    transform: translateY(-50%) scale(1.08);
+  .pf-modal-overlay.open { background: rgba(22,21,21,0.82); pointer-events: all; }
+
+  .pf-modal {
+    background: #fffff3;
+    width: min(560px, 95vw);
+    max-height: 92vh;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1), opacity 0.4s;
   }
-  /* Contador */
-  .pf-modal-counter {
-    position: absolute; bottom: 16px; right: 20px;
+  .pf-modal-overlay.open .pf-modal { transform: scale(1) translateY(0); opacity: 1; }
+
+  /* Top bar */
+  .pf-modal-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--rule);
+    flex-shrink: 0;
+  }
+  .pf-modal-cat-top {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 9px; font-weight: 200; letter-spacing: 0.18em;
-    color: rgba(255,255,255,0.7); text-transform: uppercase;
-    background: rgba(22,21,21,0.35); padding: 4px 10px; border-radius: 100px;
+    font-size: 9px; font-weight: 200;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
   }
+  .pf-modal-close {
+    background: none; border: none; cursor: pointer;
+    font-size: 18px; color: var(--muted);
+    transition: color 0.2s; line-height: 1; padding: 0;
+  }
+  .pf-modal-close:hover { color: var(--ink); }
+
+  /* Carrusel */
+  .pf-carousel {
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background: #f0ece6;
+  }
+  .pf-carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1);
+    will-change: transform;
+  }
+  .pf-car-slide {
+    flex: 0 0 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .pf-car-slide img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .pf-car-slide-ph {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pf-car-slide-ph span {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 15px; font-weight: 300; color: rgba(22,21,21,0.28);
+    text-align: center; padding: 24px;
+  }
+
+  /* Flechas internas */
+  .pf-car-arr {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.88); border: none; cursor: pointer;
+    width: 36px; height: 36px; border-radius: 50%;
+    font-size: 22px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink); transition: background 0.2s, opacity 0.3s;
+    opacity: 0; z-index: 2;
+  }
+  .pf-carousel:hover .pf-car-arr { opacity: 1; }
+  .pf-car-prev { left: 12px; }
+  .pf-car-next { right: 12px; }
+  .pf-car-arr:hover { background: #fff; }
+  .pf-car-arr:disabled { opacity: 0 !important; }
+
+  /* Dots */
+  .pf-car-dots {
+    position: absolute; bottom: 10px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 5px;
+  }
+  .pf-car-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer; transition: background 0.25s, transform 0.25s;
+  }
+  .pf-car-dot.active { background: #fff; transform: scale(1.4); }
+
+  /* Body */
+  .pf-modal-body {
+    padding: 22px 24px 28px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .pf-modal-title {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(20px, 3vw, 28px); font-weight: 300;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.2;
+  }
+  .pf-modal-desc {
+    font-family: var(--font-serif);
+    font-size: 14px; font-weight: 300; line-height: 1.8;
+    color: var(--mid); margin-bottom: 16px;
+  }
+  .pf-modal-accent {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 8px; font-weight: 200;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #fff; background: #43302e;
+    padding: 6px 14px; border-radius: 100px;
+    display: inline-block;
+  }
+
+  @media (max-width: 600px) {
+    .pf-modal { width: 100vw; max-height: 100svh; border-radius: 0; }
+    .pf-car-arr { opacity: 1; }
+  }
+
+
 
 
   /* Banner espacio para imagen de portfolio */
@@ -693,58 +799,107 @@
   }
   .portfolio-banner img {
     width: auto;
-    height: 320px;
-    max-width: 90%;
+    height: 420px;
+    max-width: 95%;
     display: block;
     mix-blend-mode: multiply;
   }
 
   /* ══════════════════════════════════════════════════
-     CONTACTO
+     CONTACTO — rediseño
   ══════════════════════════════════════════════════ */
-  .contacto { background: var(--bg); border-top: 1px solid var(--rule); }
 
-  .contacto-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-
-  .contacto-title {
-    font-family: var(--font-serif);
-    font-size: clamp(44px, 6.5vw, 88px);
-    font-weight: 300;
-    font-style: italic;
-    line-height: 0.95;
-    letter-spacing: -0.015em;
-    margin-bottom: 28px;
-    color: var(--ink);
+  /* Banda hero */
+  .ct-hero {
+    background: #43302e;
+    padding: 96px 80px 80px;
   }
-  .contacto-title .ct-sans {
-    display: block;
+  .ct-hero-inner { max-width: 800px; }
+
+  .ct-hero-eyebrow {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: clamp(18px, 2.2vw, 32px);
-    font-weight: 100;
-    font-style: normal;
-    letter-spacing: 0;
-    color: var(--ink);
+    font-size: 10px; font-weight: 200;
+    letter-spacing: 0.26em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); margin-bottom: 20px;
+  }
+  .ct-hero-title {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(56px, 9vw, 120px); font-weight: 300;
+    color: #fff; line-height: 0.92; margin-bottom: 48px;
+  }
+  .ct-hero-title em { font-style: normal; color: #dcefff; }
+
+  .ct-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 13px; font-weight: 300; letter-spacing: 0.04em;
+    color: #fff; border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 6px;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .ct-cta:hover { border-color: #dcefff; color: #dcefff; }
+  .ct-cta-arrow { font-size: 18px; transition: transform 0.3s; }
+  .ct-cta:hover .ct-cta-arrow { transform: translate(3px,-3px); }
+
+  /* Grid de cards */
+  .ct-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--rule);
+  }
+  .ct-card {
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 10px; padding: 36px 32px;
+    border-right: 1px solid var(--rule);
+    transition: background 0.4s var(--ease);
+    position: relative;
+  }
+  .ct-card:last-child { border-right: none; }
+  .ct-card:hover { background: #fefce3; }
+
+  .ct-card-icon {
+    color: var(--muted);
+    transition: color 0.3s, transform 0.3s;
     margin-bottom: 4px;
   }
-  .contacto-sub { font-family: var(--font-serif); font-size: 17px; font-weight: 300; line-height: 1.75; color: var(--mid); }
+  .ct-card:hover .ct-card-icon { color: #43302e; transform: scale(1.1); }
 
-  .contacto-links { display: flex; flex-direction: column; padding-top: 8px; }
-  .contact-link {
-    display: grid; grid-template-columns: 76px 1fr 22px;
-    align-items: center; gap: 20px;
-    padding: 20px 0; border-bottom: 1px solid var(--rule);
-    transition: padding-right 0.4s var(--ease);
+  .ct-card-label {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 8.5px; font-weight: 200;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); transition: color 0.3s;
   }
-  .contact-link:first-child { border-top: 1px solid var(--rule); }
-  .contact-link:hover { padding-right: 6px; }
-  .contact-label { font-family: var(--font-body); font-size: 9px; font-weight: 200; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
-  .contact-value { font-family: var(--font-serif); font-size: clamp(14px, 1.6vw, 18px); font-weight: 300; color: var(--ink); transition: color 0.3s; }
-  .contact-link:hover .contact-value { color: var(--warm); }
-  .contact-arrow { font-size: 17px; color: var(--muted); text-align: right; transition: transform 0.4s var(--ease), color 0.3s; }
-  .contact-link:hover .contact-arrow { transform: translate(2px, -2px); color: var(--warm); }
+  .ct-card:hover .ct-card-label { color: #43302e; }
 
+  .ct-card-val {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(13px, 1.3vw, 16px); font-weight: 300;
+    color: var(--ink); line-height: 1.3; flex: 1;
+    transition: color 0.3s;
+  }
+  .ct-card:hover .ct-card-val { color: #43302e; }
 
+  .ct-card-arrow {
+    font-size: 18px; color: var(--muted);
+    position: absolute; top: 28px; right: 24px;
+    transition: transform 0.35s var(--ease), color 0.3s; opacity: 0;
+  }
+  .ct-card:hover .ct-card-arrow { transform: translate(2px,-2px); color: #43302e; opacity: 1; }
 
+  @media (max-width: 900px) {
+    .ct-grid { grid-template-columns: repeat(2, 1fr); }
+    .ct-card:nth-child(2) { border-right: none; }
+    .ct-card:nth-child(3) { border-top: 1px solid var(--rule); }
+    .ct-card:nth-child(4) { border-top: 1px solid var(--rule); border-right: none; }
+    .ct-hero { padding: 64px 48px 56px; }
+  }
+  @media (max-width: 600px) {
+    .ct-grid { grid-template-columns: 1fr; }
+    .ct-card { border-right: none; border-top: 1px solid var(--rule); }
+    .ct-hero { padding: 52px 24px 44px; }
+    .ct-cta { font-size: 11px; }
+  }
 
   /* ══════════════════════════════════════════════════
      FOOTER — mismo estilo que header
@@ -1252,7 +1407,7 @@
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">HTML</text>
+              <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">HTML</text>
             </svg>
             <span>HTML</span>
           </div>
@@ -1297,10 +1452,10 @@
       <!-- Item 1: wide — ocupa 2 cols, fila 1 -->
       <div class="bento-item b-wide" data-project="0" tabindex="0" role="button">
         <span class="bento-num">01</span>
-        <div class="bento-ph"><span>Social media post — UNP</span></div>
+        <img src="itaca-1.png" alt="Ítaca Branding" class="bento-img">
         <div class="bento-overlay">
-          <span class="bento-cat">social media · comunicación</span>
-          <h3 class="bento-name">Social media post — UNP</h3>
+          <span class="bento-cat">branding · identidad visual</span>
+          <h3 class="bento-name">Ítaca — Identidad de marca</h3>
           <span class="bento-btn">ver proyecto</span>
         </div>
       </div>
@@ -1364,29 +1519,34 @@
 
   </section>
 
-<!-- Modal de proyecto -->
+<!-- Modal de proyecto — carrusel estilo Instagram -->
   <div class="pf-modal-overlay" id="pf-modal-overlay">
-    <!-- Flecha anterior -->
-    <button class="pf-modal-arrow pf-modal-prev" id="pf-modal-prev" aria-label="Proyecto anterior">←</button>
-
     <div class="pf-modal" id="pf-modal">
-      <div class="pf-modal-hero" id="pf-modal-hero">
-        <button class="pf-modal-close" id="pf-modal-close">✕</button>
-        <div class="pf-modal-ph" id="pf-modal-ph"><span id="pf-modal-ph-label"></span></div>
-        <!-- Contador -->
-        <span class="pf-modal-counter" id="pf-modal-counter"></span>
+
+      <!-- Cabecera del modal -->
+      <div class="pf-modal-top">
+        <span class="pf-modal-cat-top" id="pf-modal-cat"></span>
+        <button class="pf-modal-close" id="pf-modal-close" aria-label="Cerrar">✕</button>
       </div>
-      <div class="pf-modal-body">
-        <span class="pf-modal-cat" id="pf-modal-cat"></span>
+
+      <!-- Carrusel de imágenes -->
+      <div class="pf-carousel" id="pf-carousel">
+        <div class="pf-carousel-track" id="pf-carousel-track"></div>
+        <!-- Flechas internas -->
+        <button class="pf-car-arr pf-car-prev" id="pf-car-prev" aria-label="Imagen anterior">‹</button>
+        <button class="pf-car-arr pf-car-next" id="pf-car-next" aria-label="Imagen siguiente">›</button>
+        <!-- Dots -->
+        <div class="pf-car-dots" id="pf-car-dots"></div>
+      </div>
+
+      <!-- Info del proyecto -->
+      <div class="pf-modal-body" id="pf-modal-body">
         <h2 class="pf-modal-title" id="pf-modal-title"></h2>
         <p class="pf-modal-desc" id="pf-modal-desc"></p>
         <span class="pf-modal-accent" id="pf-modal-accent"></span>
-        <div class="pf-modal-thumbs" id="pf-modal-thumbs"></div>
       </div>
-    </div>
 
-    <!-- Flecha siguiente -->
-    <button class="pf-modal-arrow pf-modal-next" id="pf-modal-next" aria-label="Proyecto siguiente">→</button>
+    </div>
   </div>
 
 
@@ -1394,40 +1554,62 @@
 
   <!-- CONTACTO -->
   <section class="contacto" id="contacto">
-    <div class="section-inner">
-      <div class="section-label reveal"><span>03</span><span>Contacto</span></div>
-      <div class="contacto-layout">
-        <div>
-          <h2 class="contacto-title reveal">
-            <span class="ct-sans">¿trabajamos</span>
-            juntos?
-          </h2>
-          <p class="contacto-sub reveal d1">Siempre disponible para proyectos<br>interesantes y colaboraciones.</p>
-        </div>
-        <div class="contacto-links reveal d2">
-          <a href="mailto:milimarquez.dg@gmail.com" class="contact-link">
-            <span class="contact-label">Email</span>
-            <span class="contact-value">milimarquez.dg@gmail.com</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-          <a href="https://linkedin.com/in/milagros-marquez" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-label">LinkedIn</span>
-            <span class="contact-value">milagros-marquez</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-          <a href="https://behance.net/milimarquez" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-label">Behance</span>
-            <span class="contact-value">milimarquez</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-          <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-label">Instagram</span>
-            <span class="contact-value">@laburitostudio</span>
-            <span class="contact-arrow">↗</span>
-          </a>
-        </div>
+
+    <!-- Banda superior terracotta con headline grande -->
+    <div class="ct-hero">
+      <div class="ct-hero-inner">
+        <p class="ct-hero-eyebrow reveal">¿hablamos?</p>
+        <h2 class="ct-hero-title reveal d1">
+          Diseño con<br><em>intención.</em>
+        </h2>
+        <a href="mailto:milimarquez.dg@gmail.com" class="ct-cta reveal d2">
+          milimarquez.dg@gmail.com
+          <span class="ct-cta-arrow">↗</span>
+        </a>
       </div>
     </div>
+
+    <!-- Links en grilla -->
+    <div class="ct-grid reveal">
+
+      <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-card">
+        <div class="ct-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <span class="ct-card-label">Instagram</span>
+        <span class="ct-card-val">@laburitostudio</span>
+        <span class="ct-card-arrow">↗</span>
+      </a>
+
+      <a href="https://behance.net/milimarquez" target="_blank" rel="noopener" class="ct-card">
+        <div class="ct-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2 9h8c1.7 0 3 1.3 3 3s-1.3 3-3 3H2V6h7c1.7 0 3 1.3 3 3s-1.3 3-3 3"/><path d="M14 8h8M14 16h8M22 12c0-2.2-1.8-4-4-4s-4 1.8-4 4 1.8 4 4 4c1.2 0 2.3-.5 3-1.3"/></svg>
+        </div>
+        <span class="ct-card-label">Behance</span>
+        <span class="ct-card-val">milimarquez</span>
+        <span class="ct-card-arrow">↗</span>
+      </a>
+
+      <a href="https://linkedin.com/in/milagros-marquez" target="_blank" rel="noopener" class="ct-card">
+        <div class="ct-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.5"/><path d="M11 17v-4c0-1.7 1.3-3 3-3s3 1.3 3 3v4"/><path d="M11 10v7"/></svg>
+        </div>
+        <span class="ct-card-label">LinkedIn</span>
+        <span class="ct-card-val">milagros-marquez</span>
+        <span class="ct-card-arrow">↗</span>
+      </a>
+
+      <a href="mailto:milimarquez.dg@gmail.com" class="ct-card ct-card-email">
+        <div class="ct-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        </div>
+        <span class="ct-card-label">Email</span>
+        <span class="ct-card-val">milimarquez.dg@gmail.com</span>
+        <span class="ct-card-arrow">↗</span>
+      </a>
+
+    </div>
+
   </section>
 
 
@@ -1558,7 +1740,7 @@
      PORTFOLIO — Bento grid + modal
   ══════════════════════════════════════════════════ */
   const PF_DATA = [
-    { cat: 'social media · comunicación institucional', name: 'Social media post — UNP',   desc: 'Piezas de comunicación visual para la Universidad Nacional de Pilar. Diseño de posts para redes sociales con lenguaje institucional claro y coherente.', accent: 'Universidad Nacional de Pilar · 2025', color: '#dcefff', images: [null, null, null] },
+    { cat: 'branding · identidad visual', name: 'Ítaca — Identidad de marca', desc: 'Sistema de identidad visual para Ítaca, consultora humana y coaching de negocios. Comprende logomark, paleta, tipografía y aplicaciones sobre papelería y merchandising.', accent: 'Branding · 2025', color: '#1a2f5a', images: ['itaca-1.png', 'itaca-2.png', 'itaca-3.png'] },
     { cat: 'social media · diseño editorial',           name: 'Instagram Stories',          desc: 'Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica, paleta de color y animación para contenido de redes sociales.',      accent: 'Diseño para Instagram · 2025',       color: '#fefce3', images: [null, null, null] },
     { cat: 'identidad · comunicación',                  name: 'Comunicación institucional', desc: 'Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme en todas las plataformas.',                       accent: 'Municipalidad de Pilar · 2025',      color: '#fefce3', images: [null, null, null] },
     { cat: 'branding · papelería',                      name: 'Branding de marca',          desc: 'Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.',                                                       accent: 'Identidad de lujo',                 color: '#ede0d8', images: [null, null, null] },

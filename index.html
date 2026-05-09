@@ -800,13 +800,16 @@
     padding: 0;
     margin: 0;
     background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 80px;  /* misma sangría que section-inner */
     line-height: 0;
   }
   .portfolio-banner img {
     width: auto;
-    height: 500px;
-    max-width: 98%;
+    height: 540px;
+    max-width: 60%;
     display: block;
     mix-blend-mode: multiply;
   }
@@ -900,7 +903,7 @@
     font-size: clamp(36px, 6vw, 72px); font-weight: 300;
     color: #fff; line-height: 0.95; margin-bottom: 40px;
   }
-  .ct-hero-title em { font-style: normal; color: #dcefff; }
+  .ct-hero-title em { font-style: normal; color: #fff; }
 
   .ct-cta {
     display: inline-flex; align-items: center; gap: 10px;
@@ -951,17 +954,33 @@
   .footer-inner {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 80px;
+    justify-content: space-between;
+    height: 100px;
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0 48px;
+    padding: 0 64px;
   }
-  .footer-id {
+  .footer-left {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .footer-name {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 18px; font-weight: 300;
+    color: #fff; letter-spacing: 0;
+  }
+  .footer-role {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 10px; font-weight: 200;
+    font-size: 9px; font-weight: 200;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .footer-right {
+    display: flex; flex-direction: column; gap: 4px;
+    text-align: right;
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 9px; font-weight: 200;
     letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.55); text-align: center;
+    color: rgba(255,255,255,0.5);
   }
   .footer-left {
     display: flex; flex-direction: column; gap: 3px;
@@ -1640,7 +1659,14 @@
   <!-- FOOTER — mismo estilo que el header -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-id">Milagros Márquez — Diseñadora Gráfica — Pilar, Buenos Aires</p>
+      <div class="footer-left">
+        <span class="footer-name">Milagros Márquez</span>
+        <span class="footer-role">Diseñadora Gráfica</span>
+      </div>
+      <div class="footer-right">
+        <span>Pilar, Buenos Aires</span>
+        <span>Argentina</span>
+      </div>
     </div>
   </footer>
 
@@ -1995,32 +2021,7 @@
     });
   })();
 
-  /* ── SONIDO HOVER (suave, generado con Web Audio API) ── */
-  (function() {
-    let ctx = null;
-    function getCtx() {
-      if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
-      return ctx;
-    }
-    function playTick() {
-      try {
-        const c = getCtx();
-        const osc = c.createOscillator();
-        const gain = c.createGain();
-        osc.connect(gain); gain.connect(c.destination);
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(880, c.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(660, c.currentTime + 0.06);
-        gain.gain.setValueAtTime(0.04, c.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + 0.1);
-        osc.start(c.currentTime);
-        osc.stop(c.currentTime + 0.12);
-      } catch(e) {}
-    }
-    document.querySelectorAll('.bento-item, .nav-link, .sk-pill, .ct-link').forEach(el => {
-      el.addEventListener('mouseenter', playTick);
-    });
-  })();
+
 
   /* ── LIGHTBOX FULLSCREEN ── */
   (function() {

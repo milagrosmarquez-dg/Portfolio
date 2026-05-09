@@ -511,7 +511,7 @@
   /* Bento grid — asimétrico 3 cols */
   .bento {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 6px;
     padding: 0 80px 6px;
   }
@@ -523,21 +523,23 @@
     background: #f0ece6;
   }
 
-  /* Tamaños especiales */
-  .bento-item.b-wide { grid-column: span 2; }
-  .bento-item.b-tall { grid-row: span 2; }
-  /* Aspect ratios por defecto */
-  .bento-item       { aspect-ratio: 1 / 1; }
-  .bento-item.b-wide { aspect-ratio: 2 / 1; }
-  .bento-item.b-tall { aspect-ratio: 1 / 2; }
+  /* Grid 4 cols, items cuadrados */
+  .bento-item { aspect-ratio: 1 / 1; }
+  .bento-item.b-wide { grid-column: span 2; aspect-ratio: 2 / 1; }
+  .bento-item.b-tall { grid-row: span 2; aspect-ratio: 1 / 2; }
 
   /* Colores de fondo por ítem */
+  .bento-item:nth-child(1) { background: #dcefff; }
   .bento-item:nth-child(1) { background: #dcefff; }
   .bento-item:nth-child(2) { background: #fefce3; }
   .bento-item:nth-child(3) { background: #f0e8e3; }
   .bento-item:nth-child(4) { background: #e4ede9; }
   .bento-item:nth-child(5) { background: #ede0d8; }
   .bento-item:nth-child(6) { background: #e8e2f0; }
+  .bento-item:nth-child(7) { background: #e0ece8; }
+  .bento-item:nth-child(8) { background: #f0e4ec; }
+  .bento-item:nth-child(9) { background: #e8e8dc; }
+  .bento-item:nth-child(10) { background: #dce4f0; }
 
   /* Placeholder centrado */
   .bento-ph {
@@ -623,7 +625,7 @@
     .bento-item.b-tall { grid-row: span 1; aspect-ratio: 1 / 1; }
     .bento-item        { aspect-ratio: 1 / 1; height: auto; }
     .portfolio-wave    { height: 60px; background-size: 30px 30px; }
-    .portfolio-banner img { height: 360px; }
+    .portfolio-banner img { height: 240px; max-width: 55%; }
     .bento-filters     { padding: 0 48px 24px; }
     .sk-folders        { grid-template-columns: repeat(3, 1fr); }
     .hero-body         { grid-template-columns: 1fr 360px; gap: 28px; }
@@ -632,11 +634,11 @@
   @media (max-width: 560px) {
     .bento { grid-template-columns: 1fr; padding: 0 16px 6px; }
     .bento-item.b-wide { grid-column: span 1; }
-    .bento-item { aspect-ratio: 4/3; height: auto; }
-    .bento-item.b-tall { aspect-ratio: 4/3; }
-    .bento-item.b-wide { aspect-ratio: 4/3; }
+    .bento-item { aspect-ratio: 1/1; height: auto; }
+    .bento-item.b-tall { aspect-ratio: 1/1; }
+    .bento-item.b-wide { aspect-ratio: 1/1; grid-column: span 1; }
     .portfolio-wave { height: 48px; background-size: 24px 24px; }
-    .portfolio-banner img { height: 260px; max-width: 90%; }
+    .portfolio-banner img { height: 180px; max-width: 80%; }
     .bento-filters { padding: 0 16px 20px; gap: 8px; }
     .bf-btn { font-size: 8px; padding: 6px 14px; }
     .hero-body { grid-template-columns: 1fr; gap: 24px; }
@@ -838,8 +840,8 @@
   }
   .portfolio-banner img {
     width: auto;
-    height: 540px;
-    max-width: 60%;
+    height: 340px;
+    max-width: 50%;
     display: block;
     mix-blend-mode: multiply;
   }
@@ -918,7 +920,7 @@
   /* Banda hero */
   .ct-hero {
     background: #43302e;
-    padding: 96px 80px 80px;
+    padding: 52px 80px 48px;
   }
   .ct-hero-inner { max-width: 800px; }
 
@@ -926,7 +928,7 @@
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 10px; font-weight: 200;
     letter-spacing: 0.26em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); margin-bottom: 20px;
+    color: rgba(255,255,255,0.45); margin-bottom: 12px;
   }
   .ct-hero-title {
     font-family: var(--font-serif); font-style: italic;
@@ -1550,10 +1552,9 @@
     <!-- Bento grid -->
     <div class="bento">
 
-      <!-- Item 1: wide — ocupa 2 cols, fila 1 -->
       <div class="bento-item b-wide" data-project="0" data-cat="branding" tabindex="0" role="button">
         <span class="bento-num">01</span>
-        <img src="itaca-1.png" alt="Ítaca Branding" class="bento-img">
+        <img src="itaca-1.png" alt="Ítaca" class="bento-img">
         <div class="bento-overlay">
           <span class="bento-cat">branding · identidad visual</span>
           <h3 class="bento-name">Ítaca — Identidad de marca</h3>
@@ -1561,8 +1562,7 @@
         </div>
       </div>
 
-      <!-- Item 2: tall — 1 col, ocupa 2 filas -->
-      <div class="bento-item b-tall" data-project="1" data-cat="social" tabindex="0" role="button">
+      <div class="bento-item" data-project="1" data-cat="social" tabindex="0" role="button">
         <span class="bento-num">02</span>
         <div class="bento-ph"><span>Instagram Stories</span></div>
         <div class="bento-overlay">
@@ -1572,7 +1572,6 @@
         </div>
       </div>
 
-      <!-- Item 3: normal -->
       <div class="bento-item" data-project="2" data-cat="identidad" tabindex="0" role="button">
         <span class="bento-num">03</span>
         <div class="bento-ph"><span>Comunicación institucional</span></div>
@@ -1583,7 +1582,6 @@
         </div>
       </div>
 
-      <!-- Item 4: normal -->
       <div class="bento-item" data-project="3" data-cat="branding" tabindex="0" role="button">
         <span class="bento-num">04</span>
         <div class="bento-ph"><span>Branding de marca</span></div>
@@ -1594,7 +1592,6 @@
         </div>
       </div>
 
-      <!-- Item 5: normal -->
       <div class="bento-item" data-project="4" data-cat="identidad" tabindex="0" role="button">
         <span class="bento-num">05</span>
         <div class="bento-ph"><span>Diseño de logotipo</span></div>
@@ -1605,13 +1602,52 @@
         </div>
       </div>
 
-      <!-- Item 6: wide — fila 2 -->
-      <div class="bento-item b-wide" data-project="5" data-cat="social" tabindex="0" role="button">
+      <div class="bento-item" data-project="5" data-cat="social" tabindex="0" role="button">
         <span class="bento-num">06</span>
         <div class="bento-ph"><span>Social media & papelería</span></div>
         <div class="bento-overlay">
           <span class="bento-cat">social media · papelería</span>
           <h3 class="bento-name">Social media & papelería</h3>
+          <span class="bento-btn">ver proyecto</span>
+        </div>
+      </div>
+
+      <div class="bento-item" data-project="6" data-cat="editorial" tabindex="0" role="button">
+        <span class="bento-num">07</span>
+        <div class="bento-ph"><span>Editorial institucional</span></div>
+        <div class="bento-overlay">
+          <span class="bento-cat">diseño editorial</span>
+          <h3 class="bento-name">Editorial institucional</h3>
+          <span class="bento-btn">ver proyecto</span>
+        </div>
+      </div>
+
+      <div class="bento-item" data-project="7" data-cat="branding" tabindex="0" role="button">
+        <span class="bento-num">08</span>
+        <div class="bento-ph"><span>Sistema visual completo</span></div>
+        <div class="bento-overlay">
+          <span class="bento-cat">branding · sistema</span>
+          <h3 class="bento-name">Sistema visual completo</h3>
+          <span class="bento-btn">ver proyecto</span>
+        </div>
+      </div>
+
+      <div class="bento-item" data-project="8" data-cat="social" tabindex="0" role="button">
+        <span class="bento-num">09</span>
+        <div class="bento-ph"><span>Campañas digitales</span></div>
+        <div class="bento-overlay">
+          <span class="bento-cat">social media · campañas</span>
+          <h3 class="bento-name">Campañas digitales</h3>
+          <span class="bento-btn">ver proyecto</span>
+        </div>
+      </div>
+
+      <div class="bento-item" data-project="9" data-cat="editorial" tabindex="0" role="button">
+        <span class="bento-num">10</span>
+        <div class="bento-ph"><span>Identidad editorial</span></div>
+        <div class="bento-overlay">
+          <span class="bento-cat">editorial · identidad</span>
+          <h3 class="bento-name">Identidad editorial</h3>
           <span class="bento-btn">ver proyecto</span>
         </div>
       </div>
@@ -1815,6 +1851,11 @@
     { cat: 'branding · papelería',                       name: 'Branding de marca',           desc: 'Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.',                                                                        accent: 'Identidad de lujo', color: '#ede0d8', images: [null, null, null] },
     { cat: 'logo · identidad visual',                    name: 'Diseño de logotipo',          desc: 'Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.',                                                                     accent: 'Sistema tipográfico completo', color: '#dde8e4', images: [null, null, null] },
     { cat: 'social media · papelería',                   name: 'Social media & papelería',    desc: 'Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.',                                                                              accent: 'Laburito Studio · 2026', color: '#dcefff', images: [null, null, null] },
+,
+    { cat: 'diseño editorial',         name: 'Editorial institucional',    desc: 'Publicaciones, revistas y materiales impresos para instituciones. Diseño de grilla, selección tipográfica y producción completa.', accent: 'Editorial · 2025', color: '#e0ece8', images: [null, null, null] },
+    { cat: 'branding · sistema',       name: 'Sistema visual completo',    desc: 'Desarrollo de sistema de identidad completo: naming, logomark, paleta, tipografía, papelería y guía de uso.', accent: 'Branding · 2025', color: '#f0e4ec', images: [null, null, null] },
+    { cat: 'social media · campañas',  name: 'Campañas digitales',         desc: 'Diseño de campañas para redes sociales: piezas estáticas, stories, reels y contenido animado con identidad consistente.', accent: 'Social media · 2026', color: '#e8e8dc', images: [null, null, null] },
+    { cat: 'editorial · identidad',    name: 'Identidad editorial',        desc: 'Sistema de identidad para proyecto editorial. Diseño de cubierta, grilla interior y piezas de comunicación asociadas.', accent: 'Editorial · 2026', color: '#dce4f0', images: [null, null, null] },
   ];
 
   /* ── Modal con carrusel de imágenes ── */

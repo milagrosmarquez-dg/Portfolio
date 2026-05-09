@@ -484,29 +484,40 @@
   }
   /* Ola superior — papel blanco superpuesto sobre el marrón */
   /* Cuadrillé de transición skills → portfolio */
+  /* Marquee transición skills → portfolio */
   .portfolio-wave {
     display: block;
     width: 100%;
-    height: 40px;
-    background-color: #3A2A26;
-    background-image:
-      repeating-conic-gradient(
-        #3A2A26 0% 25%,
-        #dcefff 0% 50%
-      );
-    background-size: 20px 20px;
+    background: #3A2A26;
     overflow: hidden;
-    position: relative;
-    flex-shrink: 0;
+    padding: 12px 0;
+    border-top: none;
+    border-bottom: none;
   }
-  /* La mitad superior del cuadrillé pertenece al fondo marrón de skills */
-  /* Una línea blanca suave separa del portfolio */
-  .portfolio-wave::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--bg);
+  .portfolio-wave-track {
+    display: flex;
+    width: max-content;
+    animation: wave-scroll 22s linear infinite;
+  }
+  .portfolio-wave-track:hover { animation-play-state: paused; }
+  @keyframes wave-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .portfolio-wave-content {
+    display: flex; align-items: center;
+    gap: 0; white-space: nowrap;
+  }
+  .portfolio-wave-content span {
+    font-family: var(--font-serif);
+    font-size: 15px; font-weight: 300; font-style: italic;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.06em;
+  }
+  .portfolio-wave-content .wave-sep {
+    color: rgba(255,255,255,0.4);
+    margin: 0 20px;
+    font-style: normal; font-size: 14px;
   }
 
   /* Bento grid — asimétrico 3 cols */
@@ -625,7 +636,7 @@
     .bento-item.b-wide { grid-column: span 2; aspect-ratio: 8 / 5; }
     .bento-item.b-tall { grid-row: span 1; aspect-ratio: 4 / 5; }
     .bento-item        { aspect-ratio: 4 / 5; height: auto; }
-    .portfolio-wave    { height: 40px; background-size: 20px 20px; }
+
     .portfolio-banner img { height: 140px; max-width: 40%; }
     .bento-filters     { padding: 0 48px 24px; }
     .sk-folders        { grid-template-columns: repeat(3, 1fr); }
@@ -638,7 +649,7 @@
     .bento-item { aspect-ratio: 4/5; height: auto; }
     .bento-item.b-tall { aspect-ratio: 4/5; }
     .bento-item.b-wide { aspect-ratio: 4/5; grid-column: span 1; }
-    .portfolio-wave { height: 40px; background-size: 20px 20px; }
+
     .portfolio-banner img { height: 110px; max-width: 60%; }
     .bento-filters { padding: 0 16px 20px; gap: 8px; }
     .bf-btn { font-size: 8px; padding: 6px 14px; }
@@ -781,8 +792,8 @@
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
   }
   .pf-carousel:hover .pf-car-arr { opacity: 1; }
-  .pf-car-prev { left: 50%; transform: translate(calc(-50% - 28px), -50%); }
-  .pf-car-next { right: 50%; transform: translate(calc(50% + 28px), -50%); }
+  .pf-car-prev { left: 12px;  transform: translateY(-50%); }
+  .pf-car-next { right: 12px; transform: translateY(-50%); }
   .pf-car-arr:hover { background: #fff; }
   .pf-car-arr:disabled { opacity: 0 !important; }
 
@@ -1553,8 +1564,17 @@
 
 
     <!-- PORTFOLIO -->
-  <!-- Cuadrillé de transición skills→portfolio -->
-  <div class="portfolio-wave" aria-hidden="true"></div>
+  <!-- Marquee transición skills→portfolio -->
+  <div class="portfolio-wave" aria-hidden="true">
+    <div class="portfolio-wave-track">
+      <div class="portfolio-wave-content">
+        <span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span>
+      </div>
+      <div class="portfolio-wave-content" aria-hidden="true">
+        <span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span><span>diseño con intención</span><span class="wave-sep">*</span>
+      </div>
+    </div>
+  </div>
 
   <section class="portfolio" id="portfolio">
 
@@ -1575,7 +1595,7 @@
     <!-- Bento grid -->
     <div class="bento">
 
-      <div class="bento-item b-wide" data-project="0" data-cat="branding" tabindex="0" role="button">
+      <div class="bento-item" data-project="0" data-cat="branding" tabindex="0" role="button">
         <span class="bento-num">01</span>
         <img src="itaca-1.png" alt="Ítaca" class="bento-img">
         <div class="bento-overlay">
@@ -2148,7 +2168,7 @@
 
   /* ── Emoji cursor trail ── */
   (function () {
-    const EMOJIS = ['🪩', '✨', '💌', '🎨'];
+    const EMOJIS = ['⚡', '✨', '💌', '🎨'];
     let lastX = 0, lastY = 0, lastTime = 0, emojiIdx = 0;
     const MIN_DIST = 80;   // pixels between each emoji
     const MIN_TIME = 220;  // ms minimum between spawns

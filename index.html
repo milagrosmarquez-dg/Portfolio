@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -501,7 +500,6 @@
   .bento {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 360px 280px;
     gap: 6px;
     padding: 0 80px 6px;
   }
@@ -514,8 +512,12 @@
   }
 
   /* Tamaños especiales */
-  .bento-item.b-wide   { grid-column: span 2; }   /* ocupa 2 cols */
-  .bento-item.b-tall   { grid-row: span 2; }       /* ocupa 2 filas */
+  .bento-item.b-wide { grid-column: span 2; }
+  .bento-item.b-tall { grid-row: span 2; }
+  /* Aspect ratios por defecto */
+  .bento-item       { aspect-ratio: 1 / 1; }
+  .bento-item.b-wide { aspect-ratio: 2 / 1; }
+  .bento-item.b-tall { aspect-ratio: 1 / 2; }
 
   /* Colores de fondo por ítem */
   .bento-item:nth-child(1) { background: #dcefff; }
@@ -796,8 +798,10 @@
   .portfolio-banner {
     width: 100%;
     padding: 0;
+    margin: 0;
     background: var(--bg);
     display: flex; align-items: center; justify-content: center;
+    line-height: 0;
   }
   .portfolio-banner img {
     width: auto;
@@ -806,6 +810,73 @@
     display: block;
     mix-blend-mode: multiply;
   }
+
+
+  /* ── Filtros de portfolio ── */
+  .bento-filters {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    padding: 0 80px 28px;
+  }
+  .bf-btn {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 9px; font-weight: 200;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    border: 1px solid var(--rule); padding: 8px 18px;
+    background: none; cursor: pointer; color: var(--muted);
+    border-radius: 100px;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .bf-btn.active, .bf-btn:hover { background: #43302e; color: #fff; border-color: #43302e; }
+
+  .bento-item { transition: opacity 0.4s, transform 0.4s; }
+  .bento-item.hidden { opacity: 0; pointer-events: none; transform: scale(0.97); }
+
+  /* ── Scroll reveal animaciones ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(32px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity:0; } to { opacity:1; }
+  }
+
+  /* ── Lightbox full-screen ── */
+  .pf-lightbox {
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(0,0,0,0);
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+    transition: background 0.4s;
+  }
+  .pf-lightbox.open { background: rgba(0,0,0,0.92); pointer-events: all; }
+  .pf-lightbox-img {
+    max-width: 92vw; max-height: 92vh;
+    object-fit: contain; border-radius: 4px;
+    transform: scale(0.88); opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1), opacity 0.4s;
+    display: block;
+  }
+  .pf-lightbox.open .pf-lightbox-img { transform: scale(1); opacity: 1; }
+  .pf-lightbox-ph {
+    width: 80vw; max-width: 600px; aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    transform: scale(0.88); opacity: 0;
+    transition: transform 0.4s, opacity 0.4s;
+    border-radius: 8px;
+  }
+  .pf-lightbox.open .pf-lightbox-ph { transform: scale(1); opacity: 1; }
+  .pf-lightbox-ph span {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 18px; color: rgba(255,255,255,0.4);
+  }
+  .pf-lightbox-close {
+    position: fixed; top: 20px; right: 24px;
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.7); font-size: 28px; line-height:1;
+    transition: color 0.2s; z-index: 501;
+  }
+  .pf-lightbox-close:hover { color: #fff; }
+
 
   /* ══════════════════════════════════════════════════
      CONTACTO — rediseño
@@ -880,11 +951,17 @@
   .footer-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 100px;
+    justify-content: center;
+    height: 80px;
     max-width: 1600px;
     margin: 0 auto;
     padding: 0 48px;
+  }
+  .footer-id {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 10px; font-weight: 200;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); text-align: center;
   }
   .footer-left {
     display: flex; flex-direction: column; gap: 3px;
@@ -1415,11 +1492,20 @@
       <img src="portfolio.png" alt="My Portfolio">
     </div>
 
+    <!-- Filtros -->
+    <div class="bento-filters">
+      <button class="bf-btn active" data-filter="all">Todos</button>
+      <button class="bf-btn" data-filter="branding">Branding</button>
+      <button class="bf-btn" data-filter="social">Social media</button>
+      <button class="bf-btn" data-filter="identidad">Identidad</button>
+      <button class="bf-btn" data-filter="editorial">Editorial</button>
+    </div>
+
     <!-- Bento grid -->
     <div class="bento">
 
       <!-- Item 1: wide — ocupa 2 cols, fila 1 -->
-      <div class="bento-item b-wide" data-project="0" tabindex="0" role="button">
+      <div class="bento-item b-wide" data-project="0" data-cat="branding" tabindex="0" role="button">
         <span class="bento-num">01</span>
         <img src="itaca-1.png" alt="Ítaca Branding" class="bento-img">
         <div class="bento-overlay">
@@ -1430,7 +1516,7 @@
       </div>
 
       <!-- Item 2: tall — 1 col, ocupa 2 filas -->
-      <div class="bento-item b-tall" data-project="1" tabindex="0" role="button">
+      <div class="bento-item b-tall" data-project="1" data-cat="social" tabindex="0" role="button">
         <span class="bento-num">02</span>
         <div class="bento-ph"><span>Instagram Stories</span></div>
         <div class="bento-overlay">
@@ -1441,7 +1527,7 @@
       </div>
 
       <!-- Item 3: normal -->
-      <div class="bento-item" data-project="2" tabindex="0" role="button">
+      <div class="bento-item" data-project="2" data-cat="identidad" tabindex="0" role="button">
         <span class="bento-num">03</span>
         <div class="bento-ph"><span>Comunicación institucional</span></div>
         <div class="bento-overlay">
@@ -1452,7 +1538,7 @@
       </div>
 
       <!-- Item 4: normal -->
-      <div class="bento-item" data-project="3" tabindex="0" role="button">
+      <div class="bento-item" data-project="3" data-cat="branding" tabindex="0" role="button">
         <span class="bento-num">04</span>
         <div class="bento-ph"><span>Branding de marca</span></div>
         <div class="bento-overlay">
@@ -1463,7 +1549,7 @@
       </div>
 
       <!-- Item 5: normal -->
-      <div class="bento-item" data-project="4" tabindex="0" role="button">
+      <div class="bento-item" data-project="4" data-cat="identidad" tabindex="0" role="button">
         <span class="bento-num">05</span>
         <div class="bento-ph"><span>Diseño de logotipo</span></div>
         <div class="bento-overlay">
@@ -1474,7 +1560,7 @@
       </div>
 
       <!-- Item 6: wide — fila 2 -->
-      <div class="bento-item b-wide" data-project="5" tabindex="0" role="button">
+      <div class="bento-item b-wide" data-project="5" data-cat="social" tabindex="0" role="button">
         <span class="bento-num">06</span>
         <div class="bento-ph"><span>Social media & papelería</span></div>
         <div class="bento-overlay">
@@ -1521,6 +1607,14 @@
 
 
 
+
+  <!-- Lightbox fullscreen -->
+  <div class="pf-lightbox" id="pf-lightbox">
+    <button class="pf-lightbox-close" id="pf-lightbox-close">✕</button>
+    <img id="pf-lightbox-img" src="" alt="" class="pf-lightbox-img" style="display:none">
+    <div id="pf-lightbox-ph" class="pf-lightbox-ph" style="display:none"></div>
+  </div>
+
   <!-- CONTACTO -->
   <section class="contacto" id="contacto">
 
@@ -1531,12 +1625,9 @@
         <h2 class="ct-hero-title reveal d1">
           Diseño con<br><em>intención.</em>
         </h2>
-        <a href="mailto:milimarquez.dg@gmail.com" class="ct-cta reveal d2">
-          milimarquez.dg@gmail.com
-          <span class="ct-cta-arrow">↗</span>
-        </a>
-        <div class="ct-links reveal d3">
-          <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-link">@laburitostudio <span class="ct-link-arrow">↗</span></a>
+        <div class="ct-links reveal d2">
+          <a href="mailto:milimarquez.dg@gmail.com" class="ct-link">milimarquez.dg@gmail.com ↗</a>
+          <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-link">@laburitostudio ↗</a>
           <a href="https://behance.net/milimarquez" target="_blank" rel="noopener" class="ct-link">Behance ↗</a>
           <a href="https://linkedin.com/in/milagros-marquez" target="_blank" rel="noopener" class="ct-link">LinkedIn ↗</a>
         </div>
@@ -1549,15 +1640,7 @@
   <!-- FOOTER — mismo estilo que el header -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-left">
-        <span>milimarquez.dg@gmail.com</span>
-        <span>Pilar, Buenos Aires</span>
-      </div>
-      <div class="footer-right">
-        <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://behance.net/milimarquez" target="_blank" rel="noopener">Behance</a>
-        <a href="https://linkedin.com/in/milagros-marquez" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
+      <p class="footer-id">Milagros Márquez — Diseñadora Gráfica — Pilar, Buenos Aires</p>
     </div>
   </footer>
 
@@ -1707,14 +1790,23 @@
       // Slides
       track.innerHTML = imgs.map((src, i) => {
         if (src) {
-          return `<div class="pf-car-slide"><img src="${src}" alt="${p.name} — imagen ${i+1}" loading="lazy"></div>`;
+          return `<div class="pf-car-slide" data-src="${src}" data-color="" style="cursor:zoom-in"><img src="${src}" alt="${p.name} — imagen ${i+1}" loading="lazy"></div>`;
         }
-        return `<div class="pf-car-slide">
+        return `<div class="pf-car-slide" data-src="" data-color="${p.color}" style="cursor:zoom-in">
           <div class="pf-car-slide-ph" style="background:${p.color};">
             <span>${p.name}<br><small style="font-size:11px;opacity:.5;font-style:normal;">imagen ${i+1} — próximamente</small></span>
           </div>
         </div>`;
       }).join('');
+
+      // Lightbox on slide click
+      requestAnimationFrame(() => {
+        track.querySelectorAll('.pf-car-slide').forEach(slide => {
+          slide.addEventListener('click', () => {
+            if (window.openLightbox) window.openLightbox(slide.dataset.src || null, slide.dataset.color, p.name);
+          });
+        });
+      });
 
       // Dots (solo si hay más de 1 imagen)
       dotsEl.innerHTML = imgs.length > 1
@@ -1785,6 +1877,181 @@
       if (dx < -40) goTo(imgIdx + 1);
       if (dx >  40) goTo(imgIdx - 1);
     }, { passive: true });
+  })();
+
+  /* ══════════════════════════════════════════════════
+     ANIMACIONES & MICROINTERACCIONES
+  ══════════════════════════════════════════════════ */
+
+  /* ── Page entry animation ── */
+  (function() {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.6s ease';
+    window.addEventListener('load', () => {
+      requestAnimationFrame(() => { document.body.style.opacity = '1'; });
+    });
+  })();
+
+  /* ── Scroll reveal mejorado con stagger ── */
+  (function() {
+    const els = document.querySelectorAll('.reveal');
+    if (!els.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+    els.forEach(el => io.observe(el));
+    // Hero entra animado
+    document.querySelectorAll('.hero .reveal').forEach((el, i) =>
+      setTimeout(() => el.classList.add('visible'), 180 + i * 140)
+    );
+  })();
+
+  /* ── Header scroll shadow ── */
+  (function() {
+    const h = document.getElementById('site-header');
+    if (!h) return;
+    window.addEventListener('scroll', () => h.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+  })();
+
+  /* ── Nav active ── */
+  (function() {
+    const sects = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.nav-link, .mobile-link');
+    if (!sects.length) return;
+    const hh = () => { const h = document.getElementById('site-header'); return h ? h.offsetHeight + 20 : 0; };
+    const set = () => {
+      const y = window.scrollY + hh(); let cur = '';
+      sects.forEach(s => { if (s.offsetTop <= y) cur = s.id; });
+      links.forEach(l => {
+        const on = l.getAttribute('href') === '#' + cur;
+        l.style.opacity = on ? '1' : ''; l.style.fontWeight = on ? '300' : '';
+      });
+    };
+    window.addEventListener('scroll', set, { passive: true }); set();
+  })();
+
+  /* ── Mobile menu ── */
+  (function() {
+    const btn = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+      menu.setAttribute('aria-hidden', !open);
+    });
+    menu.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
+      menu.classList.remove('open'); btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', false); menu.setAttribute('aria-hidden', true);
+    }));
+  })();
+
+  /* ── Smooth scroll ── */
+  (function() {
+    const hh = () => { const h = document.getElementById('site-header'); return h ? h.offsetHeight : 0; };
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      const el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - hh(), behavior: 'smooth' });
+    }));
+  })();
+
+  /* ── Marquee touch ── */
+  (function() {
+    const t = document.querySelector('.marquee-track');
+    if (!t) return;
+    t.addEventListener('touchstart', () => t.style.animationPlayState = 'paused', { passive: true });
+    t.addEventListener('touchend', () => setTimeout(() => t.style.animationPlayState = 'running', 800), { passive: true });
+  })();
+
+  /* ── Reduced motion ── */
+  (function() {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const apply = r => { if (r) document.querySelectorAll('.reveal').forEach(el => { el.style.transition = 'none'; el.classList.add('visible'); }); };
+    apply(mq.matches); mq.addEventListener('change', e => apply(e.matches));
+  })();
+
+  /* ── FILTROS BENTO ── */
+  (function() {
+    const btns  = document.querySelectorAll('.bf-btn');
+    const items = document.querySelectorAll('.bento-item');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        items.forEach(item => {
+          const cat = item.dataset.cat || '';
+          const show = filter === 'all' || cat === filter;
+          item.classList.toggle('hidden', !show);
+        });
+      });
+    });
+  })();
+
+  /* ── SONIDO HOVER (suave, generado con Web Audio API) ── */
+  (function() {
+    let ctx = null;
+    function getCtx() {
+      if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+      return ctx;
+    }
+    function playTick() {
+      try {
+        const c = getCtx();
+        const osc = c.createOscillator();
+        const gain = c.createGain();
+        osc.connect(gain); gain.connect(c.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, c.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(660, c.currentTime + 0.06);
+        gain.gain.setValueAtTime(0.04, c.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + 0.1);
+        osc.start(c.currentTime);
+        osc.stop(c.currentTime + 0.12);
+      } catch(e) {}
+    }
+    document.querySelectorAll('.bento-item, .nav-link, .sk-pill, .ct-link').forEach(el => {
+      el.addEventListener('mouseenter', playTick);
+    });
+  })();
+
+  /* ── LIGHTBOX FULLSCREEN ── */
+  (function() {
+    const lb      = document.getElementById('pf-lightbox');
+    const lbClose = document.getElementById('pf-lightbox-close');
+    const lbImg   = document.getElementById('pf-lightbox-img');
+    const lbPh    = document.getElementById('pf-lightbox-ph');
+    if (!lb) return;
+
+    // Expose openLightbox globally so modal can call it
+    window.openLightbox = function(src, color, name) {
+      if (src) {
+        lbImg.src = src; lbImg.style.display = 'block';
+        lbPh.style.display = 'none';
+      } else {
+        lbPh.style.cssText = 'display:flex; background:' + color + '; width:80vw; max-width:600px; aspect-ratio:1; align-items:center; justify-content:center; border-radius:8px;';
+        lbPh.innerHTML = '<span style="font-family:var(--font-serif);font-style:italic;font-size:18px;color:rgba(255,255,255,0.4);">' + name + '</span>';
+        lbImg.style.display = 'none';
+      }
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+    lbClose.addEventListener('click', closeLb);
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
   })();
 
   </script>

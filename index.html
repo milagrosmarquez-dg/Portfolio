@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,7 +21,7 @@
     --bg:       #ffffff;
     --ink:      #161515;
     --soft:     #dcefff;
-    --warm:     #43302e;
+    --warm:     #3A2A26;
     --mid:      #6b6460;
     --muted:    #8c857f;
     --rule:     rgba(22, 21, 21, 0.10);
@@ -370,7 +371,7 @@
      SKILLS
   ══════════════════════════════════════════════════ */
   .skills {
-    background: #43302e;
+    background: #3A2A26;
     border-top: 1px solid var(--rule);
   }
 
@@ -400,7 +401,7 @@
     transition: background 0.35s var(--ease), border-color 0.35s, color 0.35s;
     cursor: default;
   }
-  .sk-pill:hover { background: #fefce3; border-color: #fefce3; color: #43302e; }
+  .sk-pill:hover { background: #fefce3; border-color: #fefce3; color: #3A2A26; }
 
   /* Technical skills — carpetitas */
   .sk-technical-wrap { }
@@ -472,7 +473,7 @@
   /* ══════════════════════════════════════════════════
      PORTFOLIO — Bento grid
   ══════════════════════════════════════════════════ */
-  :root { --terracotta: #43302e; --cream: #fefce3; }
+  :root { --terracotta: #3A2A26; --cream: #fefce3; }
 
   .portfolio {
     background: var(--bg);
@@ -486,14 +487,14 @@
   .portfolio-wave {
     display: block;
     width: 100%;
-    height: 80px;
-    background-color: #43302e;
+    height: 40px;
+    background-color: #3A2A26;
     background-image:
       repeating-conic-gradient(
-        #43302e 0% 25%,
+        #3A2A26 0% 25%,
         #dcefff 0% 50%
       );
-    background-size: 40px 40px;
+    background-size: 20px 20px;
     overflow: hidden;
     position: relative;
     flex-shrink: 0;
@@ -523,10 +524,10 @@
     background: #f0ece6;
   }
 
-  /* Grid 4 cols, items cuadrados */
-  .bento-item { aspect-ratio: 1 / 1; }
-  .bento-item.b-wide { grid-column: span 2; aspect-ratio: 2 / 1; }
-  .bento-item.b-tall { grid-row: span 2; aspect-ratio: 1 / 2; }
+  /* Grid 4 cols, items 4:5 */
+  .bento-item { aspect-ratio: 4 / 5; }
+  .bento-item.b-wide { grid-column: span 2; aspect-ratio: 8 / 5; }
+  .bento-item.b-tall { grid-row: span 2; aspect-ratio: 4 / 10; }
 
   /* Colores de fondo por ítem */
   .bento-item:nth-child(1) { background: #dcefff; }
@@ -621,11 +622,11 @@
       grid-template-columns: repeat(2, 1fr);
       padding: 0 48px 6px;
     }
-    .bento-item.b-wide { grid-column: span 2; aspect-ratio: 2 / 1; }
-    .bento-item.b-tall { grid-row: span 1; aspect-ratio: 1 / 1; }
-    .bento-item        { aspect-ratio: 1 / 1; height: auto; }
-    .portfolio-wave    { height: 60px; background-size: 30px 30px; }
-    .portfolio-banner img { height: 240px; max-width: 55%; }
+    .bento-item.b-wide { grid-column: span 2; aspect-ratio: 8 / 5; }
+    .bento-item.b-tall { grid-row: span 1; aspect-ratio: 4 / 5; }
+    .bento-item        { aspect-ratio: 4 / 5; height: auto; }
+    .portfolio-wave    { height: 40px; background-size: 20px 20px; }
+    .portfolio-banner img { height: 140px; max-width: 40%; }
     .bento-filters     { padding: 0 48px 24px; }
     .sk-folders        { grid-template-columns: repeat(3, 1fr); }
     .hero-body         { grid-template-columns: 1fr 360px; gap: 28px; }
@@ -634,11 +635,11 @@
   @media (max-width: 560px) {
     .bento { grid-template-columns: 1fr; padding: 0 16px 6px; }
     .bento-item.b-wide { grid-column: span 1; }
-    .bento-item { aspect-ratio: 1/1; height: auto; }
-    .bento-item.b-tall { aspect-ratio: 1/1; }
-    .bento-item.b-wide { aspect-ratio: 1/1; grid-column: span 1; }
-    .portfolio-wave { height: 48px; background-size: 24px 24px; }
-    .portfolio-banner img { height: 180px; max-width: 80%; }
+    .bento-item { aspect-ratio: 4/5; height: auto; }
+    .bento-item.b-tall { aspect-ratio: 4/5; }
+    .bento-item.b-wide { aspect-ratio: 4/5; grid-column: span 1; }
+    .portfolio-wave { height: 40px; background-size: 20px 20px; }
+    .portfolio-banner img { height: 110px; max-width: 60%; }
     .bento-filters { padding: 0 16px 20px; gap: 8px; }
     .bf-btn { font-size: 8px; padding: 6px 14px; }
     .hero-body { grid-template-columns: 1fr; gap: 24px; }
@@ -766,17 +767,22 @@
 
   /* Flechas internas */
   .pf-car-arr {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    background: rgba(255,255,255,0.88); border: none; cursor: pointer;
-    width: 36px; height: 36px; border-radius: 50%;
-    font-size: 22px; line-height: 1;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.92);
+    border: none; cursor: pointer;
+    width: 40px; height: 40px; border-radius: 50%;
+    font-size: 24px; line-height: 1;
     display: flex; align-items: center; justify-content: center;
-    color: var(--ink); transition: background 0.2s, opacity 0.3s;
+    color: var(--ink);
+    transition: background 0.2s, opacity 0.3s;
     opacity: 0; z-index: 2;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
   }
   .pf-carousel:hover .pf-car-arr { opacity: 1; }
-  .pf-car-prev { left: 12px; }
-  .pf-car-next { right: 12px; }
+  .pf-car-prev { left: 50%; transform: translate(calc(-50% - 28px), -50%); }
+  .pf-car-next { right: 50%; transform: translate(calc(50% + 28px), -50%); }
   .pf-car-arr:hover { background: #fff; }
   .pf-car-arr:disabled { opacity: 0 !important; }
 
@@ -813,7 +819,7 @@
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 8px; font-weight: 200;
     letter-spacing: 0.2em; text-transform: uppercase;
-    color: #fff; background: #43302e;
+    color: #fff; background: #3A2A26;
     padding: 6px 14px; border-radius: 100px;
     display: inline-block;
   }
@@ -840,8 +846,8 @@
   }
   .portfolio-banner img {
     width: auto;
-    height: 340px;
-    max-width: 50%;
+    height: 180px;
+    max-width: 35%;
     display: block;
     mix-blend-mode: multiply;
   }
@@ -861,7 +867,7 @@
     border-radius: 100px;
     transition: background 0.3s, color 0.3s, border-color 0.3s;
   }
-  .bf-btn.active, .bf-btn:hover { background: #43302e; color: #fff; border-color: #43302e; }
+  .bf-btn.active, .bf-btn:hover { background: #3A2A26; color: #fff; border-color: #3A2A26; }
 
   .bento-item { transition: opacity 0.4s, transform 0.4s; }
   .bento-item.hidden { opacity: 0; pointer-events: none; transform: scale(0.97); }
@@ -919,7 +925,7 @@
 
   /* Banda hero */
   .ct-hero {
-    background: #43302e;
+    background: #3A2A26;
     padding: 52px 80px 48px;
   }
   .ct-hero-inner { max-width: 800px; }
@@ -980,8 +986,7 @@
      FOOTER — mismo estilo que header
   ══════════════════════════════════════════════════ */
   .site-footer {
-    border-top: 1px solid var(--rule);
-    background: #43302e;
+    background: #3A2A26;
   }
   .footer-inner {
     display: flex;
@@ -1109,7 +1114,7 @@
   /* ══════════════════════════════════════════════════
      PORTFOLIO — carrusel circular coverflow
   ══════════════════════════════════════════════════ */
-  :root { --terracotta: #43302e; --cream: #fefce3; }
+  :root { --terracotta: #3A2A26; --cream: #fefce3; }
 
   .portfolio { background: var(--bg); border-top: none; padding-top: 0; position: relative; }
   .portfolio-intro { margin-bottom: 40px; }
@@ -1328,6 +1333,24 @@
   }
 
 
+
+  /* ── Emoji cursor trail ── */
+  .cursor-emoji {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: 22px;
+    line-height: 1;
+    transform: translate(-50%, -50%);
+    animation: emoji-pop 0.8s ease forwards;
+    user-select: none;
+  }
+  @keyframes emoji-pop {
+    0%   { opacity: 1; transform: translate(-50%, -50%) scale(0.4) rotate(-10deg); }
+    30%  { opacity: 1; transform: translate(-50%, -120%) scale(1.1) rotate(8deg); }
+    70%  { opacity: 0.7; transform: translate(-50%, -200%) scale(0.9) rotate(-4deg); }
+    100% { opacity: 0; transform: translate(-50%, -280%) scale(0.7) rotate(6deg); }
+  }
 
   </style>
 </head>
@@ -2121,6 +2144,43 @@
     lbClose.addEventListener('click', closeLb);
     lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
+  })();
+
+  /* ── Emoji cursor trail ── */
+  (function () {
+    const EMOJIS = ['🪩', '✨', '💌', '🎨'];
+    let lastX = 0, lastY = 0, lastTime = 0, emojiIdx = 0;
+    const MIN_DIST = 80;   // pixels between each emoji
+    const MIN_TIME = 220;  // ms minimum between spawns
+
+    function dist(x1, y1, x2, y2) {
+      return Math.hypot(x2 - x1, y2 - y1);
+    }
+
+    function spawnEmoji(x, y) {
+      const el = document.createElement('span');
+      el.className = 'cursor-emoji';
+      el.textContent = EMOJIS[emojiIdx % EMOJIS.length];
+      el.style.left = x + 'px';
+      el.style.top  = y + 'px';
+      document.body.appendChild(el);
+      emojiIdx++;
+
+      // Remove after animation ends
+      setTimeout(() => el.remove(), 820);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      const x = e.clientX, y = e.clientY;
+      if (
+        now - lastTime > MIN_TIME &&
+        dist(x, y, lastX, lastY) > MIN_DIST
+      ) {
+        spawnEmoji(x, y);
+        lastX = x; lastY = y; lastTime = now;
+      }
+    });
   })();
 
   </script>

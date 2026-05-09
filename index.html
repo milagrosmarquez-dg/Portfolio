@@ -482,18 +482,30 @@
     padding-bottom: 80px;
   }
   /* Ola superior — papel blanco superpuesto sobre el marrón */
+  /* Cuadrillé de transición skills → portfolio */
   .portfolio-wave {
     display: block;
     width: 100%;
-    line-height: 0;
+    height: 80px;
+    background-color: #43302e;
+    background-image:
+      repeating-conic-gradient(
+        #43302e 0% 25%,
+        #dcefff 0% 50%
+      );
+    background-size: 40px 40px;
     overflow: hidden;
-    margin-top: -2px;
-    background: #43302e; /* fondo detrás de la ola */
+    position: relative;
+    flex-shrink: 0;
   }
-  .portfolio-wave svg {
-    display: block;
-    width: 100%;
-    height: 72px;
+  /* La mitad superior del cuadrillé pertenece al fondo marrón de skills */
+  /* Una línea blanca suave separa del portfolio */
+  .portfolio-wave::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--bg);
   }
 
   /* Bento grid — asimétrico 3 cols */
@@ -605,17 +617,35 @@
   @media (max-width: 900px) {
     .bento {
       grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: auto;
       padding: 0 48px 6px;
     }
-    .bento-item.b-wide { grid-column: span 2; }
-    .bento-item.b-tall { grid-row: span 1; }
-    .bento-item       { height: 260px; }
+    .bento-item.b-wide { grid-column: span 2; aspect-ratio: 2 / 1; }
+    .bento-item.b-tall { grid-row: span 1; aspect-ratio: 1 / 1; }
+    .bento-item        { aspect-ratio: 1 / 1; height: auto; }
+    .portfolio-wave    { height: 60px; background-size: 30px 30px; }
+    .portfolio-banner img { height: 360px; }
+    .bento-filters     { padding: 0 48px 24px; }
+    .sk-folders        { grid-template-columns: repeat(3, 1fr); }
+    .hero-body         { grid-template-columns: 1fr 360px; gap: 28px; }
+    .hero-photo-img    { max-width: 440px; }
   }
   @media (max-width: 560px) {
-    .bento { grid-template-columns: 1fr; padding: 0 20px 6px; }
+    .bento { grid-template-columns: 1fr; padding: 0 16px 6px; }
     .bento-item.b-wide { grid-column: span 1; }
-    .bento-item { height: 240px; }
+    .bento-item { aspect-ratio: 4/3; height: auto; }
+    .bento-item.b-tall { aspect-ratio: 4/3; }
+    .bento-item.b-wide { aspect-ratio: 4/3; }
+    .portfolio-wave { height: 48px; background-size: 24px 24px; }
+    .portfolio-banner img { height: 260px; max-width: 90%; }
+    .bento-filters { padding: 0 16px 20px; gap: 8px; }
+    .bf-btn { font-size: 8px; padding: 6px 14px; }
+    .hero-body { grid-template-columns: 1fr; gap: 24px; }
+    .hero-photo { margin-left: 0; }
+    .hero-photo-img { max-width: 100%; }
+    .sk-folders { grid-template-columns: repeat(2, 1fr); gap: 20px 16px; }
+    .sk-folder svg { max-width: 64px; }
+    .ct-hero { padding: 52px 24px 44px; }
+    .ct-hero-title { font-size: clamp(28px, 10vw, 48px); }
   }
 
   /* Modal proyecto (igual que antes) */
@@ -901,7 +931,7 @@
   .ct-hero-title {
     font-family: var(--font-serif); font-style: italic;
     font-size: clamp(36px, 6vw, 72px); font-weight: 300;
-    color: #fff; line-height: 0.95; margin-bottom: 40px;
+    color: #fff; line-height: 0.95; margin-bottom: 20px;
   }
   .ct-hero-title em { font-style: normal; color: #fff; }
 
@@ -921,7 +951,7 @@
   .ct-links {
     display: flex; flex-wrap: wrap; align-items: center;
     gap: 8px 0;
-    padding-top: 28px;
+    padding-top: 12px;
   }
   .ct-link {
     display: inline-flex; align-items: center; gap: 6px;
@@ -964,15 +994,16 @@
     display: flex; flex-direction: column; gap: 4px;
   }
   .footer-name {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 18px; font-weight: 300;
-    color: #fff; letter-spacing: 0;
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 11px; font-weight: 300;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
   }
   .footer-role {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 9px; font-weight: 200;
     letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.45);
   }
   .footer-right {
     display: flex; flex-direction: column; gap: 4px;
@@ -980,7 +1011,7 @@
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 9px; font-weight: 200;
     letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.45);
   }
   .footer-left {
     display: flex; flex-direction: column; gap: 3px;
@@ -1497,12 +1528,8 @@
 
 
     <!-- PORTFOLIO -->
-  <!-- Ola de transición skills→portfolio -->
-  <div class="portfolio-wave">
-    <svg viewBox="0 0 1440 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,52 C120,20 240,68 360,44 C480,20 600,62 720,38 C840,14 960,58 1080,34 C1200,10 1320,52 1440,40 L1440,72 L0,72 Z" fill="#ffffff"/>
-    </svg>
-  </div>
+  <!-- Cuadrillé de transición skills→portfolio -->
+  <div class="portfolio-wave" aria-hidden="true"></div>
 
   <section class="portfolio" id="portfolio">
 

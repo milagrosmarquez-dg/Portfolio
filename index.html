@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -476,7 +477,11 @@
   :root { --terracotta: #3A2A26; --cream: #fefce3; }
 
   .portfolio {
-    background: var(--bg);
+    background-color: #ffffff;
+    background-image:
+      linear-gradient(rgba(180,210,240,0.35) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(180,210,240,0.35) 1px, transparent 1px);
+    background-size: 28px 28px;
     border-top: none;
     position: relative;
     margin-top: 0;
@@ -849,7 +854,7 @@
     width: 100%;
     padding: 32px 0 24px 80px;
     margin: 0;
-    background: var(--bg);
+    background: transparent;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -873,8 +878,8 @@
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 9px; font-weight: 200;
     letter-spacing: 0.18em; text-transform: uppercase;
-    border: 1px solid var(--rule); padding: 8px 18px;
-    background: none; cursor: pointer; color: var(--muted);
+    border: 1px solid rgba(0,0,0,0.12); padding: 8px 18px;
+    background: #ffffff; cursor: pointer; color: var(--ink);
     border-radius: 100px;
     transition: background 0.3s, color 0.3s, border-color 0.3s;
   }
@@ -1127,7 +1132,7 @@
   ══════════════════════════════════════════════════ */
   :root { --terracotta: #3A2A26; --cream: #fefce3; }
 
-  .portfolio { background: var(--bg); border-top: none; padding-top: 0; position: relative; }
+  .portfolio { background-color: #ffffff; border-top: none; padding-top: 0; position: relative; }
   .portfolio-intro { margin-bottom: 40px; }
   .portfolio-title {
     font-family: var(--font-serif); font-size: clamp(34px, 4.5vw, 68px);
@@ -1483,7 +1488,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ai</text>
             </svg>
@@ -1492,7 +1497,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ps</text>
             </svg>
@@ -1501,7 +1506,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ae</text>
             </svg>
@@ -1510,7 +1515,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Id</text>
             </svg>
@@ -1519,7 +1524,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Fg</text>
             </svg>
@@ -1528,7 +1533,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Cv</text>
             </svg>
@@ -1537,7 +1542,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#dcefff" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">HTML</text>
             </svg>
@@ -1546,7 +1551,7 @@
 
           <div class="sk-folder">
             <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#fefce3" stroke="#161515" stroke-width="1.5"/>
+              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
               <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
               <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">IA</text>
             </svg>

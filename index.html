@@ -1,5 +1,7 @@
 
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -282,6 +284,47 @@
     mix-blend-mode: normal;
   }
 
+  /* ── Logo tipográfico hero ── */
+  .hero-logo-block {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    user-select: none;
+    max-width: 520px;
+  }
+  .hero-logo-my {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(54px, 8vw, 120px);
+    color: var(--ink);
+    line-height: 0.9;
+    margin-bottom: -0.1em;
+    letter-spacing: -0.01em;
+  }
+  .hero-logo-portfolio-wrap {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+  }
+  .hero-logo-portfolio {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: clamp(46px, 6.8vw, 102px);
+    font-weight: 100;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .hero-logo-cursor {
+    display: inline-block;
+    margin-left: 4px;
+    margin-bottom: 4px;
+    width: clamp(20px, 3vw, 44px);
+    height: clamp(24px, 3.6vw, 54px);
+    flex-shrink: 0;
+  }
+
   @media (max-width: 900px) {
     .hero-body { grid-template-columns: 1fr; }
     .hero-photo { height: 300px; }
@@ -410,25 +453,42 @@
   .sk-folders {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 32px 24px;
+    gap: 28px 20px;
   }
 
   .sk-folder {
     display: flex; flex-direction: column;
-    align-items: center; gap: 12px;
+    align-items: center; gap: 14px;
     cursor: default;
     transition: transform 0.35s var(--ease);
   }
-  .sk-folder:hover { transform: translateY(-4px); }
+  .sk-folder:hover { transform: translateY(-5px); }
 
-  .sk-folder svg {
-    width: 100%; max-width: 80px;
-    height: auto;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.18));
+  /* Estampilla de correo */
+  .sk-stamp {
+    width: 100%;
+    max-width: 110px;
+    aspect-ratio: 13/10;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.28));
     transition: filter 0.35s;
-    transform: scaleX(-1);
   }
-  .sk-folder:hover svg { filter: drop-shadow(0 8px 20px rgba(0,0,0,0.28)); }
+  .sk-folder:hover .sk-stamp {
+    filter: drop-shadow(0 8px 28px rgba(0,0,0,0.42));
+    transform: rotate(0deg) !important;
+  }
+  .sk-folder:nth-child(1) .sk-stamp { transform: rotate(-2deg); }
+  .sk-folder:nth-child(2) .sk-stamp { transform: rotate(1.5deg); }
+  .sk-folder:nth-child(3) .sk-stamp { transform: rotate(-1deg); }
+  .sk-folder:nth-child(4) .sk-stamp { transform: rotate(2.5deg); }
+  .sk-folder:nth-child(5) .sk-stamp { transform: rotate(-1.5deg); }
+  .sk-folder:nth-child(6) .sk-stamp { transform: rotate(1deg); }
+  .sk-folder:nth-child(7) .sk-stamp { transform: rotate(-2.5deg); }
+  .sk-folder:nth-child(8) .sk-stamp { transform: rotate(2deg); }
+  .sk-stamp svg.stamp-bg {
+    width: 100%; height: 100%;
+  }
 
   .sk-folder span {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
@@ -852,20 +912,79 @@
   /* Banner espacio para imagen de portfolio */
   .portfolio-banner {
     width: 100%;
-    padding: 16px 0 12px 58px;
+    padding: 32px 0;
     margin: 0;
     background: transparent;
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     line-height: 0;
   }
   .portfolio-banner img {
-    width: auto;
-    height: 300px;
-    max-width: 50%;
     display: block;
-    mix-blend-mode: normal;
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+  }
+  .pf-banner-title {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-style: normal;
+    font-size: clamp(64px, 10vw, 140px);
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .pf-banner-title em {
+    font-style: italic;
+    font-size: 0.7em;
+    vertical-align: 0.08em;
+    margin-right: 0.1em;
+  }
+
+  /* ── Logo tipográfico "My PORTFOLIO" ── */
+  .pf-logo-block {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    user-select: none;
+  }
+  .pf-logo-my {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 130px;
+    color: var(--ink);
+    line-height: 0.88;
+    margin-bottom: -6px;
+    letter-spacing: -0.01em;
+  }
+  .pf-logo-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+  }
+  .pf-logo-portfolio {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 110px;
+    font-weight: 100;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .pf-logo-cursor {
+    display: inline-block;
+    width: 44px;
+    height: 54px;
+    margin-left: 6px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 900px) {
+    .pf-logo-my        { font-size: 80px; }
+    .pf-logo-portfolio { font-size: 68px; }
+    .pf-logo-cursor    { width: 28px; height: 34px; }
   }
 
 
@@ -915,7 +1034,7 @@
   }
   .pf-lightbox.open .pf-lightbox-img { transform: scale(1); opacity: 1; }
   .pf-lightbox-ph {
-    width: 80vw; max-width: 600px; aspect-ratio: 1;
+    width: 80vw; max-width: 600px; aspect-ratio: 13/10;
     display: flex; align-items: center; justify-content: center;
     transform: scale(0.88); opacity: 0;
     transition: transform 0.4s, opacity 0.4s;
@@ -1481,80 +1600,104 @@
         </div>
       </div>
 
-      <!-- Technical Skills — carpetitas SVG -->
+      <!-- Technical Skills — estampillas -->
       <div class="sk-technical-wrap reveal d1">
         <span class="sk-group-label">Technical skills</span>
         <div class="sk-folders">
 
           <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ai</text>
-            </svg>
+            <div class="sk-stamp">
+              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
+                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
+                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
+                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ai</text>
+              </svg>
+            </div>
             <span>Adobe Illustrator</span>
           </div>
 
           <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ps</text>
-            </svg>
+            <div class="sk-stamp">
+              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
+                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
+                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
+                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ps</text>
+              </svg>
+            </div>
             <span>Adobe Photoshop</span>
           </div>
 
           <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Ae</text>
-            </svg>
+            <div class="sk-stamp">
+              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
+                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
+                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
+                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ae</text>
+              </svg>
+            </div>
             <span>After Effects</span>
           </div>
 
           <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Id</text>
-            </svg>
+            <div class="sk-stamp">
+              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
+                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
+                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
+                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Id</text>
+              </svg>
+            </div>
             <span>Adobe InDesign</span>
           </div>
 
           <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Fg</text>
-            </svg>
+            <div class="sk-stamp">
+              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
+                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
+                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
+                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Fg</text>
+              </svg>
+            </div>
             <span>Figma</span>
           </div>
 
           <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle">Cv</text>
-            </svg>
+            <div class="sk-stamp">
+              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
+                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
+                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
+                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Cv</text>
+              </svg>
+            </div>
             <span>Canva</span>
           </div>
 
           <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text transform="scale(-1,1) translate(-120,0)" x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">HTML</text>
-            </svg>
+            <div class="sk-stamp">
+              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
+                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
+                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
+                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Html</text>
+              </svg>
+            </div>
             <span>HTML</span>
           </div>
 
           <div class="sk-folder">
-            <svg viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20 Q4 12 12 12 L44 12 L52 4 L108 4 Q116 4 116 12 L116 84 Q116 92 108 92 L12 92 Q4 92 4 84 Z" fill="#faf7f2" stroke="#161515" stroke-width="1.5"/>
-              <path d="M4 28 L116 28" stroke="#161515" stroke-width="1"/>
-              <text x="60" y="68" font-family="acumin-pro-wide,sans-serif" font-size="18" font-weight="300" fill="#161515" text-anchor="middle">IA</text>
-            </svg>
+            <div class="sk-stamp">
+              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
+                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
+                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
+                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">IA</text>
+              </svg>
+            </div>
             <span>Herramientas IA</span>
           </div>
 
@@ -1583,9 +1726,9 @@
 
   <section class="portfolio" id="portfolio">
 
-    <!-- Banner espacio para imagen de portfolio -->
+    <!-- Título portfolio -->
     <div class="portfolio-banner" id="portfolio-banner">
-      <img src="portfolio.png" alt="My Portfolio">
+      <img src="banner_portfolio.png" alt="My Portfolio">
     </div>
 
     <!-- Filtros -->

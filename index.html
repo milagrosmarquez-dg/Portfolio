@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -427,7 +425,7 @@
   }
 
   /* Personal skills — pills */
-  .sk-personal { margin-bottom: 72px; }
+  .sk-personal { margin-bottom: 0; }
 
   .sk-pills { display: flex; flex-wrap: wrap; gap: 12px; }
 
@@ -451,51 +449,59 @@
   .sk-folders {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 28px 20px;
+    gap: 28px 40px;
   }
 
   .sk-folder {
     display: flex; flex-direction: column;
-    align-items: center; gap: 14px;
+    align-items: flex-start; gap: 10px;
     cursor: default;
-    transition: transform 0.35s var(--ease);
+    transition: opacity 0.3s;
   }
-  .sk-folder:hover { transform: translateY(-5px); }
+  .sk-folder:hover { opacity: 1; }
 
-  /* Estampilla de correo */
-  .sk-stamp {
-    width: 100%;
-    max-width: 110px;
-    aspect-ratio: 13/10;
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.28));
-    transition: filter 0.35s;
-  }
-  .sk-folder:hover .sk-stamp {
-    filter: drop-shadow(0 8px 28px rgba(0,0,0,0.42));
-    transform: rotate(0deg) !important;
-  }
-  .sk-folder:nth-child(1) .sk-stamp { transform: rotate(-2deg); }
-  .sk-folder:nth-child(2) .sk-stamp { transform: rotate(1.5deg); }
-  .sk-folder:nth-child(3) .sk-stamp { transform: rotate(-1deg); }
-  .sk-folder:nth-child(4) .sk-stamp { transform: rotate(2.5deg); }
-  .sk-folder:nth-child(5) .sk-stamp { transform: rotate(-1.5deg); }
-  .sk-folder:nth-child(6) .sk-stamp { transform: rotate(1deg); }
-  .sk-folder:nth-child(7) .sk-stamp { transform: rotate(-2.5deg); }
-  .sk-folder:nth-child(8) .sk-stamp { transform: rotate(2deg); }
-  .sk-stamp svg.stamp-bg {
-    width: 100%; height: 100%;
-  }
+  .sk-stamp { display: none; }
 
   .sk-folder span {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 9px; font-weight: 200;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.55); text-align: center;
+    font-size: 10px; font-weight: 200;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255,255,255,0.65); text-align: left;
     transition: color 0.3s;
   }
   .sk-folder:hover span { color: #fefce3; }
+
+  /* Barra de progreso */
+  .sk-bar-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .sk-bar-track {
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .sk-bar-fill {
+    height: 100%;
+    background: rgba(255,255,255,0.55);
+    border-radius: 2px;
+    transition: width 1s cubic-bezier(0.25,0.1,0.25,1), background 0.35s;
+    width: 0; /* animado por JS */
+  }
+  .sk-folder:hover .sk-bar-fill { background: #fefce3; }
+  .sk-bar-pct {
+    font-family: var(--font-body);
+    font-size: 8px; font-weight: 200;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.35);
+    transition: color 0.35s;
+  }
+  .sk-folder:hover .sk-bar-pct { color: #fefce3; }
 
   @media (max-width: 768px) {
     .sk-folders { grid-template-columns: repeat(3, 1fr); gap: 24px 16px; }
@@ -537,8 +543,8 @@
   .portfolio {
     background-color: #ffffff;
     background-image:
-      linear-gradient(rgba(180,210,240,0.35) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(180,210,240,0.35) 1px, transparent 1px);
+      linear-gradient(rgba(150,100,75,0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(150,100,75,0.2) 1px, transparent 1px);
     background-size: 28px 28px;
     border-top: none;
     position: relative;
@@ -1586,8 +1592,96 @@
   <section class="skills" id="skills">
     <div class="section-inner">
 
+      <!-- Technical Skills — estampillas -->
+      <div class="sk-technical-wrap reveal d1">
+        <span class="sk-group-label">Technical skills</span>
+        <div class="sk-folders">
+
+          <!-- Ai 90% -->
+          <div class="sk-folder">
+            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ai</text></svg></div>
+            <span>Adobe Illustrator</span>
+            <div class="sk-bar-wrap">
+              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="90"></div></div>
+              <span class="sk-bar-pct">90%</span>
+            </div>
+          </div>
+
+          <!-- Ps 90% -->
+          <div class="sk-folder">
+            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ps</text></svg></div>
+            <span>Adobe Photoshop</span>
+            <div class="sk-bar-wrap">
+              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="90"></div></div>
+              <span class="sk-bar-pct">90%</span>
+            </div>
+          </div>
+
+          <!-- Cv 90% -->
+          <div class="sk-folder">
+            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Cv</text></svg></div>
+            <span>Canva</span>
+            <div class="sk-bar-wrap">
+              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="90"></div></div>
+              <span class="sk-bar-pct">90%</span>
+            </div>
+          </div>
+
+          <!-- IA 80% -->
+          <div class="sk-folder">
+            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">IA</text></svg></div>
+            <span>Herramientas IA</span>
+            <div class="sk-bar-wrap">
+              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="80"></div></div>
+              <span class="sk-bar-pct">80%</span>
+            </div>
+          </div>
+
+          <!-- Fg 70% -->
+          <div class="sk-folder">
+            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Fg</text></svg></div>
+            <span>Figma</span>
+            <div class="sk-bar-wrap">
+              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="70"></div></div>
+              <span class="sk-bar-pct">70%</span>
+            </div>
+          </div>
+
+          <!-- Ae 60% -->
+          <div class="sk-folder">
+            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ae</text></svg></div>
+            <span>After Effects</span>
+            <div class="sk-bar-wrap">
+              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="60"></div></div>
+              <span class="sk-bar-pct">60%</span>
+            </div>
+          </div>
+
+          <!-- Id 60% -->
+          <div class="sk-folder">
+            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Id</text></svg></div>
+            <span>Adobe InDesign</span>
+            <div class="sk-bar-wrap">
+              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="60"></div></div>
+              <span class="sk-bar-pct">60%</span>
+            </div>
+          </div>
+
+          <!-- Html 60% -->
+          <div class="sk-folder">
+            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Html</text></svg></div>
+            <span>HTML</span>
+            <div class="sk-bar-wrap">
+              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="60"></div></div>
+              <span class="sk-bar-pct">60%</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <!-- Personal Skills -->
-      <div class="sk-personal reveal">
+      <div class="sk-personal reveal" style="margin-top: 72px;">
         <span class="sk-group-label">Personal skills</span>
         <div class="sk-pills">
           <span class="sk-pill">Comunicación asertiva</span>
@@ -1595,110 +1689,9 @@
           <span class="sk-pill">Atención al detalle</span>
           <span class="sk-pill">Gestión del tiempo</span>
           <span class="sk-pill">Pensamiento creativo</span>
-        </div>
-      </div>
-
-      <!-- Technical Skills — estampillas -->
-      <div class="sk-technical-wrap reveal d1">
-        <span class="sk-group-label">Technical skills</span>
-        <div class="sk-folders">
-
-          <div class="sk-folder">
-            <div class="sk-stamp">
-              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
-                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
-                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
-                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ai</text>
-              </svg>
-            </div>
-            <span>Adobe Illustrator</span>
-          </div>
-
-          <div class="sk-folder">
-            <div class="sk-stamp">
-              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
-                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
-                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
-                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ps</text>
-              </svg>
-            </div>
-            <span>Adobe Photoshop</span>
-          </div>
-
-          <div class="sk-folder">
-            <div class="sk-stamp">
-              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
-                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
-                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
-                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ae</text>
-              </svg>
-            </div>
-            <span>After Effects</span>
-          </div>
-
-          <div class="sk-folder">
-            <div class="sk-stamp">
-              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
-                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
-                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
-                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Id</text>
-              </svg>
-            </div>
-            <span>Adobe InDesign</span>
-          </div>
-
-          <div class="sk-folder">
-            <div class="sk-stamp">
-              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
-                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
-                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
-                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Fg</text>
-              </svg>
-            </div>
-            <span>Figma</span>
-          </div>
-
-          <div class="sk-folder">
-            <div class="sk-stamp">
-              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
-                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
-                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
-                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Cv</text>
-              </svg>
-            </div>
-            <span>Canva</span>
-          </div>
-
-          <div class="sk-folder">
-            <div class="sk-stamp">
-              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
-                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
-                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
-                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Html</text>
-              </svg>
-            </div>
-            <span>HTML</span>
-          </div>
-
-          <div class="sk-folder">
-            <div class="sk-stamp">
-              <svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/>
-                <rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/>
-                <rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/>
-                <text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">IA</text>
-              </svg>
-            </div>
-            <span>Herramientas IA</span>
-          </div>
-
+          <span class="sk-pill">Trabajo en equipo</span>
+          <span class="sk-pill">Resolución de problemas</span>
+          <span class="sk-pill">Gestión de briefings</span>
         </div>
       </div>
 
@@ -2158,6 +2151,22 @@
   /* ══════════════════════════════════════════════════
      ANIMACIONES & MICROINTERACCIONES
   ══════════════════════════════════════════════════ */
+
+  /* ── Barras de progreso skills ── */
+  (function() {
+    const fills = document.querySelectorAll('.sk-bar-fill');
+    if (!fills.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const pct = e.target.dataset.pct || '0';
+          e.target.style.width = pct + '%';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    fills.forEach(el => io.observe(el));
+  })();
 
   /* ── Page entry animation ── */
   (function() {

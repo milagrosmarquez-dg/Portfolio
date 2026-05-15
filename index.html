@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -337,16 +339,17 @@
      MARQUEE
   ══════════════════════════════════════════════════ */
   .marquee-wrapper {
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
-    overflow: hidden; padding: 13px 0;
-    background: #dcefff;
+    overflow: hidden; padding: 0;
+    height: 28px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      #3A2A26 0px, #3A2A26 20px,
+      #dcefff 20px, #dcefff 40px
+    );
   }
   .marquee-track {
-    display: flex; width: max-content;
-    animation: marquee 34s linear infinite;
+    display: none;
   }
-  .marquee-track:hover { animation-play-state: paused; }
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -538,6 +541,10 @@
 
   .portfolio {
     background-color: #ffffff;
+    background-image:
+      linear-gradient(rgba(22,21,21,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22,21,21,0.07) 1px, transparent 1px);
+    background-size: 32px 32px;
     border-top: none;
     position: relative;
     margin-top: 0;
@@ -567,7 +574,8 @@
   }
   .portfolio-wave-content {
     display: flex; align-items: center;
-    gap: 0; white-space: nowrap;
+    gap: 80px; white-space: nowrap;
+    padding: 0 40px;
   }
   .portfolio-wave-content span {
     font-family: var(--font-serif);
@@ -1557,32 +1565,24 @@
   <div class="marquee-wrapper" aria-hidden="true">
     <div class="marquee-track">
       <div class="marquee-content">
-        <span>identidad visual</span><span class="dot">*</span>
-        <span>branding</span><span class="dot">*</span>
-        <span>editorial</span><span class="dot">*</span>
-        <span>packaging</span><span class="dot">*</span>
-        <span>social media</span><span class="dot">*</span>
-        <span>papelería</span><span class="dot">*</span>
-        <span>identidad visual</span><span class="dot">*</span>
-        <span>branding</span><span class="dot">*</span>
-        <span>editorial</span><span class="dot">*</span>
-        <span>packaging</span><span class="dot">*</span>
-        <span>social media</span><span class="dot">*</span>
-        <span>papelería</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
       </div>
       <div class="marquee-content" aria-hidden="true">
-        <span>identidad visual</span><span class="dot">*</span>
-        <span>branding</span><span class="dot">*</span>
-        <span>editorial</span><span class="dot">*</span>
-        <span>packaging</span><span class="dot">*</span>
-        <span>social media</span><span class="dot">*</span>
-        <span>papelería</span><span class="dot">*</span>
-        <span>identidad visual</span><span class="dot">*</span>
-        <span>branding</span><span class="dot">*</span>
-        <span>editorial</span><span class="dot">*</span>
-        <span>packaging</span><span class="dot">*</span>
-        <span>social media</span><span class="dot">*</span>
-        <span>papelería</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
+        <span>portfolio 2026</span><span class="dot">*</span>
       </div>
     </div>
   </div>
@@ -1708,10 +1708,24 @@
   <div class="portfolio-wave" aria-hidden="true">
     <div class="portfolio-wave-track">
       <div class="portfolio-wave-content">
-        <span>identidad visual</span><span class="wave-sep">*</span><span>branding</span><span class="wave-sep">*</span><span>editorial</span><span class="wave-sep">*</span><span>packaging</span><span class="wave-sep">*</span><span>social media</span><span class="wave-sep">*</span><span>papelería</span><span class="wave-sep">*</span><span>identidad visual</span><span class="wave-sep">*</span><span>branding</span><span class="wave-sep">*</span><span>editorial</span><span class="wave-sep">*</span><span>packaging</span><span class="wave-sep">*</span><span>social media</span><span class="wave-sep">*</span><span>papelería</span><span class="wave-sep">*</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
       </div>
       <div class="portfolio-wave-content" aria-hidden="true">
-        <span>identidad visual</span><span class="wave-sep">*</span><span>branding</span><span class="wave-sep">*</span><span>editorial</span><span class="wave-sep">*</span><span>packaging</span><span class="wave-sep">*</span><span>social media</span><span class="wave-sep">*</span><span>papelería</span><span class="wave-sep">*</span><span>identidad visual</span><span class="wave-sep">*</span><span>branding</span><span class="wave-sep">*</span><span>editorial</span><span class="wave-sep">*</span><span>packaging</span><span class="wave-sep">*</span><span>social media</span><span class="wave-sep">*</span><span>papelería</span><span class="wave-sep">*</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
+        <span>portfolio 2026</span>
       </div>
     </div>
   </div>

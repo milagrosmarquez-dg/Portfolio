@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -773,48 +771,52 @@
     pointer-events: none;
     transition: background 0.45s cubic-bezier(0.25,0.1,0.25,1);
     display: flex; align-items: center; justify-content: center;
+    padding: 24px;
   }
-  .pf-modal-overlay.open { background: rgba(22,21,21,0.82); pointer-events: all; }
+  .pf-modal-overlay.open { background: rgba(22,21,21,0.88); pointer-events: all; }
 
   .pf-modal {
     background: #fffff3;
-    width: min(560px, 95vw);
-    max-height: 92vh;
-    border-radius: 16px;
+    width: min(780px, 95vw);
+    max-height: 90vh;
+    border-radius: 20px;
     overflow: hidden;
     display: flex; flex-direction: column;
-    transform: scale(0.9) translateY(20px);
+    transform: scale(0.92) translateY(24px);
     opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1), opacity 0.4s;
+    transition: transform 0.45s cubic-bezier(0.25,0.1,0.25,1), opacity 0.45s;
+    box-shadow: 0 32px 80px rgba(22,21,21,0.35);
   }
   .pf-modal-overlay.open .pf-modal { transform: scale(1) translateY(0); opacity: 1; }
 
   /* Top bar */
   .pf-modal-top {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 20px 12px;
+    padding: 18px 24px 14px;
     border-bottom: 1px solid var(--rule);
     flex-shrink: 0;
   }
   .pf-modal-cat-top {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 9px; font-weight: 200;
-    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
   }
   .pf-modal-close {
     background: none; border: none; cursor: pointer;
-    font-size: 18px; color: var(--muted);
-    transition: color 0.2s; line-height: 1; padding: 0;
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: var(--muted);
+    transition: background 0.2s, color 0.2s;
   }
-  .pf-modal-close:hover { color: var(--ink); }
+  .pf-modal-close:hover { background: rgba(22,21,21,0.07); color: var(--ink); }
 
-  /* Carrusel */
+  /* Carrusel — landscape 16/9 */
   .pf-carousel {
     position: relative;
     flex-shrink: 0;
     overflow: hidden;
-    aspect-ratio: 1 / 1;
-    background: #f0ece6;
+    aspect-ratio: 16 / 9;
+    background: #ede8e2;
   }
   .pf-carousel-track {
     display: flex;
@@ -836,72 +838,72 @@
   }
   .pf-car-slide-ph span {
     font-family: var(--font-serif); font-style: italic;
-    font-size: 15px; font-weight: 300; color: rgba(22,21,21,0.28);
+    font-size: 15px; font-weight: 300; color: rgba(22,21,21,0.25);
     text-align: center; padding: 24px;
   }
 
-  /* Flechas internas */
+  /* Flechas — siempre visibles, estilo minimalista */
   .pf-car-arr {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255,255,255,0.92);
+    background: rgba(255,255,252,0.9);
     border: none; cursor: pointer;
-    width: 40px; height: 40px; border-radius: 50%;
-    font-size: 24px; line-height: 1;
+    width: 44px; height: 44px; border-radius: 50%;
+    font-size: 22px; line-height: 1;
     display: flex; align-items: center; justify-content: center;
     color: var(--ink);
-    transition: background 0.2s, opacity 0.3s;
-    opacity: 0; z-index: 2;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    transition: background 0.2s, transform 0.2s;
+    z-index: 2;
+    box-shadow: 0 2px 16px rgba(22,21,21,0.18);
   }
-  .pf-carousel:hover .pf-car-arr { opacity: 1; }
-  .pf-car-prev { left: 12px;  transform: translateY(-50%); }
-  .pf-car-next { right: 12px; transform: translateY(-50%); }
-  .pf-car-arr:hover { background: #fff; }
-  .pf-car-arr:disabled { opacity: 0 !important; }
+  .pf-car-prev { left: 16px; }
+  .pf-car-next { right: 16px; }
+  .pf-car-arr:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+  .pf-car-arr:disabled { opacity: 0.25; pointer-events: none; }
 
   /* Dots */
   .pf-car-dots {
-    position: absolute; bottom: 10px; left: 50%;
+    position: absolute; bottom: 12px; left: 50%;
     transform: translateX(-50%);
-    display: flex; gap: 5px;
+    display: flex; gap: 6px;
   }
   .pf-car-dot {
-    width: 5px; height: 5px; border-radius: 50%;
+    width: 6px; height: 6px; border-radius: 50%;
     background: rgba(255,255,255,0.5);
     cursor: pointer; transition: background 0.25s, transform 0.25s;
   }
-  .pf-car-dot.active { background: #fff; transform: scale(1.4); }
+  .pf-car-dot.active { background: #fff; transform: scale(1.5); }
 
   /* Body */
   .pf-modal-body {
-    padding: 22px 24px 28px;
+    padding: 28px 32px 36px;
     overflow-y: auto;
     flex: 1;
   }
   .pf-modal-title {
     font-family: var(--font-serif); font-style: italic;
-    font-size: clamp(20px, 3vw, 28px); font-weight: 300;
-    color: var(--ink); margin-bottom: 10px; line-height: 1.2;
+    font-size: clamp(22px, 3vw, 32px); font-weight: 300;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.15;
   }
   .pf-modal-desc {
-    font-family: var(--font-serif);
-    font-size: 14px; font-weight: 300; line-height: 1.8;
-    color: var(--mid); margin-bottom: 16px;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 16px; font-weight: 400; line-height: 1.85;
+    color: var(--mid); margin-bottom: 20px;
   }
   .pf-modal-accent {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 8px; font-weight: 200;
-    letter-spacing: 0.2em; text-transform: uppercase;
+    letter-spacing: 0.22em; text-transform: uppercase;
     color: #fff; background: #3A2A26;
-    padding: 6px 14px; border-radius: 100px;
+    padding: 7px 16px; border-radius: 100px;
     display: inline-block;
   }
 
   @media (max-width: 600px) {
-    .pf-modal { width: 100vw; max-height: 100svh; border-radius: 0; }
-    .pf-car-arr { opacity: 1; }
+    .pf-modal-overlay { padding: 0; align-items: flex-end; }
+    .pf-modal { width: 100vw; max-height: 92svh; border-radius: 20px 20px 0 0; }
+    .pf-modal-body { padding: 20px 20px 32px; }
   }
 
 
@@ -1684,7 +1686,6 @@
       <div class="sk-personal reveal" style="margin-top: 72px;">
         <span class="sk-group-label">Personal skills</span>
         <div class="sk-pills">
-          <span class="sk-pill">Comunicación asertiva</span>
           <span class="sk-pill">Adaptabilidad</span>
           <span class="sk-pill">Atención al detalle</span>
           <span class="sk-pill">Gestión del tiempo</span>

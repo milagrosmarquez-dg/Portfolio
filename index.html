@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -221,7 +223,7 @@
     display: block;
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: clamp(26px, 3.5vw, 52px);
-    font-weight: 100;
+    font-weight: 200;
     letter-spacing: 0;
     color: var(--ink);
     line-height: 1.2;
@@ -496,13 +498,8 @@
   }
   .sk-folder:hover .sk-bar-fill { background: #fefce3; }
   .sk-bar-pct {
-    font-family: var(--font-body);
-    font-size: 8px; font-weight: 200;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.35);
-    transition: color 0.35s;
+    display: none;
   }
-  .sk-folder:hover .sk-bar-pct { color: #fefce3; }
 
   @media (max-width: 768px) {
     .sk-folders { grid-template-columns: repeat(3, 1fr); gap: 24px 16px; }

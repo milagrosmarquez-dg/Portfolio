@@ -918,6 +918,15 @@
 
 
 
+  /* Banner: mostrar imagen según dispositivo */
+  .banner-mobile { display: none; }
+  .banner-desktop { display: block; }
+
+  @media (max-width: 560px) {
+    .banner-desktop { display: none; }
+    .banner-mobile  { display: block; }
+  }
+
   /* Banner espacio para imagen de portfolio */
   .portfolio-banner {
     width: 100%;
@@ -1555,13 +1564,13 @@
           <span class="hero-line-sans reveal">Hola, soy <em class="hero-name-inline">Mili.</em></span>
         </h1>
         <p class="hero-desc reveal d2">
-          Soy Diseñadora Gráfica con experiencia en entornos institucionales y proyectos de identidad visual y branding.
+          Soy Diseñadora Gráfica con experiencia en entornos institucionales y proyectos de identidad visual y&nbsp;branding.
         </p>
         <p class="hero-desc reveal d2" style="margin-top: 16px;">
-          Abordo el diseño de forma integral, desde el concepto hasta el detalle, combinando pensamiento estratégico y sensibilidad visual. Además combino herramientas tradicionales con nuevas tecnologías como parte del proceso creativo.
+          Abordo el diseño de forma integral, desde el concepto hasta el detalle, combinando pensamiento estratégico y sensibilidad visual. Además combino herramientas tradicionales con nuevas tecnologías como parte del proceso&nbsp;creativo.
         </p>
         <p class="hero-desc reveal d2" style="margin-top: 16px;">
-          Me adapto rápido a los lenguajes visuales de cada organización y disfruto trabajar en equipo.
+          Me adapto rápido a los lenguajes visuales de cada organización y disfruto trabajar en&nbsp;equipo.
         </p>
         <div class="hero-tags reveal d3">
           <span>Pilar, Buenos Aires</span>
@@ -1748,7 +1757,8 @@
 
     <!-- Título portfolio -->
     <div class="portfolio-banner" id="portfolio-banner">
-      <img src="banner_portfolio.png" alt="My Portfolio">
+      <img src="banner_portfolio.png" alt="My Portfolio" class="banner-desktop">
+      <img src="banner_portfolio_mobile.png" alt="My Portfolio" class="banner-mobile">
     </div>
 
     <!-- Filtros -->

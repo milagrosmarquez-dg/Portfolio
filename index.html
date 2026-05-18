@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -169,6 +167,7 @@
     transition: transform 0.35s var(--ease), opacity 0.35s;
   }
   .menu-toggle.open span:first-child { transform: translateY(8px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .menu-toggle.open span:last-child  { transform: translateY(-8px) rotate(-45deg); }
 
   .mobile-menu {
@@ -707,20 +706,19 @@
     .bento-item.b-tall { grid-row: span 1; aspect-ratio: 4 / 5; }
     .bento-item        { aspect-ratio: 4 / 5; height: auto; }
 
-    .portfolio-banner img { height: 140px; max-width: 40%; }
+    .portfolio-banner img { height: auto; max-width: 90%; }
     .bento-filters     { padding: 0 48px 24px; }
     .sk-folders        { grid-template-columns: repeat(3, 1fr); }
     .hero-body         { grid-template-columns: 1fr 360px; gap: 28px; }
     .hero-photo-img    { max-width: 440px; }
   }
   @media (max-width: 560px) {
-    .bento { grid-template-columns: 1fr; padding: 0 16px 6px; }
-    .bento-item.b-wide { grid-column: span 1; }
+    .bento { grid-template-columns: repeat(2, 1fr); padding: 0 12px 6px; gap: 4px; }
+    .bento-item.b-wide { grid-column: span 2; aspect-ratio: 8/5; }
     .bento-item { aspect-ratio: 4/5; height: auto; }
     .bento-item.b-tall { aspect-ratio: 4/5; }
-    .bento-item.b-wide { aspect-ratio: 4/5; grid-column: span 1; }
 
-    .portfolio-banner img { height: 110px; max-width: 60%; }
+    .portfolio-banner img { height: auto; max-width: 95%; }
     .bento-filters { padding: 0 16px 20px; gap: 8px; }
     .bf-btn { font-size: 8px; padding: 6px 14px; }
     .hero-body { grid-template-columns: 1fr; gap: 24px; }
@@ -1227,14 +1225,15 @@
      RESPONSIVE — MOBILE
   ══════════════════════════════════════════════════ */
   @media (max-width: 700px) {
-    :root { --header-h: 44px; }
+    :root { --header-h: 60px; }
 
-    .header-inner { grid-template-columns: 1fr auto; padding: 0 20px; }
+    .header-inner { grid-template-columns: 1fr auto; padding: 0 20px; height: 60px; }
     .nav-left, .nav-right { display: none; }
     .logo-block   { padding: 0; justify-self: center; grid-column: 1; }
     .menu-toggle  { display: flex; grid-column: 2; }
     .mobile-menu  { display: flex; }
 
+    /* Espacio entre header y "Hola, soy Mili" */
     .hero { padding: calc(var(--header-h) + 52px) 24px 64px; min-height: 100svh; }
     .hero-desc br { display: none; }
 
@@ -1247,10 +1246,20 @@
     .timeline-meta { flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; }
     .timeline-year { text-align: left; }
 
-
-
     .contacto-title { font-size: clamp(44px, 13vw, 68px); }
-    .footer-inner { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+
+    /* Footer: mantener layout horizontal izq/der en mobile */
+    .footer-inner {
+      padding: 20px 24px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0;
+      text-align: left;
+      height: auto;
+      min-height: 64px;
+    }
+    .footer-right { text-align: right; }
   }
 
 
@@ -1519,7 +1528,7 @@
       </nav>
 
       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
 
@@ -1897,7 +1906,7 @@
           <a href="mailto:milimarquez.dg@gmail.com" class="ct-link">milimarquez.dg@gmail.com ↗</a>
           <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-link">@laburitostudio ↗</a>
           <a href="https://behance.net/milimarquez" target="_blank" rel="noopener" class="ct-link">Behance ↗</a>
-          <a href="https://linkedin.com/in/milagros-marquez" target="_blank" rel="noopener" class="ct-link">LinkedIn ↗</a>
+          <a href="https://www.linkedin.com/in/milagros-m%C3%A1rquez/" target="_blank" rel="noopener" class="ct-link">LinkedIn ↗</a>
         </div>
       </div>
     </div>

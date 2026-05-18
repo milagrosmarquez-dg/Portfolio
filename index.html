@@ -918,12 +918,12 @@
 
 
   /* Banner: mostrar imagen según dispositivo */
-  .banner-mobile { display: none; }
-  .banner-desktop { display: block; }
+  .portfolio-banner .banner-mobile { display: none !important; }
+  .portfolio-banner .banner-desktop { display: block !important; }
 
   @media (max-width: 560px) {
-    .banner-desktop { display: none; }
-    .banner-mobile  { display: block; }
+    .portfolio-banner .banner-desktop { display: none !important; }
+    .portfolio-banner .banner-mobile  { display: block !important; }
   }
 
   /* Banner espacio para imagen de portfolio */

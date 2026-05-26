@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -735,7 +731,7 @@
     .ct-hero-title { font-size: clamp(28px, 10vw, 48px); }
   }
 
-  /* ─── MODAL: 4:5, solo carrusel ─── */
+  /* ─── MODAL: tamaño dictado por la imagen ─── */
   .pf-modal-overlay {
     position: fixed; inset: 0; z-index: 400;
     background: rgba(0,0,0,0);
@@ -748,16 +744,16 @@
 
   .pf-modal {
     position: relative;
-    width: min(480px, 92vw);
-    max-height: 92vh;
+    max-width: min(520px, 92vw);
+    max-height: 90vh;
     border-radius: 14px;
     overflow: hidden;
     background: #111;
     transform: scale(0.92) translateY(20px);
     opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1), opacity 0.4s, aspect-ratio 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1), opacity 0.4s;
     box-shadow: 0 32px 80px rgba(0,0,0,0.5);
-    flex-shrink: 0;
+    line-height: 0;
   }
   .pf-modal-overlay.open .pf-modal { transform: scale(1) translateY(0); opacity: 1; }
 
@@ -770,27 +766,33 @@
     background: rgba(0,0,0,0.45); border: none; cursor: pointer;
     width: 32px; height: 32px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 15px; color: #fff;
+    font-size: 15px; color: #fff; line-height: 1;
     transition: background 0.2s; backdrop-filter: blur(4px);
   }
   .pf-modal-close:hover { background: rgba(0,0,0,0.7); }
 
-  /* Carrusel ocupa todo el modal */
+  /* Carrusel — imagen activa define el tamaño */
   .pf-carousel {
     position: relative;
-    overflow: hidden;
-    background: #111;
     width: 100%;
+    background: #111;
   }
+  /* El track es solo el contenedor de slides apiladas */
   .pf-carousel-track {
-    display: flex;
-    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1);
-    will-change: transform;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
   }
   .pf-car-slide {
-    flex: 0 0 100%;
-    display: flex; align-items: center; justify-content: center;
-    background: #111;
+    grid-area: 1 / 1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    display: flex;
+  }
+  .pf-car-slide.active {
+    opacity: 1;
+    pointer-events: all;
   }
   .pf-car-slide img {
     width: 100%;
@@ -800,13 +802,14 @@
     object-fit: contain;
   }
   .pf-car-slide-ph {
-    width: 100%;
-    height: 300px;
+    width: 100%; height: 300px;
     display: flex; align-items: center; justify-content: center;
+    background: #1a1a1a;
   }
   .pf-car-slide-ph span {
     font-family: var(--font-serif); font-style: italic;
     font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.2);
+    line-height: 1.4;
   }
 
   /* Flechas */
@@ -815,20 +818,20 @@
     background: rgba(255,255,255,0.15); border: none; cursor: pointer;
     width: 36px; height: 36px; border-radius: 50%;
     font-size: 18px; display: flex; align-items: center; justify-content: center;
-    color: #fff; z-index: 2;
+    color: #fff; z-index: 2; line-height: 1;
     transition: background 0.2s;
     backdrop-filter: blur(4px);
   }
   .pf-car-prev { left: 12px; }
   .pf-car-next { right: 12px; }
   .pf-car-arr:hover { background: rgba(255,255,255,0.3); }
-  .pf-car-arr:disabled { opacity: 0.2; pointer-events: none; }
+  .pf-car-arr[style*="opacity: 0"] { pointer-events: none; }
 
   /* Dots */
   .pf-car-dots {
     position: absolute; bottom: 12px; left: 50%;
     transform: translateX(-50%);
-    display: flex; gap: 6px; z-index: 2;
+    display: flex; gap: 6px; z-index: 2; line-height: 1;
   }
   .pf-car-dot {
     width: 5px; height: 5px; border-radius: 50%;
@@ -838,8 +841,7 @@
   .pf-car-dot.active { background: #fff; transform: scale(1.5); }
 
   @media (max-width: 600px) {
-    .pf-modal-overlay { padding: 16px; }
-    .pf-modal { width: min(360px, 90vw); }
+    .pf-modal-overlay { padding: 12px; }
   }
 
 
@@ -2018,33 +2020,16 @@
       imgIdx = 0;
       const imgs = p.images;
 
-      // Slides
       track.innerHTML = imgs.map((src, i) => {
         if (src) {
-          return `<div class="pf-car-slide" data-src="${src}" data-color="" style="cursor:zoom-in"><img src="${src}" alt="${p.name} — imagen ${i+1}" loading="lazy"></div>`;
+          return `<div class="pf-car-slide${i===0?' active':''}" data-src="${src}" data-color="">` +
+                 `<img src="${src}" alt="${p.name} — imagen ${i+1}"></div>`;
         }
-        return `<div class="pf-car-slide" data-src="" data-color="${p.color}" style="cursor:zoom-in">
-          <div class="pf-car-slide-ph" style="background:${p.color};">
-            <span>${p.name}<br><small style="font-size:11px;opacity:.5;font-style:normal;">imagen ${i+1} — próximamente</small></span>
-          </div>
-        </div>`;
+        return `<div class="pf-car-slide${i===0?' active':''}" data-src="" data-color="${p.color}">` +
+               `<div class="pf-car-slide-ph" style="background:${p.color};">` +
+               `<span>${p.name}<br><small style="font-size:11px;opacity:.5;font-style:normal;">imagen ${i+1} — próximamente</small></span>` +
+               `</div></div>`;
       }).join('');
-
-      // Adaptar tamaño del modal a la primera imagen
-      const firstImg = track.querySelector('.pf-car-slide img');
-      if (firstImg) {
-        function applyRatio(img) {
-          const modal = document.getElementById('pf-modal');
-          if (!modal) return;
-          const w = img.naturalWidth, h = img.naturalHeight;
-          if (w && h) modal.style.aspectRatio = w + ' / ' + h;
-        }
-        if (firstImg.complete && firstImg.naturalWidth) {
-          applyRatio(firstImg);
-        } else {
-          firstImg.addEventListener('load', () => applyRatio(firstImg), { once: true });
-        }
-      }
 
       // Lightbox on slide click
       requestAnimationFrame(() => {
@@ -2055,7 +2040,7 @@
         });
       });
 
-      // Dots (solo si hay más de 1 imagen)
+      // Dots
       dotsEl.innerHTML = imgs.length > 1
         ? imgs.map((_, i) => `<div class="pf-car-dot${i===0?' active':''}" data-i="${i}"></div>`).join('')
         : '';
@@ -2066,34 +2051,20 @@
       goTo(0);
     }
 
-    /* ── Navega a slide ── */
+    /* ── Navega a slide (fade) ── */
     function goTo(i) {
-      const n = currentP.images.length;
+      const slides = track.querySelectorAll('.pf-car-slide');
+      const n = slides.length;
       imgIdx = Math.max(0, Math.min(i, n - 1));
-      track.style.transform = `translateX(-${imgIdx * 100}%)`;
-      // Dots
+
+      slides.forEach((s, j) => s.classList.toggle('active', j === imgIdx));
+
       dotsEl.querySelectorAll('.pf-car-dot').forEach((d, j) =>
         d.classList.toggle('active', j === imgIdx)
       );
-      // Flechas: desactivar en extremos
-      prevBtn.style.opacity = imgIdx === 0     ? '0' : '';
-      nextBtn.style.opacity = imgIdx === n - 1 ? '0' : '';
 
-      // Adaptar ratio del modal a la imagen actual
-      const modal = document.getElementById('pf-modal');
-      if (!modal) return;
-      const slides = track.querySelectorAll('.pf-car-slide');
-      const slide = slides[imgIdx];
-      if (!slide) return;
-      const img = slide.querySelector('img');
-      if (img) {
-        function setRatio(el) {
-          if (el.naturalWidth && el.naturalHeight)
-            modal.style.aspectRatio = el.naturalWidth + ' / ' + el.naturalHeight;
-        }
-        if (img.complete && img.naturalWidth) setRatio(img);
-        else img.addEventListener('load', () => setRatio(img), { once: true });
-      }
+      prevBtn.style.opacity = imgIdx === 0     ? '0' : '1';
+      nextBtn.style.opacity = imgIdx === n - 1 ? '0' : '1';
     }
 
     /* ── Abre modal ── */

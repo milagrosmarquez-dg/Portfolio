@@ -2,7 +2,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -753,7 +752,7 @@
     aspect-ratio: 4 / 3;
     border-radius: 14px;
     overflow: hidden;
-    background: #111;
+    background: #000;
     transform: scale(0.92) translateY(20px);
     opacity: 0;
     transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1), opacity 0.4s;
@@ -776,38 +775,35 @@
   }
   .pf-modal-close:hover { background: rgba(0,0,0,0.7); }
 
-  /* Carrusel — imagen activa define el tamaño */
+  /* Carrusel — cubre todo el modal */
   .pf-carousel {
-    position: relative;
-    width: 100%;
-    background: #111;
+    position: absolute; inset: 0;
+    overflow: hidden;
+    background: #000;
   }
-  /* El track es solo el contenedor de slides apiladas */
   .pf-carousel-track {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    position: relative;
+    width: 100%; height: 100%;
   }
   .pf-car-slide {
-    grid-area: 1 / 1;
+    position: absolute; inset: 0;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.35s ease;
-    display: flex;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25,0.1,0.25,1);
+    transform: scale(1.04);
   }
   .pf-car-slide.active {
     opacity: 1;
     pointer-events: all;
+    transform: scale(1);
   }
   .pf-car-slide img {
-    width: 100%;
-    height: auto;
-    max-height: 88vh;
+    width: 100%; height: 100%;
     display: block;
-    object-fit: contain;
+    object-fit: cover;
   }
   .pf-car-slide-ph {
-    width: 100%; height: 300px;
+    width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
     background: #1a1a1a;
   }
@@ -1989,7 +1985,7 @@
   ══════════════════════════════════════════════════ */
   const PF_DATA = [
     { cat: 'indumentaria institucional · branding aplicado', name: 'FDV Centro de Entrenamiento', desc: 'Desarrollo de piezas textiles destinadas al staff y socios del centro deportivo. El objetivo fue trasladar la identidad visual de la marca a un soporte físico, asegurando que el diseño sea funcional, legible y refuerce el sentido de comunidad.', accent: 'Indumentaria & Branding · 2025', color: '#1a1a2e', images: ['fdv-1.png', 'fdv-2.png', 'fdv-3.png', 'fdv-4.png'] },
-    { cat: 'editorial',                                      name: 'Infografía Mickey Mouse',     desc: 'Infografía editorial sobre la historia y evolución de Mickey Mouse. Diseño tipográfico, ilustración y composición visual en formato impreso.', accent: 'Editorial · 2025', color: '#1a1a1a', images: ['infografia-1.jpg', 'infografia-2.jpg', 'infografia-3.jpg', 'infografia-4.jpg'] },
+    { cat: 'editorial',                                      name: 'Infografía Mickey Mouse',     desc: 'Infografía editorial sobre la historia y evolución de Mickey Mouse. Diseño tipográfico, ilustración y composición visual en formato impreso.', accent: 'Editorial · 2025', color: '#1a1a1a', images: ['infografia-1.jpg', 'infografia-2.jpg', 'infografia-3.jpg'] },
     { cat: 'social media · diseño editorial',            name: 'Instagram Stories',           desc: 'Diseño de Instagram Stories con identidad visual coherente. Composición tipográfica, paleta de color y animación para contenido de redes sociales.',                       accent: 'Diseño para Instagram · 2025', color: '#fefce3', images: [null, null, null] },
     { cat: 'identidad · comunicación',                   name: 'Comunicación institucional',  desc: 'Sistema visual para institución pública. Campañas, papelería y contenido digital con lenguaje uniforme en todas las plataformas.',                                        accent: 'Municipalidad de Pilar · 2025', color: '#fefce3', images: [null, null, null] },
     { cat: 'branding · papelería',                       name: 'Branding de marca',           desc: 'Identidad refinada para marca de lujo. Logomark, paleta y aplicaciones en papelería corporativa.',                                                                        accent: 'Identidad de lujo', color: '#ede0d8', images: [null, null, null] },

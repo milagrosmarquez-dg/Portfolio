@@ -755,7 +755,7 @@
     background: #111;
     transform: scale(0.92) translateY(20px);
     opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1), opacity 0.4s;
+    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1), opacity 0.4s, aspect-ratio 0.3s ease;
     box-shadow: 0 32px 80px rgba(0,0,0,0.5);
     flex-shrink: 0;
   }
@@ -2030,6 +2030,22 @@
         </div>`;
       }).join('');
 
+      // Adaptar tamaño del modal a la primera imagen
+      const firstImg = track.querySelector('.pf-car-slide img');
+      if (firstImg) {
+        function applyRatio(img) {
+          const modal = document.getElementById('pf-modal');
+          if (!modal) return;
+          const w = img.naturalWidth, h = img.naturalHeight;
+          if (w && h) modal.style.aspectRatio = w + ' / ' + h;
+        }
+        if (firstImg.complete && firstImg.naturalWidth) {
+          applyRatio(firstImg);
+        } else {
+          firstImg.addEventListener('load', () => applyRatio(firstImg), { once: true });
+        }
+      }
+
       // Lightbox on slide click
       requestAnimationFrame(() => {
         track.querySelectorAll('.pf-car-slide').forEach(slide => {
@@ -2062,6 +2078,22 @@
       // Flechas: desactivar en extremos
       prevBtn.style.opacity = imgIdx === 0     ? '0' : '';
       nextBtn.style.opacity = imgIdx === n - 1 ? '0' : '';
+
+      // Adaptar ratio del modal a la imagen actual
+      const modal = document.getElementById('pf-modal');
+      if (!modal) return;
+      const slides = track.querySelectorAll('.pf-car-slide');
+      const slide = slides[imgIdx];
+      if (!slide) return;
+      const img = slide.querySelector('img');
+      if (img) {
+        function setRatio(el) {
+          if (el.naturalWidth && el.naturalHeight)
+            modal.style.aspectRatio = el.naturalWidth + ' / ' + el.naturalHeight;
+        }
+        if (img.complete && img.naturalWidth) setRatio(img);
+        else img.addEventListener('load', () => setRatio(img), { once: true });
+      }
     }
 
     /* ── Abre modal ── */

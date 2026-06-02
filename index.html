@@ -1,8 +1,5 @@
 
 
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -286,7 +283,6 @@
       linear-gradient(rgba(22,21,21,0.07) 1px, transparent 1px),
       linear-gradient(90deg, rgba(22,21,21,0.07) 1px, transparent 1px);
     background-size: 32px 32px;
-    background-attachment: fixed;
   }
   .hero-blobs { display: none; }
 
@@ -337,33 +333,32 @@
     position: absolute;
     inset: 0;
     border-radius: 24px;
-    /* Fondo muy tenue para que las líneas se vean a través */
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px) saturate(1.6) brightness(1.06);
-    -webkit-backdrop-filter: blur(12px) saturate(1.6) brightness(1.06);
-    /* Bordes asimétricos: aristas del vidrio */
-    border-top: 1.5px solid rgba(255,255,255,0.95);
-    border-left: 1px solid rgba(255,255,255,0.7);
-    border-right: 1px solid rgba(255,255,255,0.4);
-    border-bottom: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(20px) saturate(1.8) brightness(1.04);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8) brightness(1.04);
+    border-top: 1.5px solid rgba(255,255,255,1);
+    border-left: 1.5px solid rgba(255,255,255,0.8);
+    border-right: 1px solid rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
     box-shadow:
-      0 8px 32px rgba(0,0,0,0.07),
-      0 2px 6px rgba(0,0,0,0.04),
-      inset 0 1.5px 0 rgba(255,255,255,0.9),
-      inset 0 -1px 0 rgba(0,0,0,0.015);
+      0 12px 40px rgba(0,0,0,0.08),
+      0 2px 8px rgba(0,0,0,0.04),
+      inset 0 1.5px 0 rgba(255,255,255,0.95),
+      inset 0 -1px 0 rgba(0,0,0,0.02);
   }
-  /* Reflejo diagonal de luz */
+  /* Reflejo diagonal — la "luz" del liquid glass */
   .glass-card-inner::before {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 24px;
+    border-radius: 28px;
     background: linear-gradient(
-      130deg,
-      rgba(255,255,255,0.30) 0%,
-      rgba(255,255,255,0.10) 25%,
-      transparent 50%,
-      rgba(255,255,255,0.03) 100%
+      125deg,
+      rgba(255,255,255,0.55) 0%,
+      rgba(255,255,255,0.2) 20%,
+      transparent 45%,
+      rgba(255,255,255,0.05) 80%,
+      rgba(255,255,255,0.15) 100%
     );
     pointer-events: none;
   }
@@ -372,7 +367,7 @@
     content: '';
     position: absolute;
     top: 0; left: 5%; right: 5%;
-    height: 1px;
+    height: 1.5px;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, transparent);
     border-radius: 100px;
   }
@@ -440,7 +435,7 @@
     font-weight: 400;
     line-height: 1.85;
     color: var(--mid);
-    max-width: 380px;
+    max-width: 520px;
   }
   .hero-desc em { font-style: italic; color: var(--ink); }
 
@@ -526,7 +521,7 @@
   }
   .hero-photo-img {
     width: 100%;
-    max-width: 380px;
+    max-width: 520px;
     height: auto;
     display: block;
     mix-blend-mode: normal;
@@ -539,7 +534,7 @@
     flex-direction: column;
     line-height: 1;
     user-select: none;
-    max-width: 380px;
+    max-width: 520px;
   }
   .hero-logo-my {
     font-family: var(--font-serif);
@@ -796,9 +791,6 @@
       linear-gradient(rgba(22,21,21,0.07) 1px, transparent 1px),
       linear-gradient(90deg, rgba(22,21,21,0.07) 1px, transparent 1px);
     background-size: 32px 32px;
-    background-attachment: fixed;
-    background-position: top left;
-    background-attachment: fixed;
     border-top: none;
     position: relative;
     margin-top: 0;

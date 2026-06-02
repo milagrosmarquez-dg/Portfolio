@@ -252,68 +252,48 @@
     padding: calc(var(--header-h) + 28px) 72px 60px;
     position: relative;
     overflow: hidden;
-    background: #fffff8;
+    background: #ffffff;
   }
 
-  /* ── Fondo de manchas desenfocadas ── */
-  .hero-blobs {
+  /* ── Fondo gradiente suave con ruido ── */
+  .hero::before {
+    content: '';
     position: absolute;
     inset: 0;
     z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 15% 20%, rgba(240,217,106,0.13) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 55% at 85% 70%, rgba(254,252,227,0.18) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 50% 90%, rgba(240,217,106,0.08) 0%, transparent 60%),
+      #ffffff;
     pointer-events: none;
-    overflow: hidden;
   }
-  .hero-blob {
+
+  /* Ruido encima del gradiente */
+  .hero::after {
+    content: '';
     position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.55;
-    animation: blob-drift 18s ease-in-out infinite alternate;
-  }
-  .hero-blob-1 {
-    width: 520px; height: 420px;
-    background: radial-gradient(circle, #f0d96a 0%, #fefce3 60%, transparent 100%);
-    top: -80px; left: -100px;
-    animation-duration: 20s;
-    animation-delay: 0s;
-    opacity: 0.08;
-  }
-  .hero-blob-2 {
-    width: 380px; height: 380px;
-    background: radial-gradient(circle, #fef3a0 0%, #fffff3 65%, transparent 100%);
-    top: 30%; right: -60px;
-    animation-duration: 16s;
-    animation-delay: -5s;
-    opacity: 0.06;
-  }
-  .hero-blob-3 {
-    width: 300px; height: 260px;
-    background: radial-gradient(circle, #f0d96a 0%, #fefce3 55%, transparent 100%);
-    bottom: 40px; left: 30%;
-    animation-duration: 22s;
-    animation-delay: -9s;
-    opacity: 0.05;
-  }
-  .hero-blob-4 {
-    width: 240px; height: 200px;
-    background: radial-gradient(circle, #fde97a 0%, #fffef0 60%, transparent 100%);
-    top: 20%; left: 40%;
-    animation-duration: 14s;
-    animation-delay: -3s;
-    opacity: 0.04;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.032;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px 180px;
   }
 
-  @keyframes blob-drift {
-    0%   { transform: translate(0, 0) scale(1); }
-    33%  { transform: translate(30px, -20px) scale(1.06); }
-    66%  { transform: translate(-20px, 30px) scale(0.96); }
-    100% { transform: translate(15px, 10px) scale(1.03); }
+  /* Layout de dos columnas: texto | foto */
+  .hero-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
-
-  /* Asegura que el contenido quede sobre los blobs */
-  .hero-body { position: relative; z-index: 1; }
-
-  .hero-content { position: relative; z-index: 1; max-width: 480px; padding-right: 0; }
 
   .hero-headline {
     margin-bottom: 20px;
@@ -368,20 +348,45 @@
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
   }
 
+  /* Programas debajo de ubicación */
+  .hero-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .hero-tool {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+    border: 1px solid var(--rule);
+    padding: 5px 14px;
+    border-radius: 100px;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .hero-tool:hover {
+    border-color: var(--muted);
+    color: var(--ink);
+  }
+
 
   /* Placeholder foto */
   .hero-photo {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    margin-left: -20px;
+    justify-content: center;
+    margin-left: 0;
   }
   .hero-photo-img {
     width: 100%;
-    max-width: 520px;
+    max-width: 460px;
     height: auto;
     display: block;
     mix-blend-mode: normal;
+    border-radius: 8px;
   }
 
   /* ── Logo tipográfico hero ── */
@@ -427,7 +432,8 @@
 
   @media (max-width: 900px) {
     .hero-body { grid-template-columns: 1fr; }
-    .hero-photo { height: 300px; }
+    .hero-photo { height: auto; justify-content: flex-start; }
+    .hero-photo-img { max-width: 360px; }
   }
   @media (max-width: 700px) {
     .hero { padding: calc(var(--header-h) + 40px) 24px 64px; }
@@ -790,50 +796,23 @@
   }
   .bento-item:hover .bento-overlay { opacity: 1; }
 
-  .bento-cat {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 10px; font-weight: 200;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.75); margin-bottom: 8px;
-    transform: translateY(6px);
-    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0.05s;
-  }
-  .bento-item:hover .bento-cat { transform: translateY(0); }
+  .bento-cat { display: none; }
 
   .bento-name {
-    font-family: var(--font-serif); font-style: normal;
-    font-size: clamp(18px, 2.2vw, 26px); font-weight: 300;
-    color: #fff; line-height: 1.2; margin-bottom: 12px;
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: clamp(12px, 1.4vw, 16px);
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 8px;
     transform: translateY(8px);
     transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0.02s;
   }
   .bento-item:hover .bento-name { transform: translateY(0); }
 
-  .bento-desc {
-    font-family: var(--font-serif);
-    font-size: clamp(12px, 1.1vw, 14px);
-    font-weight: 300;
-    color: rgba(255,255,255,0.82);
-    line-height: 1.5;
-    margin-bottom: 14px;
-    transform: translateY(8px);
-    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0.03s;
-  }
-  .bento-item:hover .bento-desc { transform: translateY(0); }
-
-  .bento-btn {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 8px; font-weight: 200;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: #fff; border: 1px solid rgba(255,255,255,0.7);
-    background: transparent;
-    padding: 7px 16px; border-radius: 100px;
-    display: inline-block; width: fit-content;
-    transform: translateY(10px); opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1) 0s, opacity 0.4s 0s;
-  }
-  .bento-item:hover .bento-btn { transform: translateY(0); opacity: 1; transition-delay: 0.08s; }
-  .bento-btn:hover { background: transparent; }
+  .bento-btn { display: none; }
 
   /* Etiqueta de categoría (esquina sup-izq) — pill estilo referencia */
   .bento-tag {
@@ -1157,91 +1136,121 @@
 
 
   /* ══════════════════════════════════════════════════
-     CONTACTO — marrón, Hablemos!, pills apiladas
+     CONTACTO — marrón, layout como la referencia
   ══════════════════════════════════════════════════ */
   .contacto {
     background: #3A2A26;
+    min-height: 52vh;
+    position: relative;
   }
   .ct-inner {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 80px 80px 72px;
+    padding: 80px 80px 64px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    min-height: 52vh;
+    position: relative;
+  }
+
+  /* Fila principal: "Hablemos!" izq alineado + pills der */
+  .ct-main-row {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 40px;
   }
 
-  /* "Hablemos!" — un poco más pequeño */
+  /* "Hablemos!" grande, serif */
   .ct-headline {
     font-family: var(--font-serif);
     font-style: normal;
-    font-size: clamp(36px, 5vw, 72px);
+    font-size: clamp(52px, 8vw, 120px);
     font-weight: 300;
-    line-height: 0.92;
+    line-height: 0.9;
     letter-spacing: -0.02em;
     color: #fff;
     user-select: none;
   }
 
-  /* Contenedor pills — posicionamiento relativo para superposición */
+  /* Pills — contenedor con posicionamiento relativo */
   .ct-pills {
     position: relative;
     width: 260px;
-    height: 110px;
+    height: 120px;
     flex-shrink: 0;
+    margin-top: 12px;
   }
 
+  /* Pill base — tipografía serif, borde más delicado */
   .ct-pill {
-    font-family: var(--font-body);
+    font-family: var(--font-serif);
     font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    letter-spacing: 0.02em;
-    color: #fff;
-    border: 1.5px solid rgba(255,255,255,0.7);
-    padding: 9px 22px;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 8px 24px 9px;
     border-radius: 100px;
     white-space: nowrap;
     position: absolute;
-    transition: background 0.3s, border-color 0.3s;
     background: transparent;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+    cursor: pointer;
   }
   .ct-pill:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: #fff;
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.9);
+    color: #fff;
   }
 
-  /* linkedin — arriba a la derecha, leve rotación */
+  /* linkedin — arriba derecha, rotación positiva */
   .ct-pill-linkedin {
-    top: 0px;
-    right: 0px;
-    transform: rotate(2deg);
-  }
-
-  /* instagram — abajo a la derecha */
-  .ct-pill-instagram {
-    bottom: 0px;
-    right: 0px;
-    transform: rotate(-2deg);
-  }
-
-  /* mail — abajo a la izquierda, encima de instagram */
-  .ct-pill-mail {
-    bottom: 6px;
-    right: 100px;
+    top: 0; right: 4px;
     transform: rotate(3deg);
+  }
+  /* mail — medio izquierda, rotación negativa */
+  .ct-pill-mail {
+    top: 42px; right: 118px;
+    transform: rotate(-2deg);
     z-index: 1;
+  }
+  /* instagram — abajo derecha, leve rotación */
+  .ct-pill-instagram {
+    bottom: 0; right: 0;
+    transform: rotate(-3deg);
+  }
+
+  /* Fila inferior: nombre + rol */
+  .ct-bottom {
+    display: flex;
+    align-items: flex-end;
+    padding-top: 48px;
+    gap: 6px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ct-name {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 11px; font-weight: 300;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+  .ct-role {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 9px; font-weight: 200;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
   }
 
   @media (max-width: 768px) {
     .ct-inner {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 60px 24px 52px;
-      gap: 48px;
+      padding: 60px 24px 48px;
+      min-height: auto;
     }
-    .ct-pills { width: 240px; height: 100px; }
+    .ct-main-row { flex-direction: column; gap: 56px; }
+    .ct-pills { width: 240px; height: 110px; }
   }
 
   /* ══════════════════════════════════════════════════
@@ -1642,6 +1651,25 @@
   }
   #cursor-halo.visible { opacity: 1; }
 
+  /* Etiqueta "ver" — separada del halo para evitar mix-blend-mode */
+  #cursor-label {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -200%);
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  #cursor-label.visible { opacity: 1; }
+
   </style>
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -1673,6 +1701,7 @@
 
   <!-- Cursor halo de luz -->
   <div id="cursor-halo" aria-hidden="true"></div>
+  <div id="cursor-label" aria-hidden="true">ver</div>
 
   <!-- SKIP LINK para accesibilidad -->
   <a href="#hero" class="skip-link">Saltar al contenido principal</a>
@@ -1713,13 +1742,6 @@
 
   <!-- HERO -->
   <section class="hero" id="hero" aria-label="Presentación">
-    <!-- Fondo manchas -->
-    <div class="hero-blobs" aria-hidden="true">
-      <div class="hero-blob hero-blob-1"></div>
-      <div class="hero-blob hero-blob-2"></div>
-      <div class="hero-blob hero-blob-3"></div>
-      <div class="hero-blob hero-blob-4"></div>
-    </div>
     <div class="hero-body">
       <!-- Columna izquierda: texto -->
       <div class="hero-content">
@@ -1737,6 +1759,14 @@
         </p>
         <div class="hero-tags reveal d3">
           <span>Pilar, Buenos Aires</span>
+        </div>
+        <div class="hero-tools reveal d3">
+          <span class="hero-tool">Illustrator</span>
+          <span class="hero-tool">Photoshop</span>
+          <span class="hero-tool">InDesign</span>
+          <span class="hero-tool">Figma</span>
+          <span class="hero-tool">IA</span>
+          <span class="hero-tool">After Effects</span>
         </div>
       </div>
       <!-- Columna derecha: foto -->
@@ -1920,12 +1950,18 @@
   <section class="contacto" id="contacto" aria-label="Contacto">
     <div class="ct-inner">
 
-      <div class="ct-headline reveal">Hablemos!</div>
+      <div class="ct-main-row">
+        <div class="ct-headline reveal">Hablemos!</div>
+        <div class="ct-pills reveal d2">
+          <a href="https://www.linkedin.com/in/milagros-m%C3%A1rquez/" target="_blank" rel="noopener" class="ct-pill ct-pill-linkedin">linkedin</a>
+          <a href="mailto:milimarquez.dg@gmail.com" class="ct-pill ct-pill-mail">mail</a>
+          <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-pill ct-pill-instagram">instagram</a>
+        </div>
+      </div>
 
-      <div class="ct-pills reveal d2">
-        <a href="https://www.linkedin.com/in/milagros-m%C3%A1rquez/" target="_blank" rel="noopener" class="ct-pill ct-pill-linkedin">linkedin</a>
-        <a href="mailto:milimarquez.dg@gmail.com" class="ct-pill ct-pill-mail">mail</a>
-        <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-pill ct-pill-instagram">instagram</a>
+      <div class="ct-bottom reveal">
+        <span class="ct-name">Milagros Márquez</span>
+        <span class="ct-role">Diseñadora Gráfica</span>
       </div>
 
     </div>
@@ -2191,32 +2227,37 @@
 
   /* ── Cursor halo de luz — solo sobre proyectos del bento ── */
   (function () {
-    const halo = document.getElementById('cursor-halo');
+    const halo  = document.getElementById('cursor-halo');
+    const label = document.getElementById('cursor-label');
     if (!halo) return;
     if (!window.matchMedia('(pointer: fine)').matches) return;
 
     let rx = 0, ry = 0, tx = 0, ty = 0;
     let isOverBento = false;
 
-    // Seguimiento continuo de posición
     document.addEventListener('mousemove', (e) => {
       tx = e.clientX; ty = e.clientY;
       const el = document.elementFromPoint(e.clientX, e.clientY);
       isOverBento = !!(el && el.closest('.bento-item'));
       halo.classList.toggle('visible', isOverBento);
+      if (label) label.classList.toggle('visible', isOverBento);
     });
 
     document.addEventListener('mouseleave', () => {
       isOverBento = false;
       halo.classList.remove('visible');
+      if (label) label.classList.remove('visible');
     });
 
-    // rAF loop — siempre sigue al mouse pero solo es visible sobre bento
     (function loop() {
       rx += (tx - rx) * 0.18;
       ry += (ty - ry) * 0.18;
-      halo.style.left = rx + 'px';
-      halo.style.top  = ry + 'px';
+      halo.style.left  = rx + 'px';
+      halo.style.top   = ry + 'px';
+      if (label) {
+        label.style.left = rx + 'px';
+        label.style.top  = ry + 'px';
+      }
       requestAnimationFrame(loop);
     })();
   })();

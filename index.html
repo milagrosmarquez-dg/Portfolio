@@ -163,33 +163,49 @@
     text-transform: uppercase;
     color: var(--ink);
     position: relative;
-    padding-bottom: 2px;
     white-space: nowrap;
-    transition: color 0.35s var(--ease);
+    overflow: hidden;
+    display: inline-flex;
+    flex-direction: column;
+    height: 1.2em;
+    line-height: 1.2em;
+    transition: color 0.3s;
+    vertical-align: middle;
   }
-  .nav-link::after {
-    content: '·';
+  /* Cada nav-link tiene su texto duplicado via JS para el slide */
+  .nav-link .nl-real,
+  .nav-link .nl-ghost {
+    display: block;
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .nav-link .nl-ghost {
     position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%) scale(0);
-    font-size: 18px;
-    line-height: 1;
+    top: 100%;
+    left: 0;
     color: var(--warm);
-    transition: transform 0.35s var(--ease), opacity 0.35s;
-    opacity: 0;
   }
-  .nav-link:hover { color: var(--warm); }
+  .nav-link:hover .nl-real  { transform: translateY(-100%); }
+  .nav-link:hover .nl-ghost { transform: translateY(-100%); }
+  .nav-link::after { display: none; }
   .nav-cv {
-    background: #d4b800;
-    color: #fff !important;
-    padding: 6px 16px;
-    border-radius: 100px;
-    letter-spacing: 0.14em;
-    transition: background 0.3s, color 0.3s !important;
+    background: none !important;
+    color: var(--ink) !important;
+    padding: 0;
+    border-radius: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s !important;
   }
-  .nav-cv:hover { background: #f0e060 !important; color: #5a4a00 !important; }
+  .nav-cv:hover { color: var(--warm) !important; background: none !important; }
   .nav-cv::after { display: none !important; }
+  .nav-cv .cv-icon {
+    font-size: 13px;
+    display: inline-block;
+    transition: transform 0.3s;
+    line-height: 1;
+  }
+  .nav-cv:hover .cv-icon { transform: translate(2px, -2px); }
   .nav-link:hover::after { transform: translateX(-50%) scale(1); opacity: 1; }
 
   .logo-block {
@@ -1757,7 +1773,7 @@
 
       <nav class="nav-right" aria-label="Navegación secundaria">
         <a href="#contacto" class="nav-link">Contacto</a>
-        <a href="CV_MilagrosMarquez.pdf" target="_blank" rel="noopener" class="nav-link nav-cv">Curriculum</a>
+        <a href="CV_MilagrosMarquez.pdf" target="_blank" rel="noopener" class="nav-link nav-cv">Curriculum<span class="cv-icon" aria-hidden="true">↗</span></a>
       </nav>
 
     </div>
@@ -1978,7 +1994,6 @@
         <span class="footer-role">Diseñadora Gráfica</span>
       </div>
       <div class="footer-right">
-        <span>Pilar, Buenos Aires</span>
         <span>Argentina</span>
       </div>
     </div>
@@ -1992,6 +2007,28 @@
   <!-- JAVASCRIPT -->
   <script>
   'use strict';
+
+  /* ── Nav slide-up effect ── */
+  (function() {
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+      const text = link.textContent.trim();
+      // No duplicar si ya tiene el span (Curriculum con ícono)
+      if (link.querySelector('.nl-real')) return;
+      // Guardar el HTML original (por si tiene spans como cv-icon)
+      const inner = link.innerHTML;
+      // Solo links de texto puro
+      if (!link.querySelector('span') || link.classList.contains('nav-cv')) {
+        link.innerHTML = '<span class="nl-real">' + text + '</span><span class="nl-ghost" aria-hidden="true">' + text + '</span>';
+      }
+    });
+    // Curriculum por separado (tiene el ícono ↗)
+    const cvLink = document.querySelector('.nav-cv');
+    if (cvLink) {
+      const icon = cvLink.querySelector('.cv-icon');
+      const iconHtml = icon ? icon.outerHTML : '';
+      cvLink.innerHTML = '<span class="nl-real">Curriculum' + iconHtml + '</span><span class="nl-ghost" aria-hidden="true">Curriculum' + iconHtml + '</span>';
+    }
+  })();
 
   /* Scroll reveal */
   (function () {

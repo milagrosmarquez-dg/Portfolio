@@ -88,7 +88,7 @@
   }
 
   body  {
-    background: var(--bg);
+    background: linear-gradient(to bottom, #fffff3 0%, #ffffff 18%, #ffffff 100%);
     color: var(--ink);
     font-family: var(--font-body);
     font-weight: 200;
@@ -277,37 +277,11 @@
     padding: calc(var(--header-h) + 28px) 72px 60px;
     position: relative;
     overflow: visible;
-    background: #fff;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: -50%;
-    z-index: 0;
-    pointer-events: none;
-    /* Mancha amarilla cálida — arranca desde arriba, se funde con el header */
-    background:
-      radial-gradient(ellipse 70% 55% at 30% 10%, rgba(255,255,243,0.98) 0%, rgba(254,252,227,0.6) 40%, transparent 68%),
-      radial-gradient(ellipse 50% 40% at 75% 5%,  rgba(255,255,243,0.85) 0%, transparent 55%);
-    animation: warm-drift 11s ease-in-out infinite alternate;
-    filter: blur(36px);
-  }
-  @keyframes warm-drift {
-    0%   { transform: translate(0%,    0%)  scale(1); }
-    30%  { transform: translate(8%,   -5%)  scale(1.04); }
-    60%  { transform: translate(-6%,   8%)  scale(0.97); }
-    100% { transform: translate(5%,   -3%)  scale(1.02); }
-  }
-
-  /* Fade inferior del hero hacia el portfolio */
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 160px;
-    z-index: 0;
-    pointer-events: none;
-    background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+    background-color: #ffffff;
+    background-image:
+      linear-gradient(rgba(22,21,21,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22,21,21,0.07) 1px, transparent 1px);
+    background-size: 32px 32px;
   }
   .hero-blobs { display: none; }
 
@@ -336,8 +310,22 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    position: relative;
-    z-index: 1;
+  }
+  /* Recuadro vidrio detrás del contenido */
+  .hero-body::before {
+    content: '';
+    position: absolute;
+    inset: -48px -56px;
+    z-index: -1;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(22px) saturate(1.5);
+    -webkit-backdrop-filter: blur(22px) saturate(1.5);
+    border: 1px solid rgba(255,255,255,0.75);
+    box-shadow:
+      0 4px 32px rgba(0,0,0,0.06),
+      0 1px 4px rgba(0,0,0,0.04),
+      inset 0 2px 0 rgba(255,255,255,0.9);
   }
 
   .hero-headline {
@@ -1478,16 +1466,7 @@
   :root { --terracotta: #3A2A26; --cream: #fefce3; }
 
   .portfolio { background-color: #ffffff; border-top: none; padding-top: 0; position: relative; }
-  /* Fade superior del portfolio — se funde con el héroe */
-  .portfolio::before {
-    content: '';
-    display: block;
-    height: 80px;
-    background: linear-gradient(to bottom, #ffffff 0%, transparent 100%);
-    position: relative;
-    z-index: 2;
-    pointer-events: none;
-  }
+
   .portfolio-intro { margin-bottom: 40px; }
   .portfolio-title {
     font-family: var(--font-serif); font-size: clamp(34px, 4.5vw, 68px);

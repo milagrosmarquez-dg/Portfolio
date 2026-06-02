@@ -91,7 +91,11 @@
   }
 
   body  {
-    background: linear-gradient(to bottom, #fffff3 0%, #ffffff 18%, #ffffff 100%);
+    background-color: #ffffff;
+    background-image:
+      linear-gradient(rgba(22,21,21,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22,21,21,0.07) 1px, transparent 1px);
+    background-size: 32px 32px;
     color: var(--ink);
     font-family: var(--font-body);
     font-weight: 200;
@@ -280,13 +284,8 @@
     padding: calc(var(--header-h) + 28px) 72px 60px;
     position: relative;
     overflow: hidden;
-    background-color: #ffffff;
-    background-image:
-      linear-gradient(rgba(22,21,21,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(22,21,21,0.07) 1px, transparent 1px);
-    background-size: 32px 32px;
+    background: transparent;
   }
-  .hero-blobs { display: none; }
 
   /* Ruido encima del gradiente */
   .hero::after {
@@ -384,7 +383,7 @@
   .hero-content { position: relative; z-index: 2; max-width: 680px; }
 
   .hero-headline {
-    margin-top: 48px;
+    margin-top: 0;
     margin-bottom: 20px;
     line-height: 1;
   }
@@ -531,7 +530,7 @@
   }
   .hero-photo-img {
     width: 100%;
-    max-width: 460px;
+    max-width: 560px;
     height: auto;
     display: block;
     mix-blend-mode: normal;
@@ -796,11 +795,7 @@
   :root { --terracotta: #3A2A26; --cream: #fefce3; }
 
   .portfolio {
-    background-color: #ffffff;
-    background-image:
-      linear-gradient(rgba(22,21,21,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(22,21,21,0.07) 1px, transparent 1px);
-    background-size: 32px 32px;
+    background: transparent;
     border-top: none;
     position: relative;
     margin-top: 0;
@@ -1540,7 +1535,7 @@
   ══════════════════════════════════════════════════ */
   :root { --terracotta: #3A2A26; --cream: #fefce3; }
 
-  .portfolio { background-color: #ffffff; border-top: none; padding-top: 0; position: relative; }
+  .portfolio { background: transparent; border-top: none; padding-top: 0; position: relative; }
 
   .portfolio-intro { margin-bottom: 40px; }
   .portfolio-title {
@@ -2495,5 +2490,4 @@
 
 </body>
 </html>
-
 

@@ -1,8 +1,4 @@
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -128,7 +124,7 @@
   .site-header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: #fffff3;
-    border-bottom: 1px solid var(--rule);
+    border-bottom: none;
     transition: box-shadow 0.5s var(--ease);
   }
   .site-header.scrolled { box-shadow: 0 1px 20px rgba(22,21,21,0.05); }
@@ -280,7 +276,7 @@
     align-items: center;
     padding: calc(var(--header-h) + 28px) 72px 60px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     background: #fff;
   }
   .hero::before {
@@ -289,15 +285,29 @@
     inset: -50%;
     z-index: 0;
     pointer-events: none;
-    background: radial-gradient(ellipse 55% 45% at 60% 50%, #dcefff 0%, rgba(220,239,255,0.5) 40%, transparent 70%);
-    animation: celeste-drift 10s ease-in-out infinite alternate;
-    filter: blur(40px);
+    /* Mancha amarilla cálida — arranca desde arriba, se funde con el header */
+    background:
+      radial-gradient(ellipse 70% 55% at 30% 10%, rgba(255,255,243,0.98) 0%, rgba(254,252,227,0.6) 40%, transparent 68%),
+      radial-gradient(ellipse 50% 40% at 75% 5%,  rgba(255,255,243,0.85) 0%, transparent 55%);
+    animation: warm-drift 11s ease-in-out infinite alternate;
+    filter: blur(36px);
   }
-  @keyframes celeste-drift {
-    0%   { transform: translate(0%,   0%)  scale(1); }
-    30%  { transform: translate(12%, -8%)  scale(1.05); }
-    60%  { transform: translate(-8%, 10%)  scale(0.96); }
-    100% { transform: translate(6%,  -5%)  scale(1.03); }
+  @keyframes warm-drift {
+    0%   { transform: translate(0%,    0%)  scale(1); }
+    30%  { transform: translate(8%,   -5%)  scale(1.04); }
+    60%  { transform: translate(-6%,   8%)  scale(0.97); }
+    100% { transform: translate(5%,   -3%)  scale(1.02); }
+  }
+
+  /* Fade inferior del hero hacia el portfolio */
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 160px;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
   }
   .hero-blobs { display: none; }
 
@@ -523,16 +533,7 @@
   /* ══════════════════════════════════════════════════
      MARQUEE
   ══════════════════════════════════════════════════ */
-  .marquee-wrapper {
-    overflow: hidden; padding: 0;
-    height: 28px;
-    background-image: repeating-linear-gradient(
-      90deg,
-      #dcefff 0px, #dcefff 10px,
-      #3A2A26 10px, #3A2A26 30px,
-      #dcefff 30px, #dcefff 40px
-    );
-  }
+  .marquee-wrapper { display: none; }
   .marquee-track {
     display: none;
   }
@@ -792,9 +793,16 @@
   .bento-item {
     position: relative;
     overflow: hidden;
-    cursor: none; /* ocultamos el cursor nativo en desktop */
+    cursor: none;
     background: #f0ece6;
-    border-radius: 12px;  /* bordes redondeados */
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .bento-item.in-view {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* Grid 3 cols, items 4:3 */
@@ -1470,6 +1478,16 @@
   :root { --terracotta: #3A2A26; --cream: #fefce3; }
 
   .portfolio { background-color: #ffffff; border-top: none; padding-top: 0; position: relative; }
+  /* Fade superior del portfolio — se funde con el héroe */
+  .portfolio::before {
+    content: '';
+    display: block;
+    height: 80px;
+    background: linear-gradient(to bottom, #ffffff 0%, transparent 100%);
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+  }
   .portfolio-intro { margin-bottom: 40px; }
   .portfolio-title {
     font-family: var(--font-serif); font-size: clamp(34px, 4.5vw, 68px);
@@ -1855,8 +1873,6 @@
     </div>
   </section>
 
-  <!-- SEPARADOR — bandas celestes y marrón -->
-  <div class="marquee-wrapper" aria-hidden="true"></div>
 
     <!-- PORTFOLIO -->
   <section class="portfolio" id="portfolio" aria-label="Proyectos de portfolio">
@@ -2337,6 +2353,24 @@
       }
       requestAnimationFrame(loop);
     })();
+  })();
+
+  /* ── Bento items: aparición escalonada al scroll ── */
+  (function() {
+    var items = document.querySelectorAll('.bento-item');
+    if (!items.length) return;
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          var idx = Array.from(items).indexOf(e.target);
+          setTimeout(function() {
+            e.target.classList.add('in-view');
+          }, (idx % 3) * 80); // stagger por columna
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function(item) { io.observe(item); });
   })();
 
   /* ── Copy mail ── */

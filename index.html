@@ -2,6 +2,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -279,18 +280,31 @@
     align-items: center;
     padding: calc(var(--header-h) + 28px) 72px 60px;
     position: relative;
-    overflow: visible;
-    background: #ffffff;
+    overflow: hidden;
+    background: #fff;
   }
 
-  /* ── Fondo gradiente suave con ruido ── */
+  /* ── Aurora animada ── */
   .hero::before {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: -40%;
     z-index: 0;
-    background: transparent;
     pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 30%, rgba(240,217,106,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 70% at 80% 70%, rgba(220,239,255,0.28) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 55% 15%, rgba(254,252,227,0.18) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(147,201,232,0.14) 0%, transparent 55%);
+    animation: aurora-drift 12s ease-in-out infinite alternate;
+    filter: blur(28px);
+  }
+  @keyframes aurora-drift {
+    0%   { transform: translate(0%,    0%)   scale(1); }
+    25%  { transform: translate(4%,   -3%)   scale(1.04); }
+    50%  { transform: translate(-3%,   5%)   scale(0.97); }
+    75%  { transform: translate(5%,    2%)   scale(1.03); }
+    100% { transform: translate(-2%,  -4%)   scale(1.01); }
   }
   .hero-blobs { display: none; }
 
@@ -308,7 +322,10 @@
   }
 
   /* Layout de dos columnas: texto | foto */
+
   .hero-body {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
@@ -480,7 +497,9 @@
   }
 
   @media (max-width: 900px) {
-    .hero-body { grid-template-columns: 1fr; }
+    .hero-body {
+    position: relative;
+    z-index: 1; grid-template-columns: 1fr; }
     .hero-photo { height: auto; justify-content: flex-start; }
     .hero-photo-img { max-width: 360px; }
   }
@@ -549,14 +568,6 @@
     overflow: hidden;
   }
   /* Canvas del cielo */
-  #sky-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
   .sobre-mi .section-inner { position: relative; z-index: 1; padding-bottom: 48px; }
 
   .sobre-mi-grid { display: grid; grid-template-columns: 180px 1fr; gap: 80px; align-items: start; }
@@ -936,7 +947,9 @@
     .portfolio-banner { padding: 0; }
     .bento-filters { padding: 0 16px 20px; gap: 8px; }
     .bf-btn { font-size: 8px; padding: 6px 14px; }
-    .hero-body { grid-template-columns: 1fr; gap: 24px; }
+    .hero-body {
+    position: relative;
+    z-index: 1; grid-template-columns: 1fr; gap: 24px; }
     .hero-photo { margin-left: 0; }
     .hero-photo-img { max-width: 100%; }
     .sk-folders { grid-template-columns: repeat(2, 1fr); gap: 20px 16px; }
@@ -1221,75 +1234,75 @@
     position: relative;
   }
   .ct-inner {
-    max-width: 100%;
-    margin: 0;
-    padding: 64px 80px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 48px;
-    position: relative;
-  }
-
-
-
-  /* "Hablemos!" más chico, izquierda */
-  .ct-headline {
-    font-family: var(--font-serif);
-    font-style: normal;
-    font-size: clamp(36px, 5vw, 72px);
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: #fff;
-    user-select: none;
-    flex-shrink: 0;
-  }
-
-
-
-  /* Links contacto — tipográficos, uno por renglón */
-  .ct-pills {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 80px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    gap: 0;
-    position: static;
-    width: auto;
-    height: auto;
-    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    text-align: center;
   }
-  .ct-pill {
+
+
+
+
+
+
+
+  /* Título contacto */
+  .ct-titulo {
     font-family: var(--font-serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(28px, 3.5vw, 52px);
-    letter-spacing: -0.01em;
-    color: rgba(255,255,255,0.55);
+    font-size: clamp(36px, 5vw, 72px);
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  /* Links contacto — texto plano con subrayado hover */
+  .ct-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 32px;
+  }
+  .ct-link {
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: lowercase;
+    color: rgba(255,255,255,0.6);
     background: none;
     border: none;
-    box-shadow: none;
     padding: 4px 0;
-    border-radius: 0;
-    white-space: nowrap;
-    position: static;
-    transform: none;
-    line-height: 1.15;
     cursor: pointer;
-    display: block;
-    text-align: right;
-    transition: color 0.25s ease, letter-spacing 0.25s ease;
+    position: relative;
+    transition: color 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
-  .ct-pill:hover {
-    color: rgba(255,255,255,1);
-    letter-spacing: 0.01em;
-    background: none;
-    box-shadow: none;
-    transform: none;
+  /* Subrayado animado */
+  .ct-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: rgba(255,255,255,0.9);
+    transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
   }
-  .ct-pill-linkedin, .ct-pill-mail, .ct-pill-instagram {
-    transform: none; top: auto; right: auto; bottom: auto; z-index: auto;
+  .ct-link:hover { color: rgba(255,255,255,1); }
+  .ct-link:hover::after { width: 100%; }
+
+  @media (max-width: 768px) {
+    .ct-inner { padding: 56px 24px; gap: 24px; }
+    .ct-titulo { font-size: clamp(28px, 8vw, 48px); }
   }
 
 
@@ -1761,163 +1774,6 @@
     "knowsAbout": ["Diseño Gráfico", "Branding", "Identidad Visual", "Adobe Illustrator", "Adobe Photoshop", "Figma", "Packaging", "Social Media Design"]
   }
 
-  /* ── Cielo animado con nubes (sección sobre-mi / hero) ── */
-  (function() {
-    const canvas = document.getElementById('sky-canvas');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-
-    function resize() {
-      const parent = canvas.parentElement;
-      canvas.width  = parent.offsetWidth;
-      canvas.height = parent.offsetHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Gradiente de cielo
-    function drawSky() {
-      const w = canvas.width, h = canvas.height;
-      const grad = ctx.createLinearGradient(0, 0, 0, h);
-      grad.addColorStop(0,   '#b8dff5');
-      grad.addColorStop(0.5, '#ceeaf9');
-      grad.addColorStop(1,   '#e8f6fd');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, w, h);
-    }
-
-    // Clase nube
-    function Cloud(w, h) {
-      this.reset(w, h, true);
-    }
-    Cloud.prototype.reset = function(w, h, init) {
-      this.x     = init ? Math.random() * w : -400;
-      this.y     = Math.random() * h * 0.7;
-      this.speed = 0.18 + Math.random() * 0.22;
-      this.scale = 0.5 + Math.random() * 0.8;
-      this.alpha = 0.55 + Math.random() * 0.4;
-      this.w     = w;
-      this.h     = h;
-    };
-    Cloud.prototype.draw = function(ctx) {
-      ctx.save();
-      ctx.globalAlpha = this.alpha;
-      ctx.translate(this.x, this.y);
-      ctx.scale(this.scale, this.scale);
-      // Nube con círculos
-      ctx.fillStyle = '#fff';
-      ctx.beginPath();
-      ctx.arc(0,   0,  40, 0, Math.PI * 2);
-      ctx.arc(55, -10, 55, 0, Math.PI * 2);
-      ctx.arc(115,  0, 40, 0, Math.PI * 2);
-      ctx.arc(165,  8, 30, 0, Math.PI * 2);
-      ctx.arc(-35,  8, 30, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    };
-    Cloud.prototype.update = function() {
-      this.x += this.speed;
-      if (this.x > this.w + 500) this.reset(this.w, this.h, false);
-    };
-
-    const clouds = [];
-    const NUM_CLOUDS = 6;
-    for (let i = 0; i < NUM_CLOUDS; i++) {
-      clouds.push(new Cloud(canvas.width, canvas.height));
-    }
-
-    function loop() {
-      resize();
-      const w = canvas.width, h = canvas.height;
-      ctx.clearRect(0, 0, w, h);
-      drawSky();
-      clouds.forEach(c => { c.w = w; c.h = h; c.update(); c.draw(ctx); });
-      requestAnimationFrame(loop);
-    }
-    loop();
-  })();
-
-
-  /* ── Typewriter effect en el hero ── */
-  (function() {
-    const el      = document.getElementById('typewriter-text');
-    const cursor  = document.getElementById('typewriter-cursor');
-    if (!el || !cursor) return;
-
-    // Frase: "Hola, soy " + "Mili."
-    // La parte "Mili." va en serif italic — la dividimos en dos segmentos
-    const segments = [
-      { text: 'Hola, soy ', tag: 'span', class: '' },
-      { text: 'Mili.', tag: 'em', class: 'hero-name-inline' }
-    ];
-
-    // Aplanar todo en caracteres con su segmento
-    const chars = [];
-    segments.forEach((seg, si) => {
-      seg.text.split('').forEach((ch, ci) => {
-        chars.push({ char: ch, segIdx: si, charIdx: ci });
-      });
-    });
-
-    // Construir contenido actual
-    function buildHTML(upTo) {
-      let html = '';
-      let openSeg = -1;
-      for (let i = 0; i <= upTo && i < chars.length; i++) {
-        const c = chars[i];
-        if (c.segIdx !== openSeg) {
-          if (openSeg >= 0) html += '</' + segments[openSeg].tag + '>';
-          const seg = segments[c.segIdx];
-          html += '<' + seg.tag + (seg.class ? ' class="' + seg.class + '"' : '') + '>';
-          openSeg = c.segIdx;
-        }
-        // Escapar caracteres especiales
-        html += c.char === '&' ? '&amp;' : c.char === '<' ? '&lt;' : c.char;
-      }
-      if (openSeg >= 0 && upTo < chars.length) html += '</' + segments[openSeg].tag + '>';
-      return html;
-    }
-
-    let i = 0;
-    const totalChars = chars.length;
-
-    // Esperar a que la página cargue un poco antes de empezar
-    const startDelay = 600;
-    const charDelay  = 65; // ms entre cada letra
-    const extraDelay = { ' ': 0, ',': 120, '.': 200 }; // pausa en puntuación
-
-    function type() {
-      if (i >= totalChars) {
-        // Terminó — cursor parpadea
-        cursor.classList.remove('typing');
-        // Desaparecer cursor después de 3s
-        setTimeout(() => {
-          cursor.style.transition = 'opacity 0.6s';
-          cursor.style.opacity = '0';
-          setTimeout(() => cursor.remove(), 700);
-        }, 3000);
-        // Revelar el resto de elementos del hero
-        document.querySelectorAll('.hero-content .reveal').forEach(function(el) {
-          el.classList.add('visible');
-        });
-        return;
-      }
-      el.innerHTML = buildHTML(i);
-      const ch = chars[i].char;
-      const delay = charDelay + (extraDelay[ch] || 0);
-      i++;
-      setTimeout(type, delay);
-    }
-
-    // Ocultar temporalmente los reveals del hero-content hasta que termine typewriter
-    document.querySelectorAll('.hero-content .reveal').forEach(function(el) {
-      el.classList.remove('visible');
-    });
-
-    setTimeout(type, startDelay);
-  })();
-
   </script>
 </head>
 <body>
@@ -1957,8 +1813,7 @@
 
   <!-- HERO -->
   <section class="hero" id="hero" aria-label="Presentación">
-    <canvas id="sky-canvas" aria-hidden="true"></canvas>
-    <div class="hero-blobs" aria-hidden="true"></div>
+
     <div class="hero-body">
       <!-- Columna izquierda: texto -->
       <div class="hero-content">
@@ -2150,11 +2005,14 @@
   <!-- CONTACTO -->
   <section class="contacto" id="contacto" aria-label="Contacto">
     <div class="ct-inner">
-      <div class="ct-headline reveal">Hablemos!</div>
-      <div class="ct-pills reveal d2">
-        <a href="https://www.linkedin.com/in/milagros-m%C3%A1rquez/" target="_blank" rel="noopener" class="ct-pill ct-pill-linkedin">linkedin</a>
-        <button class="ct-pill ct-pill-mail" id="copy-mail-btn" data-mail="milimarquez.dg@gmail.com" aria-label="Copiar email">mail<span class="mail-tooltip">Click to copy</span></button>
-        <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-pill ct-pill-instagram">instagram</a>
+      <div class="ct-titulo reveal">¡Trabajemos juntos!</div>
+      <div class="ct-links reveal d2">
+        <a href="https://www.linkedin.com/in/milagros-m%C3%A1rquez/" target="_blank" rel="noopener" class="ct-link">linkedin</a>
+        <a href="https://wa.me/5491151149779" target="_blank" rel="noopener" class="ct-link">whatsapp</a>
+        <button class="ct-link" id="copy-mail-btn" data-mail="milimarquez.dg@gmail.com" aria-label="Copiar email">
+          mail<span class="mail-tooltip">copy now</span>
+        </button>
+        <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-link">instagram</a>
       </div>
     </div>
   </section>
@@ -2282,11 +2140,67 @@
     t.addEventListener('touchend', () => setTimeout(() => t.style.animationPlayState = 'running', 800), { passive: true });
   })();
 
-  /* Hero entrada */
+  /* ── Typewriter: "Hola, soy Mili." ── */
+  (function() {
+    var el     = document.getElementById('typewriter-text');
+    var cursor = document.getElementById('typewriter-cursor');
+    if (!el || !cursor) return;
+
+    // Asegurar que el headline es visible desde el inicio (solo el span contenedor)
+    var headline = document.querySelector('.hero-headline');
+    if (headline) headline.style.opacity = '1';
+    var lineSans = document.querySelector('.hero-line-sans');
+    if (lineSans) { lineSans.style.opacity = '1'; lineSans.classList.add('visible'); }
+
+    // Texto completo dividido en dos partes con distinto estilo
+    var part1 = 'Hola, soy ';   // sans-serif normal
+    var part2 = 'Mili.';         // serif italic grande
+
+    var allChars = (part1 + part2).split('');
+    var i = 0;
+    var BASE = 70;
+    var PAUSES = { ',': 150, '.': 250, ' ': 20 };
+
+    function render() {
+      var typed = allChars.slice(0, i).join('');
+      var t1 = typed.substring(0, Math.min(i, part1.length));
+      var t2 = typed.substring(part1.length);
+      var out = '';
+      if (t1) out += '<span>' + t1 + '</span>';
+      if (t2) out += '<em class="hero-name-inline">' + t2 + '</em>';
+      el.innerHTML = out;
+    }
+
+    function tick() {
+      if (i >= allChars.length) {
+        // Terminó de escribir
+        cursor.classList.remove('typing');
+        setTimeout(function() {
+          cursor.style.transition = 'opacity 0.5s';
+          cursor.style.opacity = '0';
+          setTimeout(function() { if (cursor.parentNode) cursor.parentNode.removeChild(cursor); }, 600);
+        }, 2500);
+        return;
+      }
+      render();
+      var ch = allChars[i];
+      var delay = BASE + (PAUSES[ch] || 0) + (Math.random() * 30);
+      i++;
+      setTimeout(tick, delay);
+    }
+
+    render();
+    setTimeout(tick, 400);
+  })();
+
+    /* Hero entrada — controlado por typewriter, no por reveal automático */
   (function () {
-    document.querySelectorAll('.hero .reveal').forEach((el, i) =>
-      setTimeout(() => el.classList.add('visible'), 180 + i * 150)
-    );
+    // Solo revelar elementos que NO son parte del typewriter
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      // El hero-headline lo maneja el typewriter
+      if (el.closest('.hero-headline')) return;
+      setTimeout(() => el.classList.add('visible'), 1800 + i * 150);
+    });
   })();
 
   /* Reduced motion */
@@ -2481,8 +2395,8 @@
     btn.addEventListener('click', function() {
       const mail = btn.dataset.mail;
       navigator.clipboard.writeText(mail).then(function() {
-        if (tooltip) { tooltip.textContent = '¡Copiado!'; tooltip.style.opacity = '1'; tooltip.style.transform = 'translateX(-50%) translateY(0)'; }
-        setTimeout(function() { if (tooltip) { tooltip.textContent = 'Click to copy'; tooltip.style.opacity = ''; tooltip.style.transform = ''; } }, 2000);
+        if (tooltip) { tooltip.textContent = '¡copiado!'; tooltip.style.opacity = '1'; tooltip.style.transform = 'translateX(-50%) translateY(0)'; }
+        setTimeout(function() { if (tooltip) { tooltip.textContent = 'copy now'; tooltip.style.opacity = ''; tooltip.style.transform = ''; } }, 2000);
       });
     });
   })();

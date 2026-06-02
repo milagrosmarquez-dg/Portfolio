@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -320,12 +319,9 @@
   /* ── Liquid Glass card ── */
   .glass-card {
     position: absolute;
-    top: calc(var(--header-h) + 68px);
-    left: 16px;
-    right: 16px;
-    bottom: 32px;
-    z-index: 1;
-    border-radius: 24px;
+    top: 16px; bottom: -48px; left: -56px; right: -56px;
+    z-index: -1;
+    border-radius: 28px;
     pointer-events: none;
     overflow: hidden;
   }
@@ -1897,6 +1893,7 @@
   <section class="hero" id="hero" aria-label="Presentación">
 
     <div class="hero-body">
+      <div class="glass-card" aria-hidden="true"><div class="glass-card-inner"></div></div>
       <!-- Columna izquierda: texto -->
       <div class="hero-content">
         <h1 class="hero-headline reveal">

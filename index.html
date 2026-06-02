@@ -1,5 +1,7 @@
 
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -277,7 +279,7 @@
     align-items: center;
     padding: calc(var(--header-h) + 28px) 72px 60px;
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     background-color: #ffffff;
     background-image:
       linear-gradient(rgba(22,21,21,0.07) 1px, transparent 1px),
@@ -303,14 +305,15 @@
 
   .hero-body {
     position: relative;
-    z-index: 1;
-      display: grid;
+    z-index: 2;
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 32px;
     align-items: center;
     width: 100%;
     max-width: 1200px;
     margin: 40px auto 0;
+    padding: 12px 0 36px;
   }
 
 
@@ -319,27 +322,31 @@
   /* ── Liquid Glass card ── */
   .glass-card {
     position: absolute;
-    top: 16px; bottom: -48px; left: -56px; right: -56px;
-    z-index: -1;
-    border-radius: 28px;
+    top: calc(var(--header-h) + 110px);
+    left: 100px;
+    right: 100px;
+    bottom: 72px;
+    z-index: 1;
+    border-radius: 24px;
     pointer-events: none;
-    overflow: hidden;
   }
   /* Capa de distorsión — imita la refracción del vidrio */
   .glass-card-inner {
     position: absolute;
     inset: 0;
-    border-radius: 28px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(20px) saturate(2) brightness(1.08) contrast(0.95);
-    -webkit-backdrop-filter: blur(20px) saturate(2) brightness(1.08) contrast(0.95);
-    border: 1.5px solid rgba(255,255,255,0.6);
-    border-top-color: rgba(255,255,255,1);
+    border-radius: 24px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(20px) saturate(1.8) brightness(1.04);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8) brightness(1.04);
+    border-top: 1.5px solid rgba(255,255,255,1);
+    border-left: 1.5px solid rgba(255,255,255,0.8);
+    border-right: 1px solid rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
     box-shadow:
-      0 16px 48px rgba(0,0,0,0.12),
-      0 4px 16px rgba(0,0,0,0.06),
-      inset 0 1.5px 0 rgba(255,255,255,1),
-      inset 0 -1px 0 rgba(255,255,255,0.1);
+      0 12px 40px rgba(0,0,0,0.08),
+      0 2px 8px rgba(0,0,0,0.04),
+      inset 0 1.5px 0 rgba(255,255,255,0.95),
+      inset 0 -1px 0 rgba(0,0,0,0.02);
   }
   /* Reflejo diagonal — la "luz" del liquid glass */
   .glass-card-inner::before {
@@ -367,10 +374,10 @@
     border-radius: 100px;
   }
 
-  .hero-content { position: relative; z-index: 2; }
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
 
   .hero-headline {
-    margin-top: 32px;
+    margin-top: 8px;
     margin-bottom: 20px;
     line-height: 1;
   }
@@ -430,7 +437,7 @@
     font-weight: 400;
     line-height: 1.85;
     color: var(--mid);
-    max-width: 360px;
+    max-width: 520px;
   }
   .hero-desc em { font-style: italic; color: var(--ink); }
 
@@ -516,7 +523,7 @@
   }
   .hero-photo-img {
     width: 100%;
-    max-width: 360px;
+    max-width: 520px;
     height: auto;
     display: block;
     mix-blend-mode: normal;
@@ -1892,8 +1899,8 @@
   <!-- HERO -->
   <section class="hero" id="hero" aria-label="Presentación">
 
+    <div class="glass-card" aria-hidden="true"><div class="glass-card-inner"></div></div>
     <div class="hero-body">
-      <div class="glass-card" aria-hidden="true"><div class="glass-card-inner"></div></div>
       <!-- Columna izquierda: texto -->
       <div class="hero-content">
         <h1 class="hero-headline reveal">

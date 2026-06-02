@@ -303,7 +303,7 @@
   .hero-body {
     position: relative;
     z-index: 1;
-    display: grid;
+      display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
@@ -311,22 +311,62 @@
     max-width: 1200px;
     margin: 40px auto 0;
   }
-  /* Recuadro vidrio detrás del contenido */
-  .hero-body::before {
+
+
+
+
+  /* ── Liquid Glass card ── */
+  .glass-card {
+    position: absolute;
+    top: 16px; bottom: -48px; left: -56px; right: -56px;
+    z-index: -1;
+    border-radius: 28px;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  /* Capa de distorsión — imita la refracción del vidrio */
+  .glass-card-inner {
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px) saturate(2) brightness(1.08) contrast(0.95);
+    -webkit-backdrop-filter: blur(20px) saturate(2) brightness(1.08) contrast(0.95);
+    border: 1.5px solid rgba(255,255,255,0.6);
+    border-top-color: rgba(255,255,255,1);
+    box-shadow:
+      0 16px 48px rgba(0,0,0,0.12),
+      0 4px 16px rgba(0,0,0,0.06),
+      inset 0 1.5px 0 rgba(255,255,255,1),
+      inset 0 -1px 0 rgba(255,255,255,0.1);
+  }
+  /* Reflejo diagonal — la "luz" del liquid glass */
+  .glass-card-inner::before {
     content: '';
     position: absolute;
-    top: 16px;
-    bottom: -48px;
-    left: -56px;
-    right: -56px;
-    z-index: -1;
-    border-radius: 24px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.5);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    inset: 0;
+    border-radius: 28px;
+    background: linear-gradient(
+      125deg,
+      rgba(255,255,255,0.55) 0%,
+      rgba(255,255,255,0.2) 20%,
+      transparent 45%,
+      rgba(255,255,255,0.05) 80%,
+      rgba(255,255,255,0.15) 100%
+    );
+    pointer-events: none;
   }
+  /* Arista brillante superior */
+  .glass-card-inner::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 5%; right: 5%;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, transparent);
+    border-radius: 100px;
+  }
+
+  .hero-content { position: relative; z-index: 2; }
 
   .hero-headline {
     margin-top: 32px;
@@ -407,52 +447,71 @@
     gap: 8px;
     margin-top: 20px;
   }
+
+
+  /* ── Liquid Glass pills — herramientas ── */
   .hero-tool {
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 9px; font-weight: 300;
     letter-spacing: 0.16em; text-transform: uppercase;
-    color: #3a3a3a;
-    background: rgba(255,255,255,0.38);
-    backdrop-filter: blur(24px) saturate(1.9) brightness(1.08);
-    -webkit-backdrop-filter: blur(24px) saturate(1.9) brightness(1.08);
-    border: 1px solid rgba(255,255,255,0.85);
+    color: #2a2a2a;
+    cursor: default;
+    /* Liquid glass: blur + saturate alto */
+    background: rgba(255,255,255,0.20);
+    backdrop-filter: blur(20px) saturate(2.5) brightness(1.1);
+    -webkit-backdrop-filter: blur(20px) saturate(2.5) brightness(1.1);
+    /* Bordes: superior muy blanco = arista de luz */
+    border: 1px solid rgba(255,255,255,0.5);
+    border-top: 1.5px solid rgba(255,255,255,1);
+    border-left: 1px solid rgba(255,255,255,0.75);
+    /* Sombra + inset highlight */
     box-shadow:
-      0 2px 8px rgba(0,0,0,0.08),
-      0 1px 2px rgba(0,0,0,0.04),
-      inset 0 2px 0 rgba(255,255,255,0.95),
+      0 4px 16px rgba(0,0,0,0.10),
+      0 1px 3px rgba(0,0,0,0.06),
+      inset 0 1.5px 0 rgba(255,255,255,1),
       inset 0 -1px 0 rgba(0,0,0,0.04);
-    padding: 6px 15px;
+    padding: 7px 16px;
     border-radius: 100px;
     position: relative;
     overflow: hidden;
     transition: all 0.22s ease;
+    user-select: none;
   }
-  /* Reflejo superior — vidrio real */
+  /* Reflejo de luz diagonal — el corazon del liquid glass */
   .hero-tool::before {
     content: '';
     position: absolute;
-    top: 0; left: 6%; right: 6%;
-    height: 48%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.65) 0%, transparent 100%);
+    top: 0; left: 0; right: 0;
+    height: 52%;
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.55) 0%,
+      rgba(255,255,255,0.15) 60%,
+      transparent 100%
+    );
     border-radius: 100px 100px 0 0;
     pointer-events: none;
   }
   .hero-tool:hover {
-    background: rgba(255,255,255,0.58);
+    background: rgba(255,255,255,0.38);
+    backdrop-filter: blur(24px) saturate(2.8) brightness(1.12);
+    -webkit-backdrop-filter: blur(24px) saturate(2.8) brightness(1.12);
     box-shadow:
-      0 4px 14px rgba(0,0,0,0.1),
-      inset 0 2px 0 rgba(255,255,255,1),
+      0 6px 20px rgba(0,0,0,0.12),
+      inset 0 1.5px 0 rgba(255,255,255,1),
       inset 0 -1px 0 rgba(0,0,0,0.04);
-    color: #111;
     transform: translateY(-1px);
+    color: #111;
+    cursor: default;
   }
-
 
   /* Placeholder foto */
   .hero-photo {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 2;
   }
   .hero-photo-img {
     width: 100%;
@@ -1785,6 +1844,17 @@
 </head>
 <body>
 
+
+  <!-- SVG filter: liquid glass distortion -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <filter id="liquid-glass-filter" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" seed="2" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
   <!-- Cursor halo de luz -->
   <div id="cursor-halo" aria-hidden="true"></div>
   <div id="cursor-label" aria-hidden="true">ver</div>
@@ -1822,6 +1892,7 @@
   <section class="hero" id="hero" aria-label="Presentación">
 
     <div class="hero-body">
+      <div class="glass-card" aria-hidden="true"><div class="glass-card-inner"></div></div>
       <!-- Columna izquierda: texto -->
       <div class="hero-content">
         <h1 class="hero-headline reveal">

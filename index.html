@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -332,49 +333,56 @@
     position: absolute;
     inset: 0;
     border-radius: 24px;
-    background: rgba(255,255,255,0.25);
-    backdrop-filter: blur(20px) saturate(1.8) brightness(1.04);
-    -webkit-backdrop-filter: blur(20px) saturate(1.8) brightness(1.04);
-    border-top: 1.5px solid rgba(255,255,255,1);
-    border-left: 1.5px solid rgba(255,255,255,0.8);
-    border-right: 1px solid rgba(255,255,255,0.5);
-    border-bottom: 1px solid rgba(255,255,255,0.4);
+    /* Color del fondo de la imagen: crema cálido */
+    background: rgba(250,247,242,0.18);
+    backdrop-filter: blur(14px) saturate(1.5) brightness(1.05);
+    -webkit-backdrop-filter: blur(14px) saturate(1.5) brightness(1.05);
+    /* Aristas del vidrio: superior más brillante */
+    border-top: 1.5px solid rgba(255,255,255,0.95);
+    border-left: 1px solid rgba(255,255,255,0.65);
+    border-right: 1px solid rgba(255,255,255,0.45);
+    border-bottom: 1px solid rgba(250,247,242,0.4);
     box-shadow:
-      0 12px 40px rgba(0,0,0,0.08),
-      0 2px 8px rgba(0,0,0,0.04),
-      inset 0 1.5px 0 rgba(255,255,255,0.95),
-      inset 0 -1px 0 rgba(0,0,0,0.02);
+      0 10px 36px rgba(0,0,0,0.07),
+      0 2px 6px rgba(0,0,0,0.04),
+      inset 0 1.5px 0 rgba(255,255,255,0.92),
+      inset 0 -1px 0 rgba(0,0,0,0.015);
   }
-  /* Reflejo diagonal — la "luz" del liquid glass */
+  /* Reflejo de luz — esquina superior izquierda más brillante */
   .glass-card-inner::before {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 28px;
+    border-radius: 24px;
     background: linear-gradient(
-      125deg,
-      rgba(255,255,255,0.55) 0%,
-      rgba(255,255,255,0.2) 20%,
-      transparent 45%,
-      rgba(255,255,255,0.05) 80%,
-      rgba(255,255,255,0.15) 100%
+      130deg,
+      rgba(255,255,255,0.28) 0%,
+      rgba(255,255,255,0.08) 30%,
+      transparent 55%,
+      rgba(250,247,242,0.04) 100%
     );
     pointer-events: none;
   }
-  /* Arista brillante superior */
+  /* Línea brillante en el borde superior — arista del vidrio */
   .glass-card-inner::after {
     content: '';
     position: absolute;
-    top: 0; left: 5%; right: 5%;
-    height: 1.5px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, transparent);
+    top: 0; left: 6%; right: 6%;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255,255,255,0.95) 15%,
+      rgba(255,255,255,1) 50%,
+      rgba(255,255,255,0.95) 85%,
+      transparent 100%
+    );
     border-radius: 100px;
   }
 
   .hero-content { position: relative; z-index: 2; max-width: 680px; }
 
   .hero-headline {
-    margin-top: 8px;
+    margin-top: 48px;
     margin-bottom: 20px;
     line-height: 1;
   }
@@ -517,10 +525,11 @@
     justify-content: center;
     position: relative;
     z-index: 2;
+    padding-top: 80px;
   }
   .hero-photo-img {
     width: 100%;
-    max-width: 520px;
+    max-width: 400px;
     height: auto;
     display: block;
     mix-blend-mode: normal;

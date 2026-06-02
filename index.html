@@ -1,12 +1,35 @@
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Milagros Márquez — Diseñadora Gráfica</title>
-  <meta name="description" content="Portfolio de Milagros Márquez, Diseñadora Gráfica especializada en branding, identidad visual y comunicación institucional." />
+  <title>Milagros Márquez — Diseñadora Gráfica | Branding &amp; Identidad Visual</title>
+  <meta name="description" content="Portfolio de Milagros Márquez, Diseñadora Gráfica especializada en branding, identidad visual y comunicación institucional. Pilar, Buenos Aires." />
+  <meta name="keywords" content="diseñadora gráfica, branding, identidad visual, portfolio, Buenos Aires, packaging, social media, editorial" />
+  <meta name="author" content="Milagros Márquez" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://milimarquez.com/" />
+
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Milagros Márquez — Diseñadora Gráfica" />
+  <meta property="og:description" content="Portfolio de Milagros Márquez, Diseñadora Gráfica especializada en branding, identidad visual y comunicación institucional." />
+  <meta property="og:url" content="https://milimarquez.com/" />
+  <meta property="og:image" content="foto-mili.png" />
+  <meta property="og:locale" content="es_AR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Milagros Márquez — Diseñadora Gráfica" />
+  <meta name="twitter:description" content="Portfolio de Milagros Márquez, Diseñadora Gráfica especializada en branding, identidad visual y comunicación institucional." />
+  <meta name="twitter:image" content="foto-mili.png" />
+
+  <!-- Fonts: preconnect primero, después el link -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Serif+Display:ital@0;1&family=Jost:wght@100;200;300&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
@@ -39,6 +62,35 @@
   /* ─── RESET ─── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html  { scroll-behavior: smooth; }
+
+  /* ── Skip link accesibilidad ── */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 9999;
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 20px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    border-radius: 0 0 6px 6px;
+    transition: top 0.2s;
+  }
+  .skip-link:focus { top: 0; }
+
+  /* ── Focus visible mejorado ── */
+  :focus-visible {
+    outline: 2px solid var(--warm);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .bento-item:focus-visible {
+    outline: 2px solid var(--warm);
+    outline-offset: -2px;
+  }
+
   body  {
     background: var(--bg);
     color: var(--ink);
@@ -199,19 +251,67 @@
     align-items: center;
     padding: calc(var(--header-h) + 28px) 72px 60px;
     position: relative;
-    overflow: visible;
-    background: var(--bg);
+    overflow: hidden;
+    background: #fffff8;
   }
 
-  /* Layout de dos columnas: texto | foto */
-  .hero-body {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 48px;
-    align-items: center;
-    justify-content: center; /* centra el grupo horizontalmente */
-    width: 100%;
+  /* ── Fondo de manchas desenfocadas ── */
+  .hero-blobs {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
   }
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.55;
+    animation: blob-drift 18s ease-in-out infinite alternate;
+  }
+  .hero-blob-1 {
+    width: 520px; height: 420px;
+    background: radial-gradient(circle, #f0d96a 0%, #fefce3 60%, transparent 100%);
+    top: -80px; left: -100px;
+    animation-duration: 20s;
+    animation-delay: 0s;
+    opacity: 0.08;
+  }
+  .hero-blob-2 {
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, #fef3a0 0%, #fffff3 65%, transparent 100%);
+    top: 30%; right: -60px;
+    animation-duration: 16s;
+    animation-delay: -5s;
+    opacity: 0.06;
+  }
+  .hero-blob-3 {
+    width: 300px; height: 260px;
+    background: radial-gradient(circle, #f0d96a 0%, #fefce3 55%, transparent 100%);
+    bottom: 40px; left: 30%;
+    animation-duration: 22s;
+    animation-delay: -9s;
+    opacity: 0.05;
+  }
+  .hero-blob-4 {
+    width: 240px; height: 200px;
+    background: radial-gradient(circle, #fde97a 0%, #fffef0 60%, transparent 100%);
+    top: 20%; left: 40%;
+    animation-duration: 14s;
+    animation-delay: -3s;
+    opacity: 0.04;
+  }
+
+  @keyframes blob-drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(30px, -20px) scale(1.06); }
+    66%  { transform: translate(-20px, 30px) scale(0.96); }
+    100% { transform: translate(15px, 10px) scale(1.03); }
+  }
+
+  /* Asegura que el contenido quede sobre los blobs */
+  .hero-body { position: relative; z-index: 1; }
 
   .hero-content { position: relative; z-index: 1; max-width: 480px; padding-right: 0; }
 
@@ -602,8 +702,9 @@
   .bento-item {
     position: relative;
     overflow: hidden;
-    cursor: pointer;
+    cursor: none; /* ocultamos el cursor nativo en desktop */
     background: #f0ece6;
+    border-radius: 12px;  /* bordes redondeados */
   }
 
   /* Grid 3 cols, items 4:3 */
@@ -626,6 +727,7 @@
 
   /* Placeholder centrado */
   .bento-ph {
+    position: absolute; inset: 0;
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
     transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
@@ -637,13 +739,44 @@
     color: rgba(22,21,21,0.28); text-align: center; padding: 16px;
   }
 
-  /* Imagen real */
+  /* Imagen real — primera imagen (siempre visible) */
   .bento-img {
     width: 100%; height: 100%;
     object-fit: cover; display: block;
-    transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
+    transition: opacity 0.55s cubic-bezier(0.25,0.1,0.25,1), transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
+    position: absolute; inset: 0;
   }
-  .bento-item:hover .bento-img { transform: scale(1.03); }
+  /* Segunda imagen (hover) */
+  .bento-img-hover {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.25,0.1,0.25,1), transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
+    transform: scale(1.04);
+  }
+  .bento-item:hover .bento-img        { opacity: 0; transform: scale(1.03); }
+  .bento-item:hover .bento-img-hover  { opacity: 1; transform: scale(1); }
+
+  /* ── Cursor halo de luz ── */
+  #cursor-halo {
+    position: fixed;
+    top: 0; left: 0;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.55) 0%, rgba(220,239,255,0.25) 45%, transparent 70%);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s, width 0.25s, height 0.25s;
+    mix-blend-mode: screen;
+    opacity: 0;
+  }
+  #cursor-halo.visible { opacity: 1; }
+  /* Cuando está sobre el bento, se agranda un poco */
+  #cursor-halo.on-bento {
+    width: 72px; height: 72px;
+  }
 
   /* Overlay hover con info */
   .bento-overlay {
@@ -702,15 +835,25 @@
   .bento-item:hover .bento-btn { transform: translateY(0); opacity: 1; transition-delay: 0.08s; }
   .bento-btn:hover { background: transparent; }
 
-  /* Número decorativo (siempre visible, esquina) */
-  .bento-num {
-    position: absolute; top: 18px; left: 22px;
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 12px; font-weight: 300;
-    color: rgba(22,21,21,0.3); z-index: 1;
-    transition: color 0.3s;
+  /* Etiqueta de categoría (esquina sup-izq) — pill estilo referencia */
+  .bento-tag {
+    position: absolute; top: 14px; left: 16px; z-index: 2;
+    font-family: var(--font-body);
+    font-size: 11px; font-weight: 300;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    background: rgba(255,255,255,0.88);
+    border: 1px solid rgba(22,21,21,0.18);
+    padding: 5px 13px;
+    border-radius: 100px;
+    backdrop-filter: blur(6px);
+    line-height: 1.4;
+    pointer-events: none;
+    transition: background 0.3s, color 0.3s;
   }
-  .bento-item:hover .bento-num { color: rgba(255,255,255,0.5); }
+  .bento-item:hover .bento-tag {
+    background: rgba(255,255,255,0.96);
+  }
 
   @media (max-width: 900px) {
     .bento {
@@ -1014,66 +1157,91 @@
 
 
   /* ══════════════════════════════════════════════════
-     CONTACTO — rediseño
+     CONTACTO — marrón, Hablemos!, pills apiladas
   ══════════════════════════════════════════════════ */
-
-  /* Banda hero */
-  .ct-hero {
+  .contacto {
     background: #3A2A26;
-    padding: 52px 80px 48px;
   }
-  .ct-hero-inner { max-width: 800px; }
+  .ct-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 80px 72px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+  }
 
-  .ct-hero-eyebrow {
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 10px; font-weight: 200;
-    letter-spacing: 0.26em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); margin-bottom: 12px;
+  /* "Hablemos!" — un poco más pequeño */
+  .ct-headline {
+    font-family: var(--font-serif);
+    font-style: normal;
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: #fff;
+    user-select: none;
   }
-  .ct-hero-title {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: clamp(36px, 6vw, 72px); font-weight: 300;
-    color: #fff; line-height: 0.95; margin-bottom: 20px;
-  }
-  .ct-hero-title em { font-style: normal; color: #fff; }
 
-  .ct-cta {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 13px; font-weight: 300; letter-spacing: 0.04em;
-    color: #fff; border-bottom: 1px solid rgba(255,255,255,0.4);
-    padding-bottom: 6px;
-    transition: border-color 0.3s, color 0.3s;
+  /* Contenedor pills — posicionamiento relativo para superposición */
+  .ct-pills {
+    position: relative;
+    width: 260px;
+    height: 110px;
+    flex-shrink: 0;
   }
-  .ct-cta:hover { border-color: #dcefff; color: #dcefff; }
-  .ct-cta-arrow { font-size: 18px; transition: transform 0.3s; }
-  .ct-cta:hover .ct-cta-arrow { transform: translate(3px,-3px); }
 
-  /* Links inline */
-  .ct-links {
-    display: flex; flex-wrap: wrap; align-items: center;
-    gap: 8px 0;
-    padding-top: 12px;
+  .ct-pill {
+    font-family: var(--font-body);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.7);
+    padding: 9px 22px;
+    border-radius: 100px;
+    white-space: nowrap;
+    position: absolute;
+    transition: background 0.3s, border-color 0.3s;
+    background: transparent;
   }
-  .ct-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
-    font-size: 12px; font-weight: 300; letter-spacing: 0.06em;
-    color: rgba(255,255,255,0.75);
-    border-bottom: 1px solid rgba(255,255,255,0.25);
-    padding-bottom: 2px; margin-right: 28px;
-    transition: color 0.3s, border-color 0.3s;
+  .ct-pill:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: #fff;
   }
-  .ct-link:hover { color: #fefce3; border-color: #fefce3; }
-  .ct-link-arrow { font-size: 14px; transition: transform 0.3s; }
-  .ct-link:hover .ct-link-arrow { transform: translate(2px,-2px); }
 
-  @media (max-width: 900px) {
-    .ct-hero { padding: 64px 48px 56px; }
+  /* linkedin — arriba a la derecha, leve rotación */
+  .ct-pill-linkedin {
+    top: 0px;
+    right: 0px;
+    transform: rotate(2deg);
   }
-  @media (max-width: 600px) {
-    .ct-hero { padding: 52px 24px 44px; }
-    .ct-link { font-size: 11px; margin-right: 20px; }
+
+  /* instagram — abajo a la derecha */
+  .ct-pill-instagram {
+    bottom: 0px;
+    right: 0px;
+    transform: rotate(-2deg);
+  }
+
+  /* mail — abajo a la izquierda, encima de instagram */
+  .ct-pill-mail {
+    bottom: 6px;
+    right: 100px;
+    transform: rotate(3deg);
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .ct-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 60px 24px 52px;
+      gap: 48px;
+    }
+    .ct-pills { width: 240px; height: 100px; }
   }
 
   /* ══════════════════════════════════════════════════
@@ -1458,20 +1626,66 @@
     100% { opacity: 0; transform: translate(-50%, -280%) scale(0.7) rotate(6deg); }
   }
 
+  /* ── Cursor halo de luz (solo sobre bento) ── */
+  #cursor-halo {
+    position: fixed;
+    top: 0; left: 0;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(220,239,255,0.3) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  #cursor-halo.visible { opacity: 1; }
+
   </style>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Milagros Márquez",
+    "jobTitle": "Diseñadora Gráfica",
+    "description": "Diseñadora Gráfica especializada en branding, identidad visual y comunicación institucional.",
+    "url": "https://milimarquez.com/",
+    "image": "foto-mili.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pilar",
+      "addressRegion": "Buenos Aires",
+      "addressCountry": "AR"
+    },
+    "email": "milimarquez.dg@gmail.com",
+    "sameAs": [
+      "https://instagram.com/laburitostudio",
+      "https://behance.net/milimarquez",
+      "https://www.linkedin.com/in/milagros-m%C3%A1rquez/"
+    ],
+    "knowsAbout": ["Diseño Gráfico", "Branding", "Identidad Visual", "Adobe Illustrator", "Adobe Photoshop", "Figma", "Packaging", "Social Media Design"]
+  }
+  </script>
 </head>
 <body>
 
+  <!-- Cursor halo de luz -->
+  <div id="cursor-halo" aria-hidden="true"></div>
+
+  <!-- SKIP LINK para accesibilidad -->
+  <a href="#hero" class="skip-link">Saltar al contenido principal</a>
+
   <!-- HEADER -->
-  <header class="site-header" id="site-header">
+  <header class="site-header" id="site-header" role="banner">
     <div class="header-inner">
 
       <nav class="nav-left" aria-label="Navegación principal">
         <a href="#hero"      class="nav-link">Sobre mí</a>
-        <a href="#skills"   class="nav-link">Skills</a>
-      </nav>
+              </nav>
 
-      <a href="#hero" class="logo-block" style="cursor:pointer; text-decoration:none;">
+      <a href="#hero" class="logo-block" aria-label="Milagros Márquez — inicio">
         <span class="logo-sub">Diseñadora Gráfica</span>
         <p class="logo-main">MILAGROS MÁRQUEZ</p>
       </a>
@@ -1481,22 +1695,31 @@
         <a href="#contacto"  class="nav-link">Contacto</a>
       </nav>
 
-      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
     </div>
 
-    <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Menú mobile">
       <a href="#hero"      class="mobile-link">Sobre mí</a>
-      <a href="#skills"    class="mobile-link">Skills</a>
-      <a href="#portfolio" class="mobile-link">Portfolio</a>
+            <a href="#portfolio" class="mobile-link">Portfolio</a>
       <a href="#contacto"  class="mobile-link">Contacto</a>
     </div>
   </header>
 
 
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+
   <!-- HERO -->
-  <section class="hero" id="hero">
+  <section class="hero" id="hero" aria-label="Presentación">
+    <!-- Fondo manchas -->
+    <div class="hero-blobs" aria-hidden="true">
+      <div class="hero-blob hero-blob-1"></div>
+      <div class="hero-blob hero-blob-2"></div>
+      <div class="hero-blob hero-blob-3"></div>
+      <div class="hero-blob hero-blob-4"></div>
+    </div>
     <div class="hero-body">
       <!-- Columna izquierda: texto -->
       <div class="hero-content">
@@ -1518,207 +1741,43 @@
       </div>
       <!-- Columna derecha: foto -->
       <div class="hero-photo reveal d2">
-        <img src="foto-mili.png" alt="Mili Márquez" class="hero-photo-img">
+        <img src="foto-mili.png" alt="Mili Márquez, Diseñadora Gráfica" class="hero-photo-img" width="520" height="620" fetchpriority="high">
       </div>
     </div>
   </section>
 
-
-  <!-- MARQUEE -->
-  <div class="marquee-wrapper" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-content">
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-      </div>
-      <div class="marquee-content" aria-hidden="true">
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-        <span>portfolio 2026</span><span class="dot">*</span>
-      </div>
-    </div>
-  </div>
-
-
-
-
-  <!-- SKILLS -->
-  <section class="skills" id="skills">
-    <div class="section-inner">
-
-      <!-- Technical Skills — estampillas -->
-      <div class="sk-technical-wrap reveal d1">
-        <span class="sk-group-label">Herramientas y software</span>
-        <div class="sk-folders">
-
-          <!-- Ai 90% -->
-          <div class="sk-folder">
-            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ai</text></svg></div>
-            <span>Adobe Illustrator</span>
-            <div class="sk-bar-wrap">
-              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="90"></div></div>
-              <span class="sk-bar-pct">90%</span>
-            </div>
-          </div>
-
-          <!-- Ps 90% -->
-          <div class="sk-folder">
-            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ps</text></svg></div>
-            <span>Adobe Photoshop</span>
-            <div class="sk-bar-wrap">
-              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="90"></div></div>
-              <span class="sk-bar-pct">90%</span>
-            </div>
-          </div>
-
-          <!-- Cv 90% -->
-          <div class="sk-folder">
-            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Cv</text></svg></div>
-            <span>Canva</span>
-            <div class="sk-bar-wrap">
-              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="90"></div></div>
-              <span class="sk-bar-pct">90%</span>
-            </div>
-          </div>
-
-          <!-- IA 80% -->
-          <div class="sk-folder">
-            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">IA</text></svg></div>
-            <span>Herramientas IA</span>
-            <div class="sk-bar-wrap">
-              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="80"></div></div>
-              <span class="sk-bar-pct">80%</span>
-            </div>
-          </div>
-
-          <!-- Fg 70% -->
-          <div class="sk-folder">
-            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Fg</text></svg></div>
-            <span>Figma</span>
-            <div class="sk-bar-wrap">
-              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="70"></div></div>
-              <span class="sk-bar-pct">70%</span>
-            </div>
-          </div>
-
-          <!-- Ae 60% -->
-          <div class="sk-folder">
-            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Ae</text></svg></div>
-            <span>After Effects</span>
-            <div class="sk-bar-wrap">
-              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="60"></div></div>
-              <span class="sk-bar-pct">60%</span>
-            </div>
-          </div>
-
-          <!-- Id 60% -->
-          <div class="sk-folder">
-            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Id</text></svg></div>
-            <span>Adobe InDesign</span>
-            <div class="sk-bar-wrap">
-              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="60"></div></div>
-              <span class="sk-bar-pct">60%</span>
-            </div>
-          </div>
-
-          <!-- Html 60% -->
-          <div class="sk-folder">
-            <div class="sk-stamp"><svg class="stamp-bg" viewBox="0 0 130 100" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M7,7 Q10,4 13,7 Q16,10 19,7 Q22,4 25,7 Q28,10 31,7 Q34,4 37,7 Q40,10 43,7 Q46,4 49,7 Q52,10 55,7 Q58,4 61,7 Q64,10 67,7 Q70,4 73,7 Q76,10 79,7 Q82,4 85,7 Q88,10 91,7 Q94,4 97,7 Q100,10 103,7 Q106,4 109,7 Q112,10 115,7 Q118,4 121,7 Q124,10 123,13 Q126,16 123,19 Q120,22 123,25 Q126,28 123,31 Q120,34 123,37 Q126,40 123,43 Q120,46 123,49 Q126,52 123,55 Q120,58 123,61 Q126,64 123,67 Q120,70 123,73 Q126,76 123,79 Q120,82 123,85 Q126,88 121,91 Q118,94 115,91 Q112,88 109,91 Q106,94 103,91 Q100,88 97,91 Q94,94 91,91 Q88,88 85,91 Q82,94 79,91 Q76,88 73,91 Q70,94 67,91 Q64,88 61,91 Q58,94 55,91 Q52,88 49,91 Q46,94 43,91 Q40,88 37,91 Q34,94 31,91 Q28,88 25,91 Q22,94 19,91 Q16,88 13,91 Q10,94 7,91 Q4,88 7,85 Q4,82 7,79 Q10,76 7,73 Q4,70 7,67 Q10,64 7,61 Q4,58 7,55 Q10,52 7,49 Q4,46 7,43 Q10,40 7,37 Q4,34 7,31 Q10,28 7,25 Q4,22 7,19 Q10,16 7,13 Q4,10 7,7Z"/><rect x="14" y="14" width="102" height="72" rx="3" fill="#dcefff"/><rect x="18" y="18" width="94" height="64" rx="2" fill="none" stroke="#c8b89a" stroke-width="0.8"/><text x="65" y="50" font-family="acumin-pro-wide,sans-serif" font-size="22" font-weight="300" fill="#161515" text-anchor="middle" dominant-baseline="middle">Html</text></svg></div>
-            <span>HTML</span>
-            <div class="sk-bar-wrap">
-              <div class="sk-bar-track"><div class="sk-bar-fill" data-pct="60"></div></div>
-              <span class="sk-bar-pct">60%</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Personal Skills -->
-      <div class="sk-personal reveal" style="margin-top: 72px;">
-        <span class="sk-group-label">Habilidades personales</span>
-        <div class="sk-pills">
-          <span class="sk-pill">Adaptabilidad</span>
-          <span class="sk-pill">Atención al detalle</span>
-          <span class="sk-pill">Gestión del tiempo</span>
-          <span class="sk-pill">Pensamiento creativo</span>
-          <span class="sk-pill">Trabajo en equipo</span>
-          <span class="sk-pill">Resolución de problemas</span>
-          <span class="sk-pill">Gestión de briefings</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-
-
+  <!-- SEPARADOR — bandas celestes y marrón -->
+  <div class="marquee-wrapper" aria-hidden="true"></div>
 
     <!-- PORTFOLIO -->
-  <!-- Marquee transición skills→portfolio -->
-  <div class="portfolio-wave" aria-hidden="true">
-    <div class="portfolio-wave-track">
-      <div class="portfolio-wave-content">
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-      </div>
-      <div class="portfolio-wave-content" aria-hidden="true">
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-        <span>portfolio 2026</span>
-      </div>
-    </div>
-  </div>
-
-  <section class="portfolio" id="portfolio">
+  <section class="portfolio" id="portfolio" aria-label="Proyectos de portfolio">
 
     <!-- Título portfolio -->
     <div class="portfolio-banner" id="portfolio-banner">
-      <img src="portfolio.png" alt="My Portfolio" class="banner-desktop">
-      <img src="portfolio.png" alt="My Portfolio" class="banner-mobile">
+      <img src="portfolio.png" alt="Portfolio — Milagros Márquez Diseñadora Gráfica" class="banner-desktop" width="1200" height="300" loading="lazy">
+      <img src="portfolio.png" alt="Portfolio — Milagros Márquez Diseñadora Gráfica" class="banner-mobile" width="600" height="200" loading="lazy">
     </div>
 
     <!-- Filtros -->
 
     <!-- Bento grid -->
-    <div class="bento">
+    <div class="bento" role="list">
 
-      <div class="bento-item" data-project="0" data-cat="branding" tabindex="0" role="button">
-        <span class="bento-num">01</span>
-        <img src="fdv-1.png" alt="FDV Centro de Entrenamiento" class="bento-img">
-        <div class="bento-overlay">
+      <div class="bento-item" data-project="0" data-cat="branding" tabindex="0" role="listitem button" aria-label="Ver proyecto: FDV Centro de Entrenamiento">
+        <span class="bento-tag" aria-hidden="true">Branding</span>
+        <img src="fdv-1.png" alt="FDV Centro de Entrenamiento — indumentaria institucional" class="bento-img" width="600" height="450" loading="lazy">
+        <img src="fdv-2.png" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
+        <div class="bento-overlay" aria-hidden="true">
           <span class="bento-cat">indumentaria institucional · branding aplicado</span>
           <h3 class="bento-name">FDV Centro de Entrenamiento</h3>
           <span class="bento-btn">ver proyecto</span>
         </div>
       </div>
 
-      <div class="bento-item" data-project="1" data-cat="editorial" tabindex="0" role="button">
-        <span class="bento-num">02</span>
-        <img src="infografia-1.jpg" alt="Infografía Mickey Mouse" class="bento-img">
+      <div class="bento-item" data-project="1" data-cat="editorial" tabindex="0" role="listitem button" aria-label="Ver proyecto: Infografía Mickey Mouse">
+        <span class="bento-tag" aria-hidden="true">Editorial</span>
+        <img src="infografia-1.jpg" alt="Infografía Mickey Mouse — diseño editorial" class="bento-img" width="600" height="450" loading="lazy">
+        <img src="infografia-2.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
         <div class="bento-overlay">
           <span class="bento-cat">editorial</span>
           <h3 class="bento-name">Infografía Mickey Mouse</h3>
@@ -1726,9 +1785,10 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="2" data-cat="identidad" tabindex="0" role="button">
-        <span class="bento-num">03</span>
-        <img src="munas1.jpg" alt="Munas — Manicuria Combinada" class="bento-img">
+      <div class="bento-item" data-project="2" data-cat="identidad" tabindex="0" role="listitem button" aria-label="Ver proyecto: Munas Manicuria Combinada">
+        <span class="bento-tag" aria-hidden="true">Identidad</span>
+        <img src="munas1.jpg" alt="Munas — Manicuria Combinada, identidad visual" class="bento-img" width="600" height="450" loading="lazy">
+        <img src="munas2.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
         <div class="bento-overlay">
           <span class="bento-cat">identidad visual · branding</span>
           <h3 class="bento-name">Munas — Manicuria Combinada</h3>
@@ -1737,9 +1797,10 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="3" data-cat="packaging" tabindex="0" role="button">
-        <span class="bento-num">04</span>
-        <img src="vino-1.jpg" alt="Chateau Roco" class="bento-img">
+      <div class="bento-item" data-project="3" data-cat="packaging" tabindex="0" role="listitem button" aria-label="Ver proyecto: Chateau Roco">
+        <span class="bento-tag" aria-hidden="true">Packaging</span>
+        <img src="vino-1.jpg" alt="Chateau Roco — packaging etiquetas de vino" class="bento-img" width="600" height="450" loading="lazy">
+        <img src="vino-2.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
         <div class="bento-overlay">
           <span class="bento-cat">packaging · etiquetas</span>
           <h3 class="bento-name">Chateau Roco</h3>
@@ -1748,9 +1809,10 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="4" data-cat="social" tabindex="0" role="button">
-        <span class="bento-num">05</span>
-        <img src="socialmedia-1.jpg" alt="Helardy Social Media" class="bento-img">
+      <div class="bento-item" data-project="4" data-cat="social" tabindex="0" role="listitem button" aria-label="Ver proyecto: Helardy">
+        <span class="bento-tag" aria-hidden="true">Social Media</span>
+        <img src="socialmedia-1.jpg" alt="Helardy — diseño de social media" class="bento-img" width="600" height="450" loading="lazy">
+        <img src="socialmedia-2.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
         <div class="bento-overlay">
           <span class="bento-cat">social media</span>
           <h3 class="bento-name">Helardy</h3>
@@ -1759,8 +1821,8 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="5" data-cat="social" tabindex="0" role="button">
-        <span class="bento-num">06</span>
+      <div class="bento-item" data-project="5" data-cat="social" tabindex="0" role="listitem button" aria-label="Ver proyecto: Social media y papelería">
+        <span class="bento-tag" aria-hidden="true">Social Media</span>
         <div class="bento-ph"><span>Social media & papelería</span></div>
         <div class="bento-overlay">
           <span class="bento-cat">social media · papelería</span>
@@ -1769,8 +1831,8 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="6" data-cat="editorial" tabindex="0" role="button">
-        <span class="bento-num">07</span>
+      <div class="bento-item" data-project="6" data-cat="editorial" tabindex="0" role="listitem button" aria-label="Ver proyecto: Editorial institucional">
+        <span class="bento-tag" aria-hidden="true">Editorial</span>
         <div class="bento-ph"><span>Editorial institucional</span></div>
         <div class="bento-overlay">
           <span class="bento-cat">diseño editorial</span>
@@ -1779,8 +1841,8 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="7" data-cat="branding" tabindex="0" role="button">
-        <span class="bento-num">08</span>
+      <div class="bento-item" data-project="7" data-cat="branding" tabindex="0" role="listitem button" aria-label="Ver proyecto: Sistema visual completo">
+        <span class="bento-tag" aria-hidden="true">Branding</span>
         <div class="bento-ph"><span>Sistema visual completo</span></div>
         <div class="bento-overlay">
           <span class="bento-cat">branding · sistema</span>
@@ -1789,8 +1851,8 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="8" data-cat="social" tabindex="0" role="button">
-        <span class="bento-num">09</span>
+      <div class="bento-item" data-project="8" data-cat="social" tabindex="0" role="listitem button" aria-label="Ver proyecto: Campañas digitales">
+        <span class="bento-tag" aria-hidden="true">Social Media</span>
         <div class="bento-ph"><span>Campañas digitales</span></div>
         <div class="bento-overlay">
           <span class="bento-cat">social media · campañas</span>
@@ -1799,8 +1861,8 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="9" data-cat="editorial" tabindex="0" role="button">
-        <span class="bento-num">10</span>
+      <div class="bento-item" data-project="9" data-cat="editorial" tabindex="0" role="listitem button" aria-label="Ver proyecto: Identidad editorial">
+        <span class="bento-tag" aria-hidden="true">Editorial</span>
         <div class="bento-ph"><span>Identidad editorial</span></div>
         <div class="bento-overlay">
           <span class="bento-cat">editorial · identidad</span>
@@ -1855,25 +1917,24 @@
   </div>
 
   <!-- CONTACTO -->
-  <section class="contacto" id="contacto">
+  <section class="contacto" id="contacto" aria-label="Contacto">
+    <div class="ct-inner">
 
-    <!-- Banda superior terracotta con headline grande -->
-    <div class="ct-hero">
-      <div class="ct-hero-inner">
-        <div class="ct-links reveal d2">
-          <a href="mailto:milimarquez.dg@gmail.com" class="ct-link">milimarquez.dg@gmail.com <span class="ct-link-arrow">&#x2197;&#xFE0E;</span></a>
-          <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-link">@laburitostudio <span class="ct-link-arrow">&#x2197;&#xFE0E;</span></a>
-          <a href="https://behance.net/milimarquez" target="_blank" rel="noopener" class="ct-link">Behance <span class="ct-link-arrow">&#x2197;&#xFE0E;</span></a>
-          <a href="https://www.linkedin.com/in/milagros-m%C3%A1rquez/" target="_blank" rel="noopener" class="ct-link">LinkedIn <span class="ct-link-arrow">&#x2197;&#xFE0E;</span></a>
-        </div>
+      <div class="ct-headline reveal">Hablemos!</div>
+
+      <div class="ct-pills reveal d2">
+        <a href="https://www.linkedin.com/in/milagros-m%C3%A1rquez/" target="_blank" rel="noopener" class="ct-pill ct-pill-linkedin">linkedin</a>
+        <a href="mailto:milimarquez.dg@gmail.com" class="ct-pill ct-pill-mail">mail</a>
+        <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-pill ct-pill-instagram">instagram</a>
       </div>
-    </div>
 
+    </div>
   </section>
 
+  </main><!-- /main-content -->
 
   <!-- FOOTER — mismo estilo que el header -->
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo" aria-label="Pie de página">
     <div class="footer-inner">
       <div class="footer-left">
         <span class="footer-name">Milagros Márquez</span>
@@ -2128,167 +2189,46 @@
     }, { passive: true });
   })();
 
-  /* ══════════════════════════════════════════════════
-     ANIMACIONES & MICROINTERACCIONES
-  ══════════════════════════════════════════════════ */
+  /* ── Cursor halo de luz — solo sobre proyectos del bento ── */
+  (function () {
+    const halo = document.getElementById('cursor-halo');
+    if (!halo) return;
+    if (!window.matchMedia('(pointer: fine)').matches) return;
 
-  /* ── Barras de progreso skills ── */
-  (function() {
-    const fills = document.querySelectorAll('.sk-bar-fill');
-    if (!fills.length) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const pct = e.target.dataset.pct || '0';
-          e.target.style.width = pct + '%';
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    fills.forEach(el => io.observe(el));
-  })();
+    let rx = 0, ry = 0, tx = 0, ty = 0;
+    let isOverBento = false;
 
-  /* ── Page entry animation ── */
-  (function() {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.6s ease';
-    window.addEventListener('load', () => {
-      requestAnimationFrame(() => { document.body.style.opacity = '1'; });
+    // Seguimiento continuo de posición
+    document.addEventListener('mousemove', (e) => {
+      tx = e.clientX; ty = e.clientY;
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      isOverBento = !!(el && el.closest('.bento-item'));
+      halo.classList.toggle('visible', isOverBento);
     });
-  })();
 
-  /* ── Scroll reveal mejorado con stagger ── */
-  (function() {
-    const els = document.querySelectorAll('.reveal');
-    if (!els.length) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
-    els.forEach(el => io.observe(el));
-    // Hero entra animado
-    document.querySelectorAll('.hero .reveal').forEach((el, i) =>
-      setTimeout(() => el.classList.add('visible'), 180 + i * 140)
-    );
-  })();
-
-  /* ── Header scroll shadow ── */
-  (function() {
-    const h = document.getElementById('site-header');
-    if (!h) return;
-    window.addEventListener('scroll', () => h.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
-  })();
-
-  /* ── Nav active ── */
-  (function() {
-    const sects = document.querySelectorAll('section[id]');
-    const links = document.querySelectorAll('.nav-link, .mobile-link');
-    if (!sects.length) return;
-    const hh = () => { const h = document.getElementById('site-header'); return h ? h.offsetHeight + 20 : 0; };
-    const set = () => {
-      const y = window.scrollY + hh(); let cur = '';
-      sects.forEach(s => { if (s.offsetTop <= y) cur = s.id; });
-      links.forEach(l => {
-        const on = l.getAttribute('href') === '#' + cur;
-        l.style.opacity = on ? '1' : ''; l.style.fontWeight = on ? '300' : '';
-      });
-    };
-    window.addEventListener('scroll', set, { passive: true }); set();
-  })();
-
-  /* ── Mobile menu — manejado arriba ── */
-
-  /* ── Smooth scroll ── */
-  (function() {
-    const hh = () => { const h = document.getElementById('site-header'); return h ? h.offsetHeight : 0; };
-    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
-      const id = a.getAttribute('href');
-      if (!id || id === '#') return;
-      const el = document.querySelector(id);
-      if (!el) return;
-      e.preventDefault();
-      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - hh(), behavior: 'smooth' });
-    }));
-  })();
-
-  /* ── Marquee touch ── */
-  (function() {
-    const t = document.querySelector('.marquee-track');
-    if (!t) return;
-    t.addEventListener('touchstart', () => t.style.animationPlayState = 'paused', { passive: true });
-    t.addEventListener('touchend', () => setTimeout(() => t.style.animationPlayState = 'running', 800), { passive: true });
-  })();
-
-  /* ── Reduced motion ── */
-  (function() {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const apply = r => { if (r) document.querySelectorAll('.reveal').forEach(el => { el.style.transition = 'none'; el.classList.add('visible'); }); };
-    apply(mq.matches); mq.addEventListener('change', e => apply(e.matches));
-  })();
-
-  /* ── FILTROS BENTO ── */
-  (function() {
-    const btns  = document.querySelectorAll('.bf-btn');
-    const items = document.querySelectorAll('.bento-item');
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        btns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        items.forEach(item => {
-          const cat = item.dataset.cat || '';
-          const show = filter === 'all' || cat === filter;
-          item.classList.toggle('hidden', !show);
-        });
-      });
+    document.addEventListener('mouseleave', () => {
+      isOverBento = false;
+      halo.classList.remove('visible');
     });
+
+    // rAF loop — siempre sigue al mouse pero solo es visible sobre bento
+    (function loop() {
+      rx += (tx - rx) * 0.18;
+      ry += (ty - ry) * 0.18;
+      halo.style.left = rx + 'px';
+      halo.style.top  = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
   })();
 
-
-
-  /* ── LIGHTBOX FULLSCREEN ── */
-  (function() {
-    const lb      = document.getElementById('pf-lightbox');
-    const lbClose = document.getElementById('pf-lightbox-close');
-    const lbImg   = document.getElementById('pf-lightbox-img');
-    const lbPh    = document.getElementById('pf-lightbox-ph');
-    if (!lb) return;
-
-    // Expose openLightbox globally so modal can call it
-    window.openLightbox = function(src, color, name) {
-      if (src) {
-        lbImg.src = src; lbImg.style.display = 'block';
-        lbPh.style.display = 'none';
-      } else {
-        lbPh.style.cssText = 'display:flex; background:' + color + '; width:80vw; max-width:600px; aspect-ratio:1; align-items:center; justify-content:center; border-radius:8px;';
-        lbPh.innerHTML = '<span style="font-family:var(--font-serif);font-style:italic;font-size:18px;color:rgba(255,255,255,0.4);">' + name + '</span>';
-        lbImg.style.display = 'none';
-      }
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    };
-
-    function closeLb() {
-      lb.classList.remove('open');
-      document.body.style.overflow = '';
-      lbImg.src = '';
-    }
-    lbClose.addEventListener('click', closeLb);
-    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
-  })();
-
-  /* ── Emoji cursor trail ── */
+  /* ── Emoji cursor trail — solo en sección hero ── */
   (function () {
     const EMOJIS = ['⚡', '✨', '💌', '🎨'];
     let lastX = 0, lastY = 0, lastTime = 0, emojiIdx = 0;
-    const MIN_DIST = 80;   // pixels between each emoji
-    const MIN_TIME = 220;  // ms minimum between spawns
+    const MIN_DIST = 80;
+    const MIN_TIME = 220;
 
-    function dist(x1, y1, x2, y2) {
-      return Math.hypot(x2 - x1, y2 - y1);
-    }
+    function dist(x1, y1, x2, y2) { return Math.hypot(x2 - x1, y2 - y1); }
 
     function spawnEmoji(x, y) {
       const el = document.createElement('span');
@@ -2298,8 +2238,6 @@
       el.style.top  = y + 'px';
       document.body.appendChild(el);
       emojiIdx++;
-
-      // Remove after animation ends
       setTimeout(() => el.remove(), 820);
     }
 

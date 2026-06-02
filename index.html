@@ -2,6 +2,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -253,7 +255,7 @@
     align-items: center;
     padding: calc(var(--header-h) + 28px) 72px 60px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     background: #ffffff;
   }
 
@@ -263,8 +265,22 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background: #ffffff;
+    background-color: #f4faff;
+    background-image: radial-gradient(circle, #93c9e8 1.4px, transparent 1.4px);
+    background-size: 22px 22px;
     pointer-events: none;
+  }
+  /* Fade en los bordes para suavizar los puntos */
+  .hero-blobs {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgba(244,250,255,0.7) 0%, rgba(244,250,255,0) 25%),
+      linear-gradient(to top,    rgba(244,250,255,0.7) 0%, rgba(244,250,255,0) 25%),
+      linear-gradient(to right,  rgba(244,250,255,0.7) 0%, rgba(244,250,255,0) 20%),
+      linear-gradient(to left,   rgba(244,250,255,0.7) 0%, rgba(244,250,255,0) 20%);
   }
 
   /* Ruido encima del gradiente */
@@ -358,20 +374,32 @@
     font-size: 9px; font-weight: 300;
     letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--mid);
-    background: rgba(255,255,255,0.35);
-    backdrop-filter: blur(14px) saturate(1.6);
-    -webkit-backdrop-filter: blur(14px) saturate(1.6);
-    border: 1px solid rgba(147,201,232,0.4);
-    box-shadow: 0 1px 6px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(16px) saturate(1.5);
+    -webkit-backdrop-filter: blur(16px) saturate(1.5);
+    border: 1px solid rgba(147,201,232,0.5);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8);
     padding: 6px 14px;
     border-radius: 100px;
     transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Reflejo de luz sutil */
+  .hero-tool::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 5%; right: 5%;
+    height: 45%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, transparent 100%);
+    border-radius: 100px 100px 0 0;
+    pointer-events: none;
   }
   .hero-tool:hover {
-    background: rgba(220,239,255,0.7);
-    border-color: rgba(77,184,216,0.6);
+    background: rgba(220,239,255,0.65);
+    border-color: rgba(77,184,216,0.65);
     color: #1a5c7a;
-    box-shadow: 0 2px 12px rgba(147,201,232,0.35), inset 0 1px 0 rgba(255,255,255,0.85);
+    box-shadow: 0 3px 14px rgba(147,201,232,0.3), inset 0 1px 0 rgba(255,255,255,0.85);
   }
 
 
@@ -1178,8 +1206,8 @@
     position: relative;
   }
   .ct-inner {
-    max-width: 1400px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     padding: 56px 80px;
     display: flex;
     flex-direction: row;
@@ -1226,21 +1254,11 @@
     text-transform: lowercase;
     color: rgba(255,255,255,0.95);
     /* Glass iOS 26 — capas que dan el efecto de vidrio */
-    background: linear-gradient(
-      135deg,
-      rgba(255,255,255,0.28) 0%,
-      rgba(255,255,255,0.10) 50%,
-      rgba(255,255,255,0.18) 100%
-    );
-    backdrop-filter: blur(24px) saturate(2);
-    -webkit-backdrop-filter: blur(24px) saturate(2);
-    border: 1px solid rgba(255,255,255,0.45);
-    /* Sombra exterior + highlight interno (efecto vidrio) */
-    box-shadow:
-      0 4px 24px rgba(0,0,0,0.22),
-      0 1px 0 rgba(255,255,255,0.08) inset,
-      0 -1px 0 rgba(0,0,0,0.1) inset,
-      inset 0 1.5px 0 rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(16px) saturate(1.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+    border: 1px solid rgba(255,255,255,0.42);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.35);
     padding: 11px 26px;
     border-radius: 100px;
     white-space: nowrap;
@@ -1261,17 +1279,9 @@
     pointer-events: none;
   }
   .ct-pill:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(255,255,255,0.38) 0%,
-      rgba(255,255,255,0.18) 50%,
-      rgba(255,255,255,0.28) 100%
-    );
-    border-color: rgba(255,255,255,0.65);
-    box-shadow:
-      0 6px 28px rgba(0,0,0,0.28),
-      inset 0 1.5px 0 rgba(255,255,255,0.6),
-      inset 0 -1px 0 rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.28);
+    border-color: rgba(255,255,255,0.6);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.45);
     transform: translateY(-2px);
   }
   .ct-pill-linkedin, .ct-pill-mail, .ct-pill-instagram {
@@ -1761,6 +1771,7 @@
 
   <!-- HERO -->
   <section class="hero" id="hero" aria-label="Presentación">
+    <div class="hero-blobs" aria-hidden="true"></div>
     <div class="hero-body">
       <!-- Columna izquierda: texto -->
       <div class="hero-content">

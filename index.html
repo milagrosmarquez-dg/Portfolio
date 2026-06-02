@@ -1,9 +1,4 @@
 
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -182,6 +177,16 @@
     opacity: 0;
   }
   .nav-link:hover { color: var(--warm); }
+  .nav-cv {
+    background: var(--ink);
+    color: #fff !important;
+    padding: 6px 16px;
+    border-radius: 100px;
+    letter-spacing: 0.14em;
+    transition: background 0.3s, color 0.3s !important;
+  }
+  .nav-cv:hover { background: var(--warm) !important; color: #fff !important; }
+  .nav-cv::after { display: none !important; }
   .nav-link:hover::after { transform: translateX(-50%) scale(1); opacity: 1; }
 
   .logo-block {
@@ -265,22 +270,25 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-color: #f4faff;
-    background-image: radial-gradient(circle, #93c9e8 1.4px, transparent 1.4px);
-    background-size: 22px 22px;
+    background: linear-gradient(
+      160deg,
+      #fffef0 0%,
+      #fefce3 30%,
+      #fffdf5 65%,
+      #ffffff 100%
+    );
     pointer-events: none;
   }
-  /* Fade en los bordes para suavizar los puntos */
+  /* Ruido sobre gradiente */
   .hero-blobs {
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background:
-      linear-gradient(to bottom, rgba(244,250,255,0.7) 0%, rgba(244,250,255,0) 25%),
-      linear-gradient(to top,    rgba(244,250,255,0.7) 0%, rgba(244,250,255,0) 25%),
-      linear-gradient(to right,  rgba(244,250,255,0.7) 0%, rgba(244,250,255,0) 20%),
-      linear-gradient(to left,   rgba(244,250,255,0.7) 0%, rgba(244,250,255,0) 20%);
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 160px 160px;
   }
 
   /* Ruido encima del gradiente */
@@ -373,33 +381,22 @@
     font-family: acumin-pro-wide, var(--font-body), sans-serif;
     font-size: 9px; font-weight: 300;
     letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--mid);
-    background: rgba(255,255,255,0.45);
-    backdrop-filter: blur(16px) saturate(1.5);
-    -webkit-backdrop-filter: blur(16px) saturate(1.5);
-    border: 1px solid rgba(147,201,232,0.5);
-    box-shadow: 0 1px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8);
+    color: #4a4a4a;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(236,236,240,0.9) 100%);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.10),
+      0 4px 12px rgba(0,0,0,0.06),
+      inset 0 1px 0 rgba(255,255,255,1);
     padding: 6px 14px;
     border-radius: 100px;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
     position: relative;
-    overflow: hidden;
-  }
-  /* Reflejo de luz sutil */
-  .hero-tool::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 5%; right: 5%;
-    height: 45%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, transparent 100%);
-    border-radius: 100px 100px 0 0;
-    pointer-events: none;
   }
   .hero-tool:hover {
-    background: rgba(220,239,255,0.65);
-    border-color: rgba(77,184,216,0.65);
-    color: #1a5c7a;
-    box-shadow: 0 3px 14px rgba(147,201,232,0.3), inset 0 1px 0 rgba(255,255,255,0.85);
+    background: linear-gradient(180deg, #ffffff 0%, #e0e0e5 100%);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.13), inset 0 1px 0 rgba(255,255,255,1);
+    color: #222;
   }
 
 
@@ -1250,39 +1247,28 @@
     font-style: normal;
     font-weight: 300;
     font-size: 13px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     text-transform: lowercase;
-    color: rgba(255,255,255,0.95);
-    /* Glass iOS 26 — capas que dan el efecto de vidrio */
-    background: rgba(255,255,255,0.18);
-    backdrop-filter: blur(16px) saturate(1.6);
-    -webkit-backdrop-filter: blur(16px) saturate(1.6);
-    border: 1px solid rgba(255,255,255,0.42);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.35);
+    color: #2a1f1c;
+    background: linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(228,228,232,0.95) 100%);
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow:
+      0 2px 6px rgba(0,0,0,0.14),
+      0 6px 20px rgba(0,0,0,0.08),
+      inset 0 1px 0 rgba(255,255,255,1);
     padding: 11px 26px;
     border-radius: 100px;
     white-space: nowrap;
     position: static;
     transform: none;
-    transition: all 0.25s ease;
+    transition: all 0.22s ease;
     cursor: pointer;
-    overflow: hidden;
-  }
-  /* Reflejo de luz en la parte superior */
-  .ct-pill::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 10%; right: 10%;
-    height: 40%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.35) 0%, transparent 100%);
-    border-radius: 100px 100px 0 0;
-    pointer-events: none;
   }
   .ct-pill:hover {
-    background: rgba(255,255,255,0.28);
-    border-color: rgba(255,255,255,0.6);
-    box-shadow: 0 4px 18px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.45);
+    background: linear-gradient(180deg, #ffffff 0%, #dcdce0 100%);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,1);
     transform: translateY(-2px);
+    color: #1a0f0c;
   }
   .ct-pill-linkedin, .ct-pill-mail, .ct-pill-instagram {
     transform: none;
@@ -1378,9 +1364,10 @@
 
 
 
-  /* Nav desktop oculto — solo hamburguesa */
-  .nav-left, .nav-right { display: none !important; }
-  .menu-toggle { display: flex !important; justify-self: end; }
+  /* Nav visible en desktop */
+  .nav-left  { display: flex !important; }
+  .nav-right { display: flex !important; }
+  .menu-toggle { display: none !important; }
   @media (max-width: 1024px) {
     .section-inner { padding: 80px 48px; }
     .header-inner  { padding: 0 28px; }
@@ -1680,6 +1667,39 @@
   }
 
 
+  /* Tooltip copy mail */
+  .mail-tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: #2a2a2a;
+    color: #fff;
+    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 10;
+  }
+  .mail-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #2a2a2a;
+  }
+  #copy-mail-btn { position: relative; }
+  #copy-mail-btn:hover .mail-tooltip { opacity: 1; transform: translateX(-50%) translateY(0); }
+  #copy-mail-btn .mail-tooltip { pointer-events: none; }
+
   /* "ver" — centrado dentro del halo */
   #cursor-label {
     position: fixed;
@@ -1741,7 +1761,8 @@
 
       <nav class="nav-left" aria-label="Navegación principal">
         <a href="#hero"      class="nav-link">Sobre mí</a>
-              </nav>
+        <a href="#portfolio" class="nav-link">Portfolio</a>
+      </nav>
 
       <a href="#hero" class="logo-block" aria-label="Milagros Márquez — inicio">
         <span class="logo-sub">Diseñadora Gráfica</span>
@@ -1749,19 +1770,10 @@
       </a>
 
       <nav class="nav-right" aria-label="Navegación secundaria">
-        <a href="#portfolio" class="nav-link">Portfolio</a>
-        <a href="#contacto"  class="nav-link">Contacto</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+        <a href="CV_MilagrosMarquez.pdf" target="_blank" rel="noopener" class="nav-link nav-cv">Curriculum</a>
       </nav>
 
-      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu">
-        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-      </button>
-    </div>
-
-    <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Menú mobile">
-      <a href="#hero"      class="mobile-link">Sobre mí</a>
-            <a href="#portfolio" class="mobile-link">Portfolio</a>
-      <a href="#contacto"  class="mobile-link">Contacto</a>
     </div>
   </header>
 
@@ -1967,7 +1979,7 @@
       <div class="ct-headline reveal">Hablemos!</div>
       <div class="ct-pills reveal d2">
         <a href="https://www.linkedin.com/in/milagros-m%C3%A1rquez/" target="_blank" rel="noopener" class="ct-pill ct-pill-linkedin">linkedin</a>
-        <a href="mailto:milimarquez.dg@gmail.com" class="ct-pill ct-pill-mail">mail</a>
+        <button class="ct-pill ct-pill-mail" id="copy-mail-btn" data-mail="milimarquez.dg@gmail.com" aria-label="Copiar email">mail<span class="mail-tooltip">Click to copy</span></button>
         <a href="https://instagram.com/laburitostudio" target="_blank" rel="noopener" class="ct-pill ct-pill-instagram">instagram</a>
       </div>
     </div>
@@ -2268,6 +2280,20 @@
     })();
   })();
 
+  /* ── Copy mail ── */
+  (function() {
+    const btn = document.getElementById('copy-mail-btn');
+    if (!btn) return;
+    const tooltip = btn.querySelector('.mail-tooltip');
+    btn.addEventListener('click', function() {
+      const mail = btn.dataset.mail;
+      navigator.clipboard.writeText(mail).then(function() {
+        if (tooltip) { tooltip.textContent = '¡Copiado!'; tooltip.style.opacity = '1'; tooltip.style.transform = 'translateX(-50%) translateY(0)'; }
+        setTimeout(function() { if (tooltip) { tooltip.textContent = 'Click to copy'; tooltip.style.opacity = ''; tooltip.style.transform = ''; } }, 2000);
+      });
+    });
+  })();
+
   /* ── Emoji cursor trail — solo en sección hero ── */
   (function () {
     const EMOJIS = ['⚡', '✨', '💌', '🎨'];
@@ -2309,3 +2335,4 @@
 
 </body>
 </html>
+

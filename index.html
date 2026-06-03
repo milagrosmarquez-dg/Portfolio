@@ -2179,7 +2179,7 @@
 
   /* ── Nav slide-up effect ── */
   (function() {
-    document.querySelectorAll('.nav-link').forEach(function(link) {
+    document.querySelectorAll('.nav-link:not(.cv-dropdown-item)').forEach(function(link) {
       const text = link.textContent.trim();
       // No duplicar si ya tiene el span (Curriculum con ícono)
       if (link.querySelector('.nl-real')) return;

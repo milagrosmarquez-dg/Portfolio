@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1946,13 +1947,12 @@
     <!-- Bento grid -->
     <div class="bento" role="list">
 
-      <div class="bento-item" data-project="0" data-cat="branding" tabindex="0" role="listitem button" aria-label="Ver proyecto: FDV Centro de Entrenamiento">
-        <span class="bento-tag" aria-hidden="true">Branding</span>
-        <img src="fdv-1.png" alt="FDV Centro de Entrenamiento — indumentaria institucional" class="bento-img" width="600" height="450" loading="lazy">
-        <img src="fdv-2.png" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
-        <div class="bento-overlay" aria-hidden="true">
-          <h3 class="bento-name">FDV Centro de Entrenamiento</h3>
-          <p class="bento-desc">Indumentaria institucional y branding aplicado para centro deportivo.</p>
+      <div class="bento-item" data-project="0" data-cat="" tabindex="0" role="listitem button" aria-label="Próximo proyecto">
+        <span class="bento-tag" aria-hidden="true">Próximamente</span>
+        <div class="bento-ph"><span>Próximo proyecto</span></div>
+        <div class="bento-overlay">
+          <h3 class="bento-name">Próximo proyecto</h3>
+          <p class="bento-desc">Proyecto en preparación — próximamente.</p>
         </div>
       </div>
 
@@ -1996,7 +1996,17 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="5" data-cat="social" tabindex="0" role="listitem button" aria-label="Ver proyecto: Social media y papelería">
+      <div class="bento-item" data-project="5" data-cat="merch" tabindex="0" role="listitem button" aria-label="Ver proyecto: FDV Centro de Entrenamiento">
+        <span class="bento-tag" aria-hidden="true">Merch</span>
+        <img src="fdv-1.png" alt="FDV Centro de Entrenamiento — indumentaria institucional" class="bento-img" width="600" height="450" loading="lazy">
+        <img src="fdv-2.png" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
+        <div class="bento-overlay" aria-hidden="true">
+          <h3 class="bento-name">FDV Centro de Entrenamiento</h3>
+          <p class="bento-desc">Indumentaria institucional y branding aplicado para centro deportivo.</p>
+        </div>
+      </div>
+
+      <div class="bento-item" data-project="6" data-cat="social" tabindex="0" role="listitem button" aria-label="Ver proyecto: Social media y papelería">
         <span class="bento-tag" aria-hidden="true">Social Media</span>
         <div class="bento-ph"><span>Social media & papelería</span></div>
         <div class="bento-overlay">
@@ -2005,7 +2015,7 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="6" data-cat="editorial" tabindex="0" role="listitem button" aria-label="Ver proyecto: Editorial institucional">
+      <div class="bento-item" data-project="7" data-cat="editorial" tabindex="0" role="listitem button" aria-label="Ver proyecto: Editorial institucional">
         <span class="bento-tag" aria-hidden="true">Editorial</span>
         <div class="bento-ph"><span>Editorial institucional</span></div>
         <div class="bento-overlay">
@@ -2014,7 +2024,7 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="7" data-cat="branding" tabindex="0" role="listitem button" aria-label="Ver proyecto: Sistema visual completo">
+      <div class="bento-item" data-project="8" data-cat="branding" tabindex="0" role="listitem button" aria-label="Ver proyecto: Sistema visual completo">
         <span class="bento-tag" aria-hidden="true">Branding</span>
         <div class="bento-ph"><span>Sistema visual completo</span></div>
         <div class="bento-overlay">
@@ -2023,7 +2033,7 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="8" data-cat="social" tabindex="0" role="listitem button" aria-label="Ver proyecto: Campañas digitales">
+      <div class="bento-item" data-project="9" data-cat="social" tabindex="0" role="listitem button" aria-label="Ver proyecto: Campañas digitales">
         <span class="bento-tag" aria-hidden="true">Social Media</span>
         <div class="bento-ph"><span>Campañas digitales</span></div>
         <div class="bento-overlay">
@@ -2031,7 +2041,7 @@
         </div>
       </div>
 
-      <div class="bento-item" data-project="9" data-cat="editorial" tabindex="0" role="listitem button" aria-label="Ver proyecto: Identidad editorial">
+      <div class="bento-item" data-project="10" data-cat="editorial" tabindex="0" role="listitem button" aria-label="Ver proyecto: Identidad editorial">
         <span class="bento-tag" aria-hidden="true">Editorial</span>
         <div class="bento-ph"><span>Identidad editorial</span></div>
         <div class="bento-overlay">
@@ -2246,14 +2256,13 @@
      PORTFOLIO — Bento grid + modal
   ══════════════════════════════════════════════════ */
   const PF_DATA = [
-    { cat: 'indumentaria institucional · branding aplicado', name: 'FDV Centro de Entrenamiento', desc: 'Desarrollo de piezas textiles destinadas al staff y socios del centro deportivo. El objetivo fue trasladar la identidad visual de la marca a un soporte físico, asegurando que el diseño sea funcional, legible y refuerce el sentido de comunidad.', accent: 'Indumentaria & Branding · 2025', color: '#1a1a2e', images: ['fdv-1.png', 'fdv-2.png', 'fdv-3.png', 'fdv-4.png'] },
+    { cat: '',                                                name: 'Próximo proyecto',            desc: 'Proyecto en preparación — próximamente.', accent: '', color: '#e8e8e8', images: [null] },
     { cat: 'editorial',                                      name: 'Infografía Mickey Mouse',     desc: 'Infografía editorial sobre la historia y evolución de Mickey Mouse. Diseño tipográfico, ilustración y composición visual en formato impreso.', accent: 'Editorial · 2025', color: '#1a1a1a', images: ['infografia-1.jpg', 'infografia-2.jpg', 'infografia-32.jpg'] },
     { cat: 'identidad visual · branding', name: 'Munas — Manicuria Combinada', desc: 'Desarrollo de identidad visual para estudio de manicuria combinada. Diseño de logotipo, paleta de color, tipografía y sistema de marca aplicado a piezas de comunicación y redes sociales.', accent: 'Identidad Visual · 2025', color: '#f5e6ef', images: ['munas1.jpg', 'munas2.jpg', 'munas3.jpg', 'munas4.jpg', 'munas5.jpg'] },
     { cat: 'packaging · etiquetas',                      name: 'Chateau Roco',                desc: 'Etiquetas de vino inspiradas en la estética Rococó — ilustraciones botánicas, tipografías caligráficas y detalles en dorado.',                                            accent: 'Packaging & Etiquetas · 2025', color: '#e8ddd5', images: ['vino-1.jpg', 'vino-2.jpg'] },
     { cat: 'social media',                                  name: 'Helardy',                     desc: 'Diseño de Instagram Stories para Helardy, cafetería & heladería.', accent: '', color: '#4a2d5e', images: ['socialmedia-1.jpg', 'socialmedia-2.jpg', 'socialmedia-3.jpg'] },
-    { cat: 'logo · identidad visual',                    name: 'Diseño de logotipo',          desc: 'Construcción de logotipo moderno con sistema tipográfico. Versiones monocromo, color y guía de uso.',                                                                     accent: 'Sistema tipográfico completo', color: '#dde8e4', images: [null, null, null] },
+    { cat: 'merch · indumentaria institucional',             name: 'FDV Centro de Entrenamiento', desc: 'Desarrollo de piezas textiles destinadas al staff y socios del centro deportivo. El objetivo fue trasladar la identidad visual de la marca a un soporte físico, asegurando que el diseño sea funcional, legible y refuerce el sentido de comunidad.', accent: 'Merch & Branding · 2025', color: '#1a1a2e', images: ['fdv-1.png', 'fdv-2.png', 'fdv-3.png', 'fdv-4.png'] },
     { cat: 'social media · papelería',                   name: 'Social media & papelería',    desc: 'Piezas para redes sociales y tarjetas corporativas dentro de un sistema de marca cohesivo.',                                                                              accent: 'Laburito Studio · 2026', color: '#dcefff', images: [null, null, null] },
-,
     { cat: 'diseño editorial',         name: 'Editorial institucional',    desc: 'Publicaciones, revistas y materiales impresos para instituciones. Diseño de grilla, selección tipográfica y producción completa.', accent: 'Editorial · 2025', color: '#e0ece8', images: [null, null, null] },
     { cat: 'branding · sistema',       name: 'Sistema visual completo',    desc: 'Desarrollo de sistema de identidad completo: naming, logomark, paleta, tipografía, papelería y guía de uso.', accent: 'Branding · 2025', color: '#f0e4ec', images: [null, null, null] },
     { cat: 'social media · campañas',  name: 'Campañas digitales',         desc: 'Diseño de campañas para redes sociales: piezas estáticas, stories, reels y contenido animado con identidad consistente.', accent: 'Social media · 2026', color: '#e8e8dc', images: [null, null, null] },

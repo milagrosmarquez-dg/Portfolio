@@ -4,7 +4,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1896,7 +1895,6 @@
       padding: 0 16px;
       height: 56px;
       position: relative;
-      /* Mantener grid 3-col pero colapsar nav-left/right */
       grid-template-columns: auto 1fr auto;
     }
     .nav-left  { display: none !important; }
@@ -1907,10 +1905,13 @@
       right: 16px;
       top: 50%;
       transform: translateY(-50%);
+      z-index: 200;
+      pointer-events: all !important;
     }
     .logo-block {
-      grid-column: 1 / 3;
+      grid-column: 1 / 2;
       text-align: left;
+      pointer-events: none;
     }
     .logo-sub  { font-size: 12px; }
     .logo-main { font-size: 11px; }
@@ -2045,6 +2046,8 @@
       right: 20px;
       top: 50%;
       transform: translateY(-50%);
+      z-index: 200;
+      pointer-events: all !important;
     }
 
     .hero { padding: calc(60px + 48px) 32px 72px; }
@@ -2426,18 +2429,27 @@
     const btn  = document.getElementById('menu-toggle');
     const menu = document.getElementById('mobile-menu');
     if (!btn || !menu) return;
-    btn.addEventListener('click', () => {
+
+    window.closeMobileMenu = function() {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    };
+
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
       const open = menu.classList.toggle('open');
       btn.classList.toggle('open', open);
       btn.setAttribute('aria-expanded', String(open));
     });
-    menu.querySelectorAll('.mobile-link').forEach((l) =>
-      l.addEventListener('click', () => {
-        menu.classList.remove('open');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-      })
-    );
+
+    menu.querySelectorAll('.mobile-link').forEach(function(l) {
+      l.addEventListener('click', window.closeMobileMenu);
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') window.closeMobileMenu();
+    });
   })();
 
   /* Smooth scroll */
@@ -2753,19 +2765,15 @@
 
   /* ── Hamburguesa mobile ── */
   (function() {
-    const btn  = document.getElementById('menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    if (!btn || !menu) return;
+    // closeMobileMenu para los onclick inline de los links
     window.closeMobileMenu = function() {
+      const menu = document.getElementById('mobile-menu');
+      const btn  = document.getElementById('menu-toggle');
+      if (!menu || !btn) return;
       menu.classList.remove('open');
       btn.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
     };
-    btn.addEventListener('click', function() {
-      const open = menu.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') window.closeMobileMenu();
     });

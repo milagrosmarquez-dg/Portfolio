@@ -1,9 +1,4 @@
 
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -476,20 +471,20 @@
     letter-spacing: 0.16em; text-transform: uppercase;
     color: #2a2a2a;
     cursor: default;
-    /* Liquid glass: blur + saturate alto */
-    background: rgba(255,255,255,0.20);
-    backdrop-filter: blur(20px) saturate(2.5) brightness(1.1);
-    -webkit-backdrop-filter: blur(20px) saturate(2.5) brightness(1.1);
+    /* Liquid glass con más blanco visible */
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(20px) saturate(1.8) brightness(1.05);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8) brightness(1.05);
     /* Bordes: superior muy blanco = arista de luz */
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.85);
     border-top: 1.5px solid rgba(255,255,255,1);
-    border-left: 1px solid rgba(255,255,255,0.75);
+    border-left: 1px solid rgba(255,255,255,0.9);
     /* Sombra + inset highlight */
     box-shadow:
-      0 4px 16px rgba(0,0,0,0.10),
-      0 1px 3px rgba(0,0,0,0.06),
+      0 4px 16px rgba(0,0,0,0.07),
+      0 1px 3px rgba(0,0,0,0.04),
       inset 0 1.5px 0 rgba(255,255,255,1),
-      inset 0 -1px 0 rgba(0,0,0,0.04);
+      inset 0 -1px 0 rgba(0,0,0,0.03);
     padding: 7px 16px;
     border-radius: 100px;
     position: relative;
@@ -513,13 +508,13 @@
     pointer-events: none;
   }
   .hero-tool:hover {
-    background: rgba(255,255,255,0.38);
-    backdrop-filter: blur(24px) saturate(2.8) brightness(1.12);
-    -webkit-backdrop-filter: blur(24px) saturate(2.8) brightness(1.12);
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(24px) saturate(2) brightness(1.06);
+    -webkit-backdrop-filter: blur(24px) saturate(2) brightness(1.06);
     box-shadow:
-      0 6px 20px rgba(0,0,0,0.12),
+      0 6px 20px rgba(0,0,0,0.09),
       inset 0 1.5px 0 rgba(255,255,255,1),
-      inset 0 -1px 0 rgba(0,0,0,0.04);
+      inset 0 -1px 0 rgba(0,0,0,0.03);
     transform: translateY(-1px);
     color: #111;
     cursor: default;

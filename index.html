@@ -2334,7 +2334,7 @@
       track.innerHTML = imgs.map((src, i) => {
         if (src && src.match(/\.mp4$/i)) {
           return `<div class="pf-car-slide${i===0?' active':''}" data-src="${src}" data-color="" data-type="video">` +
-                 `<video src="${src}" class="pf-car-video" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;display:block;"></video></div>`;
+                 `<video src="${src}" class="pf-car-video" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video></div>`;
         }
         if (src) {
           return `<div class="pf-car-slide${i===0?' active':''}" data-src="${src}" data-color="">` +

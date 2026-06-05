@@ -2,6 +2,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -2302,7 +2303,7 @@
     { cat: 'packaging · etiquetas',                      name: 'Chateau Roco',                desc: 'Etiquetas de vino inspiradas en la estética Rococó — ilustraciones botánicas, tipografías caligráficas y detalles en dorado.',                                            accent: 'Packaging & Etiquetas · 2025', color: '#e8ddd5', images: ['vino-1.jpg', 'vino-2.jpg'] },
     { cat: 'social media',                                  name: 'Helardy',                     desc: 'Diseño de Instagram Stories para Helardy, cafetería & heladería.', accent: '', color: '#4a2d5e', images: ['socialmedia-1.jpg', 'socialmedia-2.jpg', 'socialmedia-3.jpg'] },
     { cat: 'merch · indumentaria institucional',             name: 'FDV Centro de Entrenamiento', desc: 'Desarrollo de piezas textiles destinadas al staff y socios del centro deportivo. El objetivo fue trasladar la identidad visual de la marca a un soporte físico, asegurando que el diseño sea funcional, legible y refuerce el sentido de comunidad.', accent: 'Merch & Branding · 2025', color: '#1a1a2e', images: ['fdv-1.png', 'fdv-2.png', 'fdv-3.png', 'fdv-4.png'] },
-    { cat: 'identidad visual · branding · landing page',   name: 'Ítaca',                       desc: 'Desarrollo de identidad visual completa para Ítaca, consultora humana y coaching de negocios. Incluye logo, paleta de color, tipografía, papelería corporativa, merch y diseño y maquetación de landing page.', accent: 'Identidad Visual · Landing Page · 2025', color: '#0a366b', images: ['itaca1.jpg', 'itaca2.jpg', 'itaca3.jpg', 'itaca4.jpg', 'itaca5.jpg', 'itaca6.jpg', 'itaca7.jpg', 'itaca8.jpg', 'itaca9.jpg'] },
+    { cat: 'identidad visual · branding · landing page',   name: 'Ítaca',                       desc: 'Desarrollo de identidad visual completa para Ítaca, consultora humana y coaching de negocios. Incluye logo, paleta de color, tipografía, papelería corporativa, merch y diseño y maquetación de landing page.', accent: 'Identidad Visual · Landing Page · 2025', color: '#0a366b', images: ['itaca1.jpg', 'itaca4.jpg', 'Comp_1.mp4', 'itaca2.jpg', 'itaca3.jpg', 'itaca5.jpg', 'itaca6.jpg', 'itaca7.jpg', 'itaca8.jpg', 'itaca9.jpg'] },
     { cat: 'diseño editorial',         name: 'Editorial institucional',    desc: 'Publicaciones, revistas y materiales impresos para instituciones. Diseño de grilla, selección tipográfica y producción completa.', accent: 'Editorial · 2025', color: '#e0ece8', images: [null, null, null] },
     { cat: 'branding · sistema',       name: 'Sistema visual completo',    desc: 'Desarrollo de sistema de identidad completo: naming, logomark, paleta, tipografía, papelería y guía de uso.', accent: 'Branding · 2025', color: '#f0e4ec', images: [null, null, null] },
   ];
@@ -2331,6 +2332,10 @@
       const imgs = p.images;
 
       track.innerHTML = imgs.map((src, i) => {
+        if (src && src.match(/\.mp4$/i)) {
+          return `<div class="pf-car-slide${i===0?' active':''}" data-src="${src}" data-color="" data-type="video">` +
+                 `<video src="${src}" class="pf-car-video" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;display:block;"></video></div>`;
+        }
         if (src) {
           return `<div class="pf-car-slide${i===0?' active':''}" data-src="${src}" data-color="">` +
                  `<img src="${src}" alt="${p.name} — imagen ${i+1}"></div>`;
@@ -2341,10 +2346,11 @@
                `</div></div>`;
       }).join('');
 
-      // Lightbox on slide click
+      // Lightbox on slide click (solo para imágenes, no videos)
       requestAnimationFrame(() => {
         track.querySelectorAll('.pf-car-slide').forEach(slide => {
           slide.addEventListener('click', () => {
+            if (slide.dataset.type === 'video') return;
             if (window.openLightbox) window.openLightbox(slide.dataset.src || null, slide.dataset.color, p.name);
           });
         });
@@ -2367,7 +2373,13 @@
       const n = slides.length;
       imgIdx = Math.max(0, Math.min(i, n - 1));
 
-      slides.forEach((s, j) => s.classList.toggle('active', j === imgIdx));
+      slides.forEach((s, j) => {
+        s.classList.toggle('active', j === imgIdx);
+        const vid = s.querySelector('video');
+        if (vid) {
+          if (j === imgIdx) { vid.play(); } else { vid.pause(); }
+        }
+      });
 
       dotsEl.querySelectorAll('.pf-car-dot').forEach((d, j) =>
         d.classList.toggle('active', j === imgIdx)

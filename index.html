@@ -4,7 +4,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1118,16 +1117,17 @@
   /* Flechas */
   .pf-car-arr {
     position: absolute; top: 50%; transform: translateY(-50%);
-    background: rgba(255,255,255,0.15); border: none; cursor: pointer;
+    background: rgba(22,21,21,0.45); border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
     width: 36px; height: 36px; border-radius: 50%;
     font-size: 18px; display: flex; align-items: center; justify-content: center;
     color: #fff; z-index: 2; line-height: 1;
     transition: background 0.2s;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
   .pf-car-prev { left: 12px; }
   .pf-car-next { right: 12px; }
-  .pf-car-arr:hover { background: rgba(255,255,255,0.3); }
+  .pf-car-arr:hover { background: rgba(22,21,21,0.72); }
   .pf-car-arr[style*="opacity: 0"] { pointer-events: none; }
 
   /* Dots */

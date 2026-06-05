@@ -4,6 +4,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1875,6 +1876,149 @@
   .cv-dropdown-item:last-child { border-bottom: none; }
   .cv-dropdown-item:hover { background: rgba(22,21,21,0.04); color: var(--warm); }
   .cv-dd-icon { font-size: 13px; opacity: 0.5; }
+
+  /* ══════════════════════════════════════════════════
+     MOBILE — ajustes generales (max 480px)
+  ══════════════════════════════════════════════════ */
+  @media (max-width: 480px) {
+
+    /* ── Header ── */
+    .header-inner {
+      padding: 0 16px;
+      height: 56px;
+    }
+    .nav-left, .nav-right { display: none !important; }
+    .menu-toggle { display: flex !important; }
+    .logo-sub  { font-size: 13px; }
+    .logo-main { font-size: 12px; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: calc(56px + 40px) 20px 56px;
+      min-height: 100svh;
+    }
+    .hero-body {
+      grid-template-columns: 1fr;
+      padding: 0;
+      margin-top: 0;
+      gap: 32px;
+    }
+    .hero-logo-my       { font-size: clamp(48px, 14vw, 72px); }
+    .hero-logo-portfolio { font-size: clamp(40px, 12vw, 62px); }
+    .hero-logo-cursor   { width: clamp(18px, 5vw, 28px); height: clamp(22px, 6vw, 34px); }
+    .hero-desc          { font-size: 15px; line-height: 1.75; }
+    .hero-tools         { gap: 6px; margin-top: 28px; flex-wrap: wrap; }
+    .hero-tool          { font-size: 8px; padding: 6px 12px; }
+    .hero-photo         { display: none; }
+
+    /* ── Glass card hero ── */
+    .glass-card { display: none; }
+
+    /* ── Secciones internas ── */
+    .section-inner { padding: 56px 20px; }
+    .section-label { font-size: 9px; margin-bottom: 40px; }
+
+    /* ── Sobre mí ── */
+    .sobre-mi-grid { grid-template-columns: 1fr; gap: 32px; }
+    .sobre-mi-text { font-size: 15px; }
+
+    /* ── Skills ── */
+    .skills-layout  { grid-template-columns: 1fr; gap: 32px; }
+    .sk-folders     { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .sk-folder-label { font-size: 8px; }
+    .sk-folder svg  { max-width: 56px; }
+
+    /* ── Timeline experiencia ── */
+    .timeline-item  { grid-template-columns: 1fr; gap: 10px; padding: 28px 0; }
+    .timeline-meta  { flex-direction: row; align-items: center; gap: 10px; }
+    .timeline-role  { font-size: clamp(18px, 5vw, 26px); }
+    .timeline-desc  { font-size: 14px; }
+
+    /* ── Portfolio banner ── */
+    .portfolio-banner { padding: 20px 0; }
+    .portfolio-banner img { width: 92%; max-width: 92%; }
+
+    /* ── Bento grid — 2 cols en mobile ── */
+    .bento {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 10px 6px;
+      gap: 5px;
+    }
+    .bento-item       { aspect-ratio: 4/3; border-radius: 8px; }
+    .bento-item.b-wide { grid-column: span 1; }
+    .bento-tag        { font-size: 7px; padding: 4px 8px; }
+    .bento-name       { font-size: 13px; }
+    .bento-desc       { font-size: 11px; display: none; }
+
+    /* ── Modal ── */
+    .pf-modal-overlay { padding: 8px; }
+    .pf-modal {
+      width: 100%;
+      aspect-ratio: auto;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .pf-carousel      { flex: 1; min-height: 0; }
+    .pf-modal-body    { padding: 14px 16px; }
+    .pf-modal-title   { font-size: 16px; }
+    .pf-modal-desc    { font-size: 12px; line-height: 1.6; }
+    .pf-modal-cat-top { font-size: 8px; }
+    .pf-car-arr       { width: 32px; height: 32px; font-size: 20px; }
+
+    /* ── Contacto ── */
+    .ct-inner   { padding: 52px 20px 44px; flex-direction: column; gap: 32px; }
+    .ct-titulo  { font-size: clamp(32px, 11vw, 52px); }
+    .ct-links   { gap: 16px; flex-wrap: wrap; }
+    .ct-link    { font-size: 12px; }
+
+    /* ── Footer ── */
+    .footer-inner {
+      padding: 18px 20px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      height: auto;
+      min-height: 56px;
+    }
+    .footer-name { font-size: 9px; }
+    .footer-role { font-size: 7.5px; }
+    .footer-right { font-size: 9px; }
+
+    /* ── Marquee ── */
+    .portfolio-wave-content { gap: 48px; }
+    .portfolio-wave-content span { font-size: 13px; }
+
+    /* ── Cursor halo — ocultar en touch ── */
+    #cursor-halo, #cursor-label { display: none !important; }
+  }
+
+  /* ── Tablet 481–768px ── */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .header-inner { padding: 0 20px; }
+    .nav-left, .nav-right { display: none !important; }
+    .menu-toggle { display: flex !important; }
+
+    .hero { padding: calc(60px + 48px) 32px 72px; }
+    .hero-body { grid-template-columns: 1fr; padding: 0; gap: 32px; }
+    .hero-photo { display: none; }
+    .glass-card { display: none; }
+
+    .bento {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 20px 6px;
+      gap: 5px;
+    }
+    .bento-item { border-radius: 8px; }
+    .bento-item.b-wide { grid-column: span 1; }
+    .bento-desc { display: none; }
+
+    .section-inner { padding: 64px 32px; }
+    .sk-folders    { grid-template-columns: repeat(3, 1fr); }
+
+    .ct-inner  { padding: 56px 32px; }
+    .footer-inner { padding: 20px 32px; }
+  }
   </style>
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">

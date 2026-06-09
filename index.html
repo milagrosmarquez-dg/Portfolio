@@ -1481,14 +1481,6 @@
   };
 
   </script>
-  <link rel="preload" href="LOGOFOLIO-01.jpg" as="image" fetchpriority="high" />
-  <link rel="preload" href="itaca1.jpg" as="image" fetchpriority="high" />
-  <link rel="preload" href="infografia-1.jpg" as="image" fetchpriority="high" />
-  <link rel="preload" href="munas1.jpg" as="image" fetchpriority="high" />
-  <link rel="preload" href="Mix1.jpg" as="image" fetchpriority="high" />
-  <link rel="preload" href="vino-1.jpg" as="image" fetchpriority="high" />
-  <link rel="preload" href="socialmedia-1.jpg" as="image" fetchpriority="high" />
-  <link rel="preload" href="fdv-1.png" as="image" fetchpriority="high" />
 </head>
 <body>
 
@@ -1924,23 +1916,7 @@
     { cat: 'branding · sistema',       name: 'Sistema visual completo',    desc: 'Desarrollo de sistema de identidad completo: naming, logomark, paleta, tipografía, papelería y guía de uso.', accent: 'Branding · 2025', color: '#f0e4ec', images: [null, null, null] },
   ];
 
-  /* Preload de imágenes del bento — forzar carga inmediata en mobile */
-  (function() {
-    // Forzar carga de todas las bento-img quitando el lazy
-    document.querySelectorAll('.bento-img, .bento-img-hover').forEach(function(img) {
-      if (img.loading === 'lazy') {
-        img.loading = 'eager';
-      }
-      // Si la imagen todavía no cargó, forzar recarga
-      if (!img.complete || img.naturalWidth === 0) {
-        var src = img.src;
-        img.src = '';
-        img.src = src;
-      }
-    });
-  })();
-
-  /* Preload de imágenes del modal — se ejecuta después de un breve delay */
+  /* Preload de imágenes — se ejecuta después de un breve delay para no competir con el render inicial */
   setTimeout(function() { preloadProjectImages(PF_DATA); }, 800);
 
   /* ── Modal con carrusel de imágenes ── */
@@ -2262,5 +2238,4 @@
 
 </body>
 </html>
-
 

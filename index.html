@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -576,7 +574,7 @@
   .bento-item {
     position: relative;
     overflow: hidden;
-    cursor: none;
+    cursor: pointer;
     background: #f0ece6;
     border-radius: 12px;
     opacity: 1;
@@ -584,6 +582,9 @@
     transition: opacity 0.55s ease, transform 0.55s ease;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+  }
+  @media (pointer: fine) {
+    .bento-item { cursor: none; }
   }
   .bento-item.in-view {
     opacity: 1;
@@ -1349,20 +1350,19 @@
     .bento-desc       { font-size: 11px; display: none; }
 
     /* ── Modal ── */
-    .pf-modal-overlay { padding: 8px; }
+    .pf-modal-overlay { padding: 8px; align-items: flex-start; padding-top: 12px; }
     .pf-modal {
       width: 100%;
-      aspect-ratio: auto;
-      max-height: 92vh;
-      display: flex;
-      flex-direction: column;
+      aspect-ratio: 4 / 3;
     }
-    .pf-carousel      { flex: 1; min-height: 0; }
-    .pf-modal-body    { padding: 14px 16px; }
+    .pf-carousel { position: absolute; inset: 0; }
+    .pf-carousel-track { position: absolute; inset: 0; }
+    .pf-modal-body    { display: none; }
     .pf-modal-title   { font-size: 16px; }
     .pf-modal-desc    { font-size: 12px; line-height: 1.6; }
     .pf-modal-cat-top { font-size: 8px; }
     .pf-car-arr       { width: 32px; height: 32px; font-size: 20px; }
+    .pf-modal-top     { display: none; }
 
     /* ── Contacto — centrado igual que desktop ── */
     .ct-inner   { padding: 52px 20px 44px; flex-direction: column; align-items: center; gap: 32px; text-align: center; }
@@ -2010,10 +2010,8 @@
       buildCarousel(p);
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
-      // Force repaint en Safari — sin esto las imágenes dinámicas quedan negras
-      overlay.style.display = 'none';
-      overlay.offsetHeight; // trigger reflow
-      overlay.style.display = '';
+      // Force repaint en Safari — sin tocar display (el overlay ya es flex permanente)
+      requestAnimationFrame(function() { overlay.style.willChange = 'background'; requestAnimationFrame(function() { overlay.style.willChange = ''; }); });
     }
 
     function closeModal() {
@@ -2027,6 +2025,7 @@
       const idx = parseInt(item.dataset.project);
       item.addEventListener('click',   () => openModal(idx));
       item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(idx); });
+      item.addEventListener('touchend', function(e) { e.preventDefault(); openModal(idx); }, { passive: false });
     });
 
     prevBtn.addEventListener('click', () => goTo(imgIdx - 1));

@@ -859,6 +859,8 @@
     opacity: 1;
     transform: none;
     transition: opacity 0.55s ease, transform 0.55s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   .bento-item.in-view {
     opacity: 1;
@@ -903,6 +905,7 @@
     object-fit: cover; display: block;
     transition: opacity 0.55s cubic-bezier(0.25,0.1,0.25,1), transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
     position: absolute; inset: 0;
+    will-change: opacity, transform;
   }
   /* Segunda imagen (hover) */
   .bento-img-hover {
@@ -912,6 +915,7 @@
     opacity: 0;
     transition: opacity 0.55s cubic-bezier(0.25,0.1,0.25,1), transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
     transform: scale(1.04);
+    will-change: opacity, transform;
   }
   .bento-item:hover .bento-img        { opacity: 0; transform: scale(1.03); }
   .bento-item:hover .bento-img-hover  { opacity: 1; transform: scale(1); }
@@ -1884,6 +1888,8 @@
      MOBILE — ajustes generales (max 480px)
   ══════════════════════════════════════════════════ */
   @media (max-width: 480px) {
+    /* cursor:none bloquea tap en iOS Safari — resetear a pointer */
+    .bento-item { cursor: pointer; }
 
     /* ── Header — logo izq, hamburguesa absoluta der ── */
     .header-inner {
@@ -2029,6 +2035,8 @@
 
   /* ── Tablet 481–768px ── */
   @media (min-width: 481px) and (max-width: 768px) {
+    /* cursor:none bloquea tap en iOS Safari */
+    .bento-item { cursor: pointer; }
     .header-inner {
       padding: 0 20px;
       position: relative;
@@ -2154,7 +2162,8 @@
     <a href="#hero"      class="mobile-link" onclick="closeMobileMenu()">Sobre mí</a>
     <a href="#portfolio" class="mobile-link" onclick="closeMobileMenu()">Portfolio</a>
     <a href="#contacto"  class="mobile-link" onclick="closeMobileMenu()">Contacto</a>
-    <a href="#"          class="mobile-link" id="mobile-cv-link">Curriculum ↓</a>
+    <a href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAobWFpbHRvOm1pbGltYXJxdWV6LmRnQGdtYWlsLmNvbSkKPj4gL0JvcmRlciBbIDAgMCAwIF0gL1JlY3QgWyAyMzEuMjAzNiA3MjcuMzcwMSAzNTQuNzAzNiA3MzkuMzcwMSBdIC9TdWJ0eXBlIC9MaW5rIC9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKNSAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAoaHR0cHM6Ly9saW5rZWRpbi5jb20vaW4vbWlsYWdyb3MtbSVDMyVBMXJxdWV6KQo+PiAvQm9yZGVyIFsgMCAwIDAgXSAvUmVjdCBbIDM2OC40MjM2IDcyNy4zNzAxIDQwNi4yMjM2IDczOS4zNzAxIF0gL1N1YnR5cGUgL0xpbmsgL1R5cGUgL0Fubm90Cj4+CmVuZG9iago2IDAgb2JqCjw8Ci9BIDw8Ci9TIC9VUkkgL1R5cGUgL0FjdGlvbiAvVVJJIChodHRwczovL2JlaGFuY2UubmV0L21pbGltYXJxdWV6KQo+PiAvQm9yZGVyIFsgMCAwIDAgXSAvUmVjdCBbIDQxOS45NDM2IDcyNy4zNzAxIDQ1OS40MTM2IDczOS4zNzAxIF0gL1N1YnR5cGUgL0xpbmsgL1R5cGUgL0Fubm90Cj4+CmVuZG9iago3IDAgb2JqCjw8Ci9BIDw8Ci9TIC9VUkkgL1R5cGUgL0FjdGlvbiAvVVJJIChodHRwczovL21pbGFncm9zbWFycXVlei1kZy5naXRodWIuaW8vUG9ydGZvbGlvLykKPj4gL0JvcmRlciBbIDAgMCAwIF0gL1JlY3QgWyA0NzMuMTMzNiA3MjcuMzcwMSA1MDkuODEzNiA3MzkuMzcwMSBdIC9TdWJ0eXBlIC9MaW5rIC9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKOCAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAoaHR0cHM6Ly9pbnN0YWdyYW0uY29tL2xhYnVyaXRvc3R1ZGlvKQo+PiAvQm9yZGVyIFsgMCAwIDAgXSAvUmVjdCBbIDU3LjAyMzYyIDcxNC4zNzAxIDEyNi42NDM2IDcyNi4zNzAxIF0gL1N1YnR5cGUgL0xpbmsgL1R5cGUgL0Fubm90Cj4+CmVuZG9iago5IDAgb2JqCjw8Ci9Bbm5vdHMgWyA0IDAgUiA1IDAgUiA2IDAgUiA3IDAgUiA4IDAgUiBdIC9Db250ZW50cyAxMyAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCAxMiAwIFIgL1Jlc291cmNlcyA8PAovRm9udCAxIDAgUiAvUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PiAvUm90YXRlIDAgCiAgL1RyYW5zIDw8Cgo+PiAvVHlwZSAvUGFnZQo+PgplbmRvYmoKMTAgMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyAxMiAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjExIDAgb2JqCjw8Ci9BdXRob3IgKFwoYW5vbnltb3VzXCkpIC9DcmVhdGlvbkRhdGUgKEQ6MjAyNjA2MDMxODEwNDMrMDAnMDAnKSAvQ3JlYXRvciAoXCh1bnNwZWNpZmllZFwpKSAvS2V5d29yZHMgKCkgL01vZERhdGUgKEQ6MjAyNjA2MDMxODEwNDMrMDAnMDAnKSAvUHJvZHVjZXIgKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIFwob3BlbnNvdXJjZVwpKSAKICAvU3ViamVjdCAoXCh1bnNwZWNpZmllZFwpKSAvVGl0bGUgKFwoYW5vbnltb3VzXCkpIC9UcmFwcGVkIC9GYWxzZQo+PgplbmRvYmoKMTIgMCBvYmoKPDwKL0NvdW50IDEgL0tpZHMgWyA5IDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKMTMgMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMjIxMQo+PgpzdHJlYW0KR2F0bTw5bT5VLCcmRF9QZTIkVmpgZS8pO1ROPUpuZF9lL0JfWl0sN1wmXyVES3FsImxkQlpKanFYZmlALmlGaDtPTXBxcCVgWXFMRlxCPFRXWFBYNGhUVUcoLkZJQ01yalpAUz5hZD0lcTJTOEIkJyIoO2hpPz84QUBMYEQ+VkMmcShPMXRsbFMtdU1bYVBRUGxJI1QuYSUpTVwyL1kqViQ1WT4qSlQ5WGtOLl4wNilwYDBuPjpHJExWK2MtODxXM3JebXFNYkNqODxpLiVmdTF1RCNqIlhuX1M3LUo2KWI6TjFRImBZUTJzWy9vSj1Qbk9SQGhUPSlNQU88TE4vRkswVSVkQ0k+MFMtZSFRKD5EdC5RYEFDKWtHKnU8Y1pgTEsvOFZMXy5DaykmJ0Bgb2RicVIiRSUjXEYmbkdFO1xHTz5ePTFOOGZhSWBIVERfOU49WSJWLCUzJlJGI1FtPl8yJWw8Wi9gITE7O1xHMU9iZDlQUEFYO0N0dGovL1BOaishJmkjJ08uRDBrZDIlbGIlVzkzYUdLNmIqV04sTDZwVDEzYmw8KzwiLFFvRnA9UUkuUjUxJWE5WSJfZCc/LElALkA1bClXakVcVG1DXkRLJzpGN2BkNVpLOm5ZcyVZPVhgLTs0JnJqb1cnbVlQWF9VLGZmYC5CL2dKWjNdaltDJmhCNmcoaVNSMDRFLU8wQGs/cGRQWV4xNUI6Ty44QzYrM1JEaCIyYVx1ajE5WEwtXGA9MkdSWEc+bTBUMW4/RjU0OyhTQyM4Q10rZGZjXDlWI2QsL3FlSTUuPj9vX1JpXjFgS2VNKSw9S0ozcTF1LV88V3VjXmJWQCRUMixIXGIiMkc0JDgiW144a29HYz1lVzNyXVpmcTUoMWVtb2BZNEk2SlgwSiZMXyhMcU9XWU5NVWw5T2QvIilfZEVHMk0jPDttO3EqQmhcOUxyPWxnWVFpQHEkbmUlNmkrYV5bOk10KCskJyEnLk8nPzxQZ2wmQmZHZjRaWS9kOjRTWjs+KD8wNGdyODtaW01lYVByQj9NXkZvNz0lSiJgKFcpJm9OZDJ0JF9DTkx0MThpKyZdM1Y/M1RqNmxlbTBWW25WOiM9WlZYYGxuZm0kJk9pVFxtOClfdVI1bVBdZmNlXWInKytPL1NrQmBbUiQlKGFlUCxZXW46KlgrPWkjMCE5VFd1KTpvZjBNTDdxSTs+PDNjRUJoLUI6VHFsPDohYEdeTlkpX0JIQ0BQJ2w8TE1oX0hxQFRfOmJaME9XLmZRL1dQSiQ0R2RcXC9RSmFMVGtPOFQpMG5VWFlDWSZpSjw0JC1bNjclKUZKLjsqWjNyJWFnL1UkJnE+LlB0JUZkMFNfNWhlJmhtaE0pKFtGLzNbZGRZaU5oJUtGNTdoWi91RyhtR2E/YFBJMWgkaFZ1c2kyYUMzLjZMTjRJR2lnPlkobmsoTUtvLD1MQzhacDEpa2VzU11dNDg8Mj1lYmYxb08/M0REWUdeTFpPWShVWjokL1IzX1UrcCNVTWFOaVFJaCtlVUQpbWovY1QpRmohbWNvQShuQj50Py8yWSRCKlknPmw8QS9lciEqakAwRUdEWUNbS19tTXVeWWFPLTgxbVcmUS01J0RBbG1UNGJZM1suRk84OU1PMF9OXmw6bFJNUmVua0hVP1RCdTFxcmpfYmwtSi1VNyNiLUNKJWtfOU9fb2k4SGpPPzo3MitqVixMVVAkQ1IxVycucUReL11xOVRCYFRdVWNtIWBIKVRTJ1kuIk9MW0tEV0BCRkxqY2khPCRkYVhlRUFdNyVCblFNUyguQlNaRjs/aSNhOy5maCojIUBHVExOWTJtM3BBR1o/bVhqcSFAZ1BzZysnLkQ/WV4rJDZDTi9pJVFiSHNxTV9rOVwyIyRWS2pbNSdlRTk0MD84Pi1FYGZyJFlOa21AP0RQVzN1SjZWKmwqb2VWSldESmYmV0lRQmNLRTxbJiwtKmNjWTtvPVFGSzpATVxcUzgpSlIoM1RkaC4nbl8+Yj9yOVElRDZsa25rOj5SN15ZOy0xQWphY29jOSFkUnEkLVQxWFwjc11EOmlWcmFsPlRfPVtvMCJWbDY1clxFNS9SQmEvZkdKTUVaPE0zUD8nJitdJThkazxoaWJsK3U5Sit0OVk4PWpGRVVpY0FjdF9yLDIyLCo4YmlpJFkjNjtKVXInSTU6b1s4OHRYbSo7LWA9JlxJQEZaR0RKa1c9NHI0TGxQZVk4c29gWjRdNzRlOmQxW2pRUUk6TnVmYWckaWcqajE0JDUoPT04Pl4+QVxFSUF1T3NnPS5OPjZYPycvSkhVTGVFdT80Jy0pTStDQlUiOHVcaWkrOy51RUVtLWx0S21DRHNbNGNGLFtrMHR1Nz1MNT88WlJjX0RxJ0c2Qys+WkVcP286T11UQF9vPFclP0F0OitaZWBEKlJvYyEnbDY0PFU5WVhdaidiOidVNElHRmwrdCkuOm4+PkxxYWJuQEk9SFVccFRlUlhGWVdwUm45WF9JLF06dFdLQiI8bj9hWFpAO1dcL0pLQDNJK1JHT1cxY2dUQlM6ZkNHJChiU1hHQnNfITgqOU9iVy04VTQ5bVtyUDZLb0ZJckMicjxpR05FUD1cTGpiZztzIlM+YzkjP1tUJERvUztGXkRcZTx0UHA2RmkxXVRadDpKQjdeJztCXV5sKS0uOlsoKUooRyM5VWYucWdPSGVfITVpJ000bExgKnA9SmVVNDtqYiVjVVk9Lks0L0c0P2dqS1cmJGtRdDd1IUEhUlNFSmgmWTpNXD5bKm9PQUVJZmI5cmtlU28zQ1xeViNaLllrLXQ3cGZmcjhLXzg4KSVYbHUyN1dhM2ZsSEpBPmU6OXJtLDM5OkJLXU1aQ2xXXkFPK2M0JCRTM1hAOUEoPkQ+V2RwPlJ1WSNERCtEWEc5O1VPTjtbWU5IQX4+ZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgMTQKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMDIgMDAwMDAgbiAKMDAwMDAwMDIwOSAwMDAwMCBuIAowMDAwMDAwMzIxIDAwMDAwIG4gCjAwMDAwMDA1MDQgMDAwMDAgbiAKMDAwMDAwMDcwMSAwMDAwMCBuIAowMDAwMDAwODg0IDAwMDAwIG4gCjAwMDAwMDEwODMgMDAwMDAgbiAKMDAwMDAwMTI3MSAwMDAwMCBuIAowMDAwMDAxNTE4IDAwMDAwIG4gCjAwMDAwMDE1ODggMDAwMDAgbiAKMDAwMDAwMTg2OSAwMDAwMCBuIAowMDAwMDAxOTI5IDAwMDAwIG4gCnRyYWlsZXIKPDwKL0lEIApbPGU5ZjAzMGM4Y2IzNmRhYjFiYzkwNWFkOGUxYWQ1YzIwPjxlOWYwMzBjOGNiMzZkYWIxYmM5MDVhZDhlMWFkNWMyMD5dCiUgUmVwb3J0TGFiIGdlbmVyYXRlZCBQREYgZG9jdW1lbnQgLS0gZGlnZXN0IChvcGVuc291cmNlKQoKL0luZm8gMTEgMCBSCi9Sb290IDEwIDAgUgovU2l6ZSAxNAo+PgpzdGFydHhyZWYKNDIzMgolJUVPRgo=" download="CV_MilagrosMarquez_ES.pdf" class="mobile-link" onclick="closeMobileMenu()">Curriculum — Español ↓</a>
+    <a href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAobWFpbHRvOm1pbGltYXJxdWV6LmRnQGdtYWlsLmNvbSkKPj4gL0JvcmRlciBbIDAgMCAwIF0gL1JlY3QgWyAyMzEuMjAzNiA3MjcuMzcwMSAzNTQuNzAzNiA3MzkuMzcwMSBdIC9TdWJ0eXBlIC9MaW5rIC9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKNSAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAoaHR0cHM6Ly9saW5rZWRpbi5jb20vaW4vbWlsYWdyb3MtbSVDMyVBMXJxdWV6KQo+PiAvQm9yZGVyIFsgMCAwIDAgXSAvUmVjdCBbIDM2OC40MjM2IDcyNy4zNzAxIDQwNi4yMjM2IDczOS4zNzAxIF0gL1N1YnR5cGUgL0xpbmsgL1R5cGUgL0Fubm90Cj4+CmVuZG9iago2IDAgb2JqCjw8Ci9BIDw8Ci9TIC9VUkkgL1R5cGUgL0FjdGlvbiAvVVJJIChodHRwczovL2JlaGFuY2UubmV0L21pbGltYXJxdWV6KQo+PiAvQm9yZGVyIFsgMCAwIDAgXSAvUmVjdCBbIDQxOS45NDM2IDcyNy4zNzAxIDQ1OS40MTM2IDczOS4zNzAxIF0gL1N1YnR5cGUgL0xpbmsgL1R5cGUgL0Fubm90Cj4+CmVuZG9iago3IDAgb2JqCjw8Ci9BIDw8Ci9TIC9VUkkgL1R5cGUgL0FjdGlvbiAvVVJJIChodHRwczovL21pbGFncm9zbWFycXVlei1kZy5naXRodWIuaW8vUG9ydGZvbGlvLykKPj4gL0JvcmRlciBbIDAgMCAwIF0gL1JlY3QgWyA0NzMuMTMzNiA3MjcuMzcwMSA1MDkuODEzNiA3MzkuMzcwMSBdIC9TdWJ0eXBlIC9MaW5rIC9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKOCAwIG9iago8PAovQSA8PAovUyAvVVJJIC9UeXBlIC9BY3Rpb24gL1VSSSAoaHR0cHM6Ly9pbnN0YWdyYW0uY29tL2xhYnVyaXRvc3R1ZGlvKQo+PiAvQm9yZGVyIFsgMCAwIDAgXSAvUmVjdCBbIDU3LjAyMzYyIDcxNC4zNzAxIDEyNi42NDM2IDcyNi4zNzAxIF0gL1N1YnR5cGUgL0xpbmsgL1R5cGUgL0Fubm90Cj4+CmVuZG9iago5IDAgb2JqCjw8Ci9Bbm5vdHMgWyA0IDAgUiA1IDAgUiA2IDAgUiA3IDAgUiA4IDAgUiBdIC9Db250ZW50cyAxMyAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCAxMiAwIFIgL1Jlc291cmNlcyA8PAovRm9udCAxIDAgUiAvUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PiAvUm90YXRlIDAgCiAgL1RyYW5zIDw8Cgo+PiAvVHlwZSAvUGFnZQo+PgplbmRvYmoKMTAgMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyAxMiAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjExIDAgb2JqCjw8Ci9BdXRob3IgKFwoYW5vbnltb3VzXCkpIC9DcmVhdGlvbkRhdGUgKEQ6MjAyNjA2MDMxODEwNDMrMDAnMDAnKSAvQ3JlYXRvciAoXCh1bnNwZWNpZmllZFwpKSAvS2V5d29yZHMgKCkgL01vZERhdGUgKEQ6MjAyNjA2MDMxODEwNDMrMDAnMDAnKSAvUHJvZHVjZXIgKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIFwob3BlbnNvdXJjZVwpKSAKICAvU3ViamVjdCAoXCh1bnNwZWNpZmllZFwpKSAvVGl0bGUgKFwoYW5vbnltb3VzXCkpIC9UcmFwcGVkIC9GYWxzZQo+PgplbmRvYmoKMTIgMCBvYmoKPDwKL0NvdW50IDEgL0tpZHMgWyA5IDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKMTMgMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMjEyNgo+PgpzdHJlYW0KR2F0bTxoY0plcydSb2VbXDhUUlczYUwxIiFxUzdJa1ZBblgvJ1E8LDNQTkVFOSNlNyZVbz1pRnI4W011L1taXjkncXBEa0JsXF5icXNNLk81VEBKVnJlPC9DXyVjbDItOXRoJ2NAUGJOJig9R286QTk1KE9gRyczbGEwcU5FMW40cU5uOCtdPl9lQjJHKD8yO0NuPVk2TEdER3QicE4jRl8/RGtQLl9OMmVjb1UzPTdTNzkzRzNTZmpyUSpacUc7L3QqZSktL1VeW1xxXCE4anQhaTBLNlpjQzUjX0tgVUQ0QjcxMmkhQE5jJSRRZC5zYkJUNyoiYT1wWUJKUVVtKU9ObkNpbyo0RD5iKC4sNWU9WnNINyM8QCVgSTwhXTIjVEEnZW1IQSpbKUJlZUhGNGVqM2s/dUphO3NhQzRiPmQqTyE0OV9eQyImYVNoJ1hsWkNga1RYaSVKVF5TUGlBRydJYjRzaERXJUYvWiJWUj9kRWcvXTFDSyU6Y185QzlWX2M0XHA8IUVVZlNZUThMcCdkaiFnVWRLdDxePkRAKDJCVVhvJ2Q0ZVdrKDpZJ0RTLmNgNSI3OWdfP2pkWWJjRT01K1JHPT9mNSo/Oz9GQlFZL1NHZCY9MDNLOVY8OmBxcT5CTG1UJTtKQidfRWtWPmcjaChaVm5ycFF0cG1yYldSX3RHUF8nLG9cZ1NLSStpWGY6YEw3QUFkbmc9N2leLkpIJEVnYW5WRzJYZjwsSyxUKSQxYUgnPD9RZG9sNFREX0MzMl9dXEVmKFsmaVZhXmZNbUFULyE/WUBoTCNNdVRBbTQ3SFFkS1wqMyVEX1hzSWdTb1xHb2BFZGxQVVhsaCQsQDM6MTxqc0VcUC9xJVFKP0YqUEYqWFciLVkhSkdhQEFMVEFeKC05MVk/R2M5ZSdeMEVSNUosU08uYFEhNWhuRmRzZ0FVZGM9TE42TytXVEkjODNfJV9kWkxLYytEcWJZXE5BaHV0PCRebThLQi9KMC4sTm4kbj05Plg1MWdHUTEmUGAkUi8rMG1KMW9BXEpCRzBEYEBTVlFbXGZJXj9WSTQsJV0iaFVmbydRQTcxQ1g6KCVrZ0RpMDhJSS4qVTw6UF0pSUYxYiQvVCMqK2w3RTxJViJkJy4sTkpcMWkiWWg7MkFAYy4wWnFLP1ZiUC1SXUxwY0g7cF8nOlReWGpJbHFzOT9lTGRKImhjJURCJXAuVjJJUGVBbmYxYSIqN2NKMGxvTTA+M2crVkwuQ3RRPiJAcTYkKDJ1cEswS3EpRUBNZm9dJDsrUGpeVG5YQTIrZiNZNEBOIS9CX3VEMC8yMkY3byVVX10oLGs3KVk1Ni43cCxuW1VfTXApW1U1XzYwMmlgKzY4LylsYjNmcDs7Yy5RZWdVQ3VOYGhPTygkX3RpdWJNRXRVJDNlamFfZCg7I1tAZFtvM1BBNkVOdSIhIURCKEQvW3JTI2BvRzAyPywtQXNFKEYmYFElXixyYS5cTUZmQHNkYWw3YUFNcl8rXC9pKGFUP2tFOFpCbV4vMl1WSz5GTSZgZllXRURQKy4uYS47RnVSNUxUcWNnVU9NVTs8OD5SMmdHKzZxYmghbHA9MDUsJmA/PDNhbl5rZzBqIkMoXDMuY1NKUT1fRzk8WmErMiFnR0BqUGN1WFhFZE5aPGR1TC8vM3Q/T1RGPWMiRmhZMW44XnJSU3BjLF9MQTI8aDJXTjs7O3FsJUEoSkNWOmdvOC5Hbm00JTM+PzQ5SE1UN3AzMURdKmc4dTssMDdXOW5qXGtXY0gvQWc6TEtldVEoSmA5Wjk+NmlHZUshYmFAPlxLLTNXNzVBNSUrMGFNNEtIVjM7NlByU0g7VGZSPEtGME5BX20tXFMhLk9YNy9aSSZNW0RAOkVmVHMtSzFeQVFXPEtSNiUsK0s1YkFSVyhgW2pOXzlQK0xKUEFoXEFKOCkvdCIrR05ERF5UdVM5IzJdJjAqX2o9JF5mKEBgIlpJYk8+V1VRTkZDL3BdKkhRS0JFSlRRKS80OWkwPSw8MTEvXWFyW09hNGsyLTZbLi5HQ24sT24zREhiSF8+dEcoV2s8KEItYyo9OV1iMSlGTGVtOXNLNyZUSiotLmAjIylQKDI8cVBLQjVlVXEmQ2cuWTtSalwyRzA/R2Y6XklcXHVuRVdaSHIrPj88dUtsSUZkb09sZXU2LzRhQC0yMEw8RVhvQ2RTTC4qW24tPUFzSHQuN3E9JE5BN0VFJGM9Tz5ZbilJM0hAdCNTN2ssYiNnX0UnbihlajUiSXFbQSonKUkvOEVGPVNfU1gtZyJTMVA8WjY6VC84ZldQczlYImJCUVRYOWZeUWlNWylBazg4JVovWVFrQWxLWXNAXTtxPiVaSUFiJylSKkFEOGU+T1loYUIzRFtBJiprTFRuKiRFaE1IbmF0U29VLVxQQSMrXGdESUtXa0REXkBmQ2k8cE9jZSNNOkQwLW44TTA0X1lyIiJPUVtwX3AjOzMxbnMiRnBFZlQyPCRncTdzS0krVVVXU25FVyxhOjQ6WEheIVVTQlBmdSpCKlw9aVwvNEBTI01xIT5XOjxQbjE5YkBAW2xbTDlNZkBPI2FiRiFySSE1Si5nW2ZMSWdvZSV0XT1vZnAlRSErQExaJGV1Vi5UMT5mV1BOVmxlZlQ8Z1AvYTcqVWZUVm0pUDh0JEMmOkQjRTojRHJYWS4jZFo0cUVGcENOJyZMVU42Wj03Y1JeUFkmT1s+UW8lM0VUXF1rUmtnbmUuKV5uTSpbVmVhUTJHKTxbQ2s1O0hAU3InTkoscmsiTUYkVDNSQmlFIUknZDw+bS83SEonWW8rfj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxNAowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNjEgMDAwMDAgbiAKMDAwMDAwMDEwMiAwMDAwMCBuIAowMDAwMDAwMjA5IDAwMDAwIG4gCjAwMDAwMDAzMjEgMDAwMDAgbiAKMDAwMDAwMDUwNCAwMDAwMCBuIAowMDAwMDAwNzAxIDAwMDAwIG4gCjAwMDAwMDA4ODQgMDAwMDAgbiAKMDAwMDAwMTA4MyAwMDAwMCBuIAowMDAwMDAxMjcxIDAwMDAwIG4gCjAwMDAwMDE1MTggMDAwMDAgbiAKMDAwMDAwMTU4OCAwMDAwMCBuIAowMDAwMDAxODY5IDAwMDAwIG4gCjAwMDAwMDE5MjkgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8NzRiODliMjg3MWQ4YzQ4MDQ5NGFlODhiZGI5NTM2NTE+PDc0Yjg5YjI4NzFkOGM0ODA0OTRhZTg4YmRiOTUzNjUxPl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyAxMSAwIFIKL1Jvb3QgMTAgMCBSCi9TaXplIDE0Cj4+CnN0YXJ0eHJlZgo0MTQ3CiUlRU9GCg==" download="CV_MilagrosMarquez_EN.pdf" class="mobile-link" onclick="closeMobileMenu()">Curriculum — English ↓</a>
   </nav>
 
 
@@ -2214,7 +2223,7 @@
       <div class="bento-item" data-project="0" data-cat="branding" tabindex="0" role="listitem button" aria-label="Ver proyecto: Logofolio 2026">
         <span class="bento-tag" aria-hidden="true">Logofolio</span>
         <img src="LOGOFOLIO-01.jpg" alt="Logofolio 2026 — diseño de logotipos" class="bento-img" width="600" height="450" loading="lazy">
-        <img src="LOGOFOLIO-04.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
+        <img src="LOGOFOLIO-04.jpg" alt="" class="bento-img-hover" width="600" height="450" aria-hidden="true">
         <div class="bento-overlay">
           <h3 class="bento-name">Logofolio 2026</h3>
           <p class="bento-desc">Colección de logotipos para distintas marcas y rubros.</p>
@@ -2224,7 +2233,7 @@
       <div class="bento-item" data-project="1" data-cat="identidad" tabindex="0" role="listitem button" aria-label="Ver proyecto: Ítaca — Identidad Visual">
         <span class="bento-tag" aria-hidden="true">Identidad Visual</span>
         <img src="itaca1.jpg" alt="Ítaca — identidad visual y landing page" class="bento-img" width="600" height="450" loading="lazy">
-        <img src="itaca9.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
+        <img src="itaca9.jpg" alt="" class="bento-img-hover" width="600" height="450" aria-hidden="true">
         <div class="bento-overlay">
           <h3 class="bento-name">Ítaca</h3>
           <p class="bento-desc">Identidad visual, landing page y papelería corporativa para consultora de coaching.</p>
@@ -2234,7 +2243,7 @@
       <div class="bento-item" data-project="2" data-cat="editorial" tabindex="0" role="listitem button" aria-label="Ver proyecto: Infografía Mickey Mouse">
         <span class="bento-tag" aria-hidden="true">Editorial</span>
         <img src="infografia-1.jpg" alt="Infografía Mickey Mouse — diseño editorial" class="bento-img" width="600" height="450" loading="lazy">
-        <img src="infografia-2.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
+        <img src="infografia-2.jpg" alt="" class="bento-img-hover" width="600" height="450" aria-hidden="true">
         <div class="bento-overlay">
           <h3 class="bento-name">Infografía Mickey Mouse</h3>
           <p class="bento-desc">Infografía editorial sobre historia y evolución de Mickey Mouse.</p>
@@ -2244,7 +2253,7 @@
       <div class="bento-item" data-project="3" data-cat="identidad" tabindex="0" role="listitem button" aria-label="Ver proyecto: Munas Manicuria Combinada">
         <span class="bento-tag" aria-hidden="true">Identidad</span>
         <img src="munas1.jpg" alt="Munas — Manicuria Combinada, identidad visual" class="bento-img" width="600" height="450" loading="lazy">
-        <img src="munas2.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
+        <img src="munas2.jpg" alt="" class="bento-img-hover" width="600" height="450" aria-hidden="true">
         <div class="bento-overlay">
           <h3 class="bento-name">Munas — Manicuria Combinada</h3>
           <p class="bento-desc">Identidad visual para estudio de manicuria combinada.</p>
@@ -2254,7 +2263,7 @@
       <div class="bento-item" data-project="4" data-cat="identidad" tabindex="0" role="listitem button" aria-label="Ver proyecto: Mix Natural">
         <span class="bento-tag" aria-hidden="true">Identidad Visual</span>
         <img src="Mix1.jpg" alt="Mix Natural — identidad visual branding kit" class="bento-img" width="600" height="450" loading="lazy">
-        <img src="Mix2.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
+        <img src="Mix2.jpg" alt="" class="bento-img-hover" width="600" height="450" aria-hidden="true">
         <div class="bento-overlay">
           <h3 class="bento-name">Mix Natural</h3>
           <p class="bento-desc">Identidad visual completa para marca de frutos secos y especias.</p>
@@ -2264,7 +2273,7 @@
       <div class="bento-item" data-project="5" data-cat="packaging" tabindex="0" role="listitem button" aria-label="Ver proyecto: Chateau Roco">
         <span class="bento-tag" aria-hidden="true">Packaging</span>
         <img src="vino-1.jpg" alt="Chateau Roco — packaging etiquetas de vino" class="bento-img" width="600" height="450" loading="lazy">
-        <img src="vino-2.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
+        <img src="vino-2.jpg" alt="" class="bento-img-hover" width="600" height="450" aria-hidden="true">
         <div class="bento-overlay">
           <h3 class="bento-name">Chateau Roco</h3>
           <p class="bento-desc">Etiquetas de vino inspiradas en la estética Rococó — ilustraciones botánicas, tipografías caligráficas y detalles en dorado.</p>
@@ -2274,7 +2283,7 @@
       <div class="bento-item" data-project="6" data-cat="social" tabindex="0" role="listitem button" aria-label="Ver proyecto: Helardy">
         <span class="bento-tag" aria-hidden="true">Social Media</span>
         <img src="socialmedia-1.jpg" alt="Helardy — diseño de social media" class="bento-img" width="600" height="450" loading="lazy">
-        <img src="socialmedia-2.jpg" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
+        <img src="socialmedia-2.jpg" alt="" class="bento-img-hover" width="600" height="450" aria-hidden="true">
         <div class="bento-overlay">
           <h3 class="bento-name">Helardy</h3>
           <p class="bento-desc">Diseño de Instagram Stories para Helardy, cafetería & heladería.</p>
@@ -2284,7 +2293,7 @@
       <div class="bento-item" data-project="7" data-cat="merch" tabindex="0" role="listitem button" aria-label="Ver proyecto: FDV Centro de Entrenamiento">
         <span class="bento-tag" aria-hidden="true">Merch</span>
         <img src="fdv-1.png" alt="FDV Centro de Entrenamiento — indumentaria institucional" class="bento-img" width="600" height="450" loading="lazy">
-        <img src="fdv-2.png" alt="" class="bento-img-hover" width="600" height="450" loading="lazy" aria-hidden="true">
+        <img src="fdv-2.png" alt="" class="bento-img-hover" width="600" height="450" aria-hidden="true">
         <div class="bento-overlay" aria-hidden="true">
           <h3 class="bento-name">FDV Centro de Entrenamiento</h3>
           <p class="bento-desc">Indumentaria institucional y branding aplicado para centro deportivo.</p>
@@ -2511,6 +2520,21 @@
   /* ══════════════════════════════════════════════════
      PORTFOLIO — Bento grid + modal
   ══════════════════════════════════════════════════ */
+
+  /* ── Preload de imágenes del bento (primera imagen de cada proyecto) ── */
+  /* Se ejecuta una vez cargado el DOM para que no bloquee el render inicial */
+  function preloadProjectImages(data) {
+    // Preload todas las imágenes del bento (primera + segunda por proyecto)
+    // así el modal abre instantáneo
+    data.forEach(function(p) {
+      p.images.forEach(function(src, i) {
+        if (!src || src.match(/\.mp4$/i)) return;
+        var img = new Image();
+        img.src = src;
+      });
+    });
+  }
+
   const PF_DATA = [
     { cat: 'diseño de logotipos · branding', name: 'Logofolio 2026',             desc: 'Colección de logotipos desarrollados para distintas marcas y rubros: estudio de diseño, manicuría, cafetería, agencia de viajes, cosmetóloga, consultoría, frutos secos e impresiones 3D. Cada logo responde al universo propio de la marca.', accent: 'Logofolio · 2026', color: '#f5f0e8', images: ['LOGOFOLIO-01.jpg', 'LOGOFOLIO-02.jpg', 'LOGOFOLIO-03.jpg', 'LOGOFOLIO-04.jpg', 'LOGOFOLIO-05.jpg', 'LOGOFOLIO-06.jpg', 'LOGOFOLIO-07.jpg', 'LOGOFOLIO-08.jpg', 'LOGOFOLIO-09.jpg'] },
     { cat: 'identidad visual · branding · landing page',   name: 'Ítaca',                       desc: 'Desarrollo de identidad visual completa para Ítaca, consultora humana y coaching de negocios. Incluye logo, paleta de color, tipografía, papelería corporativa, merch y diseño y maquetación de landing page.', accent: 'Identidad Visual · Landing Page · 2025', color: '#0a366b', images: ['itaca1.jpg', 'itaca4.jpg', 'Comp_1.mp4', 'itaca2.jpg', 'itaca3.jpg', 'itaca5.jpg', 'itaca6.jpg', 'itaca7.jpg', 'itaca8.jpg', 'itaca9.jpg'] },
@@ -2522,6 +2546,9 @@
     { cat: 'merch · indumentaria institucional',             name: 'FDV Centro de Entrenamiento', desc: 'Desarrollo de piezas textiles destinadas al staff y socios del centro deportivo. El objetivo fue trasladar la identidad visual de la marca a un soporte físico, asegurando que el diseño sea funcional, legible y refuerce el sentido de comunidad.', accent: 'Merch & Branding · 2025', color: '#1a1a2e', images: ['fdv-1.png', 'fdv-2.png', 'fdv-3.png', 'fdv-4.png'] },
     { cat: 'branding · sistema',       name: 'Sistema visual completo',    desc: 'Desarrollo de sistema de identidad completo: naming, logomark, paleta, tipografía, papelería y guía de uso.', accent: 'Branding · 2025', color: '#f0e4ec', images: [null, null, null] },
   ];
+
+  /* Preload de imágenes — se ejecuta después de un breve delay para no competir con el render inicial */
+  setTimeout(function() { preloadProjectImages(PF_DATA); }, 800);
 
   /* ── Modal con carrusel de imágenes ── */
   (function () {
@@ -2659,22 +2686,9 @@
 
     let rx = 0, ry = 0, tx = 0, ty = 0;
     let isOverBento = false;
+    let rafId = null;
 
-    document.addEventListener('mousemove', (e) => {
-      tx = e.clientX; ty = e.clientY;
-      const el = document.elementFromPoint(e.clientX, e.clientY);
-      isOverBento = !!(el && el.closest('.bento-item'));
-      halo.classList.toggle('visible', isOverBento);
-      if (label) label.classList.toggle('visible', isOverBento);
-    });
-
-    document.addEventListener('mouseleave', () => {
-      isOverBento = false;
-      halo.classList.remove('visible');
-      if (label) label.classList.remove('visible');
-    });
-
-    (function loop() {
+    function loop() {
       rx += (tx - rx) * 0.18;
       ry += (ty - ry) * 0.18;
       halo.style.left  = rx + 'px';
@@ -2683,8 +2697,32 @@
         label.style.left = rx + 'px';
         label.style.top  = ry + 'px';
       }
-      requestAnimationFrame(loop);
-    })();
+      // Solo continua el loop si el halo está visible
+      if (isOverBento) {
+        rafId = requestAnimationFrame(loop);
+      } else {
+        rafId = null;
+      }
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      tx = e.clientX; ty = e.clientY;
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const wasOver = isOverBento;
+      isOverBento = !!(el && el.closest('.bento-item'));
+      halo.classList.toggle('visible', isOverBento);
+      if (label) label.classList.toggle('visible', isOverBento);
+      // Arranca el loop solo si recién entró al bento
+      if (isOverBento && !wasOver && !rafId) {
+        rafId = requestAnimationFrame(loop);
+      }
+    });
+
+    document.addEventListener('mouseleave', () => {
+      isOverBento = false;
+      halo.classList.remove('visible');
+      if (label) label.classList.remove('visible');
+    });
   })();
 
   /* ── Bento items: aparición escalonada al scroll ── */

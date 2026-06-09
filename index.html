@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -2000,7 +2001,6 @@
     }
 
     /* ── Abre modal ── */
-    let _scrollY = 0;
     function openModal(idx) {
       const p = PF_DATA[idx];
       catEl.textContent    = p.cat;
@@ -2009,20 +2009,16 @@
       accentEl.textContent = p.accent;
       buildCarousel(p);
       overlay.classList.add('open');
-      // iOS Safari fix: position:fixed en lugar de overflow:hidden
-      _scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = -_scrollY + 'px';
-      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      // Force repaint en Safari — sin esto las imágenes dinámicas quedan negras
+      overlay.style.display = 'none';
+      overlay.offsetHeight; // trigger reflow
+      overlay.style.display = '';
     }
 
     function closeModal() {
       overlay.classList.remove('open');
-      // Restaurar scroll position
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      window.scrollTo(0, _scrollY);
+      document.body.style.overflow = '';
     }
 
     /* ── Eventos ── */
@@ -2225,4 +2221,5 @@
 
 </body>
 </html>
+
 

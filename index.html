@@ -751,19 +751,16 @@
     .hero-photo-img { max-width: 100%; }
   }
 
-  /* ─── MODAL ─── */
+  /* ─── MODAL: tamaño dictado por la imagen ─── */
   .pf-modal-overlay {
     position: fixed; inset: 0; z-index: 400;
-    background: rgba(0,0,0,0.88);
+    background: rgba(0,0,0,0);
     pointer-events: none;
-    display: none;
-    align-items: center; justify-content: center;
+    transition: background 0.4s ease;
+    display: flex; align-items: center; justify-content: center;
     padding: 24px;
   }
-  .pf-modal-overlay.open {
-    display: flex;
-    pointer-events: all;
-  }
+  .pf-modal-overlay.open { background: rgba(0,0,0,0.88); pointer-events: all; }
 
   .pf-modal {
     position: relative;
@@ -771,10 +768,14 @@
     aspect-ratio: 4 / 3;
     border-radius: 14px;
     overflow: hidden;
-    background: #111;
+    background: #000;
+    transform: scale(0.92) translateY(20px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1), opacity 0.4s;
     box-shadow: 0 32px 80px rgba(0,0,0,0.5);
     line-height: 0;
   }
+  .pf-modal-overlay.open .pf-modal { transform: scale(1) translateY(0); opacity: 1; }
 
   /* Ocultar top bar y body */
   .pf-modal-top, .pf-modal-body { display: none; }
@@ -802,12 +803,15 @@
   }
   .pf-car-slide {
     position: absolute; inset: 0;
-    display: none;
+    opacity: 0;
     pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25,0.1,0.25,1);
+    transform: scale(1.04);
   }
   .pf-car-slide.active {
-    display: block;
+    opacity: 1;
     pointer-events: all;
+    transform: scale(1);
   }
   .pf-car-slide img {
     width: 100%; height: 100%;
@@ -2003,9 +2007,13 @@
       titleEl.textContent  = p.name;
       descEl.textContent   = p.desc;
       accentEl.textContent = p.accent;
+      buildCarousel(p);
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
-      buildCarousel(p);
+      // Force repaint en Safari — sin esto las imágenes dinámicas quedan negras
+      overlay.style.display = 'none';
+      overlay.offsetHeight; // trigger reflow
+      overlay.style.display = '';
     }
 
     function closeModal() {

@@ -2004,6 +2004,35 @@
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
       buildCarousel(p);
+
+      // DEBUG — mostrar info en pantalla
+      var dbg = document.getElementById('debug-box');
+      if (!dbg) {
+        dbg = document.createElement('div');
+        dbg.id = 'debug-box';
+        dbg.style.cssText = 'position:fixed;top:60px;left:10px;right:10px;z-index:9999;background:rgba(255,0,0,0.9);color:#fff;font-size:12px;padding:10px;border-radius:8px;font-family:monospace;word-break:break-all;';
+        document.body.appendChild(dbg);
+      }
+      var slides = track.querySelectorAll('.pf-car-slide');
+      var imgs = track.querySelectorAll('img');
+      var info = [
+        'proyecto: ' + p.name,
+        'slides: ' + slides.length,
+        'imgs: ' + imgs.length,
+        'overlay display: ' + getComputedStyle(overlay).display,
+        'overlay open: ' + overlay.classList.contains('open'),
+        'modal opacity: ' + getComputedStyle(overlay.querySelector('.pf-modal')).opacity,
+        'img[0] src: ' + (imgs[0] ? imgs[0].src : 'ninguna'),
+        'img[0] complete: ' + (imgs[0] ? imgs[0].complete : '-'),
+        'img[0] naturalW: ' + (imgs[0] ? imgs[0].naturalWidth : '-'),
+      ];
+      dbg.innerHTML = info.join('<br>');
+      setTimeout(function() {
+        var imgs2 = track.querySelectorAll('img');
+        if (imgs2[0]) {
+          dbg.innerHTML += '<br>--- 500ms despues ---<br>complete: ' + imgs2[0].complete + ' / naturalW: ' + imgs2[0].naturalWidth;
+        }
+      }, 500);
     }
 
     function closeModal() {

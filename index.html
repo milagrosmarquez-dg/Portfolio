@@ -2007,13 +2007,15 @@
       titleEl.textContent  = p.name;
       descEl.textContent   = p.desc;
       accentEl.textContent = p.accent;
-      buildCarousel(p);
+      // Primero mostrar el overlay, DESPUÉS inyectar imágenes
+      // Safari no carga imgs dentro de opacity:0
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
-      // Force repaint en Safari — sin esto las imágenes dinámicas quedan negras
-      overlay.style.display = 'none';
-      overlay.offsetHeight; // trigger reflow
-      overlay.style.display = '';
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          buildCarousel(p);
+        });
+      });
     }
 
     function closeModal() {
@@ -2221,5 +2223,4 @@
 
 </body>
 </html>
-
 

@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -93,8 +95,7 @@
     font-family: var(--font-body);
     font-weight: 200;
     line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+        -webkit-font-smoothing: antialiased;
   }
   img   { display: block; max-width: 100%; }
   a     { color: inherit; text-decoration: none; }
@@ -751,7 +752,7 @@
 
   /* ─── MODAL ─── */
   .pf-modal-overlay {
-    position: fixed; inset: 0; z-index: 400;
+    position: fixed; inset: 0; z-index: 9000;
     background: rgba(0,0,0,0.88);
     pointer-events: none;
     display: none;
@@ -903,7 +904,7 @@
 
   /* ── Lightbox full-screen ── */
   .pf-lightbox {
-    position: fixed; inset: 0; z-index: 500;
+    position: fixed; inset: 0; z-index: 9100;
     background: rgba(0,0,0,0);
     display: flex; align-items: center; justify-content: center;
     pointer-events: none;
@@ -1687,46 +1688,11 @@
 
   </section>
 
-<!-- Modal de proyecto — carrusel estilo Instagram -->
-  <div class="pf-modal-overlay" id="pf-modal-overlay">
-    <div class="pf-modal" id="pf-modal">
-
-      <!-- Cabecera del modal -->
-      <div class="pf-modal-top">
-        <span class="pf-modal-cat-top" id="pf-modal-cat"></span>
-        <button class="pf-modal-close" id="pf-modal-close" aria-label="Cerrar">✕</button>
-      </div>
-
-      <!-- Carrusel de imágenes -->
-      <div class="pf-carousel" id="pf-carousel">
-        <div class="pf-carousel-track" id="pf-carousel-track"></div>
-        <!-- Flechas internas -->
-        <button class="pf-car-arr pf-car-prev" id="pf-car-prev" aria-label="Imagen anterior">‹</button>
-        <button class="pf-car-arr pf-car-next" id="pf-car-next" aria-label="Imagen siguiente">›</button>
-        <!-- Dots -->
-        <div class="pf-car-dots" id="pf-car-dots"></div>
-      </div>
-
-      <!-- Info del proyecto -->
-      <div class="pf-modal-body" id="pf-modal-body">
-        <h2 class="pf-modal-title" id="pf-modal-title"></h2>
-        <p class="pf-modal-desc" id="pf-modal-desc"></p>
-        <span class="pf-modal-accent" id="pf-modal-accent"></span>
-      </div>
-
-    </div>
-  </div>
 
 
 
 
 
-  <!-- Lightbox fullscreen -->
-  <div class="pf-lightbox" id="pf-lightbox">
-    <button class="pf-lightbox-close" id="pf-lightbox-close">✕</button>
-    <img id="pf-lightbox-img" src="" alt="" class="pf-lightbox-img" style="display:none">
-    <div id="pf-lightbox-ph" class="pf-lightbox-ph" style="display:none"></div>
-  </div>
 
   <!-- CONTACTO -->
   <section class="contacto" id="contacto" aria-label="Contacto">
@@ -2004,48 +1970,6 @@
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
       buildCarousel(p);
-
-      // DEBUG — mostrar info en pantalla
-      var dbg = document.getElementById('debug-box');
-      if (!dbg) {
-        dbg = document.createElement('div');
-        dbg.id = 'debug-box';
-        dbg.style.cssText = 'position:fixed;top:60px;left:10px;right:10px;z-index:9999;background:rgba(255,0,0,0.9);color:#fff;font-size:12px;padding:10px;border-radius:8px;font-family:monospace;word-break:break-all;';
-        document.body.appendChild(dbg);
-      }
-      var slides = track.querySelectorAll('.pf-car-slide');
-      var imgs = track.querySelectorAll('img');
-      var info = [
-        'proyecto: ' + p.name,
-        'slides: ' + slides.length,
-        'imgs: ' + imgs.length,
-        'overlay display: ' + getComputedStyle(overlay).display,
-        'overlay open: ' + overlay.classList.contains('open'),
-        'modal opacity: ' + getComputedStyle(overlay.querySelector('.pf-modal')).opacity,
-        'img[0] src: ' + (imgs[0] ? imgs[0].src : 'ninguna'),
-        'img[0] complete: ' + (imgs[0] ? imgs[0].complete : '-'),
-        'img[0] naturalW: ' + (imgs[0] ? imgs[0].naturalWidth : '-'),
-      ];
-      dbg.innerHTML = info.join('<br>');
-      setTimeout(function() {
-        var imgs2 = track.querySelectorAll('img');
-        if (imgs2[0]) {
-          dbg.innerHTML += '<br>--- 500ms despues ---<br>complete: ' + imgs2[0].complete + ' / naturalW: ' + imgs2[0].naturalWidth;
-        }
-      }, 500);
-    }
-
-    function closeModal() {
-      overlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    /* ── Eventos ── */
-    // Bento items
-    document.querySelectorAll('.bento-item').forEach(item => {
-      const idx = parseInt(item.dataset.project);
-      item.addEventListener('click',   () => openModal(idx));
-      item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(idx); });
     });
 
     prevBtn.addEventListener('click', () => goTo(imgIdx - 1));
@@ -2237,6 +2161,46 @@
   };
 
   </script>
+
+
+
+  <!-- Modal y Lightbox — fuera del main para evitar stacking context de Safari iOS -->
+<!-- Modal de proyecto — carrusel estilo Instagram -->
+  <div class="pf-modal-overlay" id="pf-modal-overlay">
+    <div class="pf-modal" id="pf-modal">
+
+      <!-- Cabecera del modal -->
+      <div class="pf-modal-top">
+        <span class="pf-modal-cat-top" id="pf-modal-cat"></span>
+        <button class="pf-modal-close" id="pf-modal-close" aria-label="Cerrar">✕</button>
+      </div>
+
+      <!-- Carrusel de imágenes -->
+      <div class="pf-carousel" id="pf-carousel">
+        <div class="pf-carousel-track" id="pf-carousel-track"></div>
+        <!-- Flechas internas -->
+        <button class="pf-car-arr pf-car-prev" id="pf-car-prev" aria-label="Imagen anterior">‹</button>
+        <button class="pf-car-arr pf-car-next" id="pf-car-next" aria-label="Imagen siguiente">›</button>
+        <!-- Dots -->
+        <div class="pf-car-dots" id="pf-car-dots"></div>
+      </div>
+
+      <!-- Info del proyecto -->
+      <div class="pf-modal-body" id="pf-modal-body">
+        <h2 class="pf-modal-title" id="pf-modal-title"></h2>
+        <p class="pf-modal-desc" id="pf-modal-desc"></p>
+        <span class="pf-modal-accent" id="pf-modal-accent"></span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Lightbox fullscreen -->
+  <div class="pf-lightbox" id="pf-lightbox">
+    <button class="pf-lightbox-close" id="pf-lightbox-close">✕</button>
+    <img id="pf-lightbox-img" src="" alt="" class="pf-lightbox-img" style="display:none">
+    <div id="pf-lightbox-ph" class="pf-lightbox-ph" style="display:none"></div>
+  </div>
 
 </body>
 </html>

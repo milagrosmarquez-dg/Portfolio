@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -392,12 +393,13 @@
 
   .hero-line-sans {
     display: block;
-    font-family: acumin-pro-wide, var(--font-body), sans-serif;
+    font-family: var(--font-body), sans-serif;   /* Jost: 200 siempre disponible, sin fallback a bold */
     font-size: clamp(20px, 2.6vw, 38px);
-    font-weight: 200;
-    letter-spacing: 0;
-    color: var(--ink);
+    font-weight: 100;
+    letter-spacing: 0.01em;
+    color: #8a817b;
     line-height: 1.2;
+    -webkit-font-smoothing: antialiased;
   }
   .hero-name-inline {
     font-family: var(--font-serif);
@@ -406,19 +408,22 @@
     font-size: 1.6em;
     line-height: 0.85;
     vertical-align: middle;
+    color: var(--ink);
   }
 
   /* "Márquez." en cursiva grande */
 
   /* Descripción */
   .hero-desc {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: clamp(16px, 1.6vw, 19px);
-    font-weight: 400;
-    line-height: 1.85;
-    color: var(--ink);
+    font-family: var(--font-body), sans-serif;   /* Jost, misma familia que el resto del sitio */
+    font-size: clamp(15px, 1.35vw, 17px);
+    font-weight: 300;
+    line-height: 1.95;
+    letter-spacing: 0.01em;
+    color: #6b625d;
+    -webkit-font-smoothing: antialiased;
   }
-  .hero-desc em { font-style: italic; color: var(--ink); }
+  .hero-desc em { font-style: italic; color: inherit; }
 
   /* Programas debajo de ubicación */
   .hero-tools {
@@ -1465,6 +1470,20 @@
 
     .ct-inner  { padding: 56px 32px; }
     .footer-inner { padding: 20px 32px; }
+  }
+
+  /* ── Ajustes mobile del hero ── */
+  .hero-desc { text-wrap: pretty; }
+  @media (max-width: 480px) {
+    .header-inner { padding: 0 20px; }
+    .logo-block   { padding: 0; }
+    .hero { padding: calc(56px + 40px) 20px 56px; }
+    .hero-line-sans { font-size: clamp(30px, 9vw, 36px); }
+    .hero-headline  { margin-bottom: 24px; }
+    .hero-desc      { font-size: 15.5px; line-height: 1.85; }
+    .hero-tools     { margin-top: 32px; }
+    .hero-body      { gap: 40px; }
+    .hero-photo     { max-width: 280px; }
   }
   </style>
   <!-- JSON-LD Structured Data -->
